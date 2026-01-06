@@ -1,0 +1,757 @@
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Frown,
+  Heart,
+  Info,
+  Leaf,
+  Map,
+  Skull,
+} from 'lucide-react';
+import { ECONOMIC_ZONES, calculateDishCost, getCookingCoef, normalizeIngredientName } from '../../lib/RankingEngine';
+import EconomicZonesSvgMap from '../EconomicZonesSvgMap';
+import { getCookingEffect, getCookingLabel, getEthicsColor, getHealthColor, getPriceColor } from '../dishCardUtils';
+
+/**
+ * Get ethics icon based on index (0-10)
+ */
+function getEthicsIcon(index) {
+  if (index < 2) return Skull; // Red - череп
+  if (index < 4) return Frown; // Orange - грустный смайлик
+  return Leaf; // Green/Lime/Amber - листочек
+}
+
+/**
+ * Ethics Breakdown Slide
+ */
+function EthicsBreakdownSlide({ dishName, dishEthics, ingredients, ingredientIndex }) {
+  if (!ingredients || ingredients.length === 0 || !ingredientIndex) {
+    return (
+      <div className="flex items-center justify-center h-48 text-surface-500 dark:text-surface-500 text-sm">
+        No ingredient data available
+      </div>
+    );
+  }
+
+  // Get ethics info for each ingredient
+  const ingredientsWithEthics = ingredients.map((ing) => {
+    const ingData = ingredientIndex.get(normalizeIngredientName(ing.name));
+    return {
+      name: ing.name,
+      grams: ing.g,
+      ethicsIndex: ingData?.ethics_index ?? null,
+      ethicsReason: ingData?.ethics_reason ?? 'No ethics data available for this ingredient.',
+    };
+  });
+
+  const ethicsColors = getEthicsColor(dishEthics ?? 5);
+
+  return (
+    <div className="space-y-2">
+      {/* Header: Dish Name + Ethics Breakdown + Total Ethics Score */}
+      <div className="flex items-center justify-between mb-2 pb-2 border-b border-surface-300/50 dark:border-surface-700/50">
+        <div className="flex items-center gap-2">
+          <Leaf size={14} className={ethicsColors.text} />
+          <span className="text-sm font-semibold text-surface-800 dark:text-surface-100">
+            {dishName} Ethics Breakdown
+          </span>
+        </div>
+        {dishEthics !== null && dishEthics !== undefined && (
+          <div
+            className={`
+              px-2.5 py-1 rounded-lg text-xs font-bold text-white
+              ${ethicsColors.badge}
+            `}
+          >
+            Overall {dishEthics.toFixed(1)}/10
+          </div>
+        )}
+      </div>
+
+      {/* Ingredients list */}
+      <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+        {ingredientsWithEthics.map((ing, idx) => {
+          const colors = getEthicsColor(ing.ethicsIndex ?? 5);
+          const Icon = getEthicsIcon(ing.ethicsIndex ?? 5);
+
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.05 }}
+              className={`
+                rounded-lg p-2 border flex items-center gap-3
+                ${colors.bg} ${colors.border}
+              `}
+            >
+              {/* Left: ingredient name and grams - fixed width */}
+              <div className="flex items-center gap-1.5 flex-shrink-0 w-32">
+                <Icon size={12} className={colors.text} />
+                <span className="font-semibold text-surface-800 dark:text-surface-100 text-xs whitespace-nowrap truncate">
+                  {ing.grams}g of {ing.name}
+                </span>
+              </div>
+
+              {/* Center: ethics reason */}
+              <p className="text-xs text-surface-600 dark:text-surface-300 flex-1 truncate">
+                {ing.ethicsReason}
+              </p>
+
+              {/* Right: ethics score */}
+              {ing.ethicsIndex !== null && (
+                <div
+                  className={`
+                    px-2.5 py-1 rounded-full text-sm font-bold text-white flex-shrink-0
+                    ${colors.badge}
+                  `}
+                >
+                  {ing.ethicsIndex}/10
+                </div>
+              )}
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Health Breakdown Slide
+ */
+function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientIndex }) {
+  if (!ingredients || ingredients.length === 0 || !ingredientIndex) {
+    return (
+      <div className="flex items-center justify-center h-48 text-surface-500 dark:text-surface-500 text-sm">
+        No ingredient data available
+      </div>
+    );
+  }
+
+  // Get health info for each ingredient with cooking impact
+  const ingredientsWithHealth = ingredients.map((ing) => {
+    const ingData = ingredientIndex.get(normalizeIngredientName(ing.name));
+    const baseHealth = ingData?.health_index ?? 5;
+    const cookingCoef = getCookingCoef(ing.state);
+    const adjustedHealth = Math.min(10, Math.max(0, baseHealth * cookingCoef));
+    const cookingEffect = getCookingEffect(cookingCoef);
+
+    return {
+      name: ing.name,
+      grams: ing.g,
+      state: ing.state,
+      baseHealth,
+      adjustedHealth,
+      cookingCoef,
+      cookingLabel: getCookingLabel(ing.state),
+      cookingEffect,
+    };
+  });
+
+  // Sort by contribution (weight * health) for visual hierarchy
+  const sortedIngredients = [...ingredientsWithHealth].sort((a, b) => (b.grams * b.adjustedHealth) - (a.grams * a.adjustedHealth));
+
+  const healthColors = getHealthColor(dishHealth ?? 5);
+
+  return (
+    <div className="space-y-2">
+      {/* Header: Dish Name + Health Breakdown + Total Health Score */}
+      <div className="flex items-center justify-between mb-2 pb-2 border-b border-surface-300/50 dark:border-surface-700/50">
+        <div className="flex items-center gap-2">
+          <Heart size={14} className={healthColors.text} />
+          <span className="text-sm font-semibold text-surface-800 dark:text-surface-100">
+            {dishName} Health Breakdown
+          </span>
+        </div>
+        {dishHealth !== null && dishHealth !== undefined && (
+          <div
+            className={`
+              px-2.5 py-1 rounded-lg text-xs font-bold text-white
+              ${healthColors.badge}
+            `}
+          >
+            Overall {dishHealth.toFixed(1)}/10
+          </div>
+        )}
+      </div>
+
+      {/* Health legend */}
+      <div className="flex items-center justify-between text-[10px] text-surface-500 dark:text-surface-500 px-1 mb-2">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-emerald-500" />
+            Excellent
+          </span>
+          <span className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-lime-500" />
+            Good
+          </span>
+          <span className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-amber-500" />
+            Moderate
+          </span>
+          <span className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-orange-500" />
+            Low
+          </span>
+          <span className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-red-500" />
+            Very Low
+          </span>
+        </div>
+      </div>
+
+      {/* Ingredients list */}
+      <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+        {sortedIngredients.map((ing, idx) => {
+          const colors = getHealthColor(ing.adjustedHealth);
+          const healthPercent = (ing.adjustedHealth / 10) * 100;
+          const hasImpact = ing.cookingCoef !== 1.0;
+
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.04 }}
+              className={`
+                rounded-lg p-2.5 border
+                ${colors.bg} ${colors.border}
+              `}
+            >
+              {/* Top row: ingredient name, cooking method, scores */}
+              <div className="flex items-center gap-2 mb-1.5">
+                {/* Ingredient info */}
+                <div className="flex items-center gap-1.5 flex-shrink-0 min-w-0 flex-1">
+                  <Heart size={11} className={colors.text} />
+                  <span className="font-semibold text-surface-800 dark:text-surface-100 text-xs truncate">
+                    {ing.grams}g {ing.name}
+                  </span>
+                </div>
+
+                {/* Cooking method pill */}
+                <div
+                  className={`
+                    px-2 py-0.5 rounded-full text-[10px] font-medium flex-shrink-0
+                    ${hasImpact ? 'bg-surface-200/60 dark:bg-surface-700/60 border border-surface-300/50 dark:border-surface-600/50' : 'bg-surface-200/40 dark:bg-surface-800/40'}
+                    ${ing.cookingEffect.color}
+                  `}
+                >
+                  {ing.cookingLabel}
+                  {hasImpact && (
+                    <span className="ml-1 opacity-75">
+                      {ing.cookingEffect.icon}
+                    </span>
+                  )}
+                </div>
+
+                {/* Health score badge */}
+                <div
+                  className={`
+                    px-2 py-0.5 rounded-full text-[11px] font-bold text-white flex-shrink-0
+                    ${colors.badge}
+                  `}
+                >
+                  {ing.adjustedHealth.toFixed(1)}
+                </div>
+              </div>
+
+              {/* Health bar */}
+              <div className="flex items-center gap-2">
+                <div className="flex-1 h-1.5 bg-surface-300/60 dark:bg-surface-800/60 rounded-full overflow-hidden">
+                  <motion.div
+                    className={`h-full rounded-full ${colors.bar}`}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${healthPercent}%` }}
+                    transition={{ duration: 0.5, delay: idx * 0.04, ease: 'easeOut' }}
+                  />
+                </div>
+
+                {/* Cooking impact indicator */}
+                {hasImpact && (
+                  <span className={`text-[9px] ${ing.cookingEffect.color} flex-shrink-0`}>
+                    {ing.cookingCoef > 1 ? '+' : ''}
+                    {((ing.cookingCoef - 1) * 100).toFixed(0)}%
+                  </span>
+                )}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Footer: cooking impact legend */}
+      <div className="pt-2 border-t border-surface-300/30 dark:border-surface-700/30">
+        <div className="flex items-center justify-center gap-4 text-[9px] text-surface-500 dark:text-surface-500">
+          <span>Cooking impact:</span>
+          <span className="flex items-center gap-1">
+            <span className="text-emerald-500 dark:text-emerald-400">+</span> Enhances
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="text-teal-500 dark:text-teal-400">≈</span> Preserves
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="text-amber-500 dark:text-amber-400">−</span> Reduces
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Index Map Slide - Big Mac Index style price visualization with ingredient breakdown
+ */
+function IndexMapSlide({ dish, ingredientIndex }) {
+  const [hoveredZone, setHoveredZone] = useState(null);
+
+  // Calculate prices and breakdowns for all zones
+  const { zonePrices, zoneBreakdowns } = useMemo(() => {
+    if (!dish?.originalDish || !ingredientIndex) return { zonePrices: {}, zoneBreakdowns: {} };
+
+    const prices = {};
+    const breakdowns = {};
+    for (const zoneId of Object.keys(ECONOMIC_ZONES)) {
+      const result = calculateDishCost(dish.originalDish, zoneId, ingredientIndex);
+      // Check if dish is available in this zone
+      if (result.unavailableIngredients && result.unavailableIngredients.length > 0) {
+        prices[zoneId] = null; // Unavailable
+        breakdowns[zoneId] = null;
+      } else {
+        prices[zoneId] = result.totalCost;
+        breakdowns[zoneId] = result.breakdown;
+      }
+    }
+    return { zonePrices: prices, zoneBreakdowns: breakdowns };
+  }, [dish?.originalDish, ingredientIndex]);
+
+  // Calculate min/max for color scale (only available zones)
+  const { minPrice, maxPrice, avgPrice } = useMemo(() => {
+    const availablePrices = Object.entries(zonePrices)
+      .filter(([, price]) => price !== null && price > 0)
+      .map(([zoneId, price]) => ({ zoneId, price }));
+
+    if (availablePrices.length === 0) {
+      return { minPrice: 0, maxPrice: 0, avgPrice: 0 };
+    }
+
+    const prices = availablePrices.map((p) => p.price);
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
+
+    return {
+      minPrice: min,
+      maxPrice: max,
+      avgPrice: avg,
+    };
+  }, [zonePrices]);
+
+  // Calculate average cost per ingredient across all zones (for comparison)
+  const avgIngredientCosts = useMemo(() => {
+    const avgCosts = {};
+    const validZones = Object.entries(zoneBreakdowns).filter(([, b]) => b !== null);
+    if (validZones.length === 0) return avgCosts;
+
+    // Get ingredient names from first valid breakdown
+    const firstBreakdown = validZones[0][1];
+    for (const ing of firstBreakdown) {
+      const costs = validZones
+        .map(([, breakdown]) => breakdown.find((i) => i.name === ing.name)?.cost ?? 0)
+        .filter((c) => c > 0);
+      if (costs.length > 0) {
+        avgCosts[ing.name] = costs.reduce((a, b) => a + b, 0) / costs.length;
+      }
+    }
+    return avgCosts;
+  }, [zoneBreakdowns]);
+
+  const priceSpread = maxPrice > 0 && minPrice > 0 ? (((maxPrice - minPrice) / minPrice) * 100).toFixed(0) : 0;
+
+  // Custom functions for price-based coloring
+  const getZoneFill = (zoneId) => getPriceColor(zonePrices[zoneId], minPrice, maxPrice).fill;
+  const getZoneOpacity = (zoneId, selectedZone, isHovered) => (isHovered ? 1 : 0.85);
+  const getZoneStroke = (zoneId, isHovered) => (isHovered ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.15)');
+  const getZoneStrokeWidth = (zoneId, isHovered) => (isHovered ? 1.5 : 0.5);
+
+  const getTooltipContent = (zoneId, zoneData) => {
+    const price = zonePrices[zoneId];
+    const colorData = getPriceColor(price, minPrice, maxPrice);
+    return {
+      ...zoneData,
+      price,
+      priceColor: price === null ? 'text-surface-500' : colorData.text,
+    };
+  };
+
+  // Get current zone data for breakdown panel
+  const currentZone = hoveredZone ? ECONOMIC_ZONES[hoveredZone] : null;
+  const currentPrice = hoveredZone ? zonePrices[hoveredZone] : null;
+  const currentBreakdown = hoveredZone ? zoneBreakdowns[hoveredZone] : null;
+
+  // Sort breakdown by cost (descending) and limit to show top contributors
+  const sortedBreakdown = useMemo(() => {
+    if (!currentBreakdown) return [];
+    return [...currentBreakdown].filter((item) => item.cost > 0).sort((a, b) => b.cost - a.cost);
+  }, [currentBreakdown]);
+
+  // Calculate totals for percentage
+  const totalCost = sortedBreakdown.reduce((sum, item) => sum + item.cost, 0);
+
+  return (
+    <div className="flex gap-3 min-h-[220px]">
+      {/* Left: Map */}
+      <div className="flex-shrink-0 w-[380px] relative">
+        {/* Map container */}
+        <div className="rounded-md overflow-hidden">
+          <EconomicZonesSvgMap
+            hoveredZone={hoveredZone}
+            onHoveredZoneChange={setHoveredZone}
+            zoom={1.25}
+            className="w-full h-full"
+            svgStyle={{ height: '300px' }}
+            ariaLabel="Price index map"
+            getZoneFill={getZoneFill}
+            getZoneOpacity={getZoneOpacity}
+            getZoneStroke={getZoneStroke}
+            getZoneStrokeWidth={getZoneStrokeWidth}
+            getTooltipContent={getTooltipContent}
+            transformOffset="245 25"
+            backgroundFill="rgba(15, 23, 42, 0.5)"
+            containerClassName="w-full h-full"
+            showTooltip={true}
+          />
+        </div>
+
+        {/* Color legend */}
+        <div className="mt-1.5 flex items-center justify-between text-[10px] text-surface-500 dark:text-surface-500 px-0.5">
+          <span className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded" style={{ background: 'rgb(34, 197, 94)' }} />
+            Cheap
+          </span>
+          <div
+            className="flex-1 h-1 mx-2 rounded-full"
+            style={{
+              background: 'linear-gradient(to right, rgb(34, 197, 94), rgb(250, 204, 21), rgb(249, 115, 22), rgb(239, 68, 68))',
+            }}
+          />
+          <span className="flex items-center gap-1">
+            Expensive
+            <div className="w-2.5 h-2.5 rounded" style={{ background: 'rgb(239, 68, 68)' }} />
+          </span>
+        </div>
+      </div>
+
+      {/* Right: Ingredient Breakdown or Default Stats */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {hoveredZone && currentZone && currentBreakdown ? (
+          // Show ingredient breakdown when hovering
+          <>
+            {/* Header with zone info */}
+            <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-surface-300/50 dark:border-surface-700/50">
+              <div className="flex items-center gap-2">
+                <span className="text-sm">{currentZone.emoji}</span>
+                <span className="text-xs font-semibold text-surface-800 dark:text-surface-100">{currentZone.name}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                {avgPrice > 0 && currentPrice !== null && (
+                  <span
+                    className={`text-[10px] font-mono ${
+                      currentPrice < avgPrice ? 'text-emerald-400' : currentPrice > avgPrice ? 'text-rose-400' : 'text-surface-400'
+                    }`}
+                  >
+                    {currentPrice < avgPrice ? '' : '+'}
+                    {(((currentPrice - avgPrice) / avgPrice) * 100).toFixed(0)}% vs avg
+                  </span>
+                )}
+                <span className={`text-sm font-bold font-mono ${getPriceColor(currentPrice, minPrice, maxPrice).text}`}>
+                  ${currentPrice?.toFixed(2) ?? 'N/A'}
+                </span>
+              </div>
+            </div>
+
+            {/* Ingredient breakdown - limited to ~10 rows to fit in 11 lines total with header */}
+            <div className="flex-1 space-y-0.5 overflow-hidden">
+              {sortedBreakdown.slice(0, 10).map((item, idx) => {
+                const percentage = totalCost > 0 ? (item.cost / totalCost) * 100 : 0;
+                const avgCost = avgIngredientCosts[item.name] ?? 0;
+                const diffFromAvg = avgCost > 0 ? ((item.cost - avgCost) / avgCost) * 100 : null;
+
+                // Color based on percentage contribution
+                const barColor =
+                  percentage >= 25 ? 'bg-rose-500' : percentage >= 15 ? 'bg-amber-500' : percentage >= 8 ? 'bg-emerald-500' : 'bg-teal-500';
+
+                return (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.02 }}
+                    className="flex items-center gap-1.5 px-1.5 py-0.5 rounded bg-surface-200/30 dark:bg-surface-800/30"
+                  >
+                    {/* Ingredient name */}
+                    <span className="text-[10px] text-surface-600 dark:text-surface-300 flex-1 truncate min-w-0">{item.name}</span>
+
+                    {/* Price bar - visual representation of percentage */}
+                    <div className="w-16 h-1.5 bg-surface-300/50 dark:bg-surface-700/50 rounded-full overflow-hidden flex-shrink-0">
+                      <motion.div
+                        className={`h-full rounded-full ${barColor}`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${Math.min(percentage, 100)}%` }}
+                        transition={{ duration: 0.3, delay: idx * 0.02 }}
+                      />
+                    </div>
+
+                    {/* Percentage */}
+                    <span className="text-[9px] font-mono text-surface-500 dark:text-surface-400 w-7 text-right flex-shrink-0">
+                      {percentage.toFixed(0)}%
+                    </span>
+
+                    {/* Diff from average */}
+                    {diffFromAvg !== null && (
+                      <span
+                        className={`text-[9px] font-mono w-9 text-right flex-shrink-0 ${
+                          diffFromAvg < -5 ? 'text-emerald-400' : diffFromAvg > 5 ? 'text-rose-400' : 'text-surface-500'
+                        }`}
+                      >
+                        {diffFromAvg > 0 ? '+' : ''}
+                        {diffFromAvg.toFixed(0)}%
+                      </span>
+                    )}
+
+                    {/* Cost */}
+                    <span className="text-[10px] font-bold font-mono text-surface-700 dark:text-surface-200 w-11 text-right flex-shrink-0">
+                      ${item.cost.toFixed(2)}
+                    </span>
+                  </motion.div>
+                );
+              })}
+
+              {/* Show "more" indicator if there are more ingredients */}
+              {sortedBreakdown.length > 10 && (
+                <div className="text-[9px] text-surface-500 dark:text-surface-500 text-center pt-0.5">
+                  +{sortedBreakdown.length - 10} more (
+                  {(((totalCost - sortedBreakdown.slice(0, 10).reduce((s, i) => s + i.cost, 0)) / totalCost) * 100).toFixed(0)}%)
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          // Default view: show summary stats and hint
+          <>
+            <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-surface-300/50 dark:border-surface-700/50">
+              <div className="flex items-center gap-2">
+                <Map size={13} className="text-food-500 dark:text-food-400" />
+                <span className="text-xs font-semibold text-surface-800 dark:text-surface-100 truncate">{dish?.name} Price Index</span>
+              </div>
+              {priceSpread > 0 && (
+                <div className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                  {priceSpread}% spread
+                </div>
+              )}
+            </div>
+
+            {/* Summary stats */}
+            <div className="space-y-2 flex-1">
+              {/* Key stats in a grid */}
+              <div className="grid grid-cols-3 gap-2">
+                <div className="bg-surface-200/40 dark:bg-surface-800/40 rounded-lg p-2 text-center">
+                  <div className="text-[10px] text-surface-500 dark:text-surface-400 mb-0.5">Cheapest</div>
+                  <div className="text-sm font-bold text-emerald-500 dark:text-emerald-400">${minPrice.toFixed(2)}</div>
+                </div>
+                <div className="bg-surface-200/40 dark:bg-surface-800/40 rounded-lg p-2 text-center">
+                  <div className="text-[10px] text-surface-500 dark:text-surface-400 mb-0.5">Average</div>
+                  <div className="text-sm font-bold text-surface-700 dark:text-surface-200">${avgPrice.toFixed(2)}</div>
+                </div>
+                <div className="bg-surface-200/40 dark:bg-surface-800/40 rounded-lg p-2 text-center">
+                  <div className="text-[10px] text-surface-500 dark:text-surface-400 mb-0.5">Most Expensive</div>
+                  <div className="text-sm font-bold text-rose-500 dark:text-rose-400">${maxPrice.toFixed(2)}</div>
+                </div>
+              </div>
+
+              {/* Top 3 cheapest/expensive zones */}
+              <div className="grid grid-cols-2 gap-2">
+                {/* Cheapest zones */}
+                <div className="bg-emerald-500/10 dark:bg-emerald-500/10 rounded-lg p-2 border border-emerald-500/20">
+                  <div className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 mb-1">Cheapest Zones</div>
+                  {Object.entries(zonePrices)
+                    .filter(([, p]) => p !== null)
+                    .sort((a, b) => a[1] - b[1])
+                    .slice(0, 3)
+                    .map(([zoneId, price], idx) => (
+                      <div key={zoneId} className="flex items-center gap-1 text-[10px] text-surface-600 dark:text-surface-300">
+                        <span>{idx + 1}.</span>
+                        <span>{ECONOMIC_ZONES[zoneId]?.emoji}</span>
+                        <span className="truncate flex-1">{ECONOMIC_ZONES[zoneId]?.name}</span>
+                        <span className="font-mono font-semibold text-emerald-500">${price.toFixed(2)}</span>
+                      </div>
+                    ))}
+                </div>
+
+                {/* Expensive zones */}
+                <div className="bg-rose-500/10 dark:bg-rose-500/10 rounded-lg p-2 border border-rose-500/20">
+                  <div className="text-[10px] font-semibold text-rose-600 dark:text-rose-400 mb-1">Expensive Zones</div>
+                  {Object.entries(zonePrices)
+                    .filter(([, p]) => p !== null)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([zoneId, price], idx) => (
+                      <div key={zoneId} className="flex items-center gap-1 text-[10px] text-surface-600 dark:text-surface-300">
+                        <span>{idx + 1}.</span>
+                        <span>{ECONOMIC_ZONES[zoneId]?.emoji}</span>
+                        <span className="truncate flex-1">{ECONOMIC_ZONES[zoneId]?.name}</span>
+                        <span className="font-mono font-semibold text-rose-500">${price.toFixed(2)}</span>
+                      </div>
+                    ))}
+                </div>
+              </div>
+
+              {/* Hint */}
+              <div className="flex items-center justify-center gap-2 pt-1 text-[10px] text-surface-500 dark:text-surface-500">
+                <Info size={12} />
+                <span>Hover over a region to see ingredient cost breakdown</span>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Carousel/Slider for dish info slides
+ */
+export default function InfoSlider({ dish, dishName, dishHealth, dishEthics, ingredients, ingredientIndex }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    { id: 'index-map', label: 'Index Map', icon: Map },
+    { id: 'health', label: 'Health', icon: Heart },
+    { id: 'ethics', label: 'Ethics', icon: Leaf },
+  ];
+
+  const goToSlide = (index) => setCurrentSlide(index);
+  const goNext = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const goPrev = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+
+  // Swipe handling
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) goNext();
+    if (isRightSwipe) goPrev();
+  };
+
+  return (
+    <div className="bg-surface-100/80 dark:bg-surface-800/80 rounded-lg overflow-hidden">
+      {/* Header with tabs */}
+      <div className="flex items-center justify-between px-3 py-2 border-b border-surface-300/50 dark:border-surface-700/50">
+        {/* Left arrow */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            goPrev();
+          }}
+          className="p-1.5 rounded-lg text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 hover:bg-surface-200/50 dark:hover:bg-surface-700/50 transition-colors"
+        >
+          <ChevronLeft size={18} />
+        </button>
+
+        {/* Tab indicators */}
+        <div className="flex items-center gap-3">
+          {slides.map((slide, idx) => {
+            const Icon = slide.icon;
+            const isActive = idx === currentSlide;
+            return (
+              <button
+                key={slide.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToSlide(idx);
+                }}
+                className={`
+                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
+                  transition-all duration-200
+                  ${isActive ? 'bg-food-500/20 text-food-600 dark:text-food-400 border border-food-500/30' : 'text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 hover:bg-surface-200/30 dark:hover:bg-surface-700/30'}
+                `}
+              >
+                <Icon size={14} />
+                <span className="hidden sm:inline">{slide.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right arrow */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            goNext();
+          }}
+          className="p-1.5 rounded-lg text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 hover:bg-surface-200/50 dark:hover:bg-surface-700/50 transition-colors"
+        >
+          <ChevronRight size={18} />
+        </button>
+      </div>
+
+      {/* Slide content */}
+      <div className="p-4 relative overflow-hidden" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+          >
+            {currentSlide === 0 && <IndexMapSlide dish={dish} ingredientIndex={ingredientIndex} />}
+            {currentSlide === 1 && (
+              <HealthBreakdownSlide dishName={dishName} dishHealth={dishHealth} ingredients={ingredients} ingredientIndex={ingredientIndex} />
+            )}
+            {currentSlide === 2 && (
+              <EthicsBreakdownSlide dishName={dishName} dishEthics={dishEthics} ingredients={ingredients} ingredientIndex={ingredientIndex} />
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-2 pb-3">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={(e) => {
+              e.stopPropagation();
+              goToSlide(idx);
+            }}
+            className={`
+              w-2 h-2 rounded-full transition-all duration-200
+              ${idx === currentSlide ? 'bg-food-500 w-6' : 'bg-surface-400 dark:bg-surface-600 hover:bg-surface-500'}
+            `}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+

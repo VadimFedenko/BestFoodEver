@@ -1,0 +1,27 @@
+import { memo } from 'react';
+import EconomicZonesSvgMap from './EconomicZonesSvgMap';
+
+/**
+ * Ultra-light map widget (pure SVG)
+ * - 11 clickable zones
+ * - No country geometry in runtime
+ */
+const WorldMapWidget = memo(function WorldMapWidget({ selectedZone, onZoneSelect, variant = 'wide' }) {
+  const zoom = variant === 'square' ? 1.21 : 1.3;
+
+  return (
+    <div className="relative w-full h-full min-h-[150px] rounded-lg overflow-hidden">
+      <EconomicZonesSvgMap
+        selectedZone={selectedZone}
+        onZoneSelect={onZoneSelect}
+        zoom={zoom}
+        className="w-full h-full"
+        ariaLabel="Economic zones"
+        showTooltip={true}
+        containerClassName="w-full h-full"
+      />
+    </div>
+  );
+});
+
+export default WorldMapWidget;
