@@ -3297,7 +3297,7 @@
         "state": "fried"
       },
       {
-        "name": "Jiang you",
+        "name": "Soy Sauce",
         "g": 5,
         "state": "fried"
       },
@@ -4249,11 +4249,6 @@
       },
       {
         "name": "Sugar",
-        "g": 5,
-        "state": "raw"
-      },
-      {
-        "name": "Jiang you",
         "g": 5,
         "state": "raw"
       },
@@ -5369,7 +5364,7 @@
         "state": "raw"
       },
       {
-        "name": "Jiang you",
+        "name": "Soy Sauce",
         "g": 10,
         "state": "raw"
       },
@@ -6507,7 +6502,7 @@
       },
       {
         "name": "Salt",
-        "g": 10,
+        "g": 15,
         "state": "raw"
       }
     ],
@@ -11005,7 +11000,7 @@
         "state": "sauteed"
       },
       {
-        "name": "Jiang you",
+        "name": "Soy Sauce",
         "g": 20,
         "state": "sauteed"
       },
@@ -11309,55 +11304,6 @@
     "passive_t_hours": 3,
     "comment": "Make a large batch of chimichurri sauce in advance; it keeps for weeks in the fridge and the flavors only deepen over time, reducing active prep to just salting the meat. Use a heavily preheated cast-iron skillet if a grill isn't available to achieve a professional sear in half the time. Prepare multiple portions at once and rest them together to streamline the cooking process for subsequent meals.",
     "taste_score": 9.6,
-    "satiety_index": 176
-  },
-  {
-    "dish": "Asado",
-    "ingredients": [
-      {
-        "name": "Beef",
-        "g": 200,
-        "state": "grilled"
-      },
-      {
-        "name": "Chorizo",
-        "g": 100,
-        "state": "grilled"
-      },
-      {
-        "name": "Salsiccia",
-        "g": 80,
-        "state": "grilled"
-      },
-      {
-        "name": "Onion",
-        "g": 50,
-        "state": "grilled"
-      },
-      {
-        "name": "Bell Pepper",
-        "g": 40,
-        "state": "grilled"
-      },
-      {
-        "name": "Zucchini",
-        "g": 30,
-        "state": "grilled"
-      },
-      {
-        "name": "Olive Oil",
-        "g": 15,
-        "state": "grilled"
-      }
-    ],
-    "desc": "A classic Argentine-style barbecue featuring seasoned beef steak, chorizo, and a variety of grilled vegetables. The smoky aroma and tender textures make it the centerpiece of festive gatherings.",
-    "prep_t": 20,
-    "prep_t_optimized": 15,
-    "cook_t": 30,
-    "cook_t_optimized": 20,
-    "passive_t_hours": 4.5,
-    "comment": "You can save time on asado by doing knife work and marinating in bulk: slice vegetables and portion beef and sausages into freezer bags with a simple oil, salt, and herb rub, then freeze or keep in the fridge for 1–2 days. Light the grill efficiently with a chimney starter or use a gas grill on busy days so you are not tied up tending coals for too long. When you do fire up the grill, cook extra meat and vegetables; leftovers reheat very well in a hot pan or oven and can be used in sandwiches, salads, or grain bowls with only a few minutes of active time. This way, the full prep and grilling effort is done once, and the next two or three meals come together much faster.",
-    "taste_score": 8.4,
     "satiety_index": 176
   },
   {
@@ -12236,55 +12182,6 @@
     "satiety_index": 165
   },
   {
-    "dish": "Biltong",
-    "ingredients": [
-      {
-        "name": "Beef",
-        "g": 500,
-        "state": "raw"
-      },
-      {
-        "name": "Salt",
-        "g": 15,
-        "state": "raw"
-      },
-      {
-        "name": "Sugar",
-        "g": 10,
-        "state": "raw"
-      },
-      {
-        "name": "Black Pepper",
-        "g": 5,
-        "state": "raw"
-      },
-      {
-        "name": "Coriander Seeds",
-        "g": 5,
-        "state": "toasted"
-      },
-      {
-        "name": "Paprika",
-        "g": 5,
-        "state": "raw"
-      },
-      {
-        "name": "White Wine Vinegar",
-        "g": 20,
-        "state": "raw"
-      }
-    ],
-    "desc": "A classic South African delicacy, biltong is cured, dried beef that's spiced with a blend of coriander, pepper, and paprika. It's often enjoyed as a protein-packed snack or added to salads for an extra savory punch.",
-    "prep_t": 28,
-    "prep_t_optimized": 15,
-    "cook_t": 2,
-    "cook_t_optimized": 0,
-    "passive_t_hours": 120,
-    "comment": "To optimize, slice the beef while partially frozen; this makes the process significantly faster and ensures uniform strips without the extra cost of pre-cut meat. Prepare the dry spice rub in bulk to reduce active cooking time to zero for future batches. Biltong is ideal for batching; doubling the quantity adds very little active time and provides snacks for several weeks.",
-    "taste_score": 8.9,
-    "satiety_index": 157
-  },
-  {
     "dish": "Injera",
     "ingredients": [
       {
@@ -12485,7 +12382,7 @@
         "state": "raw"
       },
       {
-        "name": "Jiang you",
+        "name": "Soy Sauce",
         "g": 15,
         "state": "raw"
       },
@@ -13496,7 +13393,7 @@
         "state": "boiled"
       },
       {
-        "name": "Jiang you",
+        "name": "Soy Sauce",
         "g": 15,
         "state": "boiled"
       },

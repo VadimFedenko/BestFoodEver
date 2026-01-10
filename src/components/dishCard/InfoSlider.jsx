@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ChevronDown,
   ChevronLeft,
@@ -9,13 +9,14 @@ import {
   Heart,
   Info,
   Leaf,
-  Map,
+  Map as MapIcon,
   Skull,
   AlertTriangle,
   FileText,
   ArrowDown,
   Zap,
   Timer,
+  X,
 } from 'lucide-react';
 
 /**
@@ -47,6 +48,7 @@ function useIsCompactScreen() {
 import { ECONOMIC_ZONES, calculateDishCost, getCookingCoef, normalizeIngredientName, getPassiveTimePenalty } from '../../lib/RankingEngine';
 import EconomicZonesSvgMap from '../EconomicZonesSvgMap';
 import { getCookingEffect, getCookingLabel, getEthicsColor, getHealthColor, getPriceColor } from '../dishCardUtils';
+import { useIsMobile } from '../../lib/useIsMobile';
 
 /**
  * Get ethics icon based on index (0-10)
@@ -312,7 +314,7 @@ function OverviewSlide({
 /**
  * Ethics Breakdown Slide
  */
-function EthicsBreakdownSlide({ dishName, dishEthics, ingredients, ingredientIndex, liteMotion = false }) {
+function EthicsBreakdownSlide({ dishName, dishEthics, ingredients, ingredientIndex }) {
   if (!ingredients || ingredients.length === 0 || !ingredientIndex) {
     return (
       <div className="flex items-center justify-center h-48 text-surface-500 dark:text-surface-500 text-sm">
@@ -367,7 +369,7 @@ function EthicsBreakdownSlide({ dishName, dishEthics, ingredients, ingredientInd
               key={idx}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: liteMotion ? 0 : (idx * 0.05) }}
+              transition={{ delay: 0 }}
               className={`
                 rounded-lg p-2 border flex items-center gap-3
                 ${colors.bg} ${colors.border}
@@ -408,7 +410,7 @@ function EthicsBreakdownSlide({ dishName, dishEthics, ingredients, ingredientInd
 /**
  * Health Breakdown Slide
  */
-function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientIndex, liteMotion = false }) {
+function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientIndex }) {
   if (!ingredients || ingredients.length === 0 || !ingredientIndex) {
     return (
       <div className="flex items-center justify-center h-48 text-surface-500 dark:text-surface-500 text-sm">
@@ -471,37 +473,6 @@ function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientInd
         )}
       </div>
 
-      {/* Health legend - compact on mobile */}
-      <div className="flex items-center justify-center text-[9px] sm:text-[10px] text-surface-500 dark:text-surface-500 px-1 mb-2 overflow-x-auto hide-scrollbar">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <span className="flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500" />
-            <span className="hidden sm:inline">Excellent</span>
-            <span className="sm:hidden">9-10</span>
-          </span>
-          <span className="flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-lime-500" />
-            <span className="hidden sm:inline">Good</span>
-            <span className="sm:hidden">7-8</span>
-          </span>
-          <span className="flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500" />
-            <span className="hidden sm:inline">Moderate</span>
-            <span className="sm:hidden">5-6</span>
-          </span>
-          <span className="flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-orange-500" />
-            <span className="hidden sm:inline">Low</span>
-            <span className="sm:hidden">3-4</span>
-          </span>
-          <span className="flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
-            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500" />
-            <span className="hidden sm:inline">Very Low</span>
-            <span className="sm:hidden">0-2</span>
-          </span>
-        </div>
-      </div>
-
       {/* Ingredients list */}
       <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
         {sortedIngredients.map((ing, idx) => {
@@ -514,7 +485,7 @@ function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientInd
               key={idx}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: liteMotion ? 0 : (idx * 0.04) }}
+              transition={{ delay: 0 }}
               className={`
                 rounded-lg p-2.5 border
                 ${colors.bg} ${colors.border}
@@ -565,8 +536,8 @@ function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientInd
                     initial={{ width: 0 }}
                     animate={{ width: `${healthPercent}%` }}
                     transition={{
-                      duration: liteMotion ? 0.2 : 0.5,
-                      delay: liteMotion ? 0 : (idx * 0.04),
+                      duration: 0.2,
+                      delay: 0,
                       ease: 'easeOut',
                     }}
                   />
@@ -584,22 +555,6 @@ function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientInd
           );
         })}
       </div>
-
-      {/* Footer: cooking impact legend */}
-      <div className="pt-2 border-t border-surface-300/30 dark:border-surface-700/30">
-        <div className="flex items-center justify-center gap-2 sm:gap-4 text-[8px] sm:text-[9px] text-surface-500 dark:text-surface-500 flex-wrap">
-          <span className="hidden sm:inline">Cooking impact:</span>
-          <span className="flex items-center gap-0.5 sm:gap-1">
-            <span className="text-emerald-500 dark:text-emerald-400">+</span> Enhances
-          </span>
-          <span className="flex items-center gap-0.5 sm:gap-1">
-            <span className="text-teal-500 dark:text-teal-400">≈</span> Preserves
-          </span>
-          <span className="flex items-center gap-0.5 sm:gap-1">
-            <span className="text-amber-500 dark:text-amber-400">−</span> Reduces
-          </span>
-        </div>
-      </div>
     </div>
   );
 }
@@ -607,13 +562,15 @@ function HealthBreakdownSlide({ dishName, dishHealth, ingredients, ingredientInd
 /**
  * Index Map Slide - Big Mac Index style price visualization with ingredient breakdown
  */
-function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
+function IndexMapSlide({ dish, ingredientIndex, isActive = true }) {
   const [hoveredZone, setHoveredZone] = useState(null);
+  const [selectedZone, setSelectedZone] = useState(null);
+  const isMobile = useIsMobile();
 
   // Calculate prices and breakdowns for all zones
-  // Lazy computation: only calculate when component is mounted (i.e., slide is active)
+  // Lazy computation: only calculate when slide is active
   const { zonePrices, zoneBreakdowns } = useMemo(() => {
-    if (!dish?.originalDish || !ingredientIndex) return { zonePrices: {}, zoneBreakdowns: {} };
+    if (!isActive || !dish?.originalDish || !ingredientIndex) return { zonePrices: {}, zoneBreakdowns: {} };
 
     const prices = {};
     const breakdowns = {};
@@ -629,7 +586,7 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
       }
     }
     return { zonePrices: prices, zoneBreakdowns: breakdowns };
-  }, [dish?.originalDish, ingredientIndex]);
+  }, [isActive, dish?.originalDish, ingredientIndex]);
 
   // Calculate min/max for color scale (only available zones)
   const { minPrice, maxPrice, avgPrice } = useMemo(() => {
@@ -675,10 +632,23 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
   const priceSpread = maxPrice > 0 && minPrice > 0 ? (((maxPrice - minPrice) / minPrice) * 100).toFixed(0) : 0;
 
   // Custom functions for price-based coloring
-  const getZoneFill = (zoneId) => getPriceColor(zonePrices[zoneId], minPrice, maxPrice).fill;
-  const getZoneOpacity = (zoneId, selectedZone, isHovered) => (isHovered ? 1 : 0.85);
-  const getZoneStroke = (zoneId, isHovered) => (isHovered ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.15)');
-  const getZoneStrokeWidth = (zoneId, isHovered) => (isHovered ? 1.5 : 0.5);
+  // Note: EconomicZonesSvgMap passes (zoneId, isHovered, isSelected) to getZoneFill
+  // and (zoneId, selectedZone, isHovered) to getZoneOpacity, etc.
+  const getZoneFill = (zoneId, isHovered, isSelected) => getPriceColor(zonePrices[zoneId], minPrice, maxPrice).fill;
+  const getZoneOpacity = (zoneId, currentSelectedZone, isHovered) => {
+    // currentSelectedZone is the selectedZone prop from EconomicZonesSvgMap
+    // which matches our selectedZone state
+    const isSelected = currentSelectedZone === zoneId;
+    return (isHovered || isSelected) ? 1 : 0.85;
+  };
+  const getZoneStroke = (zoneId, isHovered, isSelected) => {
+    // isSelected is calculated in EconomicZonesSvgMap based on selectedZone prop
+    return (isHovered || isSelected) ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.15)';
+  };
+  const getZoneStrokeWidth = (zoneId, isHovered, isSelected) => {
+    // isSelected is calculated in EconomicZonesSvgMap based on selectedZone prop
+    return (isHovered || isSelected) ? 1.5 : 0.5;
+  };
 
   const getTooltipContent = (zoneId, zoneData) => {
     const price = zonePrices[zoneId];
@@ -690,10 +660,23 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
     };
   };
 
+  // Handle zone selection (tap/click) - works on mobile and desktop
+  const handleZoneSelect = (zoneId) => {
+    // Toggle: if clicking the same zone, deselect it
+    if (selectedZone === zoneId) {
+      setSelectedZone(null);
+    } else {
+      setSelectedZone(zoneId);
+    }
+  };
+
+  // Determine which zone to show breakdown for: selected zone takes priority, then hovered
+  const activeZone = selectedZone || hoveredZone;
+  
   // Get current zone data for breakdown panel
-  const currentZone = hoveredZone ? ECONOMIC_ZONES[hoveredZone] : null;
-  const currentPrice = hoveredZone ? zonePrices[hoveredZone] : null;
-  const currentBreakdown = hoveredZone ? zoneBreakdowns[hoveredZone] : null;
+  const currentZone = activeZone ? ECONOMIC_ZONES[activeZone] : null;
+  const currentPrice = activeZone ? zonePrices[activeZone] : null;
+  const currentBreakdown = activeZone ? zoneBreakdowns[activeZone] : null;
 
   // Sort breakdown by cost (descending) and limit to show top contributors
   const sortedBreakdown = useMemo(() => {
@@ -713,6 +696,8 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
         {/* Map container */}
         <div className="rounded-md overflow-hidden">
           <EconomicZonesSvgMap
+            selectedZone={selectedZone}
+            onZoneSelect={handleZoneSelect}
             hoveredZone={hoveredZone}
             onHoveredZoneChange={setHoveredZone}
             zoom={1.25}
@@ -752,8 +737,8 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
 
       {/* Right: Ingredient Breakdown or Default Stats */}
       <div className="flex-1 flex flex-col min-w-0">
-        {hoveredZone && currentZone && currentBreakdown ? (
-          // Show ingredient breakdown when hovering
+        {activeZone && currentZone && currentBreakdown ? (
+          // Show ingredient breakdown when hovering or selected
           <>
             {/* Header with zone info */}
             <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-surface-300/50 dark:border-surface-700/50">
@@ -775,6 +760,20 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
                 <span className={`text-sm font-bold font-mono ${getPriceColor(currentPrice, minPrice, maxPrice).text}`}>
                   ${currentPrice?.toFixed(2) ?? 'N/A'}
                 </span>
+                {/* Clear selection button - show only when zone is selected (not just hovered) */}
+                {selectedZone && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedZone(null);
+                    }}
+                    className="ml-1 p-1 rounded text-surface-400 hover:text-surface-600 dark:hover:text-surface-200 hover:bg-surface-200/50 dark:hover:bg-surface-700/50 transition-colors"
+                    title="Clear selection"
+                    aria-label="Clear selected zone"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -794,7 +793,7 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
                     key={item.name}
                     initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: liteMotion ? 0 : (idx * 0.02) }}
+                    transition={{ delay: 0 }}
                     className="flex items-center gap-1.5 px-1.5 py-0.5 rounded bg-surface-200/30 dark:bg-surface-800/30"
                   >
                     {/* Ingredient name */}
@@ -807,8 +806,8 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
                         initial={{ width: 0 }}
                         animate={{ width: `${Math.min(percentage, 100)}%` }}
                         transition={{
-                          duration: liteMotion ? 0.15 : 0.3,
-                          delay: liteMotion ? 0 : (idx * 0.02),
+                          duration: 0.15,
+                          delay: 0,
                         }}
                       />
                     </div>
@@ -852,7 +851,7 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
           <>
             <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-surface-300/50 dark:border-surface-700/50">
               <div className="flex items-center gap-2">
-                <Map size={13} className="text-food-500 dark:text-food-400" />
+                <MapIcon size={13} className="text-food-500 dark:text-food-400" />
                 <span className="text-xs font-semibold text-surface-800 dark:text-surface-100 truncate">{dish?.name} Price Index</span>
               </div>
               {priceSpread > 0 && (
@@ -918,9 +917,9 @@ function IndexMapSlide({ dish, ingredientIndex, liteMotion = false }) {
               </div>
 
               {/* Hint */}
-              <div className="flex items-center justify-center gap-2 pt-1 text-[10px] text-surface-500 dark:text-surface-500">
-                <Info size={12} />
-                <span>Hover over a region to see ingredient cost breakdown</span>
+              <div className="flex items-center justify-center gap-2 pt-1 text-[10px] text-surface-500 dark:text-surface-500 text-center px-2">
+                <Info size={12} className="flex-shrink-0" />
+                <span>{isMobile ? 'Tap a region to see ingredient cost breakdown' : 'Hover over or tap a region to see ingredient cost breakdown'}</span>
               </div>
             </div>
           </>
@@ -957,7 +956,7 @@ function formatPassiveTime(hours) {
 /**
  * Time Slide - Detailed cooking time breakdown and analysis
  */
-function TimeSlide({ dish, isOptimized = false, liteMotion = false, analysisVariants = null, priceUnit = 'serving' }) {
+function TimeSlide({ dish, isOptimized = false, analysisVariants = null, priceUnit = 'serving' }) {
   const dishName = dish?.name || 'This dish';
   
   // Normal cooking times
@@ -997,43 +996,42 @@ function TimeSlide({ dish, isOptimized = false, liteMotion = false, analysisVari
   
   const timeDescription = getTimeDescription(speedPercentile);
 
-  // Calculate scores for both modes
-  // Get score from the appropriate variant
-  let standardCookingScore = finalSpeedScore;
-  let timeOptimizedScore = finalSpeedScore;
-  
-  if (analysisVariants?.variants) {
-    // Get normal mode score
-    const normalKey = `normal:${priceUnit}`;
-    const normalVariant = analysisVariants.variants[normalKey];
-    if (normalVariant?.analyzed) {
-      const normalDish = normalVariant.analyzed.find(d => d.name === dishName);
-      if (normalDish?.normalizedBase?.speed !== undefined) {
-        standardCookingScore = normalDish.normalizedBase.speed;
+  // Calculate scores for both modes using Map for O(1) lookup
+  const { standardCookingScore, timeOptimizedScore } = useMemo(() => {
+    let standardScore = finalSpeedScore;
+    let optimizedScore = finalSpeedScore;
+    
+    if (analysisVariants?.variants) {
+      const normalKey = `normal:${priceUnit}`;
+      const normalVariant = analysisVariants.variants[normalKey];
+      if (normalVariant?.byName) {
+        const normalDish = normalVariant.byName.get(dishName);
+        if (normalDish?.normalizedBase?.speed !== undefined) {
+          standardScore = normalDish.normalizedBase.speed;
+        }
       }
+      
+      const optimizedKey = `optimized:${priceUnit}`;
+      const optimizedVariant = analysisVariants.variants[optimizedKey];
+      if (optimizedVariant?.byName) {
+        const optimizedDish = optimizedVariant.byName.get(dishName);
+        if (optimizedDish?.normalizedBase?.speed !== undefined) {
+          optimizedScore = optimizedDish.normalizedBase.speed;
+        }
+      }
+    } else {
+      // Fallback: if we don't have variants, use current score
+      standardScore = isOptimized
+        ? Math.max(0, Math.min(10, speedScoreBeforePenalty + passivePenalty))
+        : finalSpeedScore;
+      
+      optimizedScore = isOptimized
+        ? finalSpeedScore
+        : Math.max(0, Math.min(10, speedScoreBeforePenalty + passivePenalty));
     }
     
-    // Get optimized mode score
-    const optimizedKey = `optimized:${priceUnit}`;
-    const optimizedVariant = analysisVariants.variants[optimizedKey];
-    if (optimizedVariant?.analyzed) {
-      const optimizedDish = optimizedVariant.analyzed.find(d => d.name === dishName);
-      if (optimizedDish?.normalizedBase?.speed !== undefined) {
-        timeOptimizedScore = optimizedDish.normalizedBase.speed;
-      }
-    }
-  } else {
-    // Fallback: if we don't have variants, use current score
-    // Standard Cooking: if we're in normal mode, use current score; otherwise estimate
-    standardCookingScore = isOptimized
-      ? Math.max(0, Math.min(10, speedScoreBeforePenalty + passivePenalty))
-      : finalSpeedScore;
-    
-    // Time-Optimized: if we're in optimized mode, use current score; otherwise estimate
-    timeOptimizedScore = isOptimized
-      ? finalSpeedScore
-      : Math.max(0, Math.min(10, speedScoreBeforePenalty + passivePenalty));
-  }
+    return { standardCookingScore: standardScore, timeOptimizedScore: optimizedScore };
+  }, [analysisVariants?.variants, priceUnit, dishName, finalSpeedScore, isOptimized, speedScoreBeforePenalty, passivePenalty]);
 
   return (
     <div className="space-y-4">
@@ -1084,7 +1082,7 @@ function TimeSlide({ dish, isOptimized = false, liteMotion = false, analysisVari
               className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${speedPercentile}%` }}
-              transition={{ duration: liteMotion ? 0.2 : 0.6, ease: 'easeOut' }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
             />
           </div>
           <div className="flex items-center justify-center mt-1.5">
@@ -1257,7 +1255,6 @@ export default function InfoSlider({
   missingIngredients = [],
   missingPrices = [],
   isOptimized = false,
-  liteMotion = false,
   analysisVariants = null,
   priceUnit = 'serving',
 }) {
@@ -1265,7 +1262,7 @@ export default function InfoSlider({
 
   const slides = [
     { id: 'overview', label: 'Overview', icon: FileText },
-    { id: 'index-map', label: 'Index Map', icon: Map },
+    { id: 'index-map', label: 'Index Map', icon: MapIcon },
     { id: 'time', label: 'Time', icon: Clock },
     { id: 'health', label: 'Health', icon: Heart },
     { id: 'ethics', label: 'Ethics', icon: Leaf },
@@ -1355,79 +1352,35 @@ export default function InfoSlider({
 
       {/* Slide content */}
       <div className="p-2 sm:p-4 relative overflow-hidden" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
-        {liteMotion ? (
-          <div>
-            {currentSlide === 0 && (
-              <OverviewSlide 
-                dish={dish}
-                priorities={priorities}
-                unavailableIngredients={unavailableIngredients}
-                missingIngredients={missingIngredients}
-                missingPrices={missingPrices}
-              />
-            )}
-            {currentSlide === 1 && <IndexMapSlide dish={dish} ingredientIndex={ingredientIndex} liteMotion={true} />}
-            {currentSlide === 2 && <TimeSlide dish={dish} isOptimized={isOptimized} liteMotion={true} analysisVariants={analysisVariants} priceUnit={priceUnit} />}
-            {currentSlide === 3 && (
-              <HealthBreakdownSlide
-                dishName={dishName}
-                dishHealth={dishHealth}
-                ingredients={ingredients}
-                ingredientIndex={ingredientIndex}
-                liteMotion={true}
-              />
-            )}
-            {currentSlide === 4 && (
-              <EthicsBreakdownSlide
-                dishName={dishName}
-                dishEthics={dishEthics}
-                ingredients={ingredients}
-                ingredientIndex={ingredientIndex}
-                liteMotion={true}
-              />
-            )}
-          </div>
-        ) : (
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-            >
-              {currentSlide === 0 && (
-                <OverviewSlide 
-                  dish={dish}
-                  priorities={priorities}
-                  unavailableIngredients={unavailableIngredients}
-                  missingIngredients={missingIngredients}
-                  missingPrices={missingPrices}
-                />
-              )}
-              {currentSlide === 1 && <IndexMapSlide dish={dish} ingredientIndex={ingredientIndex} liteMotion={false} />}
-              {currentSlide === 2 && <TimeSlide dish={dish} isOptimized={isOptimized} liteMotion={false} analysisVariants={analysisVariants} priceUnit={priceUnit} />}
-              {currentSlide === 3 && (
-                <HealthBreakdownSlide
-                  dishName={dishName}
-                  dishHealth={dishHealth}
-                  ingredients={ingredients}
-                  ingredientIndex={ingredientIndex}
-                  liteMotion={false}
-                />
-              )}
-              {currentSlide === 4 && (
-                <EthicsBreakdownSlide
-                  dishName={dishName}
-                  dishEthics={dishEthics}
-                  ingredients={ingredients}
-                  ingredientIndex={ingredientIndex}
-                  liteMotion={false}
-                />
-              )}
-            </motion.div>
-          </AnimatePresence>
-        )}
+        <div>
+          {currentSlide === 0 && (
+            <OverviewSlide 
+              dish={dish}
+              priorities={priorities}
+              unavailableIngredients={unavailableIngredients}
+              missingIngredients={missingIngredients}
+              missingPrices={missingPrices}
+            />
+          )}
+          {currentSlide === 1 && <IndexMapSlide dish={dish} ingredientIndex={ingredientIndex} isActive={true} />}
+          {currentSlide === 2 && <TimeSlide dish={dish} isOptimized={isOptimized} analysisVariants={analysisVariants} priceUnit={priceUnit} />}
+          {currentSlide === 3 && (
+            <HealthBreakdownSlide
+              dishName={dishName}
+              dishHealth={dishHealth}
+              ingredients={ingredients}
+              ingredientIndex={ingredientIndex}
+            />
+          )}
+          {currentSlide === 4 && (
+            <EthicsBreakdownSlide
+              dishName={dishName}
+              dishEthics={dishEthics}
+              ingredients={ingredients}
+              ingredientIndex={ingredientIndex}
+            />
+          )}
+        </div>
       </div>
 
       {/* Dot indicators */}

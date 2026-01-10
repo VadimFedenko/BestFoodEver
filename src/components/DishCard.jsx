@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Clock, 
   DollarSign, 
@@ -17,44 +17,62 @@ import {
   formatTime,
   getScoreColor,
 } from './dishCardUtils';
+import { convertPriceToUnit } from '../lib/RankingEngine';
+
 
 /**
- * Hook to check if window width is less than a given breakpoint
+ * Unified breakpoints hook - single MediaQueryList listener for all breakpoints
+ * Replaces multiple useMediaQuery hooks to reduce memory and event listener overhead
  */
-function useMediaQuery(maxWidth) {
-  const [matches, setMatches] = useState(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return false;
-    return window.matchMedia(`(max-width: ${maxWidth}px)`).matches;
+function useBreakpoints() {
+  const [breakpoints, setBreakpoints] = useState(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) {
+      return { isNarrow: false, isVeryNarrow: false, isModerateNarrow: false };
+    }
+    return {
+      isNarrow: window.matchMedia('(max-width: 339px)').matches,
+      isVeryNarrow: window.matchMedia('(max-width: 379px)').matches,
+      isModerateNarrow: window.matchMedia('(max-width: 419px)').matches,
+    };
   });
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return;
 
-    const mq = window.matchMedia(`(max-width: ${maxWidth}px)`);
-    const onChange = () => setMatches(mq.matches);
+    const mqNarrow = window.matchMedia('(max-width: 339px)');
+    const mqVeryNarrow = window.matchMedia('(max-width: 379px)');
+    const mqModerateNarrow = window.matchMedia('(max-width: 419px)');
 
-    if (mq.addEventListener) {
-      mq.addEventListener('change', onChange);
-      return () => mq.removeEventListener('change', onChange);
-    }
+    const updateBreakpoints = () => {
+      setBreakpoints({
+        isNarrow: mqNarrow.matches,
+        isVeryNarrow: mqVeryNarrow.matches,
+        isModerateNarrow: mqModerateNarrow.matches,
+      });
+    };
 
-    mq.addListener(onChange);
-    return () => mq.removeListener(onChange);
-  }, [maxWidth]);
+    // Use addEventListener if available, fallback to addListener
+    const addListener = (mq, handler) => {
+      if (mq.addEventListener) {
+        mq.addEventListener('change', handler);
+        return () => mq.removeEventListener('change', handler);
+      }
+      mq.addListener(handler);
+      return () => mq.removeListener(handler);
+    };
 
-  return matches;
-}
+    const cleanup1 = addListener(mqNarrow, updateBreakpoints);
+    const cleanup2 = addListener(mqVeryNarrow, updateBreakpoints);
+    const cleanup3 = addListener(mqModerateNarrow, updateBreakpoints);
 
-function useIsNarrow() {
-  return useMediaQuery(339);
-}
+    return () => {
+      cleanup1();
+      cleanup2();
+      cleanup3();
+    };
+  }, []);
 
-function useIsVeryNarrow() {
-  return useMediaQuery(379);
-}
-
-function useIsModerateNarrow() {
-  return useMediaQuery(419);
+  return breakpoints;
 }
 
 /**
@@ -64,19 +82,18 @@ function useIsModerateNarrow() {
 export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange, overrides = {}, ingredientIndex, priceUnit = 'serving', priorities = {}, isOptimized = false, analysisVariants = null }) {
   const cardRef = useRef(null);
   const scoreColors = getScoreColor(dish.score);
-  const reduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
-  const isNarrow = useIsNarrow();
-  const isVeryNarrow = useIsVeryNarrow();
-  const isModerateNarrow = useIsModerateNarrow();
-  const lite = isMobile || reduceMotion;
+  const { isNarrow, isVeryNarrow, isModerateNarrow } = useBreakpoints();
 
   const [draftOverrides, setDraftOverrides] = useState(overrides);
   const draftRef = useRef(draftOverrides);
   const commitTimerRef = useRef(null);
   const localEditingRef = useRef(false);
 
-  useEffect(() => { draftRef.current = draftOverrides; }, [draftOverrides]);
+  // Keep ref in sync with state
+  useEffect(() => {
+    draftRef.current = draftOverrides;
+  }, [draftOverrides]);
 
   // Safety: never leave debounced commit timers running after unmount.
   useEffect(() => {
@@ -109,26 +126,12 @@ export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange,
   // Auto-scroll to top of card when expanded
   useEffect(() => {
     if (isExpanded && cardRef.current) {
-      if (lite) {
-        cardRef.current?.scrollIntoView({
-          behavior: 'auto',
-          block: 'start',
-        });
-        return;
-      }
-
-      // Wait for closing animation of previous card (250ms) + layout recalculation
-      // Use a delay that accounts for both the animation and layout updates
-      const timeoutId = setTimeout(() => {
-        cardRef.current?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        });
-      }, 350); // Delay to allow previous card to close (250ms) + buffer for layout recalculation
-      
-      return () => clearTimeout(timeoutId);
+      cardRef.current?.scrollIntoView({
+        behavior: 'auto',
+        block: 'start',
+      });
     }
-  }, [isExpanded, lite]);
+  }, [isExpanded]);
 
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
@@ -181,75 +184,99 @@ export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange,
     });
   };
 
-  // Baselines (pre-override) computed by engine
-  const baseTaste = dish.baseTaste ?? dish.taste ?? 5;
-  const basePriceServing = dish.basePriceServing ?? dish.baseCost ?? dish.prices?.serving ?? 0;
-  const baseTimeCurrentMode = isOptimized ? (dish.baseTimeOptimized ?? dish.time ?? 30) : (dish.baseTimeNormal ?? dish.time ?? 30);
-  const baseHealth = dish.baseHealth ?? dish.health ?? 5;
-  const baseEthics = dish.baseEthics ?? dish.ethics ?? 5;
-  const baseCalories = dish.baseCalories ?? dish.calories ?? 0;
+  // Baselines (pre-override) computed by engine - memoized to avoid unnecessary calculations
+  const baseValues = useMemo(() => ({
+    taste: dish.baseTaste ?? dish.taste ?? 5,
+    priceServing: dish.basePriceServing ?? dish.baseCost ?? dish.prices?.serving ?? 0,
+    timeCurrentMode: isOptimized ? (dish.baseTimeOptimized ?? dish.time ?? 30) : (dish.baseTimeNormal ?? dish.time ?? 30),
+    health: dish.baseHealth ?? dish.health ?? 5,
+    ethics: dish.baseEthics ?? dish.ethics ?? 5,
+    calories: dish.baseCalories ?? dish.calories ?? 0,
+  }), [
+    dish.baseTaste, dish.taste, dish.basePriceServing, dish.baseCost, dish.prices?.serving,
+    isOptimized, dish.baseTimeOptimized, dish.time, dish.baseTimeNormal,
+    dish.baseHealth, dish.health, dish.baseEthics, dish.ethics, dish.baseCalories, dish.calories
+  ]);
 
   // Effective values (apply draft overrides in-card without forcing global re-analysis each tick)
-  const effectiveTaste = (() => {
-    if (Number.isFinite(draftOverrides?.taste)) return clamp(draftOverrides.taste, 0, 10);
-    if (Number.isFinite(draftOverrides?.tasteMul)) return clamp(baseTaste * draftOverrides.tasteMul, 0, 10);
-    return dish.taste;
-  })();
+  const effectiveValues = useMemo(() => {
+    const { taste: baseTaste, priceServing: basePriceServing, timeCurrentMode: baseTimeCurrentMode, health: baseHealth, ethics: baseEthics, calories: baseCalories } = baseValues;
 
-  const effectiveTime = (() => {
-    if (Number.isFinite(draftOverrides?.time)) return Math.max(1, draftOverrides.time);
-    if (Number.isFinite(draftOverrides?.timeMul)) {
-      const base = isOptimized ? (dish.baseTimeOptimized ?? dish.time ?? 30) : (dish.baseTimeNormal ?? dish.time ?? 30);
-      return Math.max(1, base * draftOverrides.timeMul);
-    }
-    return dish.time;
-  })();
+    const effectiveTaste = (() => {
+      if (Number.isFinite(draftOverrides?.taste)) return clamp(draftOverrides.taste, 0, 10);
+      if (Number.isFinite(draftOverrides?.tasteMul)) return clamp(baseTaste * draftOverrides.tasteMul, 0, 10);
+      return dish.taste;
+    })();
 
-  const effectiveBasePriceServing = (() => {
-    if (Number.isFinite(draftOverrides?.price)) return Math.max(0.01, draftOverrides.price);
-    if (Number.isFinite(draftOverrides?.priceMul)) return Math.max(0.01, basePriceServing * draftOverrides.priceMul);
-    return dish.prices?.serving ?? dish.baseCost ?? dish.cost ?? 0;
-  })();
+    const effectiveTime = (() => {
+      if (Number.isFinite(draftOverrides?.time)) return Math.max(1, draftOverrides.time);
+      if (Number.isFinite(draftOverrides?.timeMul)) {
+        const base = isOptimized ? (dish.baseTimeOptimized ?? dish.time ?? 30) : (dish.baseTimeNormal ?? dish.time ?? 30);
+        return Math.max(1, base * draftOverrides.timeMul);
+      }
+      return dish.time;
+    })();
 
-  const convertPrice = (servingCost) => {
+    const effectiveBasePriceServing = (() => {
+      if (Number.isFinite(draftOverrides?.price)) return Math.max(0.01, draftOverrides.price);
+      if (Number.isFinite(draftOverrides?.priceMul)) return Math.max(0.01, basePriceServing * draftOverrides.priceMul);
+      return dish.prices?.serving ?? dish.baseCost ?? dish.cost ?? 0;
+    })();
+
+    const effectiveHealth = (() => {
+      if (Number.isFinite(draftOverrides?.health)) return clamp(draftOverrides.health, 0, 10);
+      if (Number.isFinite(draftOverrides?.healthMul)) return clamp(baseHealth * draftOverrides.healthMul, 0, 10);
+      return dish.health;
+    })();
+
+    const effectiveEthics = (() => {
+      if (Number.isFinite(draftOverrides?.ethics)) return clamp(draftOverrides.ethics, 0, 10);
+      if (Number.isFinite(draftOverrides?.ethicsMul)) return clamp(baseEthics * draftOverrides.ethicsMul, 0, 10);
+      return dish.ethics;
+    })();
+
+    const effectiveCalories = (() => {
+      if (Number.isFinite(draftOverrides?.calories)) return Math.max(0, Math.round(draftOverrides.calories));
+      if (Number.isFinite(draftOverrides?.caloriesMul)) return Math.max(0, Math.round(baseCalories * draftOverrides.caloriesMul));
+      return dish.calories ?? 0;
+    })();
+
+    // Price display: use cached per-unit price from the analyzed variant (dish.cost / dish.prices[unit])
+    // Convert only if the user set an absolute per-serving override (draftOverrides.price).
     const weight = dish?.weight ?? 0;
     const calories = dish?.calories ?? 0;
-    if (!Number.isFinite(servingCost) || servingCost <= 0) return 0;
+    const basePriceForUnit = dish.prices?.[priceUnit] ?? dish.cost ?? 0;
 
-    if (priceUnit === 'per1kg') {
-      if (!Number.isFinite(weight) || weight <= 0) return servingCost;
-      return (servingCost * 1000) / weight;
-    }
-    if (priceUnit === 'per1000kcal') {
-      if (!Number.isFinite(calories) || calories <= 0) return servingCost;
-      return servingCost / (calories / 1000);
-    }
-    return servingCost;
-  };
+    const effectivePrice = (() => {
+      if (Number.isFinite(draftOverrides?.price)) {
+        // Absolute override is interpreted as "per serving" (legacy semantics),
+        // so convert that single value to the current unit.
+        return convertPriceToUnit(draftOverrides.price, weight, calories, priceUnit);
+      }
+      if (Number.isFinite(draftOverrides?.priceMul)) {
+        // Apply multiplier to already-cached unit price (no conversion work).
+        return Math.max(0.01, basePriceForUnit * draftOverrides.priceMul);
+      }
+      return basePriceForUnit;
+    })();
 
-  const effectivePrice = convertPrice(effectiveBasePriceServing);
+    const calPerG = (dish?.weight ?? 0) > 0 && effectiveCalories > 0
+      ? ((effectiveCalories / dish.weight) * 1000 / 100)
+      : 0;
 
-  const effectiveHealth = (() => {
-    if (Number.isFinite(draftOverrides?.health)) return clamp(draftOverrides.health, 0, 10);
-    if (Number.isFinite(draftOverrides?.healthMul)) return clamp(baseHealth * draftOverrides.healthMul, 0, 10);
-    return dish.health;
-  })();
+    return {
+      taste: effectiveTaste,
+      time: effectiveTime,
+      basePriceServing: effectiveBasePriceServing,
+      price: effectivePrice,
+      health: effectiveHealth,
+      ethics: effectiveEthics,
+      calories: effectiveCalories,
+      calPerG,
+    };
+  }, [baseValues, draftOverrides, dish, isOptimized, priceUnit]);
 
-  const effectiveEthics = (() => {
-    if (Number.isFinite(draftOverrides?.ethics)) return clamp(draftOverrides.ethics, 0, 10);
-    if (Number.isFinite(draftOverrides?.ethicsMul)) return clamp(baseEthics * draftOverrides.ethicsMul, 0, 10);
-    return dish.ethics;
-  })();
-
-  const effectiveCalories = (() => {
-    if (Number.isFinite(draftOverrides?.calories)) return Math.max(0, Math.round(draftOverrides.calories));
-    if (Number.isFinite(draftOverrides?.caloriesMul)) return Math.max(0, Math.round(baseCalories * draftOverrides.caloriesMul));
-    return dish.calories ?? 0;
-  })();
-
-  const calPerG = (dish?.weight ?? 0) > 0 && (dish?.calories ?? 0) > 0
-    ? ((effectiveCalories / dish.weight) * 1000 / 100) // Convert kcal to cal and divide by 100 to get per gram
-    : 0;
+  const { taste: effectiveTaste, time: effectiveTime, basePriceServing: effectiveBasePriceServing, price: effectivePrice, health: effectiveHealth, ethics: effectiveEthics, calories: effectiveCalories, calPerG } = effectiveValues;
 
   const handleResetOverrides = () => {
     onOverrideChange(dish.name, {});
@@ -270,83 +297,94 @@ export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange,
     return m * (1 + pctDelta);
   };
 
-  const handleTasteChangePct = (pctDelta) => {
+  /**
+   * Universal handler for percentage-based changes to any override value.
+   * Handles both absolute and multiplier-based overrides for all metrics.
+   * 
+   * @param {string} key - The override key (e.g., 'taste', 'time', 'price', etc.)
+   * @param {number} pctDelta - Percentage change (e.g., 0.01 for 1% increase)
+   * @param {Object} config - Configuration object with:
+   *   - baseValue: base value for this metric from baseValues
+   *   - dishValue: fallback value from dish object
+   *   - clampMin: minimum value for clamping (for absolute values)
+   *   - clampMax: maximum value for clamping (for absolute values, optional)
+   *   - useMax: function to apply max constraint (e.g., Math.max for time/calories)
+   */
+  const createChangeHandler = (key, config) => (pctDelta) => {
     const current = draftRef.current || {};
-    if (Number.isFinite(baseTaste) && baseTaste > 0) {
-      const currentMul = Number.isFinite(current.tasteMul)
-        ? current.tasteMul
-        : (Number.isFinite(current.taste) ? (current.taste / baseTaste) : 1);
-      updateDraft({ tasteMul: bumpMul(currentMul, pctDelta) });
+    const { baseValue, dishValue, clampMin, clampMax, useMax } = config;
+    const absKey = key;
+    const mulKey = `${key}Mul`;
+
+    // Try multiplier approach if base value is valid and positive
+    if (Number.isFinite(baseValue) && baseValue > 0) {
+      const currentMul = Number.isFinite(current[mulKey])
+        ? current[mulKey]
+        : (Number.isFinite(current[absKey]) ? (current[absKey] / baseValue) : 1);
+      updateDraft({ [mulKey]: bumpMul(currentMul, pctDelta) });
       return;
     }
-    const effective = Number.isFinite(current.taste) ? current.taste : (Number.isFinite(current.tasteMul) ? baseTaste * current.tasteMul : dish.taste);
-    updateDraft({ taste: clamp(effective * (1 + pctDelta), 0, 10) });
+
+    // Fallback to absolute value approach
+    const effective = Number.isFinite(current[absKey])
+      ? current[absKey]
+      : (Number.isFinite(current[mulKey]) ? baseValue * current[mulKey] : dishValue);
+
+    // Apply constraint based on metric type
+    let newValue;
+    if (useMax) {
+      // For time and calories: use Math.max with minimum
+      newValue = useMax(clampMin, effective * (1 + pctDelta));
+    } else {
+      // For taste, health, ethics: use clamp function
+      newValue = clamp(effective * (1 + pctDelta), clampMin, clampMax ?? 10);
+    }
+
+    updateDraft({ [absKey]: newValue });
   };
 
-  const handleTimeChangePct = (pctDelta) => {
-    const current = draftRef.current || {};
-    if (Number.isFinite(baseTimeCurrentMode) && baseTimeCurrentMode > 0) {
-      const currentMul = Number.isFinite(current.timeMul)
-        ? current.timeMul
-        : (Number.isFinite(current.time) ? (current.time / baseTimeCurrentMode) : 1);
-      updateDraft({ timeMul: bumpMul(currentMul, pctDelta) });
-      return;
-    }
-    const effective = Number.isFinite(current.time) ? current.time : (Number.isFinite(current.timeMul) ? baseTimeCurrentMode * current.timeMul : dish.time);
-    updateDraft({ time: Math.max(1, effective * (1 + pctDelta)) });
-  };
+  // Create handlers for each metric with their specific configurations
+  const handleTasteChangePct = createChangeHandler('taste', {
+    baseValue: baseValues.taste,
+    dishValue: dish.taste,
+    clampMin: 0,
+    clampMax: 10,
+  });
 
-  const handlePriceChangePct = (pctDelta) => {
-    const current = draftRef.current || {};
-    if (Number.isFinite(basePriceServing) && basePriceServing > 0) {
-      const currentMul = Number.isFinite(current.priceMul)
-        ? current.priceMul
-        : (Number.isFinite(current.price) ? (current.price / basePriceServing) : 1);
-      updateDraft({ priceMul: bumpMul(currentMul, pctDelta) });
-      return;
-    }
-    const effective = Number.isFinite(current.price) ? current.price : (Number.isFinite(current.priceMul) ? basePriceServing * current.priceMul : basePriceServing);
-    updateDraft({ price: Math.max(0.01, effective * (1 + pctDelta)) });
-  };
+  const handleTimeChangePct = createChangeHandler('time', {
+    baseValue: baseValues.timeCurrentMode,
+    dishValue: dish.time,
+    clampMin: 1,
+    useMax: Math.max,
+  });
 
-  const handleHealthChangePct = (pctDelta) => {
-    const current = draftRef.current || {};
-    if (Number.isFinite(baseHealth) && baseHealth > 0) {
-      const currentMul = Number.isFinite(current.healthMul)
-        ? current.healthMul
-        : (Number.isFinite(current.health) ? (current.health / baseHealth) : 1);
-      updateDraft({ healthMul: bumpMul(currentMul, pctDelta) });
-      return;
-    }
-    const effective = Number.isFinite(current.health) ? current.health : (Number.isFinite(current.healthMul) ? baseHealth * current.healthMul : dish.health);
-    updateDraft({ health: clamp(effective * (1 + pctDelta), 0, 10) });
-  };
+  const handlePriceChangePct = createChangeHandler('price', {
+    baseValue: baseValues.priceServing,
+    dishValue: baseValues.priceServing,
+    clampMin: 0.01,
+    useMax: Math.max,
+  });
 
-  const handleEthicsChangePct = (pctDelta) => {
-    const current = draftRef.current || {};
-    if (Number.isFinite(baseEthics) && baseEthics > 0) {
-      const currentMul = Number.isFinite(current.ethicsMul)
-        ? current.ethicsMul
-        : (Number.isFinite(current.ethics) ? (current.ethics / baseEthics) : 1);
-      updateDraft({ ethicsMul: bumpMul(currentMul, pctDelta) });
-      return;
-    }
-    const effective = Number.isFinite(current.ethics) ? current.ethics : (Number.isFinite(current.ethicsMul) ? baseEthics * current.ethicsMul : dish.ethics);
-    updateDraft({ ethics: clamp(effective * (1 + pctDelta), 0, 10) });
-  };
+  const handleHealthChangePct = createChangeHandler('health', {
+    baseValue: baseValues.health,
+    dishValue: dish.health,
+    clampMin: 0,
+    clampMax: 10,
+  });
 
-  const handleCaloriesChangePct = (pctDelta) => {
-    const current = draftRef.current || {};
-    if (Number.isFinite(baseCalories) && baseCalories > 0) {
-      const currentMul = Number.isFinite(current.caloriesMul)
-        ? current.caloriesMul
-        : (Number.isFinite(current.calories) ? (current.calories / baseCalories) : 1);
-      updateDraft({ caloriesMul: bumpMul(currentMul, pctDelta) });
-      return;
-    }
-    const effective = Number.isFinite(current.calories) ? current.calories : (Number.isFinite(current.caloriesMul) ? baseCalories * current.caloriesMul : dish.calories ?? 0);
-    updateDraft({ calories: Math.max(0, effective * (1 + pctDelta)) });
-  };
+  const handleEthicsChangePct = createChangeHandler('ethics', {
+    baseValue: baseValues.ethics,
+    dishValue: dish.ethics,
+    clampMin: 0,
+    clampMax: 10,
+  });
+
+  const handleCaloriesChangePct = createChangeHandler('calories', {
+    baseValue: baseValues.calories,
+    dishValue: dish.calories ?? 0,
+    clampMin: 0,
+    useMax: Math.max,
+  });
 
   return (
     <motion.div
@@ -367,7 +405,7 @@ export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange,
       >
         {/* Score Badge - shown on desktop or when collapsed on mobile */}
         <motion.div
-          layout={lite ? false : 'position'}
+          layout={false}
           className={`
             ${isExpanded ? 'hidden sm:flex' : 'flex'} flex-shrink-0 ${isVeryNarrow ? 'w-8 h-8' : 'w-10 h-10'} sm:w-12 sm:h-12 rounded-xl
             items-center justify-center
@@ -386,7 +424,7 @@ export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange,
             {/* Score Badge - shown only on mobile (<640px) when expanded, inline with name */}
             {isExpanded && (
               <motion.div
-                layout={lite ? false : 'position'}
+                layout={false}
                 className={`
                   flex sm:hidden flex-shrink-0 w-7 h-7 rounded-lg
                   items-center justify-center
@@ -520,68 +558,30 @@ export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange,
       </div>
 
       {/* Expanded Details */}
-      {lite ? (
-        isExpanded ? (
-          <div className="overflow-hidden">
-            <div className="px-4 pb-4">
-              {/* Divider */}
-              <div className="h-px bg-surface-300 dark:bg-surface-700 mb-4" />
+      {isExpanded ? (
+        <div className="overflow-hidden">
+          <div className="px-4 pb-4">
+            {/* Divider */}
+            <div className="h-px bg-surface-300 dark:bg-surface-700 mb-4" />
 
-              <InfoSlider 
-                dish={dish}
-                dishName={dish.name}
-                dishHealth={dish.health}
-                dishEthics={dish.ethics}
-                ingredients={ingredients}
-                ingredientIndex={ingredientIndex}
-                priorities={priorities}
-                unavailableIngredients={unavailableIngredients}
-                missingIngredients={missingIngredients}
-                missingPrices={missingPrices}
-                isOptimized={isOptimized}
-                liteMotion={true}
-                analysisVariants={analysisVariants}
-                priceUnit={priceUnit}
-              />
-            </div>
+            <InfoSlider 
+              dish={dish}
+              dishName={dish.name}
+              dishHealth={dish.health}
+              dishEthics={dish.ethics}
+              ingredients={ingredients}
+              ingredientIndex={ingredientIndex}
+              priorities={priorities}
+              unavailableIngredients={unavailableIngredients}
+              missingIngredients={missingIngredients}
+              missingPrices={missingPrices}
+              isOptimized={isOptimized}
+              analysisVariants={analysisVariants}
+              priceUnit={priceUnit}
+            />
           </div>
-        ) : null
-      ) : (
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="overflow-hidden"
-            >
-              <div className="px-4 pb-4">
-                {/* Divider */}
-                <div className="h-px bg-surface-300 dark:bg-surface-700 mb-4" />
-
-                {/* Info Slider (Overview / Index Map / Time / Health / Ethics) */}
-                <InfoSlider 
-                  dish={dish}
-                  dishName={dish.name}
-                  dishHealth={dish.health}
-                  dishEthics={dish.ethics}
-                  ingredients={ingredients}
-                  ingredientIndex={ingredientIndex}
-                  priorities={priorities}
-                  unavailableIngredients={unavailableIngredients}
-                  missingIngredients={missingIngredients}
-                  missingPrices={missingPrices}
-                  isOptimized={isOptimized}
-                  liteMotion={false}
-                  analysisVariants={analysisVariants}
-                  priceUnit={priceUnit}
-                />
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )}
+        </div>
+      ) : null}
     </motion.div>
   );
 }

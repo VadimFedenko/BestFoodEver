@@ -16,7 +16,7 @@
             "subsaharan_subsistence": 6.5
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 9,
         "ethics_reason": "Plant‑based with negligible animal impact and a very low carbon footprint."
     },
@@ -37,7 +37,7 @@
             "subsaharan_subsistence": 1.8
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low environmental impact, no animal use; cultivated in small farms with minimal chemical inputs."
     },
@@ -100,7 +100,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 1,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 6,
         "ethics_reason": "Almond cultivation requires high water usage and can involve intensive pesticide application, leading to significant environmental impact."
     },
@@ -142,7 +142,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.85,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Plant-based with minimal environmental impact; can be grown sustainably."
     },
@@ -163,7 +163,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.9,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 5,
         "ethics_reason": "Wild‑caught or small‑scale fishery with moderate environmental impact and minimal animal suffering."
     },
@@ -184,7 +184,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.85,
-        "health_index": 3,
+        "health_index": 3.5,
         "ethics_index": 1,
         "ethics_reason": "Produced by slaughtering animals in factory farms with minimal environmental impact."
     },
@@ -205,7 +205,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 7.5,
         "ethics_reason": "Low animal impact, moderate water use; sustainable farming can reduce environmental footprint."
     },
@@ -226,7 +226,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based with minimal animal impact, but high water use and often monoculture production."
     },
@@ -247,7 +247,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 1,
-        "health_index": 8.5,
+        "health_index": 9,
         "ethics_index": 9,
         "ethics_reason": "Plant‑based, low carbon footprint and can be grown sustainably with minimal animal impact."
     },
@@ -268,7 +268,7 @@
             "subsaharan_subsistence": 14.3
         },
         "yield_ratio": 0.65,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 6,
         "ethics_reason": "High water consumption and reliance on monoculture plantations."
     },
@@ -289,7 +289,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 0.98,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 3,
         "ethics_reason": "Deforestation and habitat loss from palm plantations."
     },
@@ -310,7 +310,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 0.6,
-        "health_index": 3,
+        "health_index": 2,
         "ethics_index": 1,
         "ethics_reason": "Factory‑farmed pig slaughter with moderate chemical use."
     },
@@ -331,7 +331,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.95,
-        "health_index": 4.5,
+        "health_index": 4,
         "ethics_index": 6,
         "ethics_reason": "Wheat production involves significant pesticide use and water consumption."
     },
@@ -352,7 +352,7 @@
             "subsaharan_subsistence": 4.8
         },
         "yield_ratio": 1,
-        "health_index": 3,
+        "health_index": 4,
         "ethics_index": 6,
         "ethics_reason": "Produced from mined sodium and cornstarch; industrial processing with some water and energy use."
     },
@@ -373,7 +373,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 1,
-        "health_index": 2,
+        "health_index": 4,
         "ethics_index": 6,
         "ethics_reason": "Produced via chemical extraction with moderate environmental impact and no animal use."
     },
@@ -436,7 +436,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.95,
-        "health_index": 8,
+        "health_index": 7.5,
         "ethics_index": 9,
         "ethics_reason": "Minimal animal use and low resource demand make bean sprouts highly sustainable."
     },
@@ -457,7 +457,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.97,
-        "health_index": 7.5,
+        "health_index": 8.5,
         "ethics_index": 8,
         "ethics_reason": "Low environmental impact and high protein yield per hectare."
     },
@@ -478,7 +478,7 @@
             "subsaharan_subsistence": 7.5
         },
         "yield_ratio": 0.75,
-        "health_index": 6.7,
+        "health_index": 5.5,
         "ethics_index": 2,
         "ethics_reason": "Large animal slaughter with significant resource use and methane emissions."
     },
@@ -499,7 +499,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.98,
-        "health_index": 7,
+        "health_index": 6,
         "ethics_index": 2,
         "ethics_reason": "Produced from beef bones; involves slaughter of cattle."
     },
@@ -520,7 +520,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 1,
-        "health_index": 1,
+        "health_index": 1.5,
         "ethics_index": 7,
         "ethics_reason": "Brewing consumes water and generates wastewater."
     },
@@ -541,7 +541,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 0.75,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low environmental impact and no animal use, though monoculture practices can reduce sustainability."
     },
@@ -562,7 +562,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 9,
+        "health_index": 9.5,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based, low animal impact; cultivation can be regenerative and relatively water‑efficient."
     },
@@ -583,7 +583,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 8,
         "ethics_reason": "Low environmental impact and no animal suffering, but some water use in cultivation."
     },
@@ -604,7 +604,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 1,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based with minimal carbon footprint and no animal use."
     },
@@ -625,7 +625,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.92,
-        "health_index": 4.5,
+        "health_index": 4,
         "ethics_index": 6,
         "ethics_reason": "Produced from wheat with moderate industrial agriculture and processing emissions."
     },
@@ -646,7 +646,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.92,
-        "health_index": 4,
+        "health_index": 3.5,
         "ethics_index": 6,
         "ethics_reason": "Produced from refined wheat flour with moderate industrial agriculture and processing emissions."
     },
@@ -667,7 +667,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.95,
-        "health_index": 5,
+        "health_index": 3.5,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based, low animal impact and minimal carbon footprint."
     },
@@ -688,7 +688,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 9,
         "ethics_reason": "Low environmental footprint, no animal use, and typically grown in regenerative or organic systems."
     },
@@ -709,7 +709,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 3.5,
         "ethics_index": 8,
         "ethics_reason": "Produced from mass‑grown wheat and processed in factories with moderate environmental impact."
     },
@@ -730,7 +730,7 @@
             "subsaharan_subsistence": 3.5
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 3,
         "ethics_reason": "Milk production involves animal confinement and routine milking but does not require slaughter."
     },
@@ -751,7 +751,7 @@
             "subsaharan_subsistence": 0.9
         },
         "yield_ratio": 1,
-        "health_index": 8,
+        "health_index": 7,
         "ethics_index": 5,
         "ethics_reason": "Moderate animal use with some environmental impact from dairy production."
     },
@@ -772,7 +772,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 0.95,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 9,
         "ethics_reason": "Minimal environmental impact and no animal suffering."
     },
@@ -856,7 +856,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low environmental footprint and no animal suffering."
     },
@@ -877,7 +877,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 0.85,
-        "health_index": 4,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Low animal impact, but monoculture and soil depletion can be concerns."
     },
@@ -898,7 +898,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 1,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based spice with low environmental impact and minimal animal use."
     },
@@ -940,7 +940,7 @@
             "subsaharan_subsistence": 6.5
         },
         "yield_ratio": 0.95,
-        "health_index": 4,
+        "health_index": 6,
         "ethics_index": 3,
         "ethics_reason": "Dairy production involves intensive animal confinement and frequent use of antibiotics."
     },
@@ -961,7 +961,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 7,
         "ethics_reason": "Low animal impact, but conventional farming often relies on pesticides and monoculture practices."
     },
@@ -982,7 +982,7 @@
             "subsaharan_subsistence": 3.5
         },
         "yield_ratio": 0.75,
-        "health_index": 6,
+        "health_index": 6.5,
         "ethics_index": 2,
         "ethics_reason": "Factory‑farmed chicken involves large animal slaughter with moderate environmental impact."
     },
@@ -1024,7 +1024,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.95,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact but requires irrigation and fertilizer."
     },
@@ -1045,7 +1045,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 0.9,
-        "health_index": 6.5,
+        "health_index": 7,
         "ethics_index": 7,
         "ethics_reason": "Plant-based, low animal impact; production may involve intensive irrigation but no direct animal suffering."
     },
@@ -1087,7 +1087,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.9,
-        "health_index": 5,
+        "health_index": 5.5,
         "ethics_index": 8,
         "ethics_reason": "Plant-based with moderate sustainability; often grown in monocultures but can be sourced from regenerative farms."
     },
@@ -1108,7 +1108,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.7,
-        "health_index": 3.5,
+        "health_index": 2,
         "ethics_index": 2,
         "ethics_reason": "Factory‑farmed pork with high saturated fat and use of nitrites; slaughter of large animals."
     },
@@ -1150,7 +1150,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.8,
-        "health_index": 9,
+        "health_index": 8.5,
         "ethics_index": 7,
         "ethics_reason": "Clams are low-impact seafood, but harvesting can still disturb marine ecosystems."
     },
@@ -1675,7 +1675,7 @@
             "subsaharan_subsistence": 6
         },
         "yield_ratio": 1,
-        "health_index": 5.2,
+        "health_index": 4.5,
         "ethics_index": 5,
         "ethics_reason": "Plant‑based product with some pesticide and water use, but no animal suffering."
     },
@@ -1696,7 +1696,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 1,
-        "health_index": 7,
+        "health_index": 8,
         "ethics_index": 9,
         "ethics_reason": "Plant-based, minimal animal impact, low carbon footprint."
     },
@@ -1717,7 +1717,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 0.68,
-        "health_index": 7,
+        "health_index": 6,
         "ethics_index": 2,
         "ethics_reason": "Factory‑farmed duck involves intensive confinement and slaughter with moderate environmental impact."
     },
@@ -1738,7 +1738,7 @@
             "subsaharan_subsistence": 1.2
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low environmental impact, minimal pesticide use when grown organically."
     },
@@ -1759,7 +1759,7 @@
             "subsaharan_subsistence": 2.8
         },
         "yield_ratio": 0.9,
-        "health_index": 9,
+        "health_index": 8,
         "ethics_index": 4,
         "ethics_reason": "Caged hen production involves confinement and limited welfare."
     },
@@ -1801,7 +1801,7 @@
             "subsaharan_subsistence": 12
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 8,
         "ethics_index": 5,
         "ethics_reason": "Coffee farming involves pesticide use and modest labor exploitation."
     },
@@ -1822,7 +1822,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 6,
         "ethics_index": 3,
         "ethics_reason": "Cows are kept in confined dairy operations, producing milk without slaughter but with significant animal welfare concerns."
     },
@@ -1843,7 +1843,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 0.9,
-        "health_index": 9.5,
+        "health_index": 9,
         "ethics_index": 4,
         "ethics_reason": "Fish are caught or farmed with some welfare concerns, but no slaughter of sentient mammals and moderate environmental impact."
     },
@@ -1864,7 +1864,7 @@
             "subsaharan_subsistence": 25
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 4.5,
         "ethics_index": 5,
         "ethics_reason": "Uses small fish and fermentation, moderate animal use with limited environmental impact."
     },
@@ -1885,7 +1885,7 @@
             "subsaharan_subsistence": 5.5
         },
         "yield_ratio": 0.9,
-        "health_index": 9,
+        "health_index": 6.5,
         "ethics_index": 6,
         "ethics_reason": "Aquaculture contributes to water pollution and high energy use, but no animal slaughter is involved."
     },
@@ -1906,7 +1906,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.75,
-        "health_index": 7,
+        "health_index": 8,
         "ethics_index": 4,
         "ethics_reason": "Wild-caught flounder may involve bycatch and habitat disruption."
     },
@@ -1927,7 +1927,7 @@
             "subsaharan_subsistence": 1.2
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 4,
         "ethics_index": 7,
         "ethics_reason": "Cultivated crop with moderate water and pesticide use."
     },
@@ -1969,7 +1969,7 @@
             "subsaharan_subsistence": 18
         },
         "yield_ratio": 0.95,
-        "health_index": 5.5,
+        "health_index": 6,
         "ethics_index": 4,
         "ethics_reason": "Milk production involves large numbers of cows in intensive dairy systems with limited mobility and frequent use of antibiotics."
     },
@@ -1990,7 +1990,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based root with minimal environmental impact and no animal suffering."
     },
@@ -2032,7 +2032,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.95,
-        "health_index": 9,
+        "health_index": 8.5,
         "ethics_index": 7,
         "ethics_reason": "Plant-based with minimal animal impact; some pesticide use in large-scale production."
     },
@@ -2053,7 +2053,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 4.5,
+        "health_index": 4,
         "ethics_index": 3,
         "ethics_reason": "Produced from dairy cows, which experience routine milking and potential welfare concerns, but no animal slaughter is involved."
     },
@@ -2074,7 +2074,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 0.95,
-        "health_index": 9.7,
+        "health_index": 8.5,
         "ethics_index": 7,
         "ethics_reason": "Cultivated root crop with low animal impact and modest environmental footprint."
     },
@@ -2095,7 +2095,7 @@
             "subsaharan_subsistence": 80
         },
         "yield_ratio": 1,
-        "health_index": 4.5,
+        "health_index": 5.5,
         "ethics_index": 3,
         "ethics_reason": "Dairy production involves animal confinement and moderate environmental impact."
     },
@@ -2137,7 +2137,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.8,
-        "health_index": 7,
+        "health_index": 5.5,
         "ethics_index": 2,
         "ethics_reason": "Multiple servings per slaughter, high saturated fat content."
     },
@@ -2158,7 +2158,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 6.5,
         "ethics_index": 1,
         "ethics_reason": "Factory‑farmed chicken involves high mortality per bird and significant chemical use, but no large animal slaughter."
     },
@@ -2179,7 +2179,7 @@
             "subsaharan_subsistence": 7
         },
         "yield_ratio": 0.85,
-        "health_index": 7.5,
+        "health_index": 5.5,
         "ethics_index": 2,
         "ethics_reason": "Large animal slaughter provides multiple servings but involves animal death."
     },
@@ -2200,7 +2200,7 @@
             "subsaharan_subsistence": 4.5
         },
         "yield_ratio": 0.85,
-        "health_index": 7.5,
+        "health_index": 6,
         "ethics_index": 2,
         "ethics_reason": "Slaughter of pigs for multiple servings, moderate environmental impact."
     },
@@ -2221,7 +2221,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 6,
         "ethics_index": 2,
         "ethics_reason": "Animal dairy production involves large herd slaughter for cheese yield, but each cow produces multiple milk batches before ending."
     },
@@ -2242,7 +2242,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 6,
         "ethics_reason": "Low animal impact; moderate water use for cultivation."
     },
@@ -2263,7 +2263,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.95,
-        "health_index": 7.5,
+        "health_index": 8.5,
         "ethics_index": 6,
         "ethics_reason": "Significant environmental impact from monoculture, pesticide use, and water consumption."
     },
@@ -2284,7 +2284,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 4,
         "ethics_reason": "Milking cows in intensive systems causes animal distress and significant methane emissions."
     },
@@ -2305,7 +2305,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 6,
         "ethics_index": 7,
         "ethics_reason": "Bee pollination provides ecosystem services with minimal animal suffering."
     },
@@ -2326,7 +2326,7 @@
             "subsaharan_subsistence": 0.7
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 3,
         "ethics_index": 7,
         "ethics_reason": "Produced from wheat with minimal animal impact."
     },
@@ -2368,7 +2368,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.95,
-        "health_index": 5,
+        "health_index": 3.5,
         "ethics_index": 7,
         "ethics_reason": "Produced from harvested fruits with minimal animal impact, but involves sugar processing and pesticide use."
     },
@@ -2389,7 +2389,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.9,
-        "health_index": 5.5,
+        "health_index": 2.5,
         "ethics_index": 2,
         "ethics_reason": "Free‑range Iberian pigs reduce animal suffering, but the product still involves slaughter and curing."
     },
@@ -2410,7 +2410,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.7,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 1,
         "ethics_reason": "Intensive crab farming generates chemical waste and causes significant animal stress."
     },
@@ -2431,7 +2431,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.7,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 1,
         "ethics_reason": "Intensive crab farming generates chemical waste and causes significant animal stress."
     },
@@ -2452,7 +2452,7 @@
             "subsaharan_subsistence": 20
         },
         "yield_ratio": 1,
-        "health_index": 2,
+        "health_index": 2.5,
         "ethics_index": 7,
         "ethics_reason": "Plant‑derived condiment with minimal animal use but relies on intensive sugar production."
     },
@@ -2473,7 +2473,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 0.95,
-        "health_index": 2.5,
+        "health_index": 2,
         "ethics_index": 1,
         "ethics_reason": "Mass slaughter with limited animal welfare and use of preservatives."
     },
@@ -2494,7 +2494,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 9,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Harvesting kelp has minimal animal suffering but can impact marine ecosystems if not managed sustainably."
     },
@@ -2515,7 +2515,7 @@
             "subsaharan_subsistence": 18
         },
         "yield_ratio": 0.8,
-        "health_index": 7,
+        "health_index": 5.5,
         "ethics_index": 2,
         "ethics_reason": "Requires slaughter of a large animal with significant meat yield."
     },
@@ -2536,7 +2536,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.97,
-        "health_index": 5.5,
+        "health_index": 4,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based with minimal processing and low animal impact, but relies on intensive wheat farming."
     },
@@ -2578,7 +2578,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 0.85,
-        "health_index": 9,
+        "health_index": 8.5,
         "ethics_index": 8.5,
         "ethics_reason": "Low environmental impact, no animal use; moderate pesticide and water use."
     },
@@ -2599,7 +2599,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.9,
-        "health_index": 8.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Plant-based, low environmental footprint with no animal use."
     },
@@ -2620,7 +2620,7 @@
             "subsaharan_subsistence": 0.55
         },
         "yield_ratio": 1,
-        "health_index": 9,
+        "health_index": 8.5,
         "ethics_index": 9,
         "ethics_reason": "Low environmental impact and no animal suffering."
     },
@@ -2641,7 +2641,7 @@
             "subsaharan_subsistence": 1.8
         },
         "yield_ratio": 0.9,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact; moderate pesticide use in some regions."
     },
@@ -2704,7 +2704,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 0.95,
-        "health_index": 4,
+        "health_index": 4.5,
         "ethics_index": 4,
         "ethics_reason": "Milk production involves animal exploitation with moderate suffering and significant environmental impact."
     },
@@ -2725,7 +2725,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 2,
+        "health_index": 2.5,
         "ethics_index": 3,
         "ethics_reason": "Eggs sourced from caged hens and oil often derived from palm plantations with deforestation concerns."
     },
@@ -2746,7 +2746,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 6,
         "ethics_index": 3,
         "ethics_reason": "Animal welfare concerns with intensive dairy farming."
     },
@@ -2788,7 +2788,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 3.5,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based rice wine with minimal animal impact, but high importation and processing energy."
     },
@@ -2893,7 +2893,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 5,
         "ethics_index": 7,
         "ethics_reason": "Plant-based with moderate environmental impact; cultivation requires irrigation but no animal suffering."
     },
@@ -2935,7 +2935,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Cultivated wheat requires significant irrigation and fertilizer use."
     },
@@ -2998,7 +2998,7 @@
             "subsaharan_subsistence": 25
         },
         "yield_ratio": 1,
-        "health_index": 9.5,
+        "health_index": 8.5,
         "ethics_index": 9,
         "ethics_reason": "Harvested primarily from wild trees in the Amazon rainforest. This economic value encourages forest conservation and prevents deforestation, although harvesting labor can be hazardous."
     },
@@ -3040,7 +3040,7 @@
             "subsaharan_subsistence": 22
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 4.5,
         "ethics_index": 4,
         "ethics_reason": "Uses oyster extract and fermentation, moderate animal use with limited environmental impact."
     },
@@ -3145,7 +3145,7 @@
             "subsaharan_subsistence": 6
         },
         "yield_ratio": 0.98,
-        "health_index": 5,
+        "health_index": 2,
         "ethics_index": 6,
         "ethics_reason": "Harvesting palm sap has minimal animal impact but large-scale production can lead to deforestation and water use."
     },
@@ -3166,7 +3166,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.9,
-        "health_index": 3.5,
+        "health_index": 2.5,
         "ethics_index": 1.5,
         "ethics_reason": "Factory-farmed pork involves confinement and antibiotic use."
     },
@@ -3229,7 +3229,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.95,
-        "health_index": 7.5,
+        "health_index": 6.5,
         "ethics_index": 3,
         "ethics_reason": "Dairy production involves animal welfare concerns without slaughter, but no direct killing of animals."
     },
@@ -3313,7 +3313,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 0.9,
-        "health_index": 8.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact, sustainable cultivation with minimal water use."
     },
@@ -3376,7 +3376,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.9,
-        "health_index": 6,
+        "health_index": 5,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based with minimal animal impact; relies on water and pesticide use, but no direct suffering."
     },
@@ -3439,7 +3439,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.98,
-        "health_index": 5,
+        "health_index": 4,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based wheat with moderate water and pesticide use; no animal suffering."
     },
@@ -3481,7 +3481,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.95,
-        "health_index": 6,
+        "health_index": 4.5,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based, low environmental impact with minimal animal use."
     },
@@ -3502,7 +3502,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.85,
-        "health_index": 6.5,
+        "health_index": 6,
         "ethics_index": 1,
         "ethics_reason": "Factory‑farmed pork involves slaughter with moderate animal welfare concerns and significant resource use."
     },
@@ -3586,7 +3586,7 @@
             "subsaharan_subsistence": 0.7
         },
         "yield_ratio": 0.85,
-        "health_index": 5,
+        "health_index": 6,
         "ethics_index": 8,
         "ethics_reason": "Cultivated crop with low animal impact but relies on significant fertilizer and water use."
     },
@@ -3628,7 +3628,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.9,
-        "health_index": 5.5,
+        "health_index": 5,
         "ethics_index": 3,
         "ethics_reason": "Contains beef, which requires animal slaughter."
     },
@@ -3649,7 +3649,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.8,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 9,
         "ethics_reason": "Low environmental impact and can be cultivated in arid regions with minimal water use."
     },
@@ -3670,7 +3670,7 @@
             "subsaharan_subsistence": 25
         },
         "yield_ratio": 0.9,
-        "health_index": 4,
+        "health_index": 2.5,
         "ethics_index": 2,
         "ethics_reason": "Requires slaughter of many pigs and high salt curing, contributing to animal loss and processing waste."
     },
@@ -3754,7 +3754,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 6,
         "ethics_index": 6,
         "ethics_reason": "Vineyards require significant water and pesticide use, but no animal suffering."
     },
@@ -3775,7 +3775,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 1,
-        "health_index": 4,
+        "health_index": 3,
         "ethics_index": 7,
         "ethics_reason": "Mass‑produced with high sodium and additives, relying on large‑scale agriculture."
     },
@@ -3859,7 +3859,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact and low carbon footprint."
     },
@@ -3901,7 +3901,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 1,
-        "health_index": 3,
+        "health_index": 6,
         "ethics_index": 9,
         "ethics_reason": "Plant‑based, low carbon footprint, and can be produced with regenerative agriculture."
     },
@@ -3922,7 +3922,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 5.5,
         "ethics_index": 7,
         "ethics_reason": "Cultivated in large monocultures, moderate water use, no animal suffering."
     },
@@ -3943,7 +3943,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 6,
         "ethics_index": 6,
         "ethics_reason": "Water-intensive rice farming and moderate chemical use in production."
     },
@@ -4048,7 +4048,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.85,
-        "health_index": 9.8,
+        "health_index": 9.5,
         "ethics_index": 4,
         "ethics_reason": "Intensive aquaculture leads to water pollution and fish welfare concerns."
     },
@@ -4069,7 +4069,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 1,
-        "health_index": 8,
+        "health_index": 7,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based with minimal animal impact, but some pesticide use in crop production."
     },
@@ -4090,7 +4090,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.95,
-        "health_index": 8,
+        "health_index": 7,
         "ethics_index": 8,
         "ethics_reason": "Made from locally grown vegetables with minimal processing and no animal products."
     },
@@ -4111,7 +4111,7 @@
             "subsaharan_subsistence": 15
         },
         "yield_ratio": 0.9,
-        "health_index": 5,
+        "health_index": 3,
         "ethics_index": 2,
         "ethics_reason": "Killing a large animal provides many portions, but still involves slaughter."
     },
@@ -4153,7 +4153,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.95,
-        "health_index": 7.5,
+        "health_index": 6.5,
         "ethics_index": 8,
         "ethics_reason": "Plant-derived with low animal impact and moderate pesticide usage."
     },
@@ -4195,7 +4195,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.9,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 4,
         "ethics_reason": "Fish are caught and die, but sardines have a lower carbon footprint and do not involve large animal slaughter."
     },
@@ -4216,7 +4216,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.9,
-        "health_index": 10,
+        "health_index": 8.3,
         "ethics_index": 10,
         "ethics_reason": "Fermentation produces minimal environmental impact, but promotes gut health!"
     },
@@ -4237,7 +4237,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 0.95,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 9.5,
         "ethics_reason": "Plant‑based with minimal environmental impact and no animal suffering."
     },
@@ -4279,7 +4279,7 @@
             "subsaharan_subsistence": 6
         },
         "yield_ratio": 0.75,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 5,
         "ethics_reason": "Moderate environmental impact from fishing and aquaculture, but no animal slaughter involved."
     },
@@ -4300,7 +4300,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Wheat cultivation involves large‑scale monocultures and significant fertilizer use."
     },
@@ -4321,7 +4321,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 1,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 6,
         "ethics_reason": "Plant-derived with moderate water use and processing emissions."
     },
@@ -4342,7 +4342,7 @@
             "subsaharan_subsistence": 1.2
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 7,
         "ethics_reason": "Grown with moderate pesticide use and some monocultures but no animal suffering."
     },
@@ -4363,7 +4363,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low environmental footprint, no animal suffering."
     },
@@ -4384,7 +4384,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 0.9,
-        "health_index": 9,
+        "health_index": 8.5,
         "ethics_index": 7,
         "ethics_reason": "Cultivated mushrooms have minimal animal impact but require energy and water inputs."
     },
@@ -4405,7 +4405,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.9,
-        "health_index": 3.5,
+        "health_index": 7.5,
         "ethics_index": 1,
         "ethics_reason": "Factory‑farmed shrimp often involve large numbers of animals killed with minimal welfare consideration."
     },
@@ -4426,7 +4426,7 @@
             "subsaharan_subsistence": 0.9
         },
         "yield_ratio": 1,
-        "health_index": 10,
+        "health_index": 8,
         "ethics_index": 10,
         "ethics_reason": "Pure water with negligible environmental impact."
     },
@@ -4447,7 +4447,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 0.95,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 6,
         "ethics_reason": "Wild-caught sole has low animal suffering but aquaculture can cause water pollution."
     },
@@ -4489,7 +4489,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Produced from wheat, low animal impact but involves conventional farming with some pesticide use."
     },
@@ -4510,7 +4510,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.9,
-        "health_index": 9,
+        "health_index": 9.5,
         "ethics_index": 7,
         "ethics_reason": "Cultivated with moderate pesticide use and water demand, but no animal suffering."
     },
@@ -4552,7 +4552,7 @@
             "subsaharan_subsistence": 0.2
         },
         "yield_ratio": 1,
-        "health_index": 1.5,
+        "health_index": 1,
         "ethics_index": 6,
         "ethics_reason": "Large-scale sugarcane cultivation requires significant pesticide use and water consumption, causing environmental pollution but no animal suffering."
     },
@@ -4594,7 +4594,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.8,
-        "health_index": 3.5,
+        "health_index": 3,
         "ethics_index": 2,
         "ethics_reason": "Surimi is made from fish fillets that are slaughtered, but the processing minimizes waste and reduces overall resource use compared to many other animal products."
     },
@@ -4615,7 +4615,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.9,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 9,
         "ethics_reason": "Plant‑based, low carbon footprint, and widely cultivated with minimal animal impact."
     },
@@ -4636,7 +4636,7 @@
             "subsaharan_subsistence": 25
         },
         "yield_ratio": 0.75,
-        "health_index": 6,
+        "health_index": 7,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact and minimal processing."
     },
@@ -4657,7 +4657,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 4.5,
         "ethics_index": 8,
         "ethics_reason": "Extracted from cassava root, plant-based with minimal animal impact."
     },
@@ -4678,7 +4678,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.95,
-        "health_index": 7,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Cultivated with minimal animal impact and low carbon footprint."
     },
@@ -4720,7 +4720,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 4,
         "ethics_index": 5,
         "ethics_reason": "Soybean cultivation involves significant pesticide use and moderate water consumption."
     },
@@ -4741,7 +4741,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 3,
         "ethics_index": 7,
         "ethics_reason": "Processed sauce with moderate sugar content, plant-based with minimal animal impact."
     },
@@ -4783,7 +4783,7 @@
             "subsaharan_subsistence": 2.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 9,
         "ethics_reason": "Cultivated with minimal pesticide use and low carbon footprint."
     },
@@ -4804,7 +4804,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.9,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 7,
         "ethics_reason": "Low animal impact but some pesticide use."
     },
@@ -4825,7 +4825,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.8,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based with low animal impact and moderate water use."
     },
@@ -4846,7 +4846,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.95,
-        "health_index": 7.5,
+        "health_index": 7,
         "ethics_index": 7,
         "ethics_reason": "Plant-derived with minimal animal impact, though processed with added oils and sugars."
     },
@@ -4867,7 +4867,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.95,
-        "health_index": 5.5,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based with moderate pesticide use and sustainable agriculture."
     },
@@ -4888,7 +4888,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.9,
-        "health_index": 9.5,
+        "health_index": 8.5,
         "ethics_index": 4,
         "ethics_reason": "High fishing pressure and bycatch. Intensive aquaculture leads to water pollution and fish welfare concerns."
     },
@@ -4909,7 +4909,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.9,
-        "health_index": 10,
+        "health_index": 9,
         "ethics_index": 8,
         "ethics_reason": "Plant-based cultivation with moderate pesticide use and irrigation, but no animal suffering."
     },
@@ -4930,7 +4930,7 @@
             "subsaharan_subsistence": 0.6
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low environmental impact and minimal animal use; cultivated sustainably in many regions."
     },
@@ -4951,7 +4951,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 1,
-        "health_index": 6.5,
+        "health_index": 6,
         "ethics_index": 3,
         "ethics_reason": "Cows are kept in confined spaces with limited mobility."
     },
@@ -4972,7 +4972,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.8,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 5,
         "ethics_reason": "Farmed eel production involves intensive pond systems and occasional animal killing."
     },
@@ -4993,7 +4993,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 5.5,
         "ethics_index": 6,
         "ethics_reason": "Cultivated in controlled environments, low animal impact but high water and energy use for drying."
     },
@@ -5056,7 +5056,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.9,
-        "health_index": 6,
+        "health_index": 7.5,
         "ethics_index": 6,
         "ethics_reason": "Extensive monoculture cultivation with high pesticide use and significant water consumption."
     },
@@ -5119,7 +5119,7 @@
             "subsaharan_subsistence": 18
         },
         "yield_ratio": 0.9,
-        "health_index": 9.2,
+        "health_index": 9,
         "ethics_index": 8,
         "ethics_reason": "Harvested from tree farms with minimal animal impact, though some monocultures can affect biodiversity."
     },
@@ -5140,7 +5140,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.8,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 7,
         "ethics_reason": "Cultivated plant with low animal impact but intensive irrigation and labor."
     },
@@ -5161,7 +5161,7 @@
             "subsaharan_subsistence": 1.2
         },
         "yield_ratio": 1,
-        "health_index": 6.5,
+        "health_index": 4.5,
         "ethics_index": 8,
         "ethics_reason": "Processed from wheat, plant-based with minimal animal impact."
     },
@@ -5203,7 +5203,7 @@
             "subsaharan_subsistence": 12
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 7,
         "ethics_index": 8,
         "ethics_reason": "White pepper is plant‑based with minimal animal impact, but conventional cultivation relies on pesticides and moderate water use."
     },
@@ -5224,7 +5224,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.98,
-        "health_index": 3,
+        "health_index": 2,
         "ethics_index": 6,
         "ethics_reason": "Grape cultivation uses pesticides and irrigation, causing moderate environmental impact."
     },
@@ -5245,7 +5245,7 @@
             "subsaharan_subsistence": 30
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 6,
         "ethics_index": 8,
         "ethics_reason": "Produced from fermented grapes with low environmental impact and no animal use."
     },
@@ -5287,7 +5287,7 @@
             "subsaharan_subsistence": 0.9
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 6.5,
         "ethics_index": 8,
         "ethics_reason": "Fermentation is low-impact, plant-based, and requires minimal resources."
     },
@@ -5308,7 +5308,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 4,
         "ethics_reason": "Milk production involves routine animal exploitation with moderate welfare concerns."
     },
@@ -5329,7 +5329,7 @@
             "subsaharan_subsistence": 1.2
         },
         "yield_ratio": 0.92,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low environmental footprint and no animal suffering."
     },
@@ -5350,7 +5350,7 @@
             "subsaharan_subsistence": 60
         },
         "yield_ratio": 0.85,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 4,
         "ethics_reason": "Cage aquaculture causes habitat disruption and moderate pollution, but no animal slaughter."
     },
@@ -5371,7 +5371,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Plant-based with low carbon footprint; cultivated in tropical regions with minimal animal impact."
     },
@@ -5413,7 +5413,7 @@
             "subsaharan_subsistence": 2.5
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 4,
         "ethics_reason": "Cows are raised for milk but not slaughtered; dairy production involves crowding and moderate environmental impact."
     },
@@ -5434,7 +5434,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 0.85,
-        "health_index": 7,
+        "health_index": 6.5,
         "ethics_index": 2,
         "ethics_reason": "Small animal slaughter with moderate welfare concerns."
     },
@@ -5455,7 +5455,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.7,
-        "health_index": 6.5,
+        "health_index": 7,
         "ethics_index": 4,
         "ethics_reason": "Killing numerous snails with minimal suffering, low environmental impact."
     },
@@ -5476,7 +5476,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 4,
         "ethics_index": 7,
         "ethics_reason": "Produced from industrial wheat farming with moderate fertilizer and water use."
     },
@@ -5518,7 +5518,7 @@
             "subsaharan_subsistence": 15
         },
         "yield_ratio": 0.8,
-        "health_index": 2,
+        "health_index": 1.5,
         "ethics_index": 1,
         "ethics_reason": "Factory‑farmed pork with heavy processing and additives."
     },
@@ -5560,7 +5560,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.9,
-        "health_index": 3,
+        "health_index": 4.5,
         "ethics_index": 2,
         "ethics_reason": "Large sturgeon are slaughtered for the roe, raising concerns about animal use and significant water resource consumption."
     },
@@ -5581,7 +5581,7 @@
             "subsaharan_subsistence": 20
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 6.5,
         "ethics_index": 6,
         "ethics_reason": "Water‑intensive cultivation and packaging contribute to environmental impact."
     },
@@ -5602,7 +5602,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 6.5,
         "ethics_index": 4,
         "ethics_reason": "Crayfish are raised in tanks with moderate welfare concerns; no large animal slaughter involved."
     },
@@ -5623,7 +5623,7 @@
             "subsaharan_subsistence": 0.7
         },
         "yield_ratio": 0.95,
-        "health_index": 9.5,
+        "health_index": 9,
         "ethics_index": 9,
         "ethics_reason": "Low environmental impact, no animal suffering, and typically grown with minimal chemical inputs."
     },
@@ -5644,7 +5644,7 @@
             "subsaharan_subsistence": 2.9
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 3.5,
         "ethics_index": 6,
         "ethics_reason": "Cultivation uses moderate water and vinegar production emits some industrial pollution, but no animal suffering."
     },
@@ -5665,7 +5665,7 @@
             "subsaharan_subsistence": 0.7
         },
         "yield_ratio": 0.9,
-        "health_index": 10,
+        "health_index": 9,
         "ethics_index": 9,
         "ethics_reason": "Low-input crop with minimal animal impact and low carbon footprint."
     },
@@ -5686,7 +5686,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.9,
-        "health_index": 4.5,
+        "health_index": 3,
         "ethics_index": 5,
         "ethics_reason": "Factory‑produced, animal‑free but involves high energy use and packaging waste."
     },
@@ -5749,7 +5749,7 @@
             "subsaharan_subsistence": 3.8
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 7,
         "ethics_index": 8,
         "ethics_reason": "Minimal animal use (low-fat yogurt) and low carbon footprint; mostly plant-based ingredients."
     },
@@ -5770,7 +5770,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Plant‑based with minimal animal impact and a low carbon footprint."
     },
@@ -5791,7 +5791,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 2,
+        "health_index": 1.5,
         "ethics_index": 7,
         "ethics_reason": "Produced from cherries with no animal involvement, but distillation requires significant energy."
     },
@@ -5812,7 +5812,7 @@
             "subsaharan_subsistence": 18
         },
         "yield_ratio": 0.95,
-        "health_index": 5,
+        "health_index": 6,
         "ethics_index": 3,
         "ethics_reason": "Factory‑farmed dairy involves animal confinement, antibiotics, and routine milking practices that cause chronic stress."
     },
@@ -5833,7 +5833,7 @@
             "subsaharan_subsistence": 6
         },
         "yield_ratio": 0.9,
-        "health_index": 6,
+        "health_index": 7,
         "ethics_index": 1,
         "ethics_reason": "Factory‑farmed chickens involve intensive confinement and frequent antibiotic use."
     },
@@ -5875,7 +5875,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.75,
-        "health_index": 5,
+        "health_index": 5.5,
         "ethics_index": 2,
         "ethics_reason": "Large animal slaughter with multiple servings per carcass."
     },
@@ -5917,7 +5917,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 8,
         "ethics_reason": "Low‑impact herb cultivation with minimal animal use and small carbon footprint."
     },
@@ -5959,7 +5959,7 @@
             "subsaharan_subsistence": 6
         },
         "yield_ratio": 0.9,
-        "health_index": 6,
+        "health_index": 5.5,
         "ethics_index": 2,
         "ethics_reason": "Slaughter of one large animal yields multiple servings."
     },
@@ -5980,7 +5980,7 @@
             "subsaharan_subsistence": 1.8
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8.5,
         "ethics_index": 9,
         "ethics_reason": "Low‑carbon, nitrogen‑fixing legume grown with minimal inputs."
     },
@@ -6001,7 +6001,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.95,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 9,
         "ethics_reason": "Plant‑based with minimal environmental impact and low carbon footprint."
     },
@@ -6022,7 +6022,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 2.5,
         "ethics_index": 6,
         "ethics_reason": "Produced from industrial wheat and sugar, high water use and processing but no animal suffering."
     },
@@ -6043,7 +6043,7 @@
             "subsaharan_subsistence": 4.8
         },
         "yield_ratio": 0.95,
-        "health_index": 5.5,
+        "health_index": 5,
         "ethics_index": 7,
         "ethics_reason": "Produced largely from monoculture corn farms with moderate pesticide and water use."
     },
@@ -6064,7 +6064,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.6,
-        "health_index": 6.5,
+        "health_index": 5.5,
         "ethics_index": 2,
         "ethics_reason": "Large animal slaughter with moderate environmental impact; no significant chemical pollution."
     },
@@ -6085,7 +6085,7 @@
             "subsaharan_subsistence": 7
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 2.5,
         "ethics_index": 4,
         "ethics_reason": "Processed confectionery with butter and sugar; plant‑based but involves animal fat and moderate environmental impact."
     },
@@ -6106,7 +6106,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.98,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 6,
         "ethics_reason": "Plant‑based seed with moderate water use and minimal animal impact."
     },
@@ -6127,7 +6127,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.92,
-        "health_index": 5.5,
+        "health_index": 6.5,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact, moderate land use; can be grown sustainably."
     },
@@ -6148,7 +6148,7 @@
             "subsaharan_subsistence": 8
         },
         "yield_ratio": 1,
-        "health_index": 5.2,
+        "health_index": 5.5,
         "ethics_index": 3,
         "ethics_reason": "Milk production involves animal exploitation with moderate suffering and environmental impact, but no immediate slaughter per unit."
     },
@@ -6169,7 +6169,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.95,
-        "health_index": 8.5,
+        "health_index": 7.5,
         "ethics_index": 9,
         "ethics_reason": "Low environmental footprint, no animal use, and minimal water usage."
     },
@@ -6190,7 +6190,7 @@
             "subsaharan_subsistence": 7
         },
         "yield_ratio": 1,
-        "health_index": 4.5,
+        "health_index": 2.5,
         "ethics_index": 5,
         "ethics_reason": "Plant-based but relies on intensive corn farming and oil extraction that involve pesticide use and moderate water consumption."
     },
@@ -6232,7 +6232,7 @@
             "subsaharan_subsistence": 0.3
         },
         "yield_ratio": 0.9,
-        "health_index": 5,
+        "health_index": 4,
         "ethics_index": 7,
         "ethics_reason": "Low animal impact but wheat farming involves pesticide use and moderate water consumption."
     },
@@ -6274,7 +6274,7 @@
             "subsaharan_subsistence": 0.9
         },
         "yield_ratio": 0.95,
-        "health_index": 8,
+        "health_index": 9.5,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact and small carbon footprint when locally grown."
     },
@@ -6316,7 +6316,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.9,
-        "health_index": 10,
+        "health_index": 8,
         "ethics_index": 10,
         "ethics_reason": "Plant‑based fermented food with minimal animal use and low environmental footprint."
     },
@@ -6337,7 +6337,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 8.5,
         "ethics_index": 9,
         "ethics_reason": "Low environmental impact and no animal use."
     },
@@ -6379,7 +6379,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based fermented product with minimal animal impact, though soy cultivation can involve pesticide use."
     },
@@ -6400,7 +6400,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 5.5,
         "ethics_index": 4,
         "ethics_reason": "Milk production involves animal exploitation and moderate environmental impact."
     },
@@ -6442,7 +6442,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.85,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 1,
         "ethics_reason": "High animal density and routine culling practices in factory farms."
     },
@@ -6484,7 +6484,7 @@
             "subsaharan_subsistence": 1
         },
         "yield_ratio": 0.9,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 7,
         "ethics_reason": "Low animal impact and water usage, but moderate irrigation needed."
     },
@@ -6526,7 +6526,7 @@
             "subsaharan_subsistence": 4
         },
         "yield_ratio": 1,
-        "health_index": 4.5,
+        "health_index": 3.5,
         "ethics_index": 6,
         "ethics_reason": "Conventional wheat farming relies on significant fertilizer and pesticide use, leading to moderate environmental impact."
     },
@@ -6547,7 +6547,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 4.5,
         "ethics_index": 6,
         "ethics_reason": "Large water use and pesticide runoff in wheat production."
     },
@@ -6568,7 +6568,7 @@
             "subsaharan_subsistence": 5.5
         },
         "yield_ratio": 0.7,
-        "health_index": 2.5,
+        "health_index": 1.5,
         "ethics_index": 1.5,
         "ethics_reason": "Requires slaughter of pigs, but uses all parts; minimal additional suffering beyond standard meat production."
     },
@@ -6589,7 +6589,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact and modest water use, often sustainably farmed."
     },
@@ -6652,7 +6652,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7.5,
+        "health_index": 8,
         "ethics_index": 6,
         "ethics_reason": "Requires intensive irrigation and pesticide use, with some labor concerns."
     },
@@ -6673,7 +6673,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 0.7,
-        "health_index": 5,
+        "health_index": 4,
         "ethics_index": 2,
         "ethics_reason": "Conventional duck farming involves confined rearing and slaughter, with significant animal use per unit."
     },
@@ -6694,7 +6694,7 @@
             "subsaharan_subsistence": 7
         },
         "yield_ratio": 1,
-        "health_index": 4,
+        "health_index": 2,
         "ethics_index": 2,
         "ethics_reason": "Factory‑farmed pork used, multiple animals killed per sausage."
     },
@@ -6715,7 +6715,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 1,
-        "health_index": 2,
+        "health_index": 1,
         "ethics_index": 5,
         "ethics_reason": "Produced from corn or wheat with minimal animal impact but relies on intensive agriculture."
     },
@@ -6778,7 +6778,7 @@
             "subsaharan_subsistence": 2
         },
         "yield_ratio": 1,
-        "health_index": 3.5,
+        "health_index": 3,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based with minimal egg content, no animal suffering involved."
     },
@@ -6799,7 +6799,7 @@
             "subsaharan_subsistence": 0.8
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 7.5,
         "ethics_index": 7,
         "ethics_reason": "Plant-based crop grown in monocultures with moderate water use."
     },
@@ -6820,7 +6820,7 @@
             "subsaharan_subsistence": 15
         },
         "yield_ratio": 0.75,
-        "health_index": 4.5,
+        "health_index": 5.5,
         "ethics_index": 3,
         "ethics_reason": "Raised in intensive confinement with limited mobility before slaughter."
     },
@@ -6862,7 +6862,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 1,
-        "health_index": 4.5,
+        "health_index": 5,
         "ethics_index": 7,
         "ethics_reason": "Produced from large monoculture corn farms with moderate water use."
     },
@@ -6883,7 +6883,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 3.5,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based ingredients with minimal animal impact but high processing and sodium content."
     },
@@ -6904,7 +6904,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.98,
-        "health_index": 5.5,
+        "health_index": 6,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact; plant-based production with moderate water and pesticide use."
     },
@@ -6925,7 +6925,7 @@
             "subsaharan_subsistence": 1.9
         },
         "yield_ratio": 0.75,
-        "health_index": 5.5,
+        "health_index": 6,
         "ethics_index": 2,
         "ethics_reason": "Factory‑farmed turkey involves animal confinement and routine antibiotic use."
     },
@@ -6967,7 +6967,7 @@
             "subsaharan_subsistence": 0.5
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 6.5,
         "ethics_index": 8,
         "ethics_reason": "Cultivated in tropical farms with minimal animal impact but conventional pesticide use."
     },
@@ -6988,7 +6988,7 @@
             "subsaharan_subsistence": 8.7
         },
         "yield_ratio": 0.95,
-        "health_index": 6.5,
+        "health_index": 7,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact; moderate water use in orchard cultivation."
     },
@@ -7009,7 +7009,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.95,
-        "health_index": 4.5,
+        "health_index": 4,
         "ethics_index": 7,
         "ethics_reason": "Plant‑based fermentation with minimal animal impact and moderate water use."
     },
@@ -7030,7 +7030,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.5,
-        "health_index": 7,
+        "health_index": 6.5,
         "ethics_index": 2,
         "ethics_reason": "Single animal yields multiple servings with relatively low animal welfare concerns."
     },
@@ -7072,7 +7072,7 @@
             "subsaharan_subsistence": 7.5
         },
         "yield_ratio": 1,
-        "health_index": 4.5,
+        "health_index": 3.5,
         "ethics_index": 2,
         "ethics_reason": "Contains beef stock from slaughtered cattle and processed ingredients."
     },
@@ -7114,7 +7114,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 0.8,
-        "health_index": 4.5,
+        "health_index": 2.5,
         "ethics_index": 2,
         "ethics_reason": "Processed red meat with moderate animal slaughter and high saturated fat."
     },
@@ -7135,7 +7135,7 @@
             "subsaharan_subsistence": 0.7
         },
         "yield_ratio": 1,
-        "health_index": 4.5,
+        "health_index": 5.5,
         "ethics_index": 8,
         "ethics_reason": "Low animal impact; relies on conventional corn cultivation with modest pesticide use."
     },
@@ -7156,7 +7156,7 @@
             "subsaharan_subsistence": 1.5
         },
         "yield_ratio": 0.9,
-        "health_index": 8,
+        "health_index": 8.5,
         "ethics_index": 9,
         "ethics_reason": "Plant-based with low environmental impact and no animal suffering."
     },
@@ -7177,7 +7177,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 0.75,
-        "health_index": 8.5,
+        "health_index": 9,
         "ethics_index": 6,
         "ethics_reason": "Wild-caught fish with sustainable fishing practices possible, but involves animal capture."
     },
@@ -7198,7 +7198,7 @@
             "subsaharan_subsistence": 9
         },
         "yield_ratio": 1,
-        "health_index": 9,
+        "health_index": 8.5,
         "ethics_index": 10,
         "ethics_reason": "Seaweed cultivation has minimal environmental impact and no animal suffering."
     },
@@ -7261,7 +7261,7 @@
             "subsaharan_subsistence": 5
         },
         "yield_ratio": 1,
-        "health_index": 5.5,
+        "health_index": 6,
         "ethics_index": 7,
         "ethics_reason": "Processed sauce with peanuts, moderate environmental impact from monoculture but no animal suffering."
     },
@@ -7303,7 +7303,7 @@
             "subsaharan_subsistence": 25
         },
         "yield_ratio": 1,
-        "health_index": 8,
+        "health_index": 7,
         "ethics_index": 8,
         "ethics_reason": "Aged vinegar from grapes with low environmental impact and no animal use."
     },
@@ -7366,7 +7366,7 @@
             "subsaharan_subsistence": 10
         },
         "yield_ratio": 1,
-        "health_index": 7.5,
+        "health_index": 6,
         "ethics_index": 8,
         "ethics_reason": "Plant-based paste made from green chilies, lemongrass, galangal, and herbs. Low animal impact, but some ingredients may require moderate agricultural inputs."
     },
@@ -7387,7 +7387,7 @@
             "subsaharan_subsistence": 14
         },
         "yield_ratio": 1,
-        "health_index": 9.7,
+        "health_index": 9,
         "ethics_index": 9.5,
         "ethics_reason": "Low environmental impact crop with high omega-3 yield!"
     },
@@ -7408,7 +7408,7 @@
             "subsaharan_subsistence": 3
         },
         "yield_ratio": 1,
-        "health_index": 9.7,
+        "health_index": 9.5,
         "ethics_index": 9.5,
         "ethics_reason": "Sustainable crop, very low water footprint."
     },
@@ -7429,7 +7429,7 @@
             "subsaharan_subsistence": 12
         },
         "yield_ratio": 1,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 7,
         "ethics_reason": "Juice processing adds industrial overhead; shelf stability often requires pasteurization."
     },
@@ -7450,7 +7450,7 @@
             "subsaharan_subsistence": 7
         },
         "yield_ratio": 2.3,
-        "health_index": 9.8,
+        "health_index": 9,
         "ethics_index": 10,
         "ethics_reason": "Nitrogen-fixing legume, improves soil, very low carbon footprint."
     },
@@ -7471,7 +7471,7 @@
             "subsaharan_subsistence": 9
         },
         "yield_ratio": 0.8,
-        "health_index": 9.8,
+        "health_index": 9.5,
         "ethics_index": 9.5,
         "ethics_reason": "Low environmental impact, but cold chain dependent."
     },
@@ -7492,7 +7492,7 @@
             "subsaharan_subsistence": 9.5
         },
         "yield_ratio": 0.85,
-        "health_index": 9.5,
+        "health_index": 9,
         "ethics_index": 9.5,
         "ethics_reason": "Low environmental impact, but cold chain dependent."
     },
@@ -7513,7 +7513,7 @@
             "subsaharan_subsistence": 28
         },
         "yield_ratio": 1,
-        "health_index": 9.7,
+        "health_index": 8.5,
         "ethics_index": 10,
         "ethics_reason": "Exceptionally sustainable crop, captures carbon, requires minimal inputs."
     },
@@ -7534,7 +7534,7 @@
             "subsaharan_subsistence": 7
         },
         "yield_ratio": 1,
-        "health_index": 9.9,
+        "health_index": 8.8,
         "ethics_index": 9,
         "ethics_reason": "Fermented product, generally low impact production."
     },
@@ -7618,7 +7618,7 @@
             "subsaharan_subsistence": null
         },
         "yield_ratio": 1,
-        "health_index": 8,
+        "health_index": 7.5,
         "ethics_index": 4,
         "ethics_reason": "Often sourced from fish farms which can have high environmental impact on local ecosystems and involve fish slaughter."
     },
@@ -7639,7 +7639,7 @@
             "subsaharan_subsistence": 2.5
         },
         "yield_ratio": 1,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 9,
         "ethics_reason": "Plant-based staple with lower environmental impact than wheat; sustainable farming of rye is common in temperate climates."
     },
@@ -7660,7 +7660,7 @@
             "subsaharan_subsistence": 3.5
         },
         "yield_ratio": 2.5,
-        "health_index": 8,
+        "health_index": 7,
         "ethics_index": 9,
         "ethics_reason": "Buckwheat-based, gluten-free; low environmental impact from cultivation, but processing may involve energy use."
     },
@@ -7702,7 +7702,7 @@
             "subsaharan_subsistence": 22
         },
         "yield_ratio": 1,
-        "health_index": 9,
+        "health_index": 7.5,
         "ethics_index": 7,
         "ethics_reason": "Fermented soybean paste, probiotic benefits, low environmental impact from soy if sustainably sourced."
     },
@@ -7744,7 +7744,7 @@
             "subsaharan_subsistence": 2.5
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 5,
         "ethics_index": 8,
         "ethics_reason": "Plant-based preserved vegetable with minimal processing, low environmental impact."
     },
@@ -7765,7 +7765,7 @@
             "subsaharan_subsistence": 1.8
         },
         "yield_ratio": 0.9,
-        "health_index": 7,
+        "health_index": 7.5,
         "ethics_index": 8,
         "ethics_reason": "Low environmental impact, no animal use; cultivated in small farms with minimal chemical inputs."
     },
@@ -7786,7 +7786,7 @@
             "subsaharan_subsistence": 5.5
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 6.5,
         "ethics_index": 8,
         "ethics_reason": "Fermented grain vinegar with low environmental impact and no animal use."
     },
@@ -7828,7 +7828,7 @@
             "subsaharan_subsistence": 3.5
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 5,
         "ethics_index": 8,
         "ethics_reason": "Rice-based product with minimal processing, low environmental impact."
     },
@@ -7849,7 +7849,7 @@
             "subsaharan_subsistence": 7.5
         },
         "yield_ratio": 1,
-        "health_index": 6,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Fermented soybean paste with minimal animal impact, though soy cultivation involves moderate pesticide use."
     },
@@ -7870,7 +7870,7 @@
             "subsaharan_subsistence": 6.5
         },
         "yield_ratio": 0.95,
-        "health_index": 5,
+        "health_index": 4.5,
         "ethics_index": 7,
         "ethics_reason": "Processed wheat product with moderate environmental impact from industrial flour production."
     },
@@ -7891,7 +7891,7 @@
             "subsaharan_subsistence": 18
         },
         "yield_ratio": 1,
-        "health_index": 5,
+        "health_index": 6,
         "ethics_index": 2,
         "ethics_reason": "Dairy cheese production involves animal use, with cows kept for milk production and eventual slaughter."
     }

@@ -260,7 +260,7 @@ export function calculateDishCost(dish, zoneId, ingredientsDb) {
  * @param {Array} ingredientsDb - The ingredients database
  * @returns {number} Health score 0-10
  */
-function calculateDishHealth(dish, ingredientsDb) {
+export function calculateDishHealth(dish, ingredientsDb) {
   if (!dish?.ingredients?.length || !ingredientsDb) return 5; // Neutral default
 
   let totalWeight = 0;
@@ -301,7 +301,7 @@ function calculateDishHealth(dish, ingredientsDb) {
  * @param {Array} ingredientsDb - The ingredients database
  * @returns {number} Total calories
  */
-function calculateDishCalories(dish, ingredientsDb) {
+export function calculateDishCalories(dish, ingredientsDb) {
   if (!dish?.ingredients?.length || !ingredientsDb) return 0;
 
   let totalCalories = 0;
@@ -330,7 +330,7 @@ function calculateDishCalories(dish, ingredientsDb) {
  * @param {Object} dish - The dish object
  * @returns {number} Total weight in grams
  */
-function calculateDishWeight(dish) {
+export function calculateDishWeight(dish) {
   if (!dish?.ingredients?.length) return 0;
 
   let totalWeight = 0;
@@ -368,7 +368,7 @@ export const PRICE_UNITS = {
  * @param {string} unit - Price unit ('serving', 'per1kg', 'per1000kcal')
  * @returns {number} Converted price
  */
-function convertPriceToUnit(cost, weight, calories, unit) {
+export function convertPriceToUnit(cost, weight, calories, unit) {
   if (!isFiniteNumber(cost) || cost <= 0) return 0;
 
   switch (unit) {
@@ -401,7 +401,7 @@ function convertPriceToUnit(cost, weight, calories, unit) {
  * @param {Array} ingredientsDb - The ingredients database
  * @returns {number} Ethics score 0-10
  */
-function calculateDishEthics(dish, ingredientsDb) {
+export function calculateDishEthics(dish, ingredientsDb) {
   if (!dish?.ingredients?.length || !ingredientsDb) return 5;
 
   let totalWeight = 0;
@@ -433,7 +433,7 @@ function calculateDishEthics(dish, ingredientsDb) {
  * @param {boolean} useOptimized - Whether to use optimized times
  * @returns {number} Total time in minutes
  */
-function calculateDishTime(dish, useOptimized = false) {
+export function calculateDishTime(dish, useOptimized = false) {
   if (useOptimized) {
     const prep = dish.prep_t_optimized ?? dish.prep_t ?? 0;
     const cook = dish.cook_t_optimized ?? dish.cook_t ?? 0;
@@ -913,12 +913,12 @@ export function getPassiveTimePenalty(passiveTimeHours) {
  * - maxPoints = sum(|priority|)
  * - finalScore = (sum(points) / maxPoints) * 100
  * 
- * @param {Object} dishAnalysis - Output from analyzeDish()
+ * @param {Object} dishAnalysis - Output from analyzeAllDishesVariants()
  * @param {Object} priorities - User priority weights { taste, health, cheapness, speed, satiety, lowCalorie, ethics }
  * @param {Object} datasetStats - { minPrice, maxPrice, minCalories, maxCalories }
  * @returns {Object} { score, breakdown }
  */
-function calculateFinalScore(dishAnalysis, priorities, datasetStats) {
+export function calculateFinalScore(dishAnalysis, priorities, datasetStats) {
   const base = dishAnalysis.normalizedBase ?? {};
 
   // If no weights are active, return neutral score (legacy behavior in UI)
@@ -995,85 +995,15 @@ function calculateFinalScore(dishAnalysis, priorities, datasetStats) {
 // BATCH PROCESSING
 // ============================================================================
 
-/**
- * Analyze all dishes (heavy computation).
- * This computes base metrics that don't depend on priorities.
- * Call this once when dishes/ingredients/zone/overrides/priceUnit change.
- * 
- * @param {Array} dishes - Array of dish objects
- * @param {Array|Map} ingredients - Ingredients array or pre-built index Map
- * @param {string} zoneId - Economic zone ID
- * @param {boolean} useOptimizedTime - Whether to use optimized times
- * @param {Object} allOverrides - Map of dish name -> overrides
- * @param {string} priceUnit - Price unit for ranking ('serving', 'per1kg', 'per1000kcal')
- * @returns {Object} { analyzed: Array, datasetStats: Object }
- */
-export function analyzeAllDishesBase(dishes, ingredients, zoneId, useOptimizedTime = false, allOverrides = {}, priceUnit = 'serving') {
-  // Build index if we got an array (for backward compat)
-  const ingredientIndex = ingredients instanceof Map 
-    ? ingredients 
-    : buildIngredientIndex(ingredients);
-
-  // Analyze all dishes
-  const analyzed = dishes.map(dish => {
-    const dishName = dish.dish || dish.name;
-    const overrides = allOverrides[dishName] || {};
-    return analyzeDish(dish, zoneId, ingredientIndex, useOptimizedTime, overrides, priceUnit);
-  });
-
-  // STRICT normalization rules:
-  // - Every criterion entering scoring MUST be in [0..10]
-  // - Percentiles are allowed for: speed(time), satiety, lowCalorie
-  // - Everything else is deterministic (min/max scaling or raw 0..10 indices)
-
-  // Deterministic ranges (dataset min/max)
-  const costs = analyzed.map(d => d.cost).filter(c => isFiniteNumber(c) && c > 0);
-  const times = analyzed.map(d => d.time).filter(t => isFiniteNumber(t) && t > 0);
-  const calories = analyzed.map(d => d.calories).filter(c => isFiniteNumber(c) && c > 0);
-  const kcalPer100gVals = analyzed.map(d => d.kcalPer100g).filter(v => isFiniteNumber(v) && v > 0);
-  const satietyVals = analyzed.map(d => d.satiety).filter(isFiniteNumber);
-
-  const datasetStats = {
-    minCost: costs.length ? Math.min(...costs) : 1,
-    maxCost: costs.length ? Math.max(...costs) : 100,
-    minTime: times.length ? Math.min(...times) : 1,
-    maxTime: times.length ? Math.max(...times) : 120,
-    minCalories: calories.length ? Math.min(...calories) : 100,
-    maxCalories: calories.length ? Math.max(...calories) : 2000,
-    minKcalPer100g: kcalPer100gVals.length ? Math.min(...kcalPer100gVals) : 10,
-    maxKcalPer100g: kcalPer100gVals.length ? Math.max(...kcalPer100gVals) : 600,
-  };
-
-  // Percentile maps (for criteria where relative ranking is more stable than min/max scaling)
-  // NOTE: For speed(time) lower is better.
-  const speedDist = buildPercentileScoreMap(times, { higherIsBetter: false });
-  const satietyDist = buildPercentileScoreMap(satietyVals, { higherIsBetter: true });
-  const lowCalorieDist = buildPercentileScoreMap(kcalPer100gVals, { higherIsBetter: false });
-
-  const analyzedWithNorm = analyzed.map((d) => {
-    const normalizedBase = {
-      taste: normalizeRaw10(d.taste, 5),
-      health: normalizeRaw10(d.health, 5),
-      ethics: normalizeRaw10(d.ethics, 5),
-      cheapness: normalizeCostToCheapness(d.cost, datasetStats.minCost, datasetStats.maxCost),
-      // Using percentiles avoids the "one super-long recipe makes everyone 10/10 fast" effect.
-      speed: clamp(isFiniteNumber(d.time) ? speedDist.scoreForValue(d.time) : 5, 0, 10),
-      satiety: clamp(isFiniteNumber(d.satiety) ? satietyDist.scoreForValue(d.satiety) : 5, 0, 10),
-      lowCalorie: clamp(isFiniteNumber(d.kcalPer100g) ? lowCalorieDist.scoreForValue(d.kcalPer100g) : 5, 0, 10),
-    };
-    return { ...d, normalizedBase };
-  });
-
-  return { analyzed: analyzedWithNorm, datasetStats };
-}
 
 /**
- * Analyze all dishes ONCE, then materialize the 2x3 variants:
+ * Analyze all dishes ONCE, then materialize the 2x3 variants LAZILY:
  * - timeMode: normal | optimized
  * - priceUnit: serving | per1kg | per1000kcal
  *
- * This avoids recomputing expensive dish metrics when the user only toggles
- * time mode or price unit; those become O(1) switches between precomputed variants.
+ * Lazy evaluation: variants are computed only when first accessed, reducing
+ * initial computation time and memory usage from ~500ms-1s and 3-6MB to just
+ * the one variant the user actually needs.
  *
  * Recompute is required only when the underlying values change:
  * - selectedZone (prices)
@@ -1085,6 +1015,7 @@ export function analyzeAllDishesVariants(dishes, ingredients, zoneId, allOverrid
     ? ingredients
     : buildIngredientIndex(ingredients);
 
+  // Pre-compute static analysis (base metrics that don't depend on variant)
   const staticAnalyzed = dishes.map((dish) => {
     const dishName = dish.dish || dish.name;
     const overrides = allOverrides[dishName] || {};
@@ -1092,14 +1023,13 @@ export function analyzeAllDishesVariants(dishes, ingredients, zoneId, allOverrid
   });
 
   // Pre-compute normalization for independent metrics (same across all variants)
-  // These metrics don't depend on timeMode or priceUnit
   const satietyVals = staticAnalyzed.map(d => d.satiety).filter(isFiniteNumber);
   const kcalPer100gVals = staticAnalyzed.map(d => d.kcalPer100g).filter(v => isFiniteNumber(v) && v > 0);
   
   const satietyDist = buildPercentileScoreMap(satietyVals, { higherIsBetter: true });
   const lowCalorieDist = buildPercentileScoreMap(kcalPer100gVals, { higherIsBetter: false });
 
-  // Add pre-computed normalized values for independent metrics to static analysis
+  // Add pre-computed normalized values for independent metrics
   const staticAnalyzedWithNorm = staticAnalyzed.map((d) => {
     const normalizedBaseStatic = {
       taste: normalizeRaw10(d.taste, 5),
@@ -1111,87 +1041,129 @@ export function analyzeAllDishesVariants(dishes, ingredients, zoneId, allOverrid
     return { ...d, normalizedBaseStatic };
   });
 
-  const variants = {};
+  // Cache for computed variants (using Map for better performance)
+  const variantCache = new Map();
 
-  const timeModes = [
-    { id: 'normal', useOptimizedTime: false },
-    { id: 'optimized', useOptimizedTime: true },
-  ];
+  // Factory function to compute a variant lazily
+  const computeVariant = (useOptimizedTime, priceUnit) => {
+    const analyzed = staticAnalyzedWithNorm.map((d) => 
+      materializeVariant(d, { useOptimizedTime, priceUnit })
+    );
 
-  const priceUnits = ['serving', 'per1kg', 'per1000kcal'];
+    // Variant-dependent ranges (only cost and time vary)
+    const costs = analyzed.map(d => d.cost).filter(c => isFiniteNumber(c) && c > 0);
+    const times = analyzed.map(d => d.time).filter(t => isFiniteNumber(t) && t > 0);
 
-  for (const tm of timeModes) {
-    for (const pu of priceUnits) {
-      const key = `${tm.id}:${pu}`;
-      const analyzed = staticAnalyzedWithNorm.map((d) => materializeVariant(d, { useOptimizedTime: tm.useOptimizedTime, priceUnit: pu }));
+    const datasetStats = {
+      minCost: costs.length ? Math.min(...costs) : 1,
+      maxCost: costs.length ? Math.max(...costs) : 100,
+      minTime: times.length ? Math.min(...times) : 1,
+      maxTime: times.length ? Math.max(...times) : 120,
+      minCalories: staticAnalyzed.length ? Math.min(...staticAnalyzed.map(d => d.calories).filter(c => isFiniteNumber(c) && c > 0)) : 100,
+      maxCalories: staticAnalyzed.length ? Math.max(...staticAnalyzed.map(d => d.calories).filter(c => isFiniteNumber(c) && c > 0)) : 2000,
+      minKcalPer100g: kcalPer100gVals.length ? Math.min(...kcalPer100gVals) : 10,
+      maxKcalPer100g: kcalPer100gVals.length ? Math.max(...kcalPer100gVals) : 600,
+    };
 
-      // Variant-dependent ranges (only cost and time vary by variant)
-      const costs = analyzed.map(d => d.cost).filter(c => isFiniteNumber(c) && c > 0);
-      const times = analyzed.map(d => d.time).filter(t => isFiniteNumber(t) && t > 0);
+    const speedDist = buildPercentileScoreMap(times, { higherIsBetter: false });
 
-      const datasetStats = {
-        minCost: costs.length ? Math.min(...costs) : 1,
-        maxCost: costs.length ? Math.max(...costs) : 100,
-        minTime: times.length ? Math.min(...times) : 1,
-        maxTime: times.length ? Math.max(...times) : 120,
-        // These are the same across all variants, but kept for compatibility
-        minCalories: staticAnalyzed.length ? Math.min(...staticAnalyzed.map(d => d.calories).filter(c => isFiniteNumber(c) && c > 0)) : 100,
-        maxCalories: staticAnalyzed.length ? Math.max(...staticAnalyzed.map(d => d.calories).filter(c => isFiniteNumber(c) && c > 0)) : 2000,
-        minKcalPer100g: kcalPer100gVals.length ? Math.min(...kcalPer100gVals) : 10,
-        maxKcalPer100g: kcalPer100gVals.length ? Math.max(...kcalPer100gVals) : 600,
+    const analyzedWithNorm = analyzed.map((d) => {
+      const baseSpeedScore = isFiniteNumber(d.time) ? speedDist.scoreForValue(d.time) : 5;
+      const speedPercentile = Math.round(baseSpeedScore * 10);
+      const passivePenalty = getPassiveTimePenalty(d.passiveTimeHours);
+      const speedWithPenalty = baseSpeedScore + passivePenalty;
+      
+      const normalizedBase = {
+        taste: d.normalizedBaseStatic.taste,
+        health: d.normalizedBaseStatic.health,
+        ethics: d.normalizedBaseStatic.ethics,
+        satiety: d.normalizedBaseStatic.satiety,
+        lowCalorie: d.normalizedBaseStatic.lowCalorie,
+        cheapness: normalizeCostToCheapness(d.cost, datasetStats.minCost, datasetStats.maxCost),
+        speed: clamp(speedWithPenalty, 0, 10),
       };
+      
+      return { 
+        ...d, 
+        normalizedBase,
+        speedScoreBeforePenalty: clamp(baseSpeedScore, 0, 10),
+        speedPenalty: passivePenalty,
+        speedPercentile,
+      };
+    });
 
-      // Only normalize variant-dependent metrics (cost and time)
-      const speedDist = buildPercentileScoreMap(times, { higherIsBetter: false });
+    // Hot-path optimization for UI: O(1) dish lookup by name without rebuilding Maps in components
+    const byName = new Map(analyzedWithNorm.map(d => [d.name, d]));
 
-      const analyzedWithNorm = analyzed.map((d) => {
-        // Calculate base speed score from active cooking time percentile
-        const baseSpeedScore = isFiniteNumber(d.time) ? speedDist.scoreForValue(d.time) : 5;
-        
-        // Calculate the percentile (0-100) for display purposes
-        // speedDist.scoreForValue returns 0-10 where 10 = fastest
-        // So percentile = score * 10 (e.g., score 9/10 means faster than 90% of dishes)
-        const speedPercentile = Math.round(baseSpeedScore * 10);
-        
-        // Apply passive time penalty (before clamping to 0-10)
-        const passivePenalty = getPassiveTimePenalty(d.passiveTimeHours);
-        const speedWithPenalty = baseSpeedScore + passivePenalty;
-        
-        const normalizedBase = {
-          // Use pre-computed values for independent metrics
-          taste: d.normalizedBaseStatic.taste,
-          health: d.normalizedBaseStatic.health,
-          ethics: d.normalizedBaseStatic.ethics,
-          satiety: d.normalizedBaseStatic.satiety,
-          lowCalorie: d.normalizedBaseStatic.lowCalorie,
-          // Compute variant-dependent metrics
-          cheapness: normalizeCostToCheapness(d.cost, datasetStats.minCost, datasetStats.maxCost),
-          speed: clamp(speedWithPenalty, 0, 10),
-        };
-        
-        // Store additional speed calculation details for UI
-        return { 
-          ...d, 
-          normalizedBase,
-          speedScoreBeforePenalty: clamp(baseSpeedScore, 0, 10),
-          speedPenalty: passivePenalty,
-          speedPercentile, // 0-100, higher = faster than more dishes
-        };
-      });
+    return { analyzed: analyzedWithNorm, datasetStats, byName };
+  };
 
-      variants[key] = { analyzed: analyzedWithNorm, datasetStats };
+  // Simple cache object with getter function
+  const variants = {
+    get(key) {
+        if (typeof key !== 'string' || !key.includes(':')) {
+        return undefined;
+        }
+
+        // Check cache first
+      if (variantCache.has(key)) {
+        return variantCache.get(key);
+        }
+
+        // Parse key and compute variant
+        const [timeMode, priceUnit] = key.split(':');
+        const useOptimizedTime = timeMode === 'optimized';
+        
+        if (!['normal', 'optimized'].includes(timeMode) || !['serving', 'per1kg', 'per1000kcal'].includes(priceUnit)) {
+          return undefined;
+        }
+
+        // Compute and cache variant
+      const variant = computeVariant(useOptimizedTime, priceUnit);
+      variantCache.set(key, variant);
+      return variant;
+      },
+    has(key) {
+        if (typeof key !== 'string' || !key.includes(':')) {
+        return false;
+        }
+        const [timeMode, priceUnit] = key.split(':');
+        return ['normal', 'optimized'].includes(timeMode) && ['serving', 'per1kg', 'per1000kcal'].includes(priceUnit);
     }
-  }
+  };
 
-  return { variants };
+  // For compatibility with object-style access (analysisVariants.variants['normal:serving'])
+  // Use Proxy wrapper that delegates to the cache
+  return {
+    variants: new Proxy({}, {
+      get(target, key) {
+        if (key === 'get' || key === 'has') {
+          return variants[key].bind(variants);
+        }
+        return variants.get(key);
+      },
+      has(target, key) {
+        return variants.has(key);
+      },
+      ownKeys() {
+        // Return all possible variant keys (for Object.keys() support)
+        return ['normal:serving', 'normal:per1kg', 'normal:per1000kcal', 
+                'optimized:serving', 'optimized:per1kg', 'optimized:per1000kcal'];
+      },
+      getOwnPropertyDescriptor() {
+        // Required for proper Proxy behavior
+        return { enumerable: true, configurable: true };
+      }
+    })
+  };
 }
 
 /**
  * Score and sort pre-analyzed dishes (lightweight computation).
  * Call this when only priorities change — no need to re-analyze dishes.
  * 
- * @param {Array} analyzedDishes - Output from analyzeAllDishesBase().analyzed
- * @param {Object} datasetStats - Output from analyzeAllDishesBase().datasetStats
+ * @param {Array} analyzedDishes - Output from analyzeAllDishesVariants().variants[key].analyzed
+ * @param {Object} datasetStats - Output from analyzeAllDishesVariants().variants[key].datasetStats
  * @param {Object} priorities - User priority weights
  * @returns {Array} Sorted array of { ...dishAnalysis, score, scoreBreakdown }
  */
@@ -1221,29 +1193,3 @@ export function scoreAndSortDishes(analyzedDishes, datasetStats, priorities) {
   return scored;
 }
 
-/**
- * Process all dishes and return sorted rankings.
- * Legacy convenience function that combines analysis + scoring.
- * For better performance, use analyzeAllDishesBase + scoreAndSortDishes separately.
- * 
- * @param {Array} dishes - Array of dish objects
- * @param {Array} ingredients - Array of ingredient objects
- * @param {string} zoneId - Economic zone ID
- * @param {Object} priorities - User priority weights
- * @param {boolean} useOptimizedTime - Whether to use optimized times
- * @param {Object} allOverrides - Map of dish name -> overrides
- * @param {string} priceUnit - Price unit for ranking ('serving', 'per1kg', 'per1000kcal')
- * @returns {Array} Sorted array of { ...dishAnalysis, score, scoreBreakdown }
- */
-function rankAllDishes(dishes, ingredients, zoneId, priorities, useOptimizedTime = false, allOverrides = {}, priceUnit = 'serving') {
-  const { analyzed, datasetStats } = analyzeAllDishesBase(
-    dishes, 
-    ingredients, 
-    zoneId, 
-    useOptimizedTime, 
-    allOverrides,
-    priceUnit
-  );
-  
-  return scoreAndSortDishes(analyzed, datasetStats, priorities);
-}

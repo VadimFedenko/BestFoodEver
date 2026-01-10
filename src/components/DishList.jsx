@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import DishCard from './DishCard';
 import PriceUnitToggle from './PriceUnitToggle';
-import { useIsMobile } from '../lib/useIsMobile';
+import { usePrefs, prefsActions } from '../store/prefsStore';
 
 /**
  * Stats summary bar with integrated search
@@ -11,48 +11,47 @@ import { useIsMobile } from '../lib/useIsMobile';
 function StatsBar({ 
   totalDishes, 
   filteredCount, 
-  allPrioritiesZero = false, 
   priceUnit, 
   onPriceUnitChange,
   searchQuery,
   onSearchChange
 }) {
   return (
-      <div className="space-y-2">
-      <div className="flex flex-col xs:flex-row xs:items-center gap-2 xs:gap-3 px-1 text-sm text-surface-500 dark:text-surface-400 min-h-[28px]">
+      <div className="space-y-0.5 xs:space-y-2">
+      <div className="flex flex-col xs:flex-row xs:items-center gap-1 xs:gap-3 text-sm text-surface-500 dark:text-surface-400">
         {/* Search bar */}
         <div className="relative flex-1 min-w-0">
           <Search 
-            size={16} 
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-surface-400 sm:w-[18px] sm:h-[18px]" 
+            size={13} 
+            className="absolute left-2 xs:left-3 top-1/2 -translate-y-1/2 text-surface-400 xs:w-4 xs:h-4 sm:w-[18px] sm:h-[18px]" 
           />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search dishes..."
-            className="w-full pl-9 sm:pl-10 pr-8 sm:pr-10 py-2 sm:py-2.2 rounded-xl
+            className="w-full pl-7 xs:pl-9 sm:pl-10 pr-6 xs:pr-8 sm:pr-10 py-1 xs:py-2 sm:py-2.2 rounded-lg xs:rounded-xl
                        bg-white/80 dark:bg-surface-800/80 
                        border border-surface-300/50 dark:border-surface-700/50
-                       text-sm text-surface-800 dark:text-surface-100 
+                       text-xs xs:text-sm text-surface-800 dark:text-surface-100 
                        placeholder:text-surface-400 dark:placeholder:text-surface-500
                        focus:outline-none focus:border-food-500/50
-                       transition-colors shadow-sm dark:shadow-none"
+                       transition-colors shadow-sm dark:shadow-none leading-tight"
           />
           {searchQuery && (
             <button
               onClick={() => onSearchChange('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 
+              className="absolute right-2 xs:right-3 top-1/2 -translate-y-1/2 
                          text-surface-400 hover:text-surface-600 dark:hover:text-surface-200"
             >
-              <X size={14} className="sm:w-4 sm:h-4" />
+              <X size={11} className="xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4" />
             </button>
           )}
         </div>
         
         {/* Right: Price per */}
         <div className="flex items-center justify-between xs:justify-end gap-2 whitespace-nowrap">
-          <span className="text-xs font-semibold text-surface-500 dark:text-surface-400">
+          <span className="text-[10px] xs:text-xs font-semibold text-surface-500 dark:text-surface-400">
             Price per
           </span>
           <PriceUnitToggle 
@@ -98,25 +97,20 @@ function EmptyState({ hasSearch }) {
  */
 export default function DishList({ 
   dishes, 
-  overrides, 
-  onOverrideChange, 
-  allPrioritiesZero = false, 
   ingredientIndex,
-  priceUnit = 'serving',
-  onPriceUnitChange,
-  priorities = {},
-  isOptimized = false,
   expandedDish,
   onExpandedDishChange,
   analysisVariants = null
 }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const reduceMotion = useReducedMotion();
+  const priceUnit = usePrefs((s) => s.prefs.priceUnit);
+  const overrides = usePrefs((s) => s.prefs.overrides);
+  const isOptimized = usePrefs((s) => s.prefs.isOptimized);
+  const priorities = usePrefs((s) => s.computationPriorities);
 
-  // Mobile gets a smaller initial render budget to avoid heavy DOM + layout work.
-  const isMobile = useIsMobile();
-  const pageSize = isMobile ? 50 : 200;
-  // Always start at 50 on mobile (or 200 on desktop); keep in sync with detection changes.
+  // Keep the initial render budget small on all devices to avoid heavy DOM + layout work.
+  // This also keeps the priorities panel expand/collapse animation smooth on desktop.
+  const pageSize = 50;
   const [visibleCount, setVisibleCount] = useState(() => pageSize);
 
   // Filter dishes by search query
@@ -144,7 +138,6 @@ export default function DishList({
     onExpandedDishChange(expandedDish === dishName ? null : dishName);
   };
 
-  const useLiteList = reduceMotion;
   const remaining = Math.max(0, filteredDishes.length - visibleCount);
 
   return (
@@ -154,9 +147,8 @@ export default function DishList({
         <StatsBar 
           totalDishes={dishes.length} 
           filteredCount={filteredDishes.length}
-          allPrioritiesZero={allPrioritiesZero}
           priceUnit={priceUnit}
-          onPriceUnitChange={onPriceUnitChange}
+          onPriceUnitChange={(u) => prefsActions.setPref({ priceUnit: u })}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
         />
@@ -168,52 +160,26 @@ export default function DishList({
           <EmptyState hasSearch={!!searchQuery} />
         ) : (
           <>
-            {useLiteList ? (
-              <div className="space-y-1.5">
-                {visibleDishes.map((dish) => (
-                  <div key={dish.name}>
-                    <DishCard
-                      dish={dish}
-                      isExpanded={expandedDish === dish.name}
-                      onToggle={() => handleToggle(dish.name)}
-                      onOverrideChange={onOverrideChange}
-                      overrides={overrides[dish.name] || {}}
-                      ingredientIndex={ingredientIndex}
-                      priceUnit={priceUnit}
-                      priorities={priorities}
-                      isOptimized={isOptimized}
-                      analysisVariants={analysisVariants}
-                    />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <motion.div className="space-y-1.5">
-                <AnimatePresence mode="sync">
-                  {visibleDishes.map((dish) => (
-                    <motion.div
-                      key={dish.name}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.98 }}
-                    >
-                      <DishCard
-                        dish={dish}
-                        isExpanded={expandedDish === dish.name}
-                        onToggle={() => handleToggle(dish.name)}
-                        onOverrideChange={onOverrideChange}
-                        overrides={overrides[dish.name] || {}}
-                        ingredientIndex={ingredientIndex}
-                        priceUnit={priceUnit}
-                        priorities={priorities}
-                        isOptimized={isOptimized}
-                        analysisVariants={analysisVariants}
-                      />
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </motion.div>
-            )}
+            <div className="space-y-1.5">
+              {visibleDishes.map((dish) => (
+                <div key={dish.name}>
+                  <DishCard
+                    dish={dish}
+                    isExpanded={expandedDish === dish.name}
+                    onToggle={() => handleToggle(dish.name)}
+                    onOverrideChange={(dishName, newOverrides) => prefsActions.setOverrideForDish(dishName, newOverrides)}
+                    overrides={overrides[dish.name] || {}}
+                    ingredientIndex={ingredientIndex}
+                    priceUnit={priceUnit}
+                    // Avoid forcing every collapsed card to re-render when priorities change.
+                    // Only the expanded card needs priorities for breakdown UI.
+                    priorities={expandedDish === dish.name ? priorities : null}
+                    isOptimized={isOptimized}
+                    analysisVariants={analysisVariants}
+                  />
+                </div>
+              ))}
+            </div>
 
             {remaining > 0 && (
               <button
@@ -235,6 +201,3 @@ export default function DishList({
     </div>
   );
 }
-
-
-
