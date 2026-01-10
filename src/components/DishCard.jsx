@@ -407,12 +407,12 @@ export default function DishCard({ dish, isExpanded, onToggle, onOverrideChange,
         <motion.div
           layout={false}
           className={`
-            ${isExpanded ? 'hidden sm:flex' : 'flex'} flex-shrink-0 ${isVeryNarrow ? 'w-8 h-8' : 'w-10 h-10'} sm:w-12 sm:h-12 rounded-xl
+            ${isExpanded ? 'hidden sm:flex' : 'flex'} flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl
             items-center justify-center
             ${scoreColors.bg} ${scoreColors.glow}
           `}
         >
-          <span className={`${isVeryNarrow ? 'text-sm' : 'text-base'} sm:text-lg font-display font-bold text-white`}>
+          <span className={`text-base sm:text-lg font-display font-bold text-white`}>
             {dish.score}
           </span>
         </motion.div>

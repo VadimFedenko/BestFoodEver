@@ -33,6 +33,7 @@ function calculatePercentages(priorities) {
 
 /**
  * Compact priority icon for collapsed state
+ * Responsive sizing: small at <340px, progressively larger at wider breakpoints
  */
 function CompactPriorityIcon({ config, value, percentage }) {
   const isReversed = value < 0;
@@ -41,31 +42,38 @@ function CompactPriorityIcon({ config, value, percentage }) {
   const currentIconColor = isReversed ? config.negativeIconColor : config.iconColor;
 
   return (
-    <div className="flex flex-col items-center gap-0.5">
+    <div className="flex flex-col items-center gap-0 overflow-visible">
       <div 
         className={`
-          relative w-8 h-6 rounded-lg flex items-center justify-center
+          relative w-8 h-4 min-[340px]:w-9 min-[340px]:h-5 min-[480px]:w-10 min-[480px]:h-5
+          rounded-lg flex items-center justify-center overflow-visible
           ${isReversed 
             ? 'bg-rose-500/20 border border-rose-500/40' 
             : 'bg-emerald-500/20 border border-emerald-500/40'
           }
         `}
       >
-        <Icon size={14} className={currentIconColor} />
+        <Icon 
+          size={12}
+          className={currentIconColor}
+        />
         <div 
           className={`
-            absolute -top-0.5 -right-0.5 min-w-[16px] h-3 px-0.5
-            rounded text-[8px] font-bold flex items-center justify-center
+            absolute -top-1.5 -right-0.5
+            min-w-[14px] h-2.5 min-[340px]:min-w-[16px] min-[340px]:h-3 min-[480px]:min-w-[18px]
+            px-0.5 min-[340px]:px-0.5 min-[480px]:px-1
+            rounded text-[7px] min-[340px]:text-[8px] min-[480px]:text-[9px]
+            font-bold flex items-center justify-center
             ${isReversed 
-              ? 'bg-rose-500 text-white' 
-              : 'bg-emerald-500 text-white'
+              ? 'bg-rose-500/30 text-white' 
+              : 'bg-emerald-500/50 text-white'
             }
           `}
         >
           {percentage !== undefined ? `${percentage}%` : Math.abs(value)}
         </div>
       </div>
-      <span className="text-[8px] text-white dark:text-white font-medium truncate max-w-[44px] leading-tight">
+      <span className="text-[8px] min-[340px]:text-[9px] min-[480px]:text-[10px] text-white dark:text-white font-medium truncate max-w-[44px] min-[340px]:max-w-[48px] min-[480px]:max-w-[52px] leading-tight mt-0.5">
         {label}
       </span>
     </div>
@@ -74,18 +82,19 @@ function CompactPriorityIcon({ config, value, percentage }) {
 
 /**
  * Compact zone indicator for collapsed state
+ * Responsive sizing: width only, height stays fixed
  */
 function CompactZoneIcon({ zoneId }) {
   const zone = ECONOMIC_ZONES[zoneId];
   return (
-    <div className="flex flex-col items-center gap-0.5">
+    <div className="flex flex-col items-center gap-0">
       <div 
-        className="w-8 h-6 rounded-lg flex items-center justify-center
+        className="w-8 h-4 min-[340px]:w-9 min-[340px]:h-5 min-[480px]:w-10 min-[480px]:h-5 rounded-lg flex items-center justify-center
           bg-blue-500/20 border border-blue-500/40"
       >
-        <span className="text-sm">{zone.emoji}</span>
+        <span className="text-xs min-[340px]:text-[13px] min-[480px]:text-sm leading-none">{zone.emoji}</span>
       </div>
-      <span className="text-[8px] text-white dark:text-white font-medium truncate max-w-[40px] leading-tight">
+      <span className="text-[8px] min-[340px]:text-[9px] min-[480px]:text-[10px] text-white dark:text-white font-medium truncate max-w-[40px] min-[340px]:max-w-[44px] min-[480px]:max-w-[48px] leading-tight mt-0.5">
         {zone.name}
       </span>
     </div>
@@ -97,7 +106,7 @@ function CompactZoneIcon({ zoneId }) {
  */
 function CompactIconsRow({ activePriorities, displayed, percentages, selectedZone, className = '' }) {
   return (
-    <div className={`flex items-center gap-1.5 overflow-x-auto hide-scrollbar ${className}`}>
+    <div className={`flex items-center gap-0.5 min-[340px]:gap-0.5 min-[480px]:gap-1 overflow-x-auto overflow-y-visible hide-scrollbar pt-2 ${className}`}>
       {activePriorities.length > 0 ? (
         activePriorities.map(config => (
           <CompactPriorityIcon
@@ -238,72 +247,93 @@ export default function PrioritiesPanel({
   return (
     <div className="bg-white dark:bg-surface-800 border-b border-surface-300/50 dark:border-surface-700/50">
       {/* Header - always visible */}
-      <div className="px-4 py-2 relative">
-        {/* Keep room for the toggle arrow so content never pushes/overlaps it (esp. >= 480px) */}
-        <div className="pr-10 min-[480px]:pr-12">
-          {isExpanded ? (
-            <div className="grid grid-cols-1 sm:grid-cols-[1fr_260px] gap-4 items-center">
-              {/* Left header: priorities */}
-              <div className="flex items-center justify-between gap-2">
-                <h2 className="font-display font-semibold text-lg text-surface-800 dark:text-surface-100 whitespace-nowrap">
-                  My Priorities
-                </h2>
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <button
-                    onClick={handleReset}
-                    className="px-3 py-1.5 text-xs font-medium text-surface-500 dark:text-surface-400 
-                               hover:text-surface-700 dark:hover:text-surface-200 
-                               hover:bg-surface-200/50 dark:hover:bg-surface-700/50 
-                               rounded-lg transition-colors whitespace-nowrap"
-                  >
-                    Reset
-                  </button>
-                </div>
-              </div>
-
-              {/* Right header: map */}
-              <div className="hidden sm:flex items-center justify-between">
-                <h2 className="font-display font-semibold text-lg text-surface-800 dark:text-surface-100">
-                  Economic Zone
-                </h2>
+      <div className="px-4 py-2 relative overflow-visible">
+        {isExpanded ? (
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_260px] gap-4 items-center">
+            {/* Left header: priorities */}
+            <div className="flex items-center justify-between gap-2 pr-10 sm:pr-0">
+              <h2 className="font-display font-semibold text-lg text-surface-800 dark:text-surface-100 whitespace-nowrap">
+                My Priorities
+              </h2>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <button
+                  onClick={handleReset}
+                  className="px-3 py-1.5 text-xs font-medium text-surface-500 dark:text-surface-400 
+                             hover:text-surface-700 dark:hover:text-surface-200 
+                             hover:bg-surface-200/50 dark:hover:bg-surface-700/50 
+                             rounded-lg transition-colors whitespace-nowrap"
+                >
+                  Reset
+                </button>
               </div>
             </div>
-          ) : (
-            <div>
+
+            {/* Right header: map */}
+            <div className="hidden sm:flex items-center justify-between">
+              <h2 className="font-display font-semibold text-lg text-surface-800 dark:text-surface-100">
+                Economic Zone
+              </h2>
+            </div>
+          </div>
+        ) : (
+          <div className="pr-0 min-[480px]:pr-12">
+            {/* Mobile layout: title and arrow in one row, icons below */}
+            <div className="min-[480px]:hidden">
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <h2 className="font-display font-semibold text-sm text-surface-800 dark:text-surface-100 whitespace-nowrap">
+                  My Priorities
+                </h2>
+                <button
+                  onClick={handleExpand}
+                  className="p-1.5 rounded-lg hover:bg-surface-200/50 dark:hover:bg-surface-700/50 transition-colors flex-shrink-0"
+                  aria-label="Expand panels"
+                >
+                  <ChevronDown
+                    size={18}
+                    className="text-surface-500 dark:text-surface-300 transition-transform duration-300"
+                  />
+                </button>
+              </div>
               <button
                 onClick={handleExpand}
-                className="w-full flex flex-col min-[480px]:flex-row items-start min-[480px]:items-center justify-between gap-2 min-[480px]:gap-3 hover:opacity-80 transition-opacity"
+                className="w-full hover:opacity-80 transition-opacity"
               >
-                <div className="flex items-center justify-between gap-3 w-full min-[480px]:w-auto min-[480px]:flex-1 min-[480px]:min-w-0">
-                  <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <h2 className="font-display font-semibold text-sm min-[480px]:text-lg text-surface-800 dark:text-surface-100 whitespace-nowrap flex-shrink-0">
-                      My Priorities
-                    </h2>
-                    <CompactIconsRow
-                      activePriorities={activePriorities}
-                      displayed={displayed}
-                      percentages={percentages}
-                      selectedZone={selectedZone}
-                      className="hidden min-[480px]:flex"
-                    />
-                  </div>
-                </div>
                 <CompactIconsRow
                   activePriorities={activePriorities}
                   displayed={displayed}
                   percentages={percentages}
                   selectedZone={selectedZone}
-                  className="flex min-[480px]:hidden w-full"
+                  className="flex"
                 />
               </button>
             </div>
-          )}
-        </div>
+            {/* Desktop layout: title and icons in one row */}
+            <button
+              onClick={handleExpand}
+              className="hidden min-[480px]:flex items-baseline gap-3 hover:opacity-80 transition-opacity"
+            >
+              <h2 className="font-display font-semibold text-lg text-surface-800 dark:text-surface-100 whitespace-nowrap">
+                My Priorities
+              </h2>
+              <CompactIconsRow
+                activePriorities={activePriorities}
+                displayed={displayed}
+                percentages={percentages}
+                selectedZone={selectedZone}
+                className="flex"
+              />
+            </button>
+          </div>
+        )}
 
-        {/* Persistent toggle arrow: animates + stays fixed in place for >= 480px */}
+        {/* Persistent toggle arrow: absolute for expanded state and >= 480px collapsed state */}
         <button
           onClick={isExpanded ? handleToggleExpanded : handleExpand}
-          className="absolute right-2 top-2 min-[480px]:top-1/2 min-[480px]:-translate-y-1/2 p-2 rounded-lg hover:bg-surface-200/50 dark:hover:bg-surface-700/50 transition-colors z-10"
+          className={`absolute right-2 p-2 rounded-lg hover:bg-surface-200/50 dark:hover:bg-surface-700/50 transition-colors z-10 ${
+            isExpanded 
+              ? 'top-2' 
+              : 'hidden min-[480px]:block top-1/2 min-[480px]:-translate-y-1/2'
+          }`}
           aria-label={isExpanded ? 'Collapse panels' : 'Expand panels'}
         >
           <ChevronDown

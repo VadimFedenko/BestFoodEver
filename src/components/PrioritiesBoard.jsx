@@ -117,7 +117,7 @@ export default function PrioritiesBoard({
   return (
     <div className="flex-1 bg-white/60 dark:bg-surface-800/80 rounded-xl p-1.5 sm:p-2 border border-surface-300/50 dark:border-surface-700/50 shadow-sm dark:shadow-none flex flex-col">
       {/* Sliders grid */}
-      <div className="flex justify-around items-start gap-0.5 sm:gap-2 sm:gap-3 overflow-x-auto hide-scrollbar">
+      <div className="flex justify-around items-start gap-0 sm:gap-0 overflow-x-auto hide-scrollbar">
         {priorityConfig.map(config => (
           <PrioritySlider
             key={config.key}

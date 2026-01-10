@@ -11,10 +11,8 @@ export default function ThemeToggle({ isDark, onToggle }) {
       className={`
         relative w-10 h-10 rounded-xl flex items-center justify-center
         transition-all duration-300 overflow-hidden
-        ${isDark 
-          ? 'bg-surface-700/80 hover:bg-surface-600/80 border border-surface-600/50' 
-          : 'bg-amber-100/80 hover:bg-amber-200/80 border border-amber-200/50'
-        }
+        bg-surface-100/80 hover:bg-surface-200/80 dark:bg-surface-800/80 dark:hover:bg-surface-700/80
+        border border-surface-300/50 dark:border-surface-700/50
       `}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
@@ -34,7 +32,7 @@ export default function ThemeToggle({ isDark, onToggle }) {
           >
             <Moon 
               size={20} 
-              className="text-indigo-300"
+              className="text-surface-600 dark:text-surface-300"
               strokeWidth={2}
             />
           </motion.div>
@@ -51,7 +49,7 @@ export default function ThemeToggle({ isDark, onToggle }) {
           >
             <Sun 
               size={20} 
-              className="text-amber-600"
+              className="text-surface-600 dark:text-surface-300"
               strokeWidth={2}
             />
           </motion.div>
@@ -60,15 +58,9 @@ export default function ThemeToggle({ isDark, onToggle }) {
       
       {/* Subtle glow effect */}
       <motion.div
-        className={`
-          absolute inset-0 rounded-xl opacity-0 pointer-events-none
-          ${isDark 
-            ? 'bg-indigo-500/20' 
-            : 'bg-amber-400/30'
-          }
-        `}
+        className="absolute inset-0 rounded-xl opacity-0 pointer-events-none bg-surface-400/20 dark:bg-surface-500/20"
         animate={{ 
-          opacity: [0, 0.5, 0],
+          opacity: [0, 0.3, 0],
           scale: [0.8, 1.2, 0.8]
         }}
         transition={{
