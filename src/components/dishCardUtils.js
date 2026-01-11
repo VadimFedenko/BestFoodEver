@@ -1,4 +1,4 @@
-// Shared, compact helpers for `DishCard.jsx`.
+// Shared utility functions for dish-related components.
 
 const HEALTH_STEPS = [
   {

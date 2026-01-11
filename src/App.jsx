@@ -28,8 +28,7 @@ export default function App() {
   const computationPriorities = usePrefs((s) => s.computationPriorities);
   const isDark = theme !== 'light';
   
-  // Track expanded dish cards to prevent re-ranking when cards are open
-  const [expandedDish, setExpandedDish] = useState(null);
+  // Note: Modal state is now managed inside DishList component
   
   // Track priorities panel expanded state
   const [isPrioritiesExpanded, setIsPrioritiesExpanded] = useState(true);
@@ -81,14 +80,6 @@ export default function App() {
     );
   }, [analysisBase, computationPriorities]);
 
-  // Close expanded cards when zone, priceUnit, or optimized toggle changes (but NOT priorities)
-  // Priorities changes should update scores and re-sort, but keep card expanded
-  useEffect(() => {
-    if (expandedDish !== null) {
-      setExpandedDish(null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedZone, priceUnit, isOptimized]);
 
   // Shady feature: Toggle Worst Food Ever mode and set fixed priority values
   const handleWorstModeToggle = useCallback(() => {
@@ -134,8 +125,6 @@ export default function App() {
           }`}
         >
           <PrioritiesPanel
-            expandedDish={expandedDish}
-            onCollapseExpandedDish={() => setExpandedDish(null)}
             onExpandedChange={setIsPrioritiesExpanded}
           />
         </div>
@@ -150,8 +139,6 @@ export default function App() {
           <DishList
             dishes={rankedDishes}
             ingredientIndex={ingredientIndex}
-            expandedDish={expandedDish}
-            onExpandedDishChange={setExpandedDish}
             analysisVariants={analysisVariants}
           />
         </motion.main>

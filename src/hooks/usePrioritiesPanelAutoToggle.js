@@ -12,59 +12,42 @@ import { useEffect, useRef } from 'react';
 export function usePrioritiesPanelAutoToggle({
   scrollableElement,
   isExpanded,
-  expandedDish,
   setExpanded,
-  onCollapseExpandedDish,
   collapseScrollTopThreshold = 30,
   topThresholdPx = 2,
   wheelExpandAccumThreshold = 40,
   touchExpandPullThreshold = 24,
-  ignoreExpandAfterDishChangeMs = 250,
 }) {
-  const stateRef = useRef({ isExpanded, expandedDish });
-  const callbacksRef = useRef({ setExpanded, onCollapseExpandedDish });
+  const stateRef = useRef({ isExpanded });
+  const callbacksRef = useRef({ setExpanded });
 
   const lastScrollTopRef = useRef(0);
   const wheelUpAccumRef = useRef(0);
   const touchStartYRef = useRef(null);
-  const lastDishChangeAtRef = useRef(0);
 
   useEffect(() => {
-    stateRef.current = { isExpanded, expandedDish };
-  }, [isExpanded, expandedDish]);
+    stateRef.current = { isExpanded };
+  }, [isExpanded]);
 
   useEffect(() => {
-    callbacksRef.current = { setExpanded, onCollapseExpandedDish };
-  }, [setExpanded, onCollapseExpandedDish]);
-
-  useEffect(() => {
-    if (expandedDish) lastDishChangeAtRef.current = Date.now();
-  }, [expandedDish]);
+    callbacksRef.current = { setExpanded };
+  }, [setExpanded]);
 
   useEffect(() => {
     const el = scrollableElement;
     if (!el) return;
 
     const isAtTop = () => el.scrollTop <= topThresholdPx;
-    const shouldIgnoreExpand = () => {
-      const { expandedDish: dish } = stateRef.current;
-      if (!dish) return false;
-      return Date.now() - lastDishChangeAtRef.current < ignoreExpandAfterDishChangeMs;
-    };
 
     const expand = () => {
-      const { isExpanded: expanded, expandedDish: dish } = stateRef.current;
+      const { isExpanded: expanded } = stateRef.current;
       if (expanded) return;
-      if (shouldIgnoreExpand()) return;
-
-      if (dish) callbacksRef.current.onCollapseExpandedDish?.();
       callbacksRef.current.setExpanded(true);
     };
 
     const collapse = () => {
-      const { isExpanded: expanded, expandedDish: dish } = stateRef.current;
+      const { isExpanded: expanded } = stateRef.current;
       if (!expanded) return;
-      if (dish) return;
       callbacksRef.current.setExpanded(false);
     };
 
@@ -77,7 +60,7 @@ export function usePrioritiesPanelAutoToggle({
       // Any downward scrolling cancels wheel-accumulated "pull down" intent.
       if (delta > 0) wheelUpAccumRef.current = 0;
 
-      if (stateRef.current.isExpanded && current > collapseScrollTopThreshold && !stateRef.current.expandedDish) {
+      if (stateRef.current.isExpanded && current > collapseScrollTopThreshold) {
         collapse();
       }
     };
@@ -146,7 +129,6 @@ export function usePrioritiesPanelAutoToggle({
     topThresholdPx,
     wheelExpandAccumThreshold,
     touchExpandPullThreshold,
-    ignoreExpandAfterDishChangeMs,
   ]);
 }
 

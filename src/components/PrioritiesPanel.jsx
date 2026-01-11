@@ -129,8 +129,6 @@ function CompactIconsRow({ activePriorities, displayed, percentages, selectedZon
  * Optimized with separate hooks and components
  */
 export default function PrioritiesPanel({ 
-  expandedDish,
-  onCollapseExpandedDish,
   onExpandedChange,
 }) {
   const displayed = usePrefs((s) => s.uiPriorities);
@@ -143,12 +141,12 @@ export default function PrioritiesPanel({
   const [isDragging, setIsDragging] = useState(false);
   const [scrollableElement, setScrollableElement] = useState(null);
 
-  // Find scrollable element - retry when expandedDish changes (DOM might update)
+  // Find scrollable element
   useEffect(() => {
     const element = document.querySelector('main .overflow-y-auto') ||
                    document.querySelector('.overflow-y-auto');
     if (element) setScrollableElement(element);
-  }, [expandedDish]);
+  }, []);
 
   // Handle pointer up for drag end - commit immediately
   useEffect(() => {
@@ -167,13 +165,6 @@ export default function PrioritiesPanel({
     };
   }, [isDragging]);
 
-  // Auto-collapse when dish expands
-  useEffect(() => {
-    if (expandedDish && isExpanded) {
-      setIsExpanded(false);
-    }
-  }, [expandedDish, isExpanded]);
-
   // Notify parent of expanded state change
   useEffect(() => {
     onExpandedChange?.(isExpanded);
@@ -183,9 +174,7 @@ export default function PrioritiesPanel({
   usePrioritiesPanelAutoToggle({
     scrollableElement,
     isExpanded,
-    expandedDish,
     setExpanded: setIsExpanded,
-    onCollapseExpandedDish,
   });
 
   // Dropdown handlers
@@ -239,10 +228,7 @@ export default function PrioritiesPanel({
 
   const handleExpand = useCallback(() => {
     setIsExpanded(true);
-    if (onCollapseExpandedDish) {
-      onCollapseExpandedDish();
-    }
-  }, [onCollapseExpandedDish]);
+  }, []);
 
   return (
     <div className="bg-white dark:bg-surface-800 border-b border-surface-300/50 dark:border-surface-700/50">

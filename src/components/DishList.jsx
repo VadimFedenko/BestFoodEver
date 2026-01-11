@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
-import DishCard from './DishCard';
+import DishCardSimple from './DishCardSimple';
+import DishModal from './DishModal';
 import PriceUnitToggle from './PriceUnitToggle';
 import { usePrefs, prefsActions } from '../store/prefsStore';
 
@@ -98,11 +99,10 @@ function EmptyState({ hasSearch }) {
 export default function DishList({ 
   dishes, 
   ingredientIndex,
-  expandedDish,
-  onExpandedDishChange,
   analysisVariants = null
 }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDish, setSelectedDish] = useState(null);
   const priceUnit = usePrefs((s) => s.prefs.priceUnit);
   const overrides = usePrefs((s) => s.prefs.overrides);
   const isOptimized = usePrefs((s) => s.prefs.isOptimized);
@@ -134,8 +134,16 @@ export default function DishList({
     return filteredDishes.slice(0, visibleCount);
   }, [filteredDishes, visibleCount]);
 
-  const handleToggle = (dishName) => {
-    onExpandedDishChange(expandedDish === dishName ? null : dishName);
+  const handleDishClick = (dish) => {
+    setSelectedDish(dish);
+  };
+  
+  const handleCloseModal = () => {
+    setSelectedDish(null);
+  };
+  
+  const handleResetOverrides = (dishName) => {
+    prefsActions.setOverrideForDish(dishName, {});
   };
 
   const remaining = Math.max(0, filteredDishes.length - visibleCount);
@@ -163,19 +171,12 @@ export default function DishList({
             <div className="space-y-1.5">
               {visibleDishes.map((dish) => (
                 <div key={dish.name}>
-                  <DishCard
+                  <DishCardSimple
                     dish={dish}
-                    isExpanded={expandedDish === dish.name}
-                    onToggle={() => handleToggle(dish.name)}
-                    onOverrideChange={(dishName, newOverrides) => prefsActions.setOverrideForDish(dishName, newOverrides)}
+                    onClick={() => handleDishClick(dish)}
                     overrides={overrides[dish.name] || {}}
-                    ingredientIndex={ingredientIndex}
+                    onResetOverrides={handleResetOverrides}
                     priceUnit={priceUnit}
-                    // Avoid forcing every collapsed card to re-render when priorities change.
-                    // Only the expanded card needs priorities for breakdown UI.
-                    priorities={expandedDish === dish.name ? priorities : null}
-                    isOptimized={isOptimized}
-                    analysisVariants={analysisVariants}
                   />
                 </div>
               ))}
@@ -198,6 +199,18 @@ export default function DishList({
           </>
         )}
       </div>
+      
+      {/* Dish Modal */}
+      <DishModal
+        dish={selectedDish}
+        isOpen={selectedDish !== null}
+        onClose={handleCloseModal}
+        ingredientIndex={ingredientIndex}
+        priorities={priorities}
+        isOptimized={isOptimized}
+        analysisVariants={analysisVariants}
+        priceUnit={priceUnit}
+      />
     </div>
   );
 }
