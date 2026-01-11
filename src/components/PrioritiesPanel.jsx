@@ -134,6 +134,7 @@ export default function PrioritiesPanel({
   const displayed = usePrefs((s) => s.uiPriorities);
   const selectedZone = usePrefs((s) => s.prefs.selectedZone);
   const isDark = usePrefs((s) => s.prefs.theme) !== 'light';
+  const viewMode = usePrefs((s) => s.prefs.viewMode);
 
   const [isExpanded, setIsExpanded] = useState(true);
   const [isZoneDropdownOpen, setIsZoneDropdownOpen] = useState(false);
@@ -141,12 +142,17 @@ export default function PrioritiesPanel({
   const [isDragging, setIsDragging] = useState(false);
   const [scrollableElement, setScrollableElement] = useState(null);
 
-  // Find scrollable element
+  // Find scrollable element - re-run when viewMode changes
   useEffect(() => {
-    const element = document.querySelector('main .overflow-y-auto') ||
-                   document.querySelector('.overflow-y-auto');
-    if (element) setScrollableElement(element);
-  }, []);
+    // Use a small delay to allow DOM to update after viewMode change
+    const timer = setTimeout(() => {
+      const element = document.querySelector('main .overflow-y-auto') ||
+                     document.querySelector('.overflow-y-auto');
+      if (element) setScrollableElement(element);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [viewMode]);
 
   // Handle pointer up for drag end - commit immediately
   useEffect(() => {

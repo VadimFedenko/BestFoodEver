@@ -20,6 +20,7 @@ const DEFAULT_PREFS = {
   isOptimized: true,
   priceUnit: 'per1000kcal',
   theme: 'dark',
+  viewMode: 'list', // 'list' or 'grid'
 };
 
 function readJsonSafe(key) {
@@ -53,6 +54,7 @@ function mergeDefaults(stored) {
   merged.theme = merged.theme || DEFAULT_PREFS.theme;
   merged.isOptimized =
     typeof merged.isOptimized === 'boolean' ? merged.isOptimized : DEFAULT_PREFS.isOptimized;
+  merged.viewMode = merged.viewMode === 'grid' ? 'grid' : 'list';
   return merged;
 }
 

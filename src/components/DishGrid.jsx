@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
-import DishCardSimple from './DishCardSimple';
+import DishTile from './DishTile';
 import DishModal from './DishModal';
 import { StatsBar, EmptyState } from './DishListCommon';
 import { usePrefs, prefsActions } from '../store/prefsStore';
 
 /**
- * Main Dish List Component
- * Displays a scrollable, filterable list of ranked dishes
+ * Main Dish Grid Component
+ * Displays a responsive grid of dish tiles
  */
-export default function DishList({ 
+export default function DishGrid({ 
   dishes, 
   ingredientIndex,
   analysisVariants = null
@@ -20,9 +20,8 @@ export default function DishList({
   const isOptimized = usePrefs((s) => s.prefs.isOptimized);
   const priorities = usePrefs((s) => s.computationPriorities);
 
-  // Keep the initial render budget small on all devices to avoid heavy DOM + layout work.
-  // This also keeps the priorities panel expand/collapse animation smooth on desktop.
-  const pageSize = 50;
+  // Pagination
+  const pageSize = 30; // Smaller for grid since tiles are larger
   const [visibleCount, setVisibleCount] = useState(() => pageSize);
 
   // Filter dishes by search query
@@ -39,12 +38,20 @@ export default function DishList({
   // Reset pagination when search changes or when the dataset changes.
   useEffect(() => {
     setVisibleCount(pageSize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, dishes, pageSize]);
 
   const visibleDishes = useMemo(() => {
     return filteredDishes.slice(0, visibleCount);
   }, [filteredDishes, visibleCount]);
+
+  // Build a map of dish name to original rank
+  const dishRankMap = useMemo(() => {
+    const map = new Map();
+    dishes.forEach((dish, index) => {
+      map.set(dish.name, index + 1);
+    });
+    return map;
+  }, [dishes]);
 
   const handleDishClick = (dish) => {
     setSelectedDish(dish);
@@ -52,10 +59,6 @@ export default function DishList({
   
   const handleCloseModal = () => {
     setSelectedDish(null);
-  };
-  
-  const handleResetOverrides = (dishName) => {
-    prefsActions.setOverrideForDish(dishName, {});
   };
 
   const remaining = Math.max(0, filteredDishes.length - visibleCount);
@@ -74,23 +77,24 @@ export default function DishList({
         />
       </div>
 
-      {/* Dish list */}
-      <div className="flex-1 overflow-y-auto px-4 pt-0 pb-4">
+      {/* Dish grid */}
+      <div className="flex-1 overflow-y-auto px-4 pt-3 pb-4">
         {filteredDishes.length === 0 ? (
           <EmptyState hasSearch={!!searchQuery} />
         ) : (
           <>
-            <div className="space-y-1.5">
+            {/* Responsive CSS Grid: 1 col < 440px, 2 cols 440-660px, 3 cols > 660px */}
+            <div className="grid grid-cols-1 min-[440px]:grid-cols-2 min-[660px]:grid-cols-3 gap-3">
               {visibleDishes.map((dish) => (
-                <div key={dish.name}>
-                  <DishCardSimple
-                    dish={dish}
-                    onClick={() => handleDishClick(dish)}
-                    overrides={overrides[dish.name] || {}}
-                    onResetOverrides={handleResetOverrides}
-                    priceUnit={priceUnit}
-                  />
-                </div>
+                <DishTile
+                  key={dish.name}
+                  dish={dish}
+                  rank={dishRankMap.get(dish.name)}
+                  onClick={() => handleDishClick(dish)}
+                  overrides={overrides[dish.name] || {}}
+                  priceUnit={priceUnit}
+                  priorities={priorities || {}}
+                />
               ))}
             </div>
 
@@ -98,7 +102,7 @@ export default function DishList({
               <button
                 type="button"
                 onClick={() => setVisibleCount((c) => c + pageSize)}
-                className="w-full mt-4 py-3 rounded-xl
+                className="w-full mt-6 py-3 rounded-xl
                            bg-white/80 dark:bg-surface-800/80
                            border border-surface-300/50 dark:border-surface-700/50
                            text-sm font-semibold text-surface-700 dark:text-surface-200
@@ -126,3 +130,4 @@ export default function DishList({
     </div>
   );
 }
+

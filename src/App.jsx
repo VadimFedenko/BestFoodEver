@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Header from './components/Header';
 import PrioritiesPanel from './components/PrioritiesPanel';
 import DishList from './components/DishList';
+import DishGrid from './components/DishGrid';
 import { 
   buildIngredientIndex,
   analyzeAllDishesVariants,
@@ -25,6 +26,7 @@ export default function App() {
   const isOptimized = usePrefs((s) => s.prefs.isOptimized);
   const priceUnit = usePrefs((s) => s.prefs.priceUnit);
   const theme = usePrefs((s) => s.prefs.theme);
+  const viewMode = usePrefs((s) => s.prefs.viewMode);
   const computationPriorities = usePrefs((s) => s.computationPriorities);
   const isDark = theme !== 'light';
   
@@ -136,11 +138,19 @@ export default function App() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <DishList
-            dishes={rankedDishes}
-            ingredientIndex={ingredientIndex}
-            analysisVariants={analysisVariants}
-          />
+          {viewMode === 'grid' ? (
+            <DishGrid
+              dishes={rankedDishes}
+              ingredientIndex={ingredientIndex}
+              analysisVariants={analysisVariants}
+            />
+          ) : (
+            <DishList
+              dishes={rankedDishes}
+              ingredientIndex={ingredientIndex}
+              analysisVariants={analysisVariants}
+            />
+          )}
         </motion.main>
 
         {/* Bottom safe area for mobile (iOS) */}

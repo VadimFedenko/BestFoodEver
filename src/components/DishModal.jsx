@@ -452,8 +452,7 @@ function HeroHeader({
     const t = e.targetTouches?.[0];
     if (!t) return;
 
-    // Prevent the modal body from scrolling while resizing the header
-    e.preventDefault?.();
+    // touchAction: 'none' already prevents scrolling
 
     const dy = t.clientY - dragRef.current.startY;
     const next = clamp(dragRef.current.startHeight + dy, heroCollapsedPx, heroExpandedPx);
@@ -512,14 +511,14 @@ function HeroHeader({
       onTouchCancel={onHeaderTouchEnd}
     >
       {imageSrc ? (
-        <motion.img
-          src={imageSrc}
-          alt={dish?.name}
-          className={`absolute inset-0 w-full h-full ${isExpanded ? 'object-contain bg-black/40' : 'object-cover'}`}
-          loading="eager"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
+        <div
+          className="absolute inset-0 w-full bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${imageSrc})`,
+            backgroundSize: '100% auto',
+          }}
+          role="img"
+          aria-label={dish?.name}
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-surface-700 to-surface-900" />
@@ -686,17 +685,13 @@ export default function DishModal({
     const apply = () => {
       const next = calcExpanded();
       setHeroExpandedPx(next);
-      setHeroHeightPx((prev) => {
-        if (heroMode === 'expanded') return next;
-        return clamp(prev, heroCollapsedPx, next);
-      });
     };
 
     apply();
-    window.addEventListener('resize', apply);
-    return () => window.removeEventListener('resize', apply);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMobile, heroMode]);
+    const handleResize = () => apply();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobile]);
 
   useEffect(() => {
     if (!isOpen) return;

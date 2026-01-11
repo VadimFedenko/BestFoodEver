@@ -3,6 +3,7 @@ import { UtensilsCrossed } from 'lucide-react';
 import SettingsButton from './SettingsButton';
 import SettingsSheet from './SettingsSheet';
 import ThemeToggle from './ThemeToggle';
+import ViewModeToggle from './ViewModeToggle';
 import { usePrefs, prefsActions } from '../store/prefsStore';
 
 /**
@@ -15,8 +16,13 @@ export default function Header({
   isPrioritiesExpanded
 }) {
   const isDark = usePrefs((s) => s.prefs.theme) !== 'light';
+  const viewMode = usePrefs((s) => s.prefs.viewMode);
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  
+  const handleViewModeToggle = () => {
+    prefsActions.setPref({ viewMode: viewMode === 'list' ? 'grid' : 'list' });
+  };
 
   return (
     <header
@@ -48,6 +54,7 @@ export default function Header({
 
         {/* Controls */}
         <div className="flex items-center gap-2">
+          <ViewModeToggle viewMode={viewMode} onToggle={handleViewModeToggle} />
           <SettingsButton onClick={() => setIsSettingsOpen(true)} />
           <ThemeToggle 
             isDark={isDark} 
