@@ -155,7 +155,13 @@ function PrioritySlider({
       </div>
 
       {/* Slider track container - responsive height */}
-      <div className="relative h-[100px] sm:h-[110px] md:h-[120px] w-10 flex items-center justify-center">
+      <div
+        className="relative h-[100px] sm:h-[110px] md:h-[120px] w-10 flex items-center justify-center"
+        // IMPORTANT: if `useIsMobile()` stays true on wide screens (e.g. phone landscape / tablet),
+        // we must keep the mobile track height at 100px, otherwise the thumb math (0..100px)
+        // won't span the full track and the slider looks "stuck".
+        style={isMobile ? { height: '100px' } : undefined}
+      >
         {/* Track background with gradient */}
         <div className="absolute inset-x-0 mx-auto w-2.5 h-full rounded-full bg-surface-300 dark:bg-surface-700 overflow-hidden">
           {/* Active fill - grows from bottom */}

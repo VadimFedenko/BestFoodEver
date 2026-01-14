@@ -68,18 +68,27 @@ export function usePrioritiesPanelAutoToggle({
       const delta = current - prev;
 
       // If the panel is expanded:
-      // - Desktop/default: lock list scroll (panel controls consume the gesture)
-      // - Mobile overlay mode: allow scroll, but collapse on downward intent
+      // - Desktop/default: lock list scroll only for downward scroll, so that
+      //   the gesture first collapses the panel but still allows scrolling up.
+      // - Mobile overlay mode: allow scroll, but collapse on downward intent.
       if (stateRef.current.isExpanded) {
         if (!disableScrollLock) {
-          // Do not allow the list to scroll at all.
-          const locked =
-            lockedScrollTopRef.current == null ? prev : lockedScrollTopRef.current;
-          if (current !== locked) {
-            el.scrollTop = locked;
+          if (delta > 0) {
+            // Block downward scroll: keep the list at the locked position while
+            // we use the gesture to collapse the panel instead.
+            const locked =
+              lockedScrollTopRef.current == null ? prev : lockedScrollTopRef.current;
+            if (current !== locked) {
+              el.scrollTop = locked;
+            }
+            lastScrollTopRef.current = locked;
+            if (current > locked) collapse();
+            return;
           }
-          lastScrollTopRef.current = locked;
-          if (current > locked) collapse();
+
+          // Allow scrolling up freely while expanded.
+          lockedScrollTopRef.current = null;
+          lastScrollTopRef.current = current;
           return;
         }
         // In mobile mode, allow scroll; collapse only when user scrolls down.
@@ -101,12 +110,19 @@ export function usePrioritiesPanelAutoToggle({
     const onWheel = (e) => {
       if (stateRef.current.isExpanded) {
         if (!disableScrollLock) {
-          // Consume wheel so the list doesn't move while expanded.
-          if (e.cancelable) e.preventDefault();
-          lockedScrollTopRef.current =
-            lockedScrollTopRef.current == null ? el.scrollTop : lockedScrollTopRef.current;
-          // Collapse only on downward intent (scrolling content down).
-          if (e.deltaY > 0) collapse();
+          // For desktop: block only downward wheel (so it collapses panel first),
+          // but allow scrolling up normally.
+          if (e.deltaY > 0) {
+            // Consume wheel so the list doesn't move while expanded.
+            if (e.cancelable) e.preventDefault();
+            lockedScrollTopRef.current =
+              lockedScrollTopRef.current == null ? el.scrollTop : lockedScrollTopRef.current;
+            // Collapse only on downward intent (scrolling content down).
+            collapse();
+            return;
+          }
+          // Upward wheel: do not preventDefault, allow normal scrolling.
+          lockedScrollTopRef.current = null;
           return;
         }
         // Mobile: don't preventDefault, just collapse on downward intent.

@@ -8621,7 +8621,7 @@
         "state": "raw"
       },
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 50,
         "state": "raw"
       },
@@ -9702,7 +9702,7 @@
     "dish": "Croque Monsieur",
     "ingredients": [
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 120,
         "state": "baked"
       },
@@ -10265,7 +10265,7 @@
     "dish": "French Toast",
     "ingredients": [
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 60,
         "state": "fried"
       },
@@ -10578,7 +10578,7 @@
         "state": "steamed"
       },
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 70,
         "state": "toasted"
       },
@@ -10621,7 +10621,7 @@
     "dish": "Reuben sandwich",
     "ingredients": [
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 80,
         "state": "toasted"
       },
@@ -12464,7 +12464,7 @@
     "dish": "Francesinha",
     "ingredients": [
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 80,
         "state": "toasted"
       },
@@ -13071,7 +13071,7 @@
         "state": "fried"
       },
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 100,
         "state": "raw"
       }
@@ -13472,7 +13472,7 @@
     "dish": "Cuban Sandwich",
     "ingredients": [
       {
-        "name": "Bread",
+        "name": "White Bread",
         "g": 160,
         "state": "toasted"
       },
