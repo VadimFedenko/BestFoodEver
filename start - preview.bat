@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo Запуск приложения Best Food Ever
+echo Running Best Food Ever
 echo ========================================
 echo.
 
@@ -15,7 +15,7 @@ if not exist "node_modules" (
 REM Запуск dev сервера
 echo Запуск dev сервера...
 echo.
-call npm run dev
+call npm run preview
 
 pause
 

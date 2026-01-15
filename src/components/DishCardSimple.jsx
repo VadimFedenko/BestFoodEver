@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '../lib/motion';
 import { 
   Clock, 
   DollarSign, 
@@ -8,7 +8,7 @@ import {
   Flame,
   Leaf,
   RotateCcw,
-} from 'lucide-react';
+} from '../icons/lucide';
 import {
   formatTime,
   getScoreColor,
@@ -84,7 +84,7 @@ export default function DishCardSimple({
   };
   
   return (
-    <motion.div
+    <m.div
       onClick={onClick}
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
@@ -183,7 +183,7 @@ export default function DishCardSimple({
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

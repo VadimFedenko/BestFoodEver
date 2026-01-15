@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '../lib/motion';
 import {
   Utensils,
   Heart,
@@ -11,7 +11,7 @@ import {
   RotateCcw,
   Edit3,
   Check,
-} from 'lucide-react';
+} from '../icons/lucide';
 import { formatTime } from './dishCardUtils';
 
 function clamp(n, min, max) {
@@ -132,7 +132,7 @@ function ScoreSlider({
       
       <div className="flex-1 relative h-5 flex items-center">
         <div className="absolute inset-x-0 h-1.5 rounded-full bg-surface-300 dark:bg-surface-700 overflow-hidden">
-          <motion.div
+          <m.div
             className={`absolute left-0 top-0 bottom-0 ${!isActive ? barFillColor : `bg-gradient-to-r ${barFillColor}`}`}
             initial={false}
             animate={{ width: `${percentage}%` }}
@@ -151,7 +151,7 @@ function ScoreSlider({
           className={`absolute inset-0 w-full opacity-0 z-10 touch-pan-x ${disabled || !isActive ? 'cursor-not-allowed' : 'cursor-pointer'}`}
         />
         
-        <motion.div
+        <m.div
           className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full shadow-md pointer-events-none border-2 ${thumbColor}`}
           initial={false}
           animate={{ left: `calc(${percentage}% - 8px)` }}
@@ -194,7 +194,7 @@ function ScoreBar({ label, icon: Icon, value, maxValue = 10, color, isModified =
         <span className={`text-xs ${labelColor}`}>{label}</span>
       </div>
       <div className="flex-1 h-1.5 bg-surface-300 dark:bg-surface-700 rounded-full overflow-hidden">
-        <motion.div
+        <m.div
           className={`h-full rounded-full ${barColor}`}
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
@@ -231,7 +231,7 @@ export default function EditableScoreBreakdown({
   }, [isEditing, onEditingChange]);
 
   const unitLabel =
-    priceUnit === 'per1kg' ? '/kg' : priceUnit === 'per1000kcal' ? '/kkcal' : '/serving';
+    priceUnit === 'per1kg' ? '/Kg' : priceUnit === 'per1000kcal' ? '/Kcal' : '/serving';
 
   const currentScoreByKey = useMemo(() => {
     const n = dish?.normalizedMetrics || {};

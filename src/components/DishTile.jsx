@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '../lib/motion';
 import { 
   Clock, 
   DollarSign, 
@@ -10,7 +10,7 @@ import {
   Trophy,
   Medal,
   Award,
-} from 'lucide-react';
+} from '../icons/lucide';
 import {
   formatTime,
   getScoreColor,
@@ -63,7 +63,7 @@ function RankBadge({ rank }) {
 
   return (
     <div className="absolute top-2 right-2 z-10">
-      <motion.div
+      <m.div
         initial={{ scale: 0, rotate: -45 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ delay: 0.1, type: 'spring', stiffness: 300, damping: 20 }}
@@ -73,7 +73,7 @@ function RankBadge({ rank }) {
         <span className="text-xs font-black text-white/70">
           {config.label}
         </span>
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -188,27 +188,27 @@ export default function DishTile({
   
 
   return (
-    <motion.div
+    <m.div
       onClick={onClick}
       whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.98 }}
       className="relative cursor-pointer group"
     >
-      {/* Main tile container */}
-      <div className="relative rounded-2xl overflow-hidden bg-black shadow-lg border border-surface-700/30 dark:border-surface-700/50">
-        {/* Image container with aspect ratio - fallback for old browsers using padding-bottom */}
-        <div className="relative" style={{ paddingBottom: '80.952%' }}>
+      {/* Main tile container - now includes name section */}
+      <div className="relative rounded-2xl overflow-hidden bg-white dark:bg-surface-900 shadow-lg border border-surface-300/50 dark:border-surface-700/50 flex flex-col">
+        {/* Image container with aspect ratio - slightly reduced to make room for name */}
+        <div className="relative" style={{ paddingBottom: '75%' }}>
           {/* Dish image */}
           <img
             src={dish?.originalDish?.img_s || dish?.img_s}
             alt={dish.name}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
           
-          {/* Gradient overlay for text legibility - only bottom portion */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" 
-               style={{ backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 30%, transparent 60%)' }} />
+          {/* Gradient overlay for text legibility - enhanced for better transition */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" 
+               style={{ backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 25%, rgba(0,0,0,0.1) 50%, transparent 70%)' }} />
           
           {/* Score badge - top left - only show if priorities are set */}
           {hasActivePriorities && (
@@ -219,6 +219,7 @@ export default function DishTile({
                   flex items-center justify-center
                   ${scoreColors.bg} ${scoreColors.glow}
                   backdrop-blur-sm border border-white/20
+                  group-hover:scale-110 transition-transform duration-300
                 `}
               >
                 <span className="text-xs font-display font-bold text-white leading-none">
@@ -252,15 +253,18 @@ export default function DishTile({
           {/* Hover highlight effect */}
           <div className="absolute inset-0 bg-food-500/0 group-hover:bg-food-500/10 transition-colors duration-300 pointer-events-none" />
         </div>
+        
+        {/* Name section - now inside the card with enhanced styling */}
+        <div className="relative px-3 py-3 bg-gradient-to-b from-white via-white to-surface-50 dark:from-surface-900 dark:via-surface-950 dark:to-black border-t border-surface-200/60 dark:border-surface-800/60">
+          {/* Subtle inner shadow for depth */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-surface-300/30 dark:via-surface-700/30 to-transparent" />
+          
+          <h3 className="font-display font-semibold text-sm text-surface-800 dark:text-surface-100 truncate text-center leading-tight relative z-10">
+            {dish.name}
+          </h3>
+        </div>
       </div>
-      
-      {/* Dish name below the tile */}
-      <div className="mt-2 px-1">
-        <h3 className="font-display font-semibold text-sm text-surface-600 dark:text-surface-100 truncate text-center">
-          {dish.name}
-        </h3>
-      </div>
-    </motion.div>
+    </m.div>
   );
 }
 

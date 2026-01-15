@@ -1,0 +1,61 @@
+// Centralized Lucide icon exports.
+//
+// NOTE:
+// - lucide-react uses `package.exports`, so deep imports like `dist/esm/icons/*.mjs/.js` are blocked.
+// - `lucide-react/icons` exists, but it doesn't export every alias (e.g. `Edit3`), which we use.
+// - Importing from the root keeps compatibility; production builds still tree-shake with `sideEffects: false`.
+
+export {
+  AlertTriangle,
+  ArrowDown,
+  Award,
+  Banknote,
+  Building2,
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+  Clock,
+  Cookie,
+  DollarSign,
+  Edit3,
+  Factory,
+  FileText,
+  Flame,
+  Frown,
+  Globe,
+  Heart,
+  Hourglass,
+  Info,
+  Landmark,
+  LayoutGrid,
+  Leaf,
+  List,
+  Loader2,
+  Map,
+  MapPin,
+  Medal,
+  Moon,
+  Mountain,
+  RotateCcw,
+  Scale,
+  Search,
+  Settings,
+  Skull,
+  Snowflake,
+  Soup,
+  Sparkles,
+  Sprout,
+  Sun,
+  Timer,
+  Trophy,
+  Utensils,
+  UtensilsCrossed,
+  Waves,
+  Wheat,
+  X,
+  Zap,
+} from 'lucide-react';
+
+

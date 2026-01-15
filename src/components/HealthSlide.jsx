@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { m } from '../lib/motion';
+import { Heart } from '../icons/lucide';
 import { getHealthColor, getCookingLabel, getCookingEffect } from './dishCardUtils';
 import { getCookingCoef, normalizeIngredientName } from '../lib/RankingEngine';
 
@@ -51,7 +51,7 @@ export default function HealthSlide({ dish, ingredients, ingredientIndex }) {
           const impactPercent = ((ing.cookingCoef - 1) * 100).toFixed(0);
 
           return (
-            <motion.div
+            <m.div
               key={idx}
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -79,14 +79,14 @@ export default function HealthSlide({ dish, ingredients, ingredientIndex }) {
                 </div>
               </div>
               <div className="h-1 bg-surface-300/60 dark:bg-surface-700/60 rounded-full overflow-hidden">
-                <motion.div
+                <m.div
                   className={`h-full rounded-full ${colors.bar}`}
                   initial={{ width: 0 }}
                   animate={{ width: `${healthPercent}%` }}
                   transition={{ duration: 0.3, delay: idx * 0.03 }}
                 />
               </div>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

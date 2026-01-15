@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Map as MapIcon, X, Loader2 } from 'lucide-react';
+import { Map as MapIcon, X, Loader2 } from '../icons/lucide';
 import { ECONOMIC_ZONES, calculateDishCost } from '../lib/RankingEngine';
 import { getPriceColor } from './dishCardUtils';
 import EconomicZonesSvgMap from './EconomicZonesSvgMap';
@@ -13,7 +13,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
   const [isCalculating, setIsCalculating] = useState(true);
   const calculationRef = useRef({ dishId: null, ingredientIndex: null });
 
-  const priceUnitLabel = priceUnit === 'per1kg' ? 'per kg' : priceUnit === 'per1000kcal' ? 'per 1000kcal' : 'per serving';
+  const priceUnitLabel = priceUnit === 'per1kg' ? 'per Kg' : priceUnit === 'per1000kcal' ? 'per Kcal' : 'per serving';
 
   // Вычисляем цены только при открытии слайда или изменении dish/ingredientIndex
   useEffect(() => {

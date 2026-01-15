@@ -1,5 +1,5 @@
-import { List, LayoutGrid } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { List, LayoutGrid } from '../icons/lucide';
+import { m } from '../lib/motion';
 
 /**
  * Toggle button for switching between list and grid view modes
@@ -8,7 +8,7 @@ export default function ViewModeToggle({ viewMode, onToggle }) {
   const isGrid = viewMode === 'grid';
   
   return (
-    <motion.button
+    <m.button
       type="button"
       onClick={onToggle}
       className={`
@@ -22,7 +22,7 @@ export default function ViewModeToggle({ viewMode, onToggle }) {
       aria-label={isGrid ? "Switch to list view" : "Switch to grid view"}
       title={isGrid ? "Switch to list view" : "Switch to grid view"}
     >
-      <motion.div
+      <m.div
         key={viewMode}
         initial={{ scale: 0, rotate: -90 }}
         animate={{ scale: 1, rotate: 0 }}
@@ -42,18 +42,18 @@ export default function ViewModeToggle({ viewMode, onToggle }) {
             strokeWidth={2}
           />
         )}
-      </motion.div>
+      </m.div>
       
       {/* Subtle glow effect when in grid mode */}
       {isGrid && (
-        <motion.div
+        <m.div
           className="absolute inset-0 rounded-xl pointer-events-none bg-food-400/10 dark:bg-food-500/10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         />
       )}
-    </motion.button>
+    </m.button>
   );
 }
 

@@ -4,15 +4,20 @@ let cached = null;
 let inFlight = null;
 
 /**
- * Lazy-load `ingredients.json` and build an ingredient index Map.
- * This keeps the initial bundle smaller and avoids blocking first paint.
+ * Lazy-load `ingredients.json` (as a static asset) and build an ingredient index Map.
+ * This keeps JS bundles smaller and avoids blocking first paint.
  */
 export async function loadIngredientsIndex() {
   if (cached) return cached;
   if (inFlight) return inFlight;
 
-  inFlight = import('../../ingredients.json')
-    .then((m) => m.default)
+  const url = new URL('ingredients.json', document.baseURI).toString();
+
+  inFlight = fetch(url, { cache: 'force-cache' })
+    .then((res) => {
+      if (!res.ok) throw new Error(`Failed to load ingredients.json (${res.status})`);
+      return res.json();
+    })
     .then((ingredients) => {
       const ingredientIndex = buildIngredientIndex(ingredients);
       cached = { ingredients, ingredientIndex };

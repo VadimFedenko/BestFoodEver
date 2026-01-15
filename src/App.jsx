@@ -1,10 +1,30 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import { LazyMotion, domAnimation, m } from './lib/motion';
 import Header from './components/Header';
-import PrioritiesPanel from './components/PrioritiesPanel';
-import DishList from './components/DishList';
-import DishGrid from './components/DishGrid';
 import { usePrefs } from './store/prefsStore';
+
+const PrioritiesPanel = lazy(() => import('./components/PrioritiesPanel'));
+const DishList = lazy(() => import('./components/DishList'));
+const DishGrid = lazy(() => import('./components/DishGrid'));
+
+function PrioritiesPanelFallback() {
+  return (
+    <div className="bg-white dark:bg-surface-800 border-b border-surface-300/50 dark:border-surface-700/50">
+      <div className="px-4 py-3">
+        <div className="h-4 w-40 rounded bg-surface-200/70 dark:bg-surface-700/60" />
+        <div className="mt-3 h-8 w-full rounded bg-surface-200/60 dark:bg-surface-700/50" />
+      </div>
+    </div>
+  );
+}
+
+function MainFallback() {
+  return (
+    <div className="p-4 text-sm text-surface-500 dark:text-surface-400">
+      Loading…
+    </div>
+  );
+}
 
 /**
  * Main Application Component
@@ -54,6 +74,15 @@ export default function App() {
   useEffect(() => {
     const w = new Worker(new URL('./workers/rankingWorker.js', import.meta.url), { type: 'module' });
     workerRef.current = w;
+
+    // Provide absolute URLs for static JSON so the worker can fetch in both dev and prod.
+    try {
+      const dishesUrl = new URL('dishes.json', document.baseURI).toString();
+      const ingredientsUrl = new URL('ingredients.json', document.baseURI).toString();
+      w.postMessage({ type: 'init', dataUrls: { dishesUrl, ingredientsUrl }, preload: true });
+    } catch {
+      // ignore; worker has a production-only fallback
+    }
 
     const onMessage = (e) => {
       const msg = e?.data || {};
@@ -175,63 +204,69 @@ export default function App() {
 
 
   return (
-    <div className="min-h-screen bg-surface-100 dark:bg-surface-900 pattern-grid transition-colors duration-300">
-      {/* Centered container - max width for desktop, full width on mobile */}
-      <div className="mx-auto w-full max-w-[960px] flex flex-col h-screen 
-                      border-x border-surface-300/50 dark:border-surface-700/50 
-                      shadow-2xl shadow-black/10 dark:shadow-black/30 
-                      bg-white dark:bg-surface-900 lg:bg-white/50 lg:dark:bg-transparent transition-colors duration-300">
-        {/* Sticky Header - highest z-index for dropdowns */}
-        <div className="sticky top-0 z-50">
-          <Header />
-        </div>
+    <LazyMotion features={domAnimation}>
+      <div className="min-h-screen bg-surface-100 dark:bg-surface-900 pattern-grid transition-colors duration-300">
+        {/* Centered container - max width for desktop, full width on mobile */}
+        <div className="mx-auto w-full max-w-[960px] flex flex-col h-screen 
+                        border-x border-surface-300/50 dark:border-surface-700/50 
+                        shadow-2xl shadow-black/10 dark:shadow-black/30 
+                        bg-white dark:bg-surface-900 lg:bg-white/50 lg:dark:bg-transparent transition-colors duration-300">
+          {/* Sticky Header - highest z-index for dropdowns */}
+          <div className="sticky top-0 z-50">
+            <Header />
+          </div>
 
-        {/* Sticky Priorities Panel - lower z-index, will stick below header when scrolling */}
-        <div
-          className="sticky z-40 top-[73px]"
-        >
-          <PrioritiesPanel
-            onExpandedChange={setIsPrioritiesExpanded}
-            onDraggingChange={handleDraggingChange}
-            scrollableElement={scrollableElement}
+          {/* Sticky Priorities Panel - lower z-index, will stick below header when scrolling */}
+          <div
+            className="sticky z-40 top-[73px]"
+          >
+            <Suspense fallback={<PrioritiesPanelFallback />}>
+              <PrioritiesPanel
+                onExpandedChange={setIsPrioritiesExpanded}
+                onDraggingChange={handleDraggingChange}
+                scrollableElement={scrollableElement}
+              />
+            </Suspense>
+          </div>
+
+          {/* Main Content Area */}
+          <m.main 
+            className="flex-1 overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <Suspense fallback={<MainFallback />}>
+              {viewMode === 'grid' ? (
+                <DishGrid
+                  dishes={rankedDishes}
+                  rankingMeta={rankingMeta}
+                  isLoading={rankingStatus === 'loading'}
+                  error={rankingStatus === 'error' ? rankingError : null}
+                  onRetry={retryRanking}
+                  onScrollContainerChange={setScrollableElement}
+                />
+              ) : (
+                <DishList
+                  dishes={rankedDishes}
+                  rankingMeta={rankingMeta}
+                  isLoading={rankingStatus === 'loading'}
+                  error={rankingStatus === 'error' ? rankingError : null}
+                  onRetry={retryRanking}
+                  onScrollContainerChange={setScrollableElement}
+                />
+              )}
+            </Suspense>
+          </m.main>
+
+          {/* Bottom safe area for mobile (iOS) */}
+          <div 
+            className="bg-white dark:bg-surface-900 transition-colors duration-300" 
+            style={{ height: 'var(--safe-area-inset-bottom)' }}
           />
         </div>
-
-        {/* Main Content Area */}
-        <motion.main 
-          className="flex-1 overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          {viewMode === 'grid' ? (
-            <DishGrid
-              dishes={rankedDishes}
-              rankingMeta={rankingMeta}
-              isLoading={rankingStatus === 'loading'}
-              error={rankingStatus === 'error' ? rankingError : null}
-              onRetry={retryRanking}
-              onScrollContainerChange={setScrollableElement}
-            />
-          ) : (
-            <DishList
-              dishes={rankedDishes}
-              rankingMeta={rankingMeta}
-              isLoading={rankingStatus === 'loading'}
-              error={rankingStatus === 'error' ? rankingError : null}
-              onRetry={retryRanking}
-              onScrollContainerChange={setScrollableElement}
-            />
-          )}
-        </motion.main>
-
-        {/* Bottom safe area for mobile (iOS) */}
-        <div 
-          className="bg-white dark:bg-surface-900 transition-colors duration-300" 
-          style={{ height: 'var(--safe-area-inset-bottom)' }}
-        />
       </div>
-    </div>
+    </LazyMotion>
   );
 }
 

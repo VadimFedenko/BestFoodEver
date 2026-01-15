@@ -1,23 +1,23 @@
-import { motion } from 'framer-motion';
-import { Scale, Flame, UtensilsCrossed } from 'lucide-react';
+import { m } from '../lib/motion';
+import { Scale, Flame, Soup } from '../icons/lucide';
 
 /**
  * Price unit options with icons and labels
- * Order: 1000kcal, 1kg, Serving
+ * Order: Kcal, Kg, Serving
  */
 const PRICE_UNIT_OPTIONS = [
   { 
     id: 'per1000kcal', 
-    label: '1000kcal', 
-    shortLabel: '1000kcal',
+    label: 'Kcal', 
+    shortLabel: 'Kcal',
     icon: Flame,
     description: 'Price per 1000 calories',
     color: 'from-rose-400 to-pink-500',
   },
   { 
     id: 'per1kg', 
-    label: '1kg', 
-    shortLabel: '1kg',
+    label: 'Kg', 
+    shortLabel: 'Kg',
     icon: Scale,
     description: 'Price per 1 kilogram',
     color: 'from-emerald-400 to-teal-500',
@@ -26,7 +26,7 @@ const PRICE_UNIT_OPTIONS = [
     id: 'serving', 
     label: 'Serving', 
     shortLabel: 'srv',
-    icon: UtensilsCrossed,
+    icon: Soup,
     description: 'Price per serving',
     color: 'from-amber-400 to-orange-500',
   },
@@ -63,7 +63,7 @@ export default function PriceUnitToggle({ priceUnit, onPriceUnitChange }) {
           >
             {/* Animated background indicator (auto-sizes to the selected button) */}
             {isSelected && (
-              <motion.div
+              <m.div
                 layoutId="price-unit-indicator"
                 className="absolute inset-0 rounded-md bg-gradient-to-r from-food-500/30 to-food-600/30 border border-food-500/40"
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}

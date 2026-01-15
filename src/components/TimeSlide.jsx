@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Timer, Zap, ArrowDown } from 'lucide-react';
+import { m } from '../lib/motion';
+import { Timer, Zap, ArrowDown } from '../icons/lucide';
 import { getPassiveTimePenalty } from '../lib/RankingEngine';
 
 export default function TimeSlide({ dish, isOptimized }) {
@@ -52,7 +52,7 @@ export default function TimeSlide({ dish, isOptimized }) {
             <span>Fastest</span>
           </div>
           <div className="relative h-1.5 bg-surface-300 dark:bg-surface-600 rounded-full overflow-hidden">
-            <motion.div
+            <m.div
               className="absolute top-0 left-0 h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${speedPercentile}%` }}

@@ -1,12 +1,12 @@
-import { Sun, Moon } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Sun, Moon } from '../icons/lucide';
+import { m, AnimatePresence } from '../lib/motion';
 
 /**
  * Theme toggle button with smooth sun/moon animation
  */
 export default function ThemeToggle({ isDark, onToggle }) {
   return (
-    <motion.button
+    <m.button
       onClick={onToggle}
       className={`
         relative w-10 h-10 rounded-xl flex items-center justify-center
@@ -20,7 +20,7 @@ export default function ThemeToggle({ isDark, onToggle }) {
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (
-          <motion.div
+          <m.div
             key="moon"
             initial={{ y: -30, opacity: 0, rotate: -90 }}
             animate={{ y: 0, opacity: 1, rotate: 0 }}
@@ -35,9 +35,9 @@ export default function ThemeToggle({ isDark, onToggle }) {
               className="text-surface-600 dark:text-surface-300"
               strokeWidth={2}
             />
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.div
+          <m.div
             key="sun"
             initial={{ y: 30, opacity: 0, rotate: 90 }}
             animate={{ y: 0, opacity: 1, rotate: 0 }}
@@ -52,12 +52,12 @@ export default function ThemeToggle({ isDark, onToggle }) {
               className="text-surface-600 dark:text-surface-300"
               strokeWidth={2}
             />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
       
       {/* Subtle glow effect */}
-      <motion.div
+      <m.div
         className="absolute inset-0 rounded-xl opacity-0 pointer-events-none bg-surface-400/20 dark:bg-surface-500/20"
         animate={{ 
           opacity: [0, 0.3, 0],
@@ -69,7 +69,7 @@ export default function ThemeToggle({ isDark, onToggle }) {
           ease: "easeInOut"
         }}
       />
-    </motion.button>
+    </m.button>
   );
 }
 

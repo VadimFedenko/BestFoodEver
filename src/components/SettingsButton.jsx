@@ -1,9 +1,9 @@
-import { Settings } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Settings } from '../icons/lucide';
+import { m } from '../lib/motion';
 
 export default function SettingsButton({ onClick }) {
   return (
-    <motion.button
+    <m.button
       type="button"
       onClick={onClick}
       className={`
@@ -17,7 +17,7 @@ export default function SettingsButton({ onClick }) {
       aria-label="Open settings"
       title="Settings"
     >
-      <motion.div
+      <m.div
         initial={{ rotate: 0 }}
         whileHover={{ rotate: 90 }}
         transition={{ duration: 0.3, ease: [0.68, -0.55, 0.265, 1.55] }}
@@ -27,10 +27,10 @@ export default function SettingsButton({ onClick }) {
           className="text-surface-600 dark:text-surface-300"
           strokeWidth={2}
         />
-      </motion.div>
+      </m.div>
       
       {/* Subtle glow effect */}
-      <motion.div
+      <m.div
         className="absolute inset-0 rounded-xl opacity-0 pointer-events-none bg-surface-400/20 dark:bg-surface-500/20"
         animate={{ 
           opacity: [0, 0.3, 0],
@@ -42,7 +42,7 @@ export default function SettingsButton({ onClick }) {
           ease: "easeInOut"
         }}
       />
-    </motion.button>
+    </m.button>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, X, Check, Sparkles } from 'lucide-react';
+import { AnimatePresence, m } from '../lib/motion';
+import { ChevronDown, X, Check, Sparkles } from '../icons/lucide';
 import { useIsMobile } from '../lib/useIsMobile';
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
 
@@ -85,7 +85,7 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
   if (!open || !position) return null;
 
   return createPortal(
-    <motion.div
+    <m.div
       ref={dropdownRef}
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
@@ -142,7 +142,7 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
           ))}
         </div>
       </div>
-    </motion.div>,
+    </m.div>,
     document.body
   );
 }
@@ -184,7 +184,7 @@ function PresetModal({ open, presets, currentPreset, onClose, onSelectPreset }) 
   return (
     <AnimatePresence>
       {open ? (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[200]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -198,7 +198,7 @@ function PresetModal({ open, presets, currentPreset, onClose, onSelectPreset }) 
           />
 
           {/* Modal panel - top sheet on mobile, centered on desktop */}
-          <motion.div
+          <m.div
             role="dialog"
             aria-modal="true"
             aria-label="Choose Preset"
@@ -259,8 +259,8 @@ function PresetModal({ open, presets, currentPreset, onClose, onSelectPreset }) 
                 ))}
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       ) : null}
     </AnimatePresence>
   );

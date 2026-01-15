@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, lazy, Suspense, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '../lib/motion';
 import {
   X,
   Clock,
@@ -9,7 +9,7 @@ import {
   Map as MapIcon,
   ChevronLeft,
   ChevronRight,
-} from 'lucide-react';
+} from '../icons/lucide';
 import { useIsMobile } from '../lib/useIsMobile';
 import { getScoreColor } from './dishCardUtils';
 import { prefsActions, usePrefs } from '../store/prefsStore';
@@ -607,7 +607,7 @@ export default function DishModal({
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -619,7 +619,7 @@ export default function DishModal({
             } ${!isMobile ? 'backdrop-blur-sm' : ''}`}
           />
           
-          <motion.div
+          <m.div
             ref={modalContainerRef}
             initial={{ opacity: 0, scale: 0.95, x: isMobile ? 0 : '-50%', y: isMobile ? 0 : '-50%' }}
             animate={{ opacity: 1, scale: 1, x: isMobile ? 0 : '-50%', y: isMobile ? 0 : '-50%' }}
@@ -711,7 +711,7 @@ export default function DishModal({
               onTouchEnd={onTouchEnd}
             >
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={currentSlide}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -766,7 +766,7 @@ export default function DishModal({
                       />
                     )}
                   </Suspense>
-                </motion.div>
+                </m.div>
               </AnimatePresence>
             </div>
             
@@ -783,7 +783,7 @@ export default function DishModal({
                 />
               ))}
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

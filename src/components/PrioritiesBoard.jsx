@@ -11,7 +11,7 @@ import {
   Hourglass,
   Zap,
   AlertTriangle
-} from 'lucide-react';
+} from '../icons/lucide';
 import PrioritySlider from './PrioritySlider';
 
 const PRIORITY_CONFIG = [
@@ -137,9 +137,8 @@ export default function PrioritiesBoard({
       {/* Hint when all priorities are zero */}
       {allPrioritiesZero && (
         <div className="mt-1.5 sm:mt-2 p-1.5 sm:p-2 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
-          <p className="text-[10px] sm:text-[11px] text-amber-700 dark:text-amber-300 text-center">
-            💡 Adjust the sliders above to rank dishes by your preferences. 
-            All dishes currently show a neutral score (50).
+          <p className="text-sm sm:text-base text-amber-700 dark:text-amber-300 text-center">
+            Priorities disabled. Displaying list in alphabetical order.
           </p>
         </div>
       )}

@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Search, X } from 'lucide-react';
+import { m } from '../lib/motion';
+import { Search, X } from '../icons/lucide';
 import PriceUnitToggle from './PriceUnitToggle';
 
 /**
@@ -68,7 +68,7 @@ export function StatsBar({
  */
 export function EmptyState({ hasSearch }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="text-center py-12 px-4"
@@ -86,7 +86,7 @@ export function EmptyState({ hasSearch }) {
           : 'Check that your data files are loaded correctly'
         }
       </p>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -152,6 +152,81 @@ export function ErrorState({ message = 'Failed to compute ranking.', onRetry }) 
           </button>
         )}
       </div>
+    </div>
+  );
+}
+
+/**
+ * Shared shell for DishList / DishGrid:
+ * - StatsBar header
+ * - Scroll container + Loading/Error/Empty states
+ * - "Show more" button
+ */
+export function DishCollectionShell({
+  dishes,
+  filteredDishes,
+  searchQuery,
+  onSearchChange,
+  priceUnit,
+  onPriceUnitChange,
+  isLoading = false,
+  error = null,
+  onRetry = null,
+  variant = 'list',
+  shouldHideContent = false,
+  setScrollContainerEl = null,
+  contentClassName = '',
+  children,
+  remaining = 0,
+  onShowMore = null,
+  showMoreClassName = 'mt-4',
+}) {
+  return (
+    <div className="flex flex-col h-full">
+      <div className="px-4 pt-2.5 pb-1.5 space-y-2 border-b border-surface-200/50 dark:border-surface-800/50">
+        <StatsBar
+          totalDishes={dishes.length}
+          filteredCount={filteredDishes.length}
+          priceUnit={priceUnit}
+          onPriceUnitChange={onPriceUnitChange}
+          searchQuery={searchQuery}
+          onSearchChange={onSearchChange}
+        />
+      </div>
+
+      {!shouldHideContent && (
+        <div
+          ref={setScrollContainerEl}
+          className={`flex-1 overflow-y-auto ${contentClassName}`.trim()}
+        >
+          {isLoading && dishes.length === 0 ? (
+            <LoadingState variant={variant} />
+          ) : error && dishes.length === 0 ? (
+            <ErrorState message={error} onRetry={onRetry} />
+          ) : filteredDishes.length === 0 ? (
+            <EmptyState hasSearch={!!searchQuery} />
+          ) : (
+            <>
+              {children}
+
+              {remaining > 0 && (
+                <button
+                  type="button"
+                  onClick={onShowMore}
+                  className={`w-full ${showMoreClassName} py-3 rounded-xl
+                             bg-white/80 dark:bg-surface-800/80
+                             border border-surface-300/50 dark:border-surface-700/50
+                             text-sm font-semibold text-surface-700 dark:text-surface-200
+                             hover:bg-white dark:hover:bg-surface-800
+                             transition-colors shadow-sm dark:shadow-none`.trim()}
+                >
+                  Show more ({remaining} left)
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }

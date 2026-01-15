@@ -10,7 +10,7 @@ import {
   Mountain,
   MapPin,
   Globe,
-} from 'lucide-react';
+} from '../icons/lucide';
 
 /**
  * ZoneIcon component - одноцветные иконки для экономических регионов

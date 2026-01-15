@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { AnimatePresence, m } from '../lib/motion';
+import { X } from '../icons/lucide';
 import { usePrefs, prefsActions } from '../store/prefsStore';
 import { ECONOMIC_ZONES } from '../lib/RankingEngine';
 import ZoneIcon from './ZoneIcon';
@@ -129,7 +129,7 @@ export default function SettingsSheet({ open, onClose }) {
   return (
     <AnimatePresence>
       {open ? (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[200]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -143,7 +143,7 @@ export default function SettingsSheet({ open, onClose }) {
           />
 
           {/* Settings panel - mobile: bottom sheet, desktop: centered modal */}
-          <motion.div
+          <m.div
             role="dialog"
             aria-modal="true"
             aria-label="Settings"
@@ -262,8 +262,8 @@ export default function SettingsSheet({ open, onClose }) {
                 </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       ) : null}
     </AnimatePresence>
   );

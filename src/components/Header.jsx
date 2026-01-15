@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import { UtensilsCrossed } from 'lucide-react';
+import { useState } from 'react';
+import { UtensilsCrossed } from '../icons/lucide';
 import SettingsButton from './SettingsButton';
 import SettingsSheet from './SettingsSheet';
 import ThemeToggle from './ThemeToggle';
 import ViewModeToggle from './ViewModeToggle';
 import PresetSelector from './PresetSelector';
+import { PRESETS } from '../data/presets';
 import { usePrefs, prefsActions } from '../store/prefsStore';
 
 /**
@@ -17,21 +18,7 @@ export default function Header() {
   const currentPresetId = usePrefs((s) => s.prefs.currentPresetId);
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [presets, setPresets] = useState([]);
-  
-  // Load presets from JSON file
-  useEffect(() => {
-    fetch('/presets.json')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.presets && Array.isArray(data.presets)) {
-          setPresets(data.presets);
-        }
-      })
-      .catch((err) => {
-        console.error('Failed to load presets:', err);
-      });
-  }, []);
+  const presets = PRESETS;
   
   const handleViewModeToggle = () => {
     prefsActions.setPref({ viewMode: viewMode === 'list' ? 'grid' : 'list' });

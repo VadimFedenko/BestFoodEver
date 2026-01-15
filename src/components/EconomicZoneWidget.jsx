@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown } from '../icons/lucide';
 import WorldMapWidget from './WorldMapWidget';
 import { ECONOMIC_ZONES } from '../lib/RankingEngine';
 import ZoneIcon from './ZoneIcon';

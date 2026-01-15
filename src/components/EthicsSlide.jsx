@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { Leaf, Skull, Frown } from 'lucide-react';
+import { m } from '../lib/motion';
+import { Leaf, Skull, Frown } from '../icons/lucide';
 import { getEthicsColor } from './dishCardUtils';
 import { normalizeIngredientName } from '../lib/RankingEngine';
 
@@ -48,7 +48,7 @@ export default function EthicsSlide({ dish, ingredients, ingredientIndex }) {
           const Icon = getEthicsIcon(ing.ethicsIndex ?? 5);
 
           return (
-            <motion.div
+            <m.div
               key={idx}
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -71,7 +71,7 @@ export default function EthicsSlide({ dish, ingredients, ingredientIndex }) {
               <p className="text-xs text-surface-600 dark:text-surface-300 leading-relaxed">
                 {ing.ethicsReason}
               </p>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

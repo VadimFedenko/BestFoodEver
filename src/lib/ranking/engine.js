@@ -9,10 +9,6 @@
  * - Final weighted scoring based on user priorities
  */
 
-// Import cooking states configuration
-// Use absolute path from Vite project root so we can keep JSON in app root.
-import cookingStatesData from '/states.json';
-
 // ============================================================================
 // CONSTANTS & CONFIGURATION
 // ============================================================================
@@ -37,9 +33,18 @@ const FALLBACK_ZONE = 'west_eu_industrial';
 
 // Cooking method health penalty coefficients
 // Higher values = healthier preparation methods
-// Imported from states.json (root-level config)
-export const COOKING_STATE_COEFS = cookingStatesData.states;
-const COOKING_STATE_ALIASES = cookingStatesData.aliases || {};
+// Loaded from states.json in public folder
+let COOKING_STATE_COEFS = { default: 1.0 };
+let COOKING_STATE_ALIASES = {};
+
+// Load states.json from public folder
+fetch('/states.json')
+  .then(res => res.json())
+  .then(data => {
+    COOKING_STATE_COEFS = data.states || COOKING_STATE_COEFS;
+    COOKING_STATE_ALIASES = data.aliases || {};
+  })
+  .catch(err => console.error('Failed to load states.json:', err));
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -350,8 +355,8 @@ export function calculateDishWeight(dish) {
  */
 export const PRICE_UNITS = {
   serving: { id: 'serving', label: 'Serving', shortLabel: 'srv' },
-  per1kg: { id: 'per1kg', label: '1kg', shortLabel: '1kg' },
-  per1000kcal: { id: 'per1000kcal', label: '1000kcal', shortLabel: 'kcal' },
+  per1kg: { id: 'per1kg', label: 'Kg', shortLabel: 'Kg' },
+  per1000kcal: { id: 'per1000kcal', label: 'Kcal', shortLabel: 'Kcal' },
 };
 
 /**

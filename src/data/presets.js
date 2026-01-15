@@ -1,0 +1,46 @@
+// In-bundle presets to avoid a startup fetch for `/presets.json`.
+// Keep in sync with `public/presets.json`.
+export const PRESETS = [
+  {
+    id: 'best-food-ever',
+    name: 'Best Food Ever',
+    description: 'Personal Food Leaderboard. Click me!',
+    settings: {
+      priorities: {
+        taste: 10,
+        health: 10,
+        cheapness: 10,
+        speed: 10,
+        satiety: 0,
+        lowCalorie: 0,
+        ethics: 0,
+      },
+      priceUnit: 'per1000kcal',
+      isOptimized: true,
+      tasteScoreMethod: 'taste_score',
+      selectedZone: null,
+    },
+  },
+  {
+    id: 'worst-food-ever',
+    name: 'Worst Food Ever',
+    description: 'Evil Food Leaderboard with worst possible traits',
+    settings: {
+      priorities: {
+        taste: -10,
+        health: -10,
+        cheapness: -10,
+        speed: -10,
+        satiety: 0,
+        lowCalorie: 0,
+        ethics: 0,
+      },
+      priceUnit: 'per1000kcal',
+      isOptimized: true,
+      tasteScoreMethod: 'taste_score',
+      selectedZone: null,
+    },
+  },
+];
+
+

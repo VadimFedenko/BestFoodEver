@@ -27,6 +27,7 @@ export function usePrioritiesPanelAutoToggle({
 
   const lastScrollTopRef = useRef(0);
   const lockedScrollTopRef = useRef(null);
+  const lockRafIdRef = useRef(0);
   const wheelUpAccumRef = useRef(0);
   const touchStartYRef = useRef(null);
   const touchStartYExpandedRef = useRef(null);
@@ -78,8 +79,12 @@ export function usePrioritiesPanelAutoToggle({
             // we use the gesture to collapse the panel instead.
             const locked =
               lockedScrollTopRef.current == null ? prev : lockedScrollTopRef.current;
-            if (current !== locked) {
-              el.scrollTop = locked;
+            // Avoid synchronous scrollTop writes during scroll events; batch to next frame.
+            if (current !== locked && lockRafIdRef.current === 0) {
+              lockRafIdRef.current = requestAnimationFrame(() => {
+                lockRafIdRef.current = 0;
+                el.scrollTop = locked;
+              });
             }
             lastScrollTopRef.current = locked;
             if (current > locked) collapse();
@@ -202,6 +207,10 @@ export function usePrioritiesPanelAutoToggle({
     el.addEventListener('touchcancel', onTouchEnd, { passive: true });
 
     return () => {
+      if (lockRafIdRef.current) {
+        cancelAnimationFrame(lockRafIdRef.current);
+        lockRafIdRef.current = 0;
+      }
       el.removeEventListener('scroll', onScroll);
       el.removeEventListener('wheel', onWheel);
       el.removeEventListener('touchstart', onTouchStart);

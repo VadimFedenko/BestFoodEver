@@ -1,4 +1,4 @@
-import { Clock, DollarSign, Flame, Info, AlertTriangle } from 'lucide-react';
+import { Clock, DollarSign, Flame, Info, AlertTriangle } from '../icons/lucide';
 import { formatTime } from './dishCardUtils';
 import EditableScoreBreakdown from './EditableScoreBreakdown';
 
@@ -10,7 +10,7 @@ export default function OverviewSlide({
   const hasDataWarnings = missingIngredients?.length > 0 || missingPrices?.length > 0;
 
   // Get price unit label
-  const priceUnitLabel = priceUnit === 'per1kg' ? '/kg' : priceUnit === 'per1000kcal' ? '/kkcal' : '/serving';
+  const priceUnitLabel = priceUnit === 'per1kg' ? '/Kg' : priceUnit === 'per1000kcal' ? '/Kcal' : '/serving';
 
   return (
     <div className="space-y-3">
