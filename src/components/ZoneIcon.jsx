@@ -13,8 +13,8 @@ import {
 } from '../icons/lucide';
 
 /**
- * ZoneIcon component - одноцветные иконки для экономических регионов
- * Заменяет цветные эмодзи на одноцветные SVG иконки
+ * ZoneIcon component - monochrome icons for economic regions
+ * Replaces colored emojis with monochrome SVG icons
  */
 export default function ZoneIcon({ zoneId, size = 18, className = '' }) {
   const iconProps = {

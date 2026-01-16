@@ -15,12 +15,12 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
 
   const priceUnitLabel = priceUnit === 'per1kg' ? 'per Kg' : priceUnit === 'per1000kcal' ? 'per Kcal' : 'per serving';
 
-  // Вычисляем цены только при открытии слайда или изменении dish/ingredientIndex
+  // Calculate prices only when the slide opens or when dish/ingredientIndex changes
   useEffect(() => {
     const currentDishId = dish?.originalDish?.id || dish?.id;
     const currentIngredientIndex = ingredientIndex;
 
-    // Проверяем, нужно ли пересчитывать
+    // Check if recalculation is needed
     if (!dish?.originalDish || !ingredientIndex) {
       setZonePrices({});
       setZoneBreakdowns({});
@@ -28,37 +28,37 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
       return;
     }
 
-    // Если данные уже вычислены для этого блюда, не пересчитываем
+    // If data is already calculated for this dish, don't recalculate
     if (
       calculationRef.current.dishId === currentDishId && 
       calculationRef.current.ingredientIndex === currentIngredientIndex
     ) {
-      // Данные уже вычислены, просто убеждаемся, что состояние загрузки снято
+      // Data is already calculated, just make sure loading state is cleared
       setIsCalculating(prev => prev ? false : prev);
       return;
     }
 
-    // Сбрасываем состояние при изменении блюда
+    // Reset state when dish changes
     setZonePrices({});
     setZoneBreakdowns({});
     setIsCalculating(true);
     calculationRef.current = { dishId: currentDishId, ingredientIndex: currentIngredientIndex };
 
-    // Используем setTimeout чтобы отложить вычисления на следующий тик event loop
-    // Это позволит UI сначала отрисоваться
+    // Use setTimeout to defer calculations to the next event loop tick
+    // This allows the UI to render first
     const timeoutId = setTimeout(() => {
-      // Проверяем, что компонент еще монтирован и данные не изменились
+      // Check that component is still mounted and data hasn't changed
       if (
         calculationRef.current.dishId !== currentDishId ||
         calculationRef.current.ingredientIndex !== currentIngredientIndex
       ) {
-        return; // Данные изменились, прекращаем вычисления
+        return; // Data has changed, stop calculations
       }
 
       const prices = {};
       const breakdowns = {};
 
-      // Вычисляем цены для всех 11 зон
+      // Calculate prices for all 11 zones
       for (const zoneId of Object.keys(ECONOMIC_ZONES)) {
         const result = calculateDishCost(dish.originalDish, zoneId, ingredientIndex);
         if (result.unavailableIngredients?.length > 0) {
@@ -70,7 +70,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
         }
       }
 
-      // Проверяем еще раз перед обновлением состояния
+      // Check once more before updating state
       if (
         calculationRef.current.dishId === currentDishId &&
         calculationRef.current.ingredientIndex === currentIngredientIndex
@@ -81,12 +81,12 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
       }
     }, 0);
 
-    // Cleanup: отменяем таймаут при изменении зависимостей
-    // Данные автоматически сбрасываются при размонтировании компонента
+    // Cleanup: cancel timeout when dependencies change
+    // Data is automatically reset when component unmounts
     return () => {
       clearTimeout(timeoutId);
-      // При размонтировании компонента (выход из слайда) все состояния теряются
-      // При следующем открытии слайда данные будут вычислены заново
+      // When component unmounts (exiting the slide), all states are lost
+      // On next slide opening, data will be recalculated
       calculationRef.current = { dishId: null, ingredientIndex: null };
     };
   }, [dish?.originalDish, dish?.id, ingredientIndex]);
@@ -104,7 +104,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
 
   const getZoneFill = (zoneId) => {
     if (isCalculating || zonePrices[zoneId] === undefined) {
-      return 'rgba(148, 163, 184, 0.3)'; // Серый цвет для загрузки
+      return 'rgba(148, 163, 184, 0.3)'; // Gray color for loading
     }
     return getPriceColor(zonePrices[zoneId], minPrice, maxPrice).fill;
   };

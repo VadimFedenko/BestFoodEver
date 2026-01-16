@@ -5,34 +5,17 @@ echo Running Best Food Ever
 echo ========================================
 echo.
 
-REM Проверка наличия node_modules
+REM Checking for node_modules
 if not exist "node_modules" (
-    echo Установка зависимостей...
+    echo Installing dependencies...
     call npm install
     echo.
 )
 
-REM Запуск dev сервера
-echo Запуск dev сервера...
+REM Starting dev server
+echo Starting dev server...
 echo.
-call npm run preview
+call npm run dev
 
 pause
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

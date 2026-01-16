@@ -156,6 +156,7 @@ export default function SettingsSheet({ open, onClose }) {
               shadow-2xl
               ${isMobile ? 'max-h-[85vh]' : 'max-h-[90vh]'}
               overflow-hidden
+              flex flex-col
             `}
             initial={isMobile ? { y: 24, opacity: 0 } : { scale: 0.95, opacity: 0, x: '-50%', y: '-50%' }}
             animate={isMobile ? { y: 0, opacity: 1 } : { scale: 1, opacity: 1, x: '-50%', y: '-50%' }}
@@ -165,13 +166,13 @@ export default function SettingsSheet({ open, onClose }) {
           >
             {/* Drag handle - only on mobile */}
             {isMobile && (
-              <div className="pt-2 flex justify-center">
+              <div className="pt-2 flex justify-center flex-shrink-0">
                 <div className="w-10 h-1 rounded-full bg-surface-300/70 dark:bg-surface-700/70" />
               </div>
             )}
 
             {/* Header */}
-            <div className={`px-4 ${isMobile ? 'pt-3 pb-2' : 'pt-4 pb-3'} flex items-center justify-between`}>
+            <div className={`px-4 ${isMobile ? 'pt-3 pb-2' : 'pt-4 pb-3'} flex items-center justify-between flex-shrink-0`}>
               <div className="min-w-0">
                 <div className="text-base font-bold text-surface-900 dark:text-surface-100">
                   Settings
@@ -190,7 +191,7 @@ export default function SettingsSheet({ open, onClose }) {
 
             {/* Content */}
             <div
-              className={`px-4 ${isMobile ? 'pb-4' : 'pb-6'} overflow-y-auto custom-scrollbar`}
+              className={`px-4 ${isMobile ? 'pb-4' : 'pb-6'} overflow-y-auto custom-scrollbar flex-1 min-h-0`}
               style={isMobile ? { paddingBottom: 'calc(16px + var(--safe-area-inset-bottom))' } : {}}
             >
               <div className="mt-3 space-y-6">
