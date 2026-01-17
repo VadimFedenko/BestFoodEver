@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ECONOMIC_ZONES } from '../lib/RankingEngine';
 import { useSvgMap } from '../lib/useSvgMap';
 import { centeredScaleTransform } from '../lib/svgMapUtils';
 import ZoneIcon from './ZoneIcon';
+import { tZoneName } from '../i18n/dataTranslations';
+import { getPriceColor } from './dishCardUtils';
 
 function getZoneFillDefault(zoneId, selectedZone, isHovered) {
   // On hover - show lighter zone color
@@ -39,6 +42,20 @@ function getZoneOpacityDefault(zoneId, selectedZone) {
   return selectedZone === zoneId ? 1 : 0.25;
 }
 
+const ZONE_CENTERS = {
+  east_euro_agrarian: [410, 170],
+  west_eu_industrial: [245, 220],
+  northern_import: [280, 170],
+  mediterranean: [270, 235],
+  north_american: [130, 220],
+  latam_agrarian: [170, 330],
+  asian_rice_labor: [405, 250],
+  developed_asia: [435, 250],
+  mena_arid: [280, 266],
+  oceanic: [435, 335],
+  subsaharan_subsistence: [285, 310],
+};
+
 /**
  * Ultra-light economic zones map:
  * - Pure SVG, 11 <path> elements (one per zone)
@@ -68,7 +85,11 @@ export default function EconomicZonesSvgMap({
   // Container props for tooltip positioning
   containerClassName = '',
   svgStyle = {},
+  zonePrices = {},
+  minPrice = 0,
+  maxPrice = 0,
 }) {
+  const { t } = useTranslation();
   const { viewBox, paths, isLoading } = useSvgMap();
   const zoneEntries = Object.entries(ECONOMIC_ZONES);
   const [internalHoveredZone, setInternalHoveredZone] = useState(null);
@@ -92,9 +113,15 @@ export default function EconomicZonesSvgMap({
 
   // Get hovered zone data for tooltip
   const hoveredZoneData = hoveredZone ? ECONOMIC_ZONES[hoveredZone] : null;
-  const tooltipContent = hoveredZoneData && getTooltipContent 
+  let tooltipContent = hoveredZoneData && getTooltipContent 
     ? getTooltipContent(hoveredZone, hoveredZoneData)
     : hoveredZoneData;
+  
+  // Translate zone name in tooltip if not customized
+  if (tooltipContent && !getTooltipContent && hoveredZone) {
+    const translatedName = tZoneName(t, hoveredZone) || tooltipContent.name;
+    tooltipContent = { ...tooltipContent, name: translatedName };
+  }
 
   if (isLoading) {
     return (
@@ -157,6 +184,114 @@ export default function EconomicZonesSvgMap({
             );
           })}
         </g>
+
+        {Object.keys(zonePrices).length > 0 && (
+          <g transform={`${centeredScaleTransform(viewBox, zoom)} translate(${transformOffset})`}>
+            {Object.entries(zonePrices).map(([zoneId, price]) => {
+              if (price === null || price === undefined || price === 0) return null;
+              
+              const center = ZONE_CENTERS[zoneId];
+              if (!center) return null;
+
+              const [centerX, centerY] = center;
+              const diagonalLength = 30;
+              const horizontalLength = 35;
+              
+              let angleRad;
+              let horizontalDirection;
+              
+              if (zoneId === 'latam_agrarian') {
+                angleRad = (-135 * Math.PI) / 180;
+                horizontalDirection = -1;
+              } else if (zoneId === 'north_american') {
+                angleRad = (-30 * Math.PI) / 180;
+                horizontalDirection = 1;
+              } else if (zoneId === 'subsaharan_subsistence') {
+                angleRad = (45 * Math.PI) / 180;
+                horizontalDirection = 1;
+              } else if (zoneId === 'asian_rice_labor') {
+                angleRad = (-45 * Math.PI) / 180;
+                horizontalDirection = 1;
+              } else if (zoneId === 'developed_asia') {
+                angleRad = (45 * Math.PI) / 180;
+                horizontalDirection = 1;
+              } else {
+                angleRad = (-45 * Math.PI) / 180;
+                horizontalDirection = 1;
+              }
+              
+              const diagonalEndX = centerX + diagonalLength * Math.cos(angleRad);
+              const diagonalEndY = centerY + diagonalLength * Math.sin(angleRad);
+              const horizontalEndX = diagonalEndX + horizontalLength * horizontalDirection;
+              const horizontalEndY = diagonalEndY;
+
+              const priceColorObj = getPriceColor(price, minPrice, maxPrice);
+              const priceColor = priceColorObj.fill || 'rgba(255, 255, 255, 0.6)';
+              const priceText = `$${price.toFixed(2)}`;
+              const textWidth = priceText.length * 9 + 16;
+              const textX = horizontalDirection > 0 ? horizontalEndX + 8 : horizontalEndX - textWidth + 8;
+
+              return (
+                <g key={`price-line-${zoneId}`}>
+                  <path
+                    d={`M ${centerX} ${centerY} L ${diagonalEndX} ${diagonalEndY} L ${horizontalEndX} ${horizontalEndY}`}
+                    stroke="rgba(255, 255, 255, 0.9)"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.9"
+                  />
+                  <path
+                    d={`M ${centerX} ${centerY} L ${diagonalEndX} ${diagonalEndY} L ${horizontalEndX} ${horizontalEndY}`}
+                    stroke={priceColor}
+                    strokeWidth="2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="1"
+                  />
+                  <circle
+                    cx={centerX}
+                    cy={centerY}
+                    r="4"
+                    fill="rgba(255, 255, 255, 0.95)"
+                    opacity="1"
+                  />
+                  <circle
+                    cx={centerX}
+                    cy={centerY}
+                    r="3"
+                    fill={priceColor}
+                    opacity="1"
+                  />
+                  <rect
+                    x={horizontalDirection > 0 ? horizontalEndX : horizontalEndX - textWidth + 4}
+                    y={horizontalEndY - 12}
+                    width={textWidth}
+                    height="22"
+                    fill="rgba(15, 23, 42, 0.9)"
+                    rx="3"
+                    opacity="0.95"
+                    stroke="rgba(255, 255, 255, 0.3)"
+                    strokeWidth="0.5"
+                  />
+                  <text
+                    x={textX}
+                    y={horizontalEndY}
+                    fill={priceColor}
+                    fontSize="14"
+                    fontWeight="bold"
+                    dominantBaseline="middle"
+                    opacity="1"
+                  >
+                    {priceText}
+                  </text>
+                </g>
+              );
+            })}
+          </g>
+        )}
       </svg>
       
       {/* Hover tooltip */}

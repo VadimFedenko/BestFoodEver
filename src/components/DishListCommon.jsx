@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { m } from '../lib/motion';
 import { Search, X } from '../icons/lucide';
 import PriceUnitToggle from './PriceUnitToggle';
@@ -14,6 +15,7 @@ export function StatsBar({
   searchQuery,
   onSearchChange
 }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-0.5 xs:space-y-2">
       <div className="flex flex-col xs:flex-row xs:items-center gap-1 xs:gap-3 text-sm text-surface-500 dark:text-surface-400">
@@ -27,7 +29,7 @@ export function StatsBar({
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search dishes..."
+            placeholder={t('ui.searchDishes')}
             className="w-full pl-7 xs:pl-9 sm:pl-10 pr-6 xs:pr-8 sm:pr-10 py-1 xs:py-2 sm:py-2.2 rounded-lg xs:rounded-xl
                        bg-white/80 dark:bg-surface-800/80 
                        border border-surface-300/50 dark:border-surface-700/50
@@ -50,7 +52,7 @@ export function StatsBar({
         {/* Right: Price per */}
         <div className="flex items-center justify-between xs:justify-end gap-2 whitespace-nowrap">
           <span className="text-[10px] xs:text-xs font-semibold text-surface-500 dark:text-surface-400">
-            Price per
+            {t('ui.pricePer')}
           </span>
           <PriceUnitToggle 
             priceUnit={priceUnit} 
@@ -181,6 +183,7 @@ export function DishCollectionShell({
   onShowMore = null,
   showMoreClassName = 'mt-4',
 }) {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col h-full">
       <div className="px-4 pt-2.5 pb-1.5 space-y-2 border-b border-surface-200/50 dark:border-surface-800/50">
@@ -220,7 +223,7 @@ export function DishCollectionShell({
                              hover:bg-white dark:hover:bg-surface-800
                              transition-colors shadow-sm dark:shadow-none`.trim()}
                 >
-                  Show more ({remaining} left)
+                  {t('ui.showMore', { count: remaining })}
                 </button>
               )}
             </>

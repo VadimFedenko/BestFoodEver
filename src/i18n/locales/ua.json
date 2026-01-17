@@ -1,0 +1,111 @@
+{
+  "settings": {
+    "title": "Налаштування",
+    "close": "Закрити налаштування",
+    "language": {
+      "title": "Мова",
+      "en": "English",
+      "ru": "Русский",
+      "ua": "Українська"
+    },
+    "speedScore": {
+      "title": "Оцінка швидкості",
+      "normal": {
+        "title": "Звичайне приготування",
+        "description": "Швидкість приготування заснована на типових часах рецептів."
+      },
+      "optimized": {
+        "title": "Оптимізований час",
+        "description": "Багато страв можна приготувати набагато швидше, використовуючи пакетну обробку та професійні кухонні техніки. Цей режим застосовує ці оптимізовані часи."
+      }
+    },
+    "tasteScore": {
+      "title": "Оцінка смаку",
+      "aiAnalysis": {
+        "title": "AI Аналіз",
+        "description": "Аналіз поляризації думок. Кожна страва оцінювалася за рівнем поляризації думок у країнах споживання (щоб уникнути «західної упередженості») з використанням Gemini 3 Flash Thinking з контекстом попередніх оцінок."
+      },
+      "sentimentAnalysis": {
+        "title": "Аналіз настроїв",
+        "description": "Поляризація думок для кожної страви на основі аналізу настроїв з баз даних відгуків Yelp та Amazon Food Reviews."
+      }
+    },
+    "priceScore": {
+      "title": "Оцінка ціни",
+      "description": "Використовується для розрахунку місцевої вартості приготування страви у вибраному регіоні."
+    }
+  },
+  "presets": {
+    "choosePreset": "Вибрати пресет",
+    "selectPreset": "Вибрати пресет",
+    "chooseConfiguration": "Виберіть конфігурацію",
+    "selectPresetDescription": "Виберіть пресет, щоб застосувати попередньо встановлені налаштування пріоритетів та конфігурації.",
+    "savePresetTitle": "Зберегти пресет",
+    "presetName": "Назва пресета",
+    "presetNamePlaceholder": "Мій пресет",
+    "cancel": "Скасувати",
+    "save": "Зберегти"
+  },
+  "priorities": {
+    "title": "Мої Пріоритети",
+    "save": "Зберегти",
+    "reset": "Скид",
+    "disabled": "Пріоритети вимкнено. Відображення списку в алфавітному порядку.",
+    "taste": {
+      "positiveLabel": "Смачне",
+      "negativeLabel": "Нішеве",
+      "description": "Смак та задоволення"
+    },
+    "health": {
+      "positiveLabel": "Здорове",
+      "negativeLabel": "Шкідливе",
+      "description": "Харчова цінність"
+    },
+    "cheapness": {
+      "positiveLabel": "Дешеве",
+      "negativeLabel": "Дороге",
+      "description": "Низька вартість"
+    },
+    "speed": {
+      "positiveLabel": "Швидке",
+      "negativeLabel": "Довге",
+      "description": "Швидке приготування"
+    },
+    "lowCalorie": {
+      "positiveLabel": "Низькокалорійне",
+      "negativeLabel": "Висококалорійне",
+      "description": "Менше ккал/100г"
+    },
+    "ethics": {
+      "positiveLabel": "Етичне",
+      "negativeLabel": "Неетичне",
+      "description": "Етичне походження"
+    }
+  },
+  "ui": {
+    "searchDishes": "Пошук страв...",
+    "pricePer": "Ціна за",
+    "showMore": "Показати ще (залишилось {{count}})",
+    "showMore_plural": "Показати ще (залишилось {{count}})",
+    "priceUnits": {
+      "kcal": "Ккал",
+      "kg": "Кг",
+      "serving": "Порція"
+    }
+  },
+  "zones": {
+    "title": "Економічна Зона",
+    "east_euro_agrarian": "Східна Європа",
+    "west_eu_industrial": "Західна Європа",
+    "northern_import": "Північний імпорт",
+    "mediterranean": "Середземномор'я",
+    "north_american": "Північна Америка",
+    "latam_agrarian": "Латинська Америка",
+    "asian_rice_labor": "Азія (Рисовий пояс)",
+    "developed_asia": "Розвинена Азія",
+    "mena_arid": "Близький Схід і Північна Африка",
+    "oceanic": "Океанія",
+    "subsaharan_subsistence": "Африка на південь від Сахари"
+  }
+}
+

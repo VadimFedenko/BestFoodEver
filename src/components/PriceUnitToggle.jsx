@@ -1,42 +1,41 @@
+import { useTranslation } from 'react-i18next';
 import { m } from '../lib/motion';
 import { Scale, Flame, Soup } from '../icons/lucide';
-
-/**
- * Price unit options with icons and labels
- * Order: Kcal, Kg, Serving
- */
-const PRICE_UNIT_OPTIONS = [
-  { 
-    id: 'per1000kcal', 
-    label: 'Kcal', 
-    shortLabel: 'Kcal',
-    icon: Flame,
-    description: 'Price per 1000 calories',
-    color: 'from-rose-400 to-pink-500',
-  },
-  { 
-    id: 'per1kg', 
-    label: 'Kg', 
-    shortLabel: 'Kg',
-    icon: Scale,
-    description: 'Price per 1 kilogram',
-    color: 'from-emerald-400 to-teal-500',
-  },
-  { 
-    id: 'serving', 
-    label: 'Serving', 
-    shortLabel: 'srv',
-    icon: Soup,
-    description: 'Price per serving',
-    color: 'from-amber-400 to-orange-500',
-  },
-];
 
 /**
  * Price Unit Toggle Component
  * A beautiful segmented control for switching price display units
  */
 export default function PriceUnitToggle({ priceUnit, onPriceUnitChange }) {
+  const { t } = useTranslation();
+  
+  const PRICE_UNIT_OPTIONS = [
+    { 
+      id: 'per1000kcal', 
+      label: t('ui.priceUnits.kcal'),
+      shortLabel: t('ui.priceUnits.kcal'),
+      icon: Flame,
+      description: 'Cost per 1000 calories',
+      color: 'from-rose-400 to-pink-500',
+    },
+    { 
+      id: 'per1kg', 
+      label: t('ui.priceUnits.kg'),
+      shortLabel: t('ui.priceUnits.kg'),
+      icon: Scale,
+      description: 'Cost per 1 kilogram',
+      color: 'from-emerald-400 to-teal-500',
+    },
+    { 
+      id: 'serving', 
+      label: t('ui.priceUnits.serving'),
+      shortLabel: 'srv', // Short abbreviation, keep as is
+      icon: Soup,
+      description: 'Cost per serving',
+      color: 'from-amber-400 to-orange-500',
+    },
+  ];
+
   return (
     <div className="relative flex items-center bg-surface-100/80 dark:bg-surface-800/80 rounded-lg p-0.5 border border-surface-300/50 dark:border-surface-700/50">
       {/* Options */}

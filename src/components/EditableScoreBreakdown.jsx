@@ -122,16 +122,16 @@ function ScoreSlider({
     : (isModified ? 'text-amber-600 dark:text-amber-400' : 'text-surface-700 dark:text-surface-200');
   
   return (
-    <div className={`flex items-center gap-2 py-1.5 ${disabled ? 'opacity-50' : ''}`}>
-      <div className="flex items-center gap-1.5 w-16 sm:w-20 flex-shrink-0">
-        <Icon size={14} className={iconColor} />
-        <span className={`text-xs font-medium truncate ${labelColor}`}>
+    <div className={`flex items-center gap-2 sm:gap-3 py-1.5 sm:py-2 ${disabled ? 'opacity-50' : ''}`}>
+      <div className="flex items-center gap-1.5 sm:gap-2 w-16 sm:w-24 flex-shrink-0">
+        <Icon size={14} className={`${iconColor} sm:w-4 sm:h-4`} />
+        <span className={`text-xs sm:text-sm font-medium truncate ${labelColor}`}>
           {label}
         </span>
       </div>
       
-      <div className="flex-1 relative h-5 flex items-center">
-        <div className="absolute inset-x-0 h-1.5 rounded-full bg-surface-300 dark:bg-surface-700 overflow-hidden">
+      <div className="flex-1 relative h-5 sm:h-6 flex items-center">
+        <div className="absolute inset-x-0 h-1.5 sm:h-2 rounded-full bg-surface-300 dark:bg-surface-700 overflow-hidden">
           <m.div
             className={`absolute left-0 top-0 bottom-0 ${!isActive ? barFillColor : `bg-gradient-to-r ${barFillColor}`}`}
             initial={false}
@@ -152,14 +152,14 @@ function ScoreSlider({
         />
         
         <m.div
-          className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full shadow-md pointer-events-none border-2 ${thumbColor}`}
+          className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 rounded-full shadow-md pointer-events-none border-2 ${thumbColor}`}
           initial={false}
           animate={{ left: `calc(${percentage}% - 8px)` }}
           transition={{ type: 'tween', duration: 0.1 }}
         />
       </div>
       
-      <div className={`w-16 text-right font-mono text-[11px] font-medium ${valueColor}`}>
+      <div className={`w-16 sm:w-24 text-right font-mono text-[11px] sm:text-sm font-medium ${valueColor}`}>
         {rightLabel ?? value.toFixed(1)}
       </div>
     </div>
@@ -188,12 +188,12 @@ function ScoreBar({ label, icon: Icon, value, maxValue = 10, color, isModified =
     : (isModified ? 'text-amber-600 dark:text-amber-400' : 'text-surface-600 dark:text-surface-300');
   
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex items-center gap-1.5 w-16 sm:w-20 flex-shrink-0">
-        <Icon size={14} className={iconColor} />
-        <span className={`text-xs ${labelColor}`}>{label}</span>
+    <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-1.5 sm:gap-2 w-16 sm:w-24 flex-shrink-0">
+        <Icon size={14} className={`${iconColor} sm:w-4 sm:h-4`} />
+        <span className={`text-xs sm:text-sm ${labelColor}`}>{label}</span>
       </div>
-      <div className="flex-1 h-1.5 bg-surface-300 dark:bg-surface-700 rounded-full overflow-hidden">
+      <div className="flex-1 h-1.5 sm:h-2 bg-surface-300 dark:bg-surface-700 rounded-full overflow-hidden">
         <m.div
           className={`h-full rounded-full ${barColor}`}
           initial={{ width: 0 }}
@@ -201,7 +201,7 @@ function ScoreBar({ label, icon: Icon, value, maxValue = 10, color, isModified =
           transition={{ duration: 0.5, ease: 'easeOut' }}
         />
       </div>
-      <span className={`text-xs font-mono w-8 text-right ${valueColor}`}>
+      <span className={`text-xs sm:text-sm font-mono w-8 sm:w-12 text-right ${valueColor}`}>
         {value.toFixed(1)}
       </span>
     </div>
@@ -428,18 +428,18 @@ export default function EditableScoreBreakdown({
   
   return (
     <div>
-      <div className="flex items-center justify-between mb-2">
-        <h4 className="text-sm font-semibold text-surface-700 dark:text-surface-200">
+      <div className="flex items-center justify-between mb-2 sm:mb-3">
+        <h4 className="text-sm sm:text-base font-semibold text-surface-700 dark:text-surface-200">
           Score Breakdown
         </h4>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:gap-3">
           {hasModifications && !isEditing && (
             <button
               onClick={onResetAll}
-              className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-medium
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded text-[10px] sm:text-xs font-medium
                          text-amber-600 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20"
             >
-              <RotateCcw size={10} />
+              <RotateCcw size={10} className="sm:w-3 sm:h-3" />
               Reset
             </button>
           )}
@@ -447,36 +447,36 @@ export default function EditableScoreBreakdown({
             <>
               <button
                 onClick={handleCancel}
-                className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium
+                className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded text-xs sm:text-sm font-medium
                            text-surface-600 dark:text-surface-400 bg-surface-200 dark:bg-surface-700 hover:bg-surface-300 dark:hover:bg-surface-600"
               >
-                <X size={12} />
+                <X size={12} className="sm:w-4 sm:h-4" />
                 Cancel
               </button>
               <button
                 onClick={handleSave}
-                className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium
+                className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded text-xs sm:text-sm font-medium
                            text-white bg-food-500 hover:bg-food-600"
               >
-                <Check size={12} />
+                <Check size={12} className="sm:w-4 sm:h-4" />
                 Save
               </button>
             </>
           ) : (
             <button
               onClick={handleStartEdit}
-              className="flex items-center gap-1 px-2 py-1 rounded text-xs font-medium
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded text-xs sm:text-sm font-medium
                          text-food-600 dark:text-food-400 bg-food-500/10 hover:bg-food-500/20"
               disabled={activeMetrics.length === 0}
             >
-              <Edit3 size={12} />
+              <Edit3 size={12} className="sm:w-4 sm:h-4" />
               Edit
             </button>
           )}
         </div>
       </div>
       
-      <div className="space-y-1 bg-surface-100/80 dark:bg-surface-800/80 rounded-lg p-3">
+      <div className="space-y-1 sm:space-y-2 bg-surface-100/80 dark:bg-surface-800/80 rounded-lg p-3 sm:p-4">
         {isEditing ? (
           <>
             {metricsWithActive.map(metric => {
@@ -498,7 +498,7 @@ export default function EditableScoreBreakdown({
                 />
               );
             })}
-            <p className="text-[10px] text-surface-500 dark:text-surface-400 mt-2 pt-2 border-t border-surface-200 dark:border-surface-700">
+            <p className="text-[10px] sm:text-xs text-surface-500 dark:text-surface-400 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-surface-200 dark:border-surface-700">
               Edit target scores (0–10). Right side shows the corresponding raw units; on Save we compute the needed multipliers.
             </p>
           </>

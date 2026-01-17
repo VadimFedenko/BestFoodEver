@@ -3171,7 +3171,7 @@
     "dish": "Chicken Parmesan",
     "ingredients": [
       {
-        "name": "Chicken Breast (or tofu)",
+        "name": "Chicken Breast",
         "g": 150,
         "state": "baked"
       },
@@ -5368,7 +5368,7 @@
         "state": "simmered"
       },
       {
-        "name": "Chicken Breast (or tofu)",
+        "name": "Chicken Breast",
         "g": 150,
         "state": "simmered"
       },
@@ -10467,7 +10467,7 @@
     "dish": "Cobb Salad",
     "ingredients": [
       {
-        "name": "Chicken Breast (or tofu)",
+        "name": "Chicken Breast",
         "g": 120,
         "state": "grilled"
       },

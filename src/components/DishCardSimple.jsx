@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { m } from '../lib/motion';
+import { useTranslation } from 'react-i18next';
 import { 
   Clock, 
   DollarSign, 
@@ -14,6 +15,7 @@ import {
   getScoreColor,
 } from './dishCardUtils';
 import { useIsMobile } from '../lib/useIsMobile';
+import { tDishName } from '../i18n/dataTranslations';
 
 /**
  * Compact metric display for card header
@@ -53,8 +55,10 @@ export default function DishCardSimple({
   onResetOverrides,
   priceUnit = 'serving',
 }) {
+  const { t } = useTranslation();
   const scoreColors = getScoreColor(dish.score);
   const isMobile = useIsMobile();
+  const dishName = tDishName(t, dish);
   
   const hasAnyOverride = useMemo(() => {
     const o = dish?.hasOverrides;
@@ -114,7 +118,7 @@ export default function DishCardSimple({
           {/* Name row */}
           <div className="flex items-center gap-1.5 sm:gap-2 flex-nowrap mb-1.5">
             <h3 className="font-display font-semibold text-surface-800 dark:text-surface-100 truncate text-sm sm:text-base flex-1 min-w-0">
-              {dish.name}
+              {dishName}
             </h3>
             
             {/* Reset button */}

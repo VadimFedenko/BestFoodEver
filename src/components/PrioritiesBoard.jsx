@@ -12,6 +12,8 @@ import {
   Zap,
   AlertTriangle
 } from '../icons/lucide';
+import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import PrioritySlider from './PrioritySlider';
 
 const PRIORITY_CONFIG = [
@@ -103,19 +105,18 @@ const PRIORITY_CONFIG = [
 
 /**
  * Priorities board content - sliders and hint
- * Note: Inline callbacks are acceptable here since PrioritySlider uses local state
- * during drag and only commits to store on pointerup, minimizing re-render impact
+ * Memoized to prevent re-renders when only isExpanded changes in parent
  */
-export default function PrioritiesBoard({ 
+function PrioritiesBoard({ 
   priorityConfig,
   displayed, 
-  percentages, 
   allPrioritiesZero, 
   handleSliderChange, 
   handleDragStart, 
   handleToggleReverse, 
   isDark 
 }) {
+  const { t } = useTranslation();
   return (
     <div className="flex-1 bg-white dark:bg-surface-800 rounded-xl p-1.5 sm:p-2 border border-surface-300/50 dark:border-surface-700/50 flex flex-col">
       {/* Sliders grid */}
@@ -125,7 +126,6 @@ export default function PrioritiesBoard({
             key={config.key}
             config={config}
             value={displayed[config.key]}
-            percentage={percentages[config.key]}
             onChange={(val) => handleSliderChange(config.key, val)}
             onDragStart={handleDragStart}
             onToggleReverse={() => handleToggleReverse(config.key)}
@@ -138,13 +138,15 @@ export default function PrioritiesBoard({
       {allPrioritiesZero && (
         <div className="mt-1.5 sm:mt-2 p-1.5 sm:p-2 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
           <p className="text-sm sm:text-base text-amber-700 dark:text-amber-300 text-center">
-            Priorities disabled. Displaying list in alphabetical order.
+            {t('priorities.disabled')}
           </p>
         </div>
       )}
     </div>
   );
 }
+
+export default memo(PrioritiesBoard);
 
 export { PRIORITY_CONFIG };
 

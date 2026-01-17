@@ -7,6 +7,7 @@ import ViewModeToggle from './ViewModeToggle';
 import PresetSelector from './PresetSelector';
 import { PRESETS } from '../data/presets';
 import { usePrefs, prefsActions } from '../store/prefsStore';
+import { useUserPresets } from '../store/userPresetsStore';
 
 /**
  * Main application header
@@ -16,9 +17,14 @@ export default function Header() {
   const isDark = usePrefs((s) => s.prefs.theme) !== 'light';
   const viewMode = usePrefs((s) => s.prefs.viewMode);
   const currentPresetId = usePrefs((s) => s.prefs.currentPresetId);
+  const userPresets = useUserPresets();
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const presets = PRESETS;
+  const defaultUserPresetDescription = 'Personal Food Leaderboard.';
+  const presets = [
+    ...(userPresets || []).map((p) => ({ ...p, description: defaultUserPresetDescription })),
+    ...PRESETS,
+  ];
   
   const handleViewModeToggle = () => {
     prefsActions.setPref({ viewMode: viewMode === 'list' ? 'grid' : 'list' });

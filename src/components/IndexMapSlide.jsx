@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Map as MapIcon, X, Loader2 } from '../icons/lucide';
 import { ECONOMIC_ZONES, calculateDishCost } from '../lib/RankingEngine';
 import { getPriceColor } from './dishCardUtils';
 import EconomicZonesSvgMap from './EconomicZonesSvgMap';
 import ZoneIcon from './ZoneIcon';
+import { tZoneName } from '../i18n/dataTranslations';
 
-export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUnit, defaultSelectedZone }) {
+export default function IndexMapSlide({ dish, ingredientIndex, isMobile, defaultSelectedZone }) {
+  const { t } = useTranslation();
   const [hoveredZone, setHoveredZone] = useState(null);
   const [selectedZone, setSelectedZone] = useState(defaultSelectedZone || null);
   const [zonePrices, setZonePrices] = useState({});
   const [zoneBreakdowns, setZoneBreakdowns] = useState({});
   const [isCalculating, setIsCalculating] = useState(true);
   const calculationRef = useRef({ dishId: null, ingredientIndex: null });
-
-  const priceUnitLabel = priceUnit === 'per1kg' ? 'per Kg' : priceUnit === 'per1000kcal' ? 'per Kcal' : 'per serving';
 
   // Calculate prices only when the slide opens or when dish/ingredientIndex changes
   useEffect(() => {
@@ -115,8 +116,10 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
   
   const getTooltipContent = (zoneId, zoneData) => {
     const price = isCalculating ? undefined : zonePrices[zoneId];
+    const translatedName = tZoneName(t, zoneId) || zoneData.name;
     return {
       ...zoneData,
+      name: translatedName,
       price,
       priceColor: price === null || price === undefined 
         ? 'text-surface-500' 
@@ -133,31 +136,27 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
     ? [...currentBreakdown].filter(i => i.cost > 0).sort((a, b) => b.cost - a.cost)
     : [];
 
-  const totalCost = sortedBreakdown.reduce((s, i) => s + i.cost, 0);
-
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 sm:space-y-3">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <MapIcon size={14} className="text-food-500" />
-          <span className="text-sm font-semibold text-surface-700 dark:text-surface-200">
-            {dish?.name} Price Index
+        <div className="flex items-center gap-2 sm:gap-3">
+          <MapIcon size={14} className="text-food-500 sm:w-5 sm:h-5" />
+          <span className="text-sm sm:text-base font-semibold text-surface-700 dark:text-surface-200">
+            {dish?.name} Cost Index
           </span>
         </div>
         {priceSpread > 0 && (
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400">
+          <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400">
             {priceSpread}% spread
           </span>
         )}
       </div>
 
-      <p className="text-[10px] text-surface-500">Prices shown {priceUnitLabel}</p>
-
       {isCalculating && Object.keys(zonePrices).length === 0 ? (
-        <div className="flex items-center justify-center py-12">
+        <div className="flex items-center justify-center py-12 sm:py-16">
           <div className="flex flex-col items-center gap-3 text-surface-500">
-            <Loader2 size={24} className="animate-spin text-food-500" />
-            <span className="text-sm">Calculating prices for all zones...</span>
+            <Loader2 size={24} className="animate-spin text-food-500 sm:w-8 sm:h-8" />
+            <span className="text-sm sm:text-base">Calculating costs for all zones...</span>
           </div>
         </div>
       ) : (
@@ -182,6 +181,9 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
               transformOffset="245 25"
               backgroundFill="rgba(15, 23, 42, 0.5)"
               showTooltip={true}
+              zonePrices={zonePrices}
+              minPrice={minPrice}
+              maxPrice={maxPrice}
             />
           </div>
 
@@ -208,8 +210,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
               <div className="space-y-0.5">
                 {sortedBreakdown.slice(0, 5).map((item) => (
                   <div key={item.name} className="flex items-center gap-1.5 text-[11px]">
-                    <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{item.name}</span>
-                    <span className="text-surface-500 font-mono">{totalCost > 0 ? ((item.cost / totalCost) * 100).toFixed(0) : 0}%</span>
+                    <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{item.name}, {item.netWeight || 0}g</span>
                     <span className="font-bold font-mono text-surface-700 dark:text-surface-200 w-10 text-right">${item.cost.toFixed(2)}</span>
                   </div>
                 ))}
@@ -221,8 +222,8 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
         </>
       ) : (
         // Desktop: horizontal layout (map on left, data on right)
-        <div className="flex gap-4">
-          <div className="flex-shrink-0 w-[55%] space-y-2">
+        <div className="flex gap-4 sm:gap-6">
+          <div className="flex-shrink-0 w-[55%] space-y-2 sm:space-y-3">
             <div className="rounded-lg overflow-hidden bg-surface-800/50">
               <EconomicZonesSvgMap
                 selectedZone={selectedZone}
@@ -231,7 +232,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
                 onHoveredZoneChange={setHoveredZone}
                 zoom={1.25}
                 className="w-full"
-                svgStyle={{ height: '220px' }}
+                svgStyle={{ height: '280px' }}
                 getZoneFill={getZoneFill}
                 getZoneOpacity={getZoneOpacity}
                 getZoneStroke={getZoneStroke}
@@ -240,39 +241,41 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, priceUn
                 transformOffset="245 25"
                 backgroundFill="rgba(15, 23, 42, 0.5)"
                 showTooltip={true}
+                zonePrices={zonePrices}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
               />
             </div>
 
-            <div className="flex items-center justify-between text-[9px] text-surface-500 px-0.5">
-              <span className="flex items-center gap-1"><div className="w-2 h-2 rounded" style={{ background: 'rgb(34, 197, 94)' }} />Cheap</span>
-              <div className="flex-1 h-1 mx-2 rounded-full" style={{ background: 'linear-gradient(to right, rgb(34, 197, 94), rgb(250, 204, 21), rgb(249, 115, 22), rgb(239, 68, 68))' }} />
-              <span className="flex items-center gap-1">Expensive<div className="w-2 h-2 rounded" style={{ background: 'rgb(239, 68, 68)' }} /></span>
+            <div className="flex items-center justify-between text-[9px] sm:text-xs text-surface-500 px-0.5">
+              <span className="flex items-center gap-1"><div className="w-2 h-2 sm:w-3 sm:h-3 rounded" style={{ background: 'rgb(34, 197, 94)' }} />Cheap</span>
+              <div className="flex-1 h-1 sm:h-1.5 mx-2 rounded-full" style={{ background: 'linear-gradient(to right, rgb(34, 197, 94), rgb(250, 204, 21), rgb(249, 115, 22), rgb(239, 68, 68))' }} />
+              <span className="flex items-center gap-1">Expensive<div className="w-2 h-2 sm:w-3 sm:h-3 rounded" style={{ background: 'rgb(239, 68, 68)' }} /></span>
             </div>
 
-            <p className="text-[9px] text-surface-500 text-center">Click a region to see ingredient breakdown</p>
+            <p className="text-[9px] sm:text-xs text-surface-500 text-center">Click a region to see ingredient breakdown</p>
           </div>
 
-          <div className="flex-1 min-w-0 h-[220px] flex flex-col">
+          <div className="flex-1 min-w-0 h-[280px] flex flex-col">
             {activeZone && currentZone && currentBreakdown && (
-              <div className="bg-surface-100/80 dark:bg-surface-800/80 rounded-lg p-2.5 h-full flex flex-col">
-                <div className="flex items-center justify-between mb-1.5 flex-shrink-0">
-                  <div className="flex items-center gap-1.5">
-                    <ZoneIcon zoneId={activeZone} size={16} />
-                    <span className="text-xs font-semibold text-surface-700 dark:text-surface-200">{currentZone.name}</span>
+              <div className="bg-surface-100/80 dark:bg-surface-800/80 rounded-lg p-2.5 sm:p-4 h-full flex flex-col">
+                <div className="flex items-center justify-between mb-1.5 sm:mb-3 flex-shrink-0">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <ZoneIcon zoneId={activeZone} size={16} className="sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-semibold text-surface-700 dark:text-surface-200">{currentZone.name}</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className={`text-sm font-bold font-mono ${getPriceColor(currentPrice, minPrice, maxPrice).text}`}>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className={`text-sm sm:text-lg font-bold font-mono ${getPriceColor(currentPrice, minPrice, maxPrice).text}`}>
                       ${currentPrice?.toFixed(2) ?? 'N/A'}
                     </span>
-                    {selectedZone && <button onClick={() => setSelectedZone(null)} className="p-0.5 rounded text-surface-400 hover:text-surface-600"><X size={12} /></button>}
+                    {selectedZone && <button onClick={() => setSelectedZone(null)} className="p-0.5 sm:p-1 rounded text-surface-400 hover:text-surface-600"><X size={12} className="sm:w-4 sm:h-4" /></button>}
                   </div>
                 </div>
-                <div className="space-y-0.5 flex-1 overflow-y-auto">
-                  {sortedBreakdown.slice(0, 5).map((item) => (
-                    <div key={item.name} className="flex items-center gap-1.5 text-[11px]">
-                      <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{item.name}</span>
-                      <span className="text-surface-500 font-mono">{totalCost > 0 ? ((item.cost / totalCost) * 100).toFixed(0) : 0}%</span>
-                      <span className="font-bold font-mono text-surface-700 dark:text-surface-200 w-10 text-right">${item.cost.toFixed(2)}</span>
+                <div className="space-y-0.5 sm:space-y-1.5 flex-1 overflow-y-auto">
+                  {sortedBreakdown.slice(0, 8).map((item) => (
+                    <div key={item.name} className="flex items-center gap-1.5 sm:gap-3 text-[11px] sm:text-sm">
+                      <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{item.name}, {item.netWeight || 0}g</span>
+                      <span className="font-bold font-mono text-surface-700 dark:text-surface-200 w-10 sm:w-14 text-right">${item.cost.toFixed(2)}</span>
                     </div>
                   ))}
                 </div>

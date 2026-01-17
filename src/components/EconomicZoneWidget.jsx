@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import { ChevronDown } from '../icons/lucide';
 import WorldMapWidget from './WorldMapWidget';
 import { ECONOMIC_ZONES } from '../lib/RankingEngine';
 import ZoneIcon from './ZoneIcon';
+import { tZoneName } from '../i18n/dataTranslations';
 
 /**
  * Economic zone widget content
@@ -12,6 +14,8 @@ export default function EconomicZoneWidget({
   handleZoneButtonClick, 
   isZoneDropdownOpen 
 }) {
+  const { t } = useTranslation();
+  const zoneName = tZoneName(t, selectedZone) || ECONOMIC_ZONES[selectedZone]?.name || '';
   return (
     <div className="hidden sm:block sm:w-[260px] bg-white dark:bg-surface-800 rounded-xl p-2 sm:p-3 border border-surface-300/50 dark:border-surface-700/50 flex flex-col">
       <div className="w-full relative flex-shrink-0 flex-1" style={{ height: '140px' }}>
@@ -31,7 +35,7 @@ export default function EconomicZoneWidget({
           className="flex items-center gap-2 text-sm font-medium text-surface-700 dark:text-surface-200 w-full text-left"
         >
           <ZoneIcon zoneId={selectedZone} size={18} />
-          <span className="truncate flex-1">{ECONOMIC_ZONES[selectedZone]?.name}</span>
+          <span className="truncate flex-1">{zoneName}</span>
           <ChevronDown 
             size={16} 
             className={`text-surface-500 dark:text-surface-400 transition-transform ${isZoneDropdownOpen ? 'rotate-180' : ''}`}

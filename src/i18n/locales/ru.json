@@ -1,0 +1,110 @@
+{
+  "settings": {
+    "title": "Настройки",
+    "close": "Закрыть настройки",
+    "language": {
+      "title": "Язык",
+      "en": "English",
+      "ru": "Русский",
+      "ua": "Українська"
+    },
+    "speedScore": {
+      "title": "Оценка скорости основана на",
+      "normal": {
+        "title": "Обычное приготовление",
+        "description": "Скорость приготовления основана на типичных временах рецептов."
+      },
+      "optimized": {
+        "title": "Оптимизированное время",
+        "description": "Многие блюда можно приготовить намного быстрее, используя пакетную обработку и профессиональные кухонные техники. Этот режим применяет эти оптимизированные времена."
+      }
+    },
+    "tasteScore": {
+      "title": "Оценка вкуса основана на:",
+      "aiAnalysis": {
+        "title": "AI Анализ",
+        "description": "Анализ поляризации мнений. Каждое блюдо оценивалось по уровню поляризации мнений в странах потребления (чтобы избежать «западной предвзятости») с использованием Gemini 3 Flash Thinking с контекстом предыдущих оценок."
+      },
+      "sentimentAnalysis": {
+        "title": "Анализ настроений",
+        "description": "Поляризация мнений для каждого блюда на основе анализа настроений из баз данных отзывов Yelp и Amazon Food Reviews."
+      }
+    },
+    "priceScore": {
+      "title": "Оценка цены основана на",
+      "description": "Выберите экономическую зону. Это используется для расчета местной стоимости приготовления блюда в выбранном регионе."
+    }
+  },
+  "presets": {
+    "choosePreset": "Выбрать пресет",
+    "selectPreset": "Выбрать пресет",
+    "chooseConfiguration": "Выберите конфигурацию",
+    "selectPresetDescription": "Выберите пресет, чтобы применить предустановленные настройки приоритетов и конфигурации.",
+    "savePresetTitle": "Сохранить пресет",
+    "presetName": "Название пресета",
+    "presetNamePlaceholder": "Мой пресет",
+    "cancel": "Отмена",
+    "save": "Сохранить"
+  },
+  "priorities": {
+    "title": "Мои Приоритеты",
+    "save": "Сохранить",
+    "reset": "Сброс",
+    "disabled": "Приоритеты отключены. Отображение списка в алфавитном порядке.",
+    "taste": {
+      "positiveLabel": "Вкусное",
+      "negativeLabel": "Нишевое",
+      "description": "Вкус и удовольствие"
+    },
+    "health": {
+      "positiveLabel": "Здоровое",
+      "negativeLabel": "Вредное",
+      "description": "Пищевая ценность"
+    },
+    "cheapness": {
+      "positiveLabel": "Дешевое",
+      "negativeLabel": "Дорогое",
+      "description": "Низкая стоимость"
+    },
+    "speed": {
+      "positiveLabel": "Быстрое",
+      "negativeLabel": "Долгое",
+      "description": "Быстрое приготовление"
+    },
+    "lowCalorie": {
+      "positiveLabel": "Низкокалорийное",
+      "negativeLabel": "Высококалорийное",
+      "description": "Меньше ккал/100г"
+    },
+    "ethics": {
+      "positiveLabel": "Этичное",
+      "negativeLabel": "Неэтичное",
+      "description": "Этичное происхождение"
+    }
+  },
+  "ui": {
+    "searchDishes": "Поиск блюд...",
+    "pricePer": "Цена за",
+    "showMore": "Показать ещё (осталось {{count}})",
+    "showMore_plural": "Показать ещё (осталось {{count}})",
+    "priceUnits": {
+      "kcal": "Ккал",
+      "kg": "Кг",
+      "serving": "Порция"
+    }
+  },
+  "zones": {
+    "title": "Экономическая Зона",
+    "east_euro_agrarian": "Восточная Европа",
+    "west_eu_industrial": "Западная Европа",
+    "northern_import": "Северный импорт",
+    "mediterranean": "Средиземноморье",
+    "north_american": "Северная Америка",
+    "latam_agrarian": "Латинская Америка",
+    "asian_rice_labor": "Азия (Рисовый пояс)",
+    "developed_asia": "Развитая Азия",
+    "mena_arid": "Ближний Восток и Северная Африка",
+    "oceanic": "Океания",
+    "subsaharan_subsistence": "Африка к югу от Сахары"
+  }
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, lazy, Suspense, useCallback } from 'react';
+import { useEffect, useState, useRef, lazy, Suspense, useCallback, useMemo } from 'react';
 import { m, AnimatePresence } from '../lib/motion';
 import {
   X,
@@ -9,11 +9,15 @@ import {
   Map as MapIcon,
   ChevronLeft,
   ChevronRight,
+  Maximize2,
+  Minimize2,
 } from '../icons/lucide';
 import { useIsMobile } from '../lib/useIsMobile';
 import { getScoreColor } from './dishCardUtils';
 import { prefsActions, usePrefs } from '../store/prefsStore';
 import { loadIngredientsIndex } from '../lib/loadIngredientsIndex';
+import { useTranslation } from 'react-i18next';
+import { tDishName, tDishDesc, tIngredientName } from '../i18n/dataTranslations';
 
 // Lazy load slide components for code splitting
 const OverviewSlide = lazy(() => import('./OverviewSlide'));
@@ -114,11 +118,11 @@ function SlideNavigation({ slides, currentSlide, onSlideChange, isMobile, disabl
     );
   }
   
-  // Desktop: Original design but refined
+  // Desktop: Larger and more readable tabs
   return (
     <div 
       ref={containerRef}
-      className="flex items-center gap-1 overflow-x-auto py-1 px-1"
+      className="flex items-center gap-1.5 overflow-x-auto py-2 px-2"
       style={{ scrollbarWidth: 'thin', msOverflowStyle: '-ms-autohiding-scrollbar' }}
     >
       {slides.map((slide, idx) => {
@@ -136,22 +140,79 @@ function SlideNavigation({ slides, currentSlide, onSlideChange, isMobile, disabl
             }}
             disabled={disabled}
             className={`
-              flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
+              flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium
               transition-all duration-200 flex-shrink-0 whitespace-nowrap
               ${isActive 
-                ? 'text-white border border-white/20' 
+                ? 'text-white border border-white/20 shadow-md' 
                 : 'text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 hover:bg-surface-200/30 dark:hover:bg-surface-700/30'
               }
               ${disabled ? 'opacity-50 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}
             `}
             style={isActive ? { backgroundColor: slideColor } : {}}
           >
-            <Icon size={14} />
+            <Icon size={16} />
             <span>{slide.label}</span>
           </button>
         );
       })}
     </div>
+  );
+}
+
+/**
+ * Fullscreen image lightbox for desktop
+ */
+function ImageLightbox({ src, alt, description, onClose }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  return (
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center cursor-zoom-out overflow-y-auto"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-10 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors backdrop-blur-sm"
+      >
+        <X size={24} />
+      </button>
+      
+      <div className="flex flex-col items-center justify-center w-full max-w-[95vw] py-20" onClick={(e) => e.stopPropagation()}>
+        <m.img
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          src={src}
+          alt={alt}
+          className="max-w-[95vw] max-h-[80vh] object-contain rounded-lg shadow-2xl mb-6"
+        />
+        
+        {description && (
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
+            className="max-w-4xl px-6 text-center"
+          >
+            <p className="text-white/90 text-lg sm:text-xl leading-relaxed">
+              {description}
+            </p>
+          </m.div>
+        )}
+      </div>
+    </m.div>
   );
 }
 
@@ -164,6 +225,8 @@ function clamp(n, min, max) {
 
 function HeroHeader({
   dish,
+  dishName,
+  dishDesc,
   onClose,
   isMobile,
   heroHeightPx,
@@ -172,6 +235,7 @@ function HeroHeader({
   heroMode,
   setHeroMode,
   setHeroHeightPx,
+  onImageClick,
 }) {
   // Show small placeholder immediately; render big image above it once loaded (no transitions).
   const smallSrc = dish?.originalDish?.img_s || dish?.img_s;
@@ -185,9 +249,12 @@ function HeroHeader({
 
   const isExpanded = heroMode === 'expanded';
   
+  // Desktop: larger hero, clickable for lightbox
+  const desktopHeight = 'h-64';
+  
   return (
     <div
-      className={`relative overflow-hidden rounded-t-xl flex-shrink-0 ${!isMobile ? 'h-48' : ''}`}
+      className={`relative overflow-hidden rounded-t-xl flex-shrink-0 ${!isMobile ? desktopHeight : ''}`}
       style={{
         height: isMobile ? `${heroHeightPx}px` : undefined,
       }}
@@ -199,7 +266,7 @@ function HeroHeader({
       {smallSrc && (
         <img
           src={smallSrc}
-          alt={dish?.name || ''}
+          alt={dishName || ''}
           className="absolute inset-0 w-full h-full object-cover"
           decoding="async"
           loading="eager"
@@ -211,7 +278,7 @@ function HeroHeader({
       {bigSrc && (
         <img
           src={bigSrc}
-          alt={dish?.name || ''}
+          alt={dishName || ''}
           className="absolute inset-0 w-full h-full object-cover"
           decoding="async"
           loading="eager"
@@ -236,11 +303,21 @@ function HeroHeader({
         }}
       />
       
+      {/* Desktop: expand button in top right corner */}
+      {!isMobile && bigSrc && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onImageClick(); }}
+          className="absolute top-3 right-14 z-10 p-2 rounded-full bg-black/30 text-white/90 hover:bg-black/50 transition-colors backdrop-blur-sm"
+        >
+          <Maximize2 size={isMobile ? 20 : 22} />
+        </button>
+      )}
+      
       <button
-        onClick={onClose}
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
         className={`absolute top-3 right-3 z-10 p-2 rounded-full bg-black/30 text-white/90 hover:bg-black/50 transition-colors ${!isMobile ? 'backdrop-blur-sm' : ''}`}
       >
-        <X size={20} />
+        <X size={isMobile ? 20 : 22} />
       </button>
 
       {isMobile && (
@@ -249,24 +326,24 @@ function HeroHeader({
         </div>
       )}
       
-      <div className="absolute bottom-0 left-0 right-0 p-4">
-        <div className="flex items-end justify-between gap-3">
+      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-end justify-between gap-3 sm:gap-4">
           <div className="flex-1 min-w-0">
-            <h2 className="font-display font-bold text-lg sm:text-xl text-white truncate drop-shadow-lg">
-              {dish?.name}
+            <h2 className="font-display font-bold text-lg sm:text-2xl text-white truncate drop-shadow-lg">
+              {dishName}
             </h2>
             <p
               className={[
-                'text-white/80 text-xs sm:text-sm mt-0.5 drop-shadow leading-snug',
-                isExpanded ? 'line-clamp-none max-h-40 overflow-auto pr-1 custom-scrollbar' : 'line-clamp-1',
+                'text-white/80 text-xs sm:text-base mt-0.5 sm:mt-1 drop-shadow leading-snug',
+                isExpanded ? 'line-clamp-none max-h-40 overflow-auto pr-1 custom-scrollbar' : 'line-clamp-1 sm:line-clamp-2',
               ].join(' ')}
             >
-              {dish?.description || dish?.originalDish?.desc}
+              {dishDesc}
             </p>
           </div>
           
-          <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${scoreColors.bg} ${scoreColors.glow} shadow-lg`}>
-            <span className="text-lg font-display font-bold text-white">{dish?.score ?? 0}</span>
+          <div className={`flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center ${scoreColors.bg} ${scoreColors.glow} shadow-lg`}>
+            <span className="text-lg sm:text-xl font-display font-bold text-white">{dish?.score ?? 0}</span>
           </div>
         </div>
       </div>
@@ -287,6 +364,7 @@ export default function DishModal({
   rankingMeta = null,
   priceUnit = 'serving',
 }) {
+  const { t, i18n } = useTranslation();
   const isMobile = useIsMobile();
   const theme = usePrefs((s) => s.prefs.theme);
   const isDark = theme !== 'light';
@@ -297,6 +375,17 @@ export default function DishModal({
   const contentScrollRef = useRef(null);
   const modalContainerRef = useRef(null);
   const [isEditingScores, setIsEditingScores] = useState(false);
+  
+  // Desktop lightbox state
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const bigImageSrc = dish?.originalDish?.img_b || dish?.img_b;
+
+  const dishName = tDishName(t, dish);
+  const dishDesc = tDishDesc(t, dish);
+  const dishUi = useMemo(
+    () => (dish ? { ...dish, displayName: dishName, displayDesc: dishDesc } : dish),
+    [dish, dishName, dishDesc],
+  );
 
   // Lazily loaded ingredients DB/index (only needed for some slides).
   const [loadedIngredientIndex, setLoadedIngredientIndex] = useState(null);
@@ -596,8 +685,23 @@ export default function DishModal({
   };
   
   const ingredients = dish?.originalDish?.ingredients || [];
+  const ingredientsUi = useMemo(() => {
+    // Depend on language so this re-computes on toggle.
+    const _lng = i18n.language;
+    return (ingredients || []).map((ing) => ({
+      ...ing,
+      displayName: tIngredientName(t, ing?.name),
+    }));
+  }, [ingredients, t, i18n.language]);
   const ingredientIndex = loadedIngredientIndex;
   const unavailableIngredients = dish?.unavailableIngredients || [];
+  const unavailableIngredientsUi = useMemo(() => {
+    const _lng = i18n.language;
+    return (unavailableIngredients || []).map((ing) => ({
+      ...ing,
+      displayName: tIngredientName(t, ing?.name),
+    }));
+  }, [unavailableIngredients, t, i18n.language]);
   const missingIngredients = dish?.missingIngredients || [];
   const missingPrices = dish?.missingPrices || [];
   
@@ -607,6 +711,18 @@ export default function DishModal({
     <AnimatePresence>
       {isOpen && (
         <>
+          {/* Desktop lightbox for full image view */}
+          <AnimatePresence>
+            {isLightboxOpen && !isMobile && bigImageSrc && (
+              <ImageLightbox 
+                src={bigImageSrc} 
+                alt={dishName || ''} 
+                description={dishDesc}
+                onClose={() => setIsLightboxOpen(false)} 
+              />
+            )}
+          </AnimatePresence>
+          
           <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -629,7 +745,7 @@ export default function DishModal({
               fixed z-50 bg-white dark:bg-surface-900 shadow-2xl overflow-hidden flex flex-col
               ${isMobile 
                 ? 'inset-x-2 top-4 bottom-4 rounded-xl' 
-                : 'left-1/2 top-1/2 w-full max-w-2xl h-[56vh] rounded-xl'
+                : 'left-1/2 top-1/2 w-full max-w-4xl h-[80vh] max-h-[900px] rounded-2xl'
               }
             `}
             onTouchStart={onModalTouchStart}
@@ -638,7 +754,9 @@ export default function DishModal({
             onTouchCancel={onModalTouchEnd}
           >
             <HeroHeader 
-              dish={dish}
+              dish={dishUi}
+              dishName={dishName}
+              dishDesc={dishDesc}
               onClose={onClose}
               isMobile={isMobile}
               heroHeightPx={isMobile ? heroHeightPx : undefined}
@@ -647,6 +765,7 @@ export default function DishModal({
               heroMode={heroMode}
               setHeroMode={setHeroMode}
               setHeroHeightPx={setHeroHeightPx}
+              onImageClick={() => setIsLightboxOpen(true)}
             />
             
             <div className="border-b border-surface-200 dark:border-surface-700 flex-shrink-0 relative">
@@ -665,18 +784,18 @@ export default function DishModal({
                   disabled={isEditingScores}
                 />
               ) : (
-                // Desktop: Tabs with arrows
-                <div className="flex items-center justify-between px-2">
+                // Desktop: Tabs with arrows - larger and more visible
+                <div className="flex items-center justify-between px-3">
                   <button
                     onClick={() => {
                       if (isEditingScores) return;
                       setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
                     }}
                     disabled={isEditingScores}
-                    className={`p-1.5 rounded-lg text-surface-500 hover:bg-surface-200/50 dark:hover:bg-surface-700/50 flex-shrink-0 transition-colors ${isEditingScores ? 'opacity-50 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}`}
+                    className={`p-2 rounded-lg text-surface-500 hover:text-surface-700 dark:hover:text-surface-300 hover:bg-surface-200/50 dark:hover:bg-surface-700/50 flex-shrink-0 transition-colors ${isEditingScores ? 'opacity-50 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}`}
                     aria-label="Previous slide"
                   >
-                    <ChevronLeft size={18} />
+                    <ChevronLeft size={22} />
                   </button>
                   
                   <SlideNavigation 
@@ -693,10 +812,10 @@ export default function DishModal({
                       setCurrentSlide((prev) => (prev + 1) % slides.length);
                     }}
                     disabled={isEditingScores}
-                    className={`p-1.5 rounded-lg text-surface-500 hover:bg-surface-200/50 dark:hover:bg-surface-700/50 flex-shrink-0 transition-colors ${isEditingScores ? 'opacity-50 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}`}
+                    className={`p-2 rounded-lg text-surface-500 hover:text-surface-700 dark:hover:text-surface-300 hover:bg-surface-200/50 dark:hover:bg-surface-700/50 flex-shrink-0 transition-colors ${isEditingScores ? 'opacity-50 cursor-not-allowed hover:bg-transparent dark:hover:bg-transparent' : ''}`}
                     aria-label="Next slide"
                   >
-                    <ChevronRight size={18} />
+                    <ChevronRight size={22} />
                   </button>
                 </div>
               )}
@@ -704,7 +823,7 @@ export default function DishModal({
             
             <div 
               ref={contentScrollRef}
-              className={`flex-1 overflow-x-hidden p-4 ${isEditingScores ? 'overflow-y-hidden' : 'overflow-y-auto'}`}
+              className={`flex-1 overflow-x-hidden p-4 sm:p-6 ${isEditingScores ? 'overflow-y-hidden' : 'overflow-y-auto'}`}
               style={isEditingScores ? { touchAction: 'none' } : undefined}
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
@@ -721,9 +840,9 @@ export default function DishModal({
                   <Suspense fallback={<div className="flex items-center justify-center h-32 text-surface-500">Loading...</div>}>
                     {currentSlide === 0 && (
                       <OverviewSlide
-                        dish={dish}
-                        ingredients={ingredients}
-                        unavailableIngredients={unavailableIngredients}
+                        dish={dishUi}
+                        ingredients={ingredientsUi}
+                        unavailableIngredients={unavailableIngredientsUi}
                         missingIngredients={missingIngredients}
                         missingPrices={missingPrices}
                         priorities={priorities}
@@ -738,30 +857,29 @@ export default function DishModal({
                     )}
                     {currentSlide === 1 && (
                       <IndexMapSlide 
-                        dish={dish} 
+                        dish={dishUi} 
                         ingredientIndex={ingredientIndex} 
                         isMobile={isMobile} 
-                        priceUnit={priceUnit} 
                         defaultSelectedZone={userSelectedZone} 
                       />
                     )}
                     {currentSlide === 2 && (
                       <TimeSlide 
-                        dish={dish} 
+                        dish={dishUi} 
                         isOptimized={isOptimized} 
                       />
                     )}
                     {currentSlide === 3 && (
                       <HealthSlide 
-                        dish={dish} 
-                        ingredients={ingredients} 
+                        dish={dishUi} 
+                        ingredients={ingredientsUi} 
                         ingredientIndex={ingredientIndex} 
                       />
                     )}
                     {currentSlide === 4 && (
                       <EthicsSlide 
-                        dish={dish} 
-                        ingredients={ingredients} 
+                        dish={dishUi} 
+                        ingredients={ingredientsUi} 
                         ingredientIndex={ingredientIndex} 
                       />
                     )}
@@ -770,7 +888,7 @@ export default function DishModal({
               </AnimatePresence>
             </div>
             
-            <div className={`flex justify-center gap-2 py-2 border-t border-surface-200/50 dark:border-surface-700/50 flex-shrink-0 ${isEditingScores ? 'opacity-50' : ''}`}>
+            <div className={`flex justify-center gap-2 py-3 sm:py-4 border-t border-surface-200/50 dark:border-surface-700/50 flex-shrink-0 ${isEditingScores ? 'opacity-50' : ''}`}>
               {slides.map((_, idx) => (
                 <button
                   key={idx}
@@ -779,7 +897,7 @@ export default function DishModal({
                     setCurrentSlide(idx);
                   }}
                   disabled={isEditingScores}
-                  className={`h-1.5 rounded-full transition-all ${idx === currentSlide ? 'bg-food-500 w-5' : 'bg-surface-400 dark:bg-surface-600 w-1.5'}`}
+                  className={`h-2 sm:h-2.5 rounded-full transition-all ${idx === currentSlide ? 'bg-food-500 w-6 sm:w-8' : 'bg-surface-400 dark:bg-surface-600 w-2 sm:w-2.5'}`}
                 />
               ))}
             </div>

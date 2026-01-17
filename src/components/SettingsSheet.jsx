@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AnimatePresence, m } from '../lib/motion';
 import { X } from '../icons/lucide';
 import { usePrefs, prefsActions } from '../store/prefsStore';
 import { ECONOMIC_ZONES } from '../lib/RankingEngine';
 import ZoneIcon from './ZoneIcon';
 import { useIsMobile } from '../lib/useIsMobile';
+import { tZoneName } from '../i18n/dataTranslations';
 
 function CookingModeOption({ value, isSelected, title, description, onSelect }) {
   return (
@@ -45,6 +47,8 @@ function CookingModeOption({ value, isSelected, title, description, onSelect }) 
 }
 
 function ZoneOption({ zoneId, zone, isSelected, onSelect }) {
+  const { t } = useTranslation();
+  const zoneName = tZoneName(t, zoneId) || zone.name;
   return (
     <button
       type="button"
@@ -64,7 +68,7 @@ function ZoneOption({ zoneId, zone, isSelected, onSelect }) {
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0 flex-1">
           <ZoneIcon zoneId={zoneId} size={18} />
-          <span className="text-sm font-semibold truncate">{zone.name}</span>
+          <span className="text-sm font-semibold truncate">{zoneName}</span>
         </div>
         <div
           className={`
@@ -81,9 +85,11 @@ function ZoneOption({ zoneId, zone, isSelected, onSelect }) {
 }
 
 export default function SettingsSheet({ open, onClose }) {
+  const { t } = useTranslation();
   const isOptimized = usePrefs((s) => s.prefs.isOptimized);
   const selectedZone = usePrefs((s) => s.prefs.selectedZone);
   const tasteScoreMethod = usePrefs((s) => s.prefs.tasteScoreMethod);
+  const language = usePrefs((s) => s.prefs.language);
   const closeBtnRef = useRef(null);
   const isMobile = useIsMobile();
 
@@ -124,6 +130,10 @@ export default function SettingsSheet({ open, onClose }) {
 
   const setTasteScoreMethod = (method) => {
     prefsActions.setPref({ tasteScoreMethod: method });
+  };
+
+  const setLanguage = (lng) => {
+    prefsActions.setPref({ language: lng === 'ru' ? 'ru' : lng === 'ua' ? 'ua' : 'en' });
   };
 
   return (
@@ -175,7 +185,7 @@ export default function SettingsSheet({ open, onClose }) {
             <div className={`px-4 ${isMobile ? 'pt-3 pb-2' : 'pt-4 pb-3'} flex items-center justify-between flex-shrink-0`}>
               <div className="min-w-0">
                 <div className="text-base font-bold text-surface-900 dark:text-surface-100">
-                  Settings
+                  {t('settings.title')}
                 </div>
               </div>
               <button
@@ -183,7 +193,7 @@ export default function SettingsSheet({ open, onClose }) {
                 type="button"
                 onClick={onClose}
                 className="w-10 h-10 rounded-xl flex items-center justify-center bg-surface-100/80 dark:bg-surface-800/80 border border-surface-300/50 dark:border-surface-700/50 hover:bg-surface-200/80 dark:hover:bg-surface-700/80 transition-colors"
-                aria-label="Close settings"
+                aria-label={t('settings.close')}
               >
                 <X size={18} />
               </button>
@@ -198,21 +208,21 @@ export default function SettingsSheet({ open, onClose }) {
                 {/* Cooking time mode */}
                 <div>
                   <div className="text-sm font-semibold text-surface-900 dark:text-surface-100 mb-2">
-                    Speed Score Based on
+                    {t('settings.speedScore.title')}
                   </div>
-                  <div role="radiogroup" aria-label="Cooking time mode" className="space-y-2">
+                  <div role="radiogroup" aria-label={t('settings.speedScore.title')} className="space-y-2">
                     <CookingModeOption
                       value="normal"
                       isSelected={!isOptimized}
-                      title="Normal cooking"
-                      description="Cooking speed is based on typical recipe times."
+                      title={t('settings.speedScore.normal.title')}
+                      description={t('settings.speedScore.normal.description')}
                       onSelect={setMode}
                     />
                     <CookingModeOption
                       value="optimized"
                       isSelected={isOptimized}
-                      title="Time optimized"
-                      description="Many dishes can be prepared much faster using batching and professional kitchen techniques. This mode applies these optimized timings."
+                      title={t('settings.speedScore.optimized.title')}
+                      description={t('settings.speedScore.optimized.description')}
                       onSelect={setMode}
                     />
                   </div>
@@ -221,22 +231,52 @@ export default function SettingsSheet({ open, onClose }) {
                 {/* Taste score method */}
                 <div>
                   <div className="text-sm font-semibold text-surface-900 dark:text-surface-100 mb-2">
-                    Taste Score Based on:
+                    {t('settings.tasteScore.title')}
                   </div>
-                  <div role="radiogroup" aria-label="Taste score method" className="space-y-2">
+                  <div role="radiogroup" aria-label={t('settings.tasteScore.title')} className="space-y-2">
                     <CookingModeOption
                       value="taste_score"
                       isSelected={tasteScoreMethod === 'taste_score'}
-                      title="AI Analysis"
-                      description="Opinion polarization analysis. Each dish was evaluated by the level of opinion polarization within consuming countries (to avoid 'Western bias') using Gemini 3 Flash Thinking with context from previous evaluations."
+                      title={t('settings.tasteScore.aiAnalysis.title')}
+                      description={t('settings.tasteScore.aiAnalysis.description')}
                       onSelect={setTasteScoreMethod}
                     />
                     <CookingModeOption
                       value="sentiment_score"
                       isSelected={tasteScoreMethod === 'sentiment_score'}
-                      title="Sentiment Analysis"
-                      description="Opinion polarization for each dish based on sentiment analysis from Yelp and Amazon Food Reviews databases."
+                      title={t('settings.tasteScore.sentimentAnalysis.title')}
+                      description={t('settings.tasteScore.sentimentAnalysis.description')}
                       onSelect={setTasteScoreMethod}
+                    />
+                  </div>
+                </div>
+
+                {/* Language */}
+                <div>
+                  <div className="text-sm font-semibold text-surface-900 dark:text-surface-100 mb-2">
+                    {t('settings.language.title')}
+                  </div>
+                  <div role="radiogroup" aria-label={t('settings.language.title')} className="space-y-2">
+                    <CookingModeOption
+                      value="en"
+                      isSelected={language === 'en'}
+                      title={t('settings.language.en')}
+                      description=""
+                      onSelect={setLanguage}
+                    />
+                    <CookingModeOption
+                      value="ru"
+                      isSelected={language === 'ru'}
+                      title={t('settings.language.ru')}
+                      description=""
+                      onSelect={setLanguage}
+                    />
+                    <CookingModeOption
+                      value="ua"
+                      isSelected={language === 'ua'}
+                      title={t('settings.language.ua')}
+                      description=""
+                      onSelect={setLanguage}
                     />
                   </div>
                 </div>
@@ -244,12 +284,12 @@ export default function SettingsSheet({ open, onClose }) {
                 {/* Economic zone */}
                 <div>
                   <div className="text-sm font-semibold text-surface-900 dark:text-surface-100 mb-2">
-                    Price Score Based on
+                    {t('settings.priceScore.title')}
                   </div>
                   <div className="text-xs text-surface-500 dark:text-surface-400 mb-3 leading-snug">
-                    Select an economic zone. This is used to calculate the local cost of preparing the dish in the selected region.
+                    {t('settings.priceScore.description')}
                   </div>
-                  <div role="radiogroup" aria-label="Economic zone" className="space-y-2 max-h-[280px] overflow-y-auto custom-scrollbar pr-1">
+                  <div role="radiogroup" aria-label={t('zones.title')} className="space-y-2 max-h-[280px] overflow-y-auto custom-scrollbar pr-1">
                     {Object.entries(ECONOMIC_ZONES).map(([zoneId, zone]) => (
                       <ZoneOption
                         key={zoneId}

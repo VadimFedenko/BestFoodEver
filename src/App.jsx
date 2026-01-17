@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { LazyMotion, domAnimation, m } from './lib/motion';
 import Header from './components/Header';
 import { usePrefs } from './store/prefsStore';
+import i18n from './i18n/i18n';
 
 const PrioritiesPanel = lazy(() => import('./components/PrioritiesPanel'));
 const DishList = lazy(() => import('./components/DishList'));
@@ -38,6 +39,7 @@ export default function App() {
   const theme = usePrefs((s) => s.prefs.theme);
   const viewMode = usePrefs((s) => s.prefs.viewMode);
   const tasteScoreMethod = usePrefs((s) => s.prefs.tasteScoreMethod);
+  const language = usePrefs((s) => s.prefs.language);
   const computationPriorities = usePrefs((s) => s.computationPriorities);
   const isDark = theme !== 'light';
   
@@ -69,6 +71,13 @@ export default function App() {
     // Allow transitions after initial theme is resolved to avoid startup flicker
     document.documentElement.classList.remove('theme-preload');
   }, [isDark]);
+
+  // Keep i18n language in sync with preferences.
+  useEffect(() => {
+    const next = language === 'ru' ? 'ru' : language === 'ua' ? 'ua' : 'en';
+    if (i18n.language !== next) i18n.changeLanguage(next);
+    document.documentElement.lang = next;
+  }, [language]);
 
   // Create worker once.
   useEffect(() => {

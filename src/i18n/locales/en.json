@@ -1,0 +1,110 @@
+{
+  "settings": {
+    "title": "Settings",
+    "close": "Close settings",
+    "language": {
+      "title": "Language",
+      "en": "English",
+      "ru": "Russian",
+      "ua": "Ukrainian"
+    },
+    "speedScore": {
+      "title": "Speed Score Based on",
+      "normal": {
+        "title": "Normal cooking",
+        "description": "Cooking speed is based on typical recipe times."
+      },
+      "optimized": {
+        "title": "Time optimized",
+        "description": "Many dishes can be prepared much faster using batching and professional kitchen techniques. This mode applies these optimized timings."
+      }
+    },
+    "tasteScore": {
+      "title": "Taste Score Based on:",
+      "aiAnalysis": {
+        "title": "AI Analysis",
+        "description": "Opinion polarization analysis. Each dish was evaluated by the level of opinion polarization within consuming countries (to avoid 'Western bias') using Gemini 3 Flash Thinking with context from previous evaluations."
+      },
+      "sentimentAnalysis": {
+        "title": "Sentiment Analysis",
+        "description": "Opinion polarization for each dish based on sentiment analysis from Yelp and Amazon Food Reviews databases."
+      }
+    },
+    "priceScore": {
+      "title": "Cost Score Based on",
+      "description": "Select an economic zone. This is used to calculate the local cost of preparing the dish in the selected region."
+    }
+  },
+  "presets": {
+    "choosePreset": "Choose Preset",
+    "selectPreset": "Select Preset",
+    "chooseConfiguration": "Choose a configuration",
+    "selectPresetDescription": "Select a preset to apply predefined priority settings and configurations.",
+    "savePresetTitle": "Save Preset",
+    "presetName": "Preset name",
+    "presetNamePlaceholder": "My preset",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "priorities": {
+    "title": "My Priorities",
+    "save": "Save",
+    "reset": "Reset",
+    "disabled": "Priorities disabled. Displaying list in alphabetical order.",
+    "taste": {
+      "positiveLabel": "Tasty",
+      "negativeLabel": "Niche",
+      "description": "Flavor & enjoyment"
+    },
+    "health": {
+      "positiveLabel": "Healthy",
+      "negativeLabel": "Junky",
+      "description": "Nutritional value"
+    },
+    "cheapness": {
+      "positiveLabel": "Cheap",
+      "negativeLabel": "Costly",
+      "description": "Lower cost"
+    },
+    "speed": {
+      "positiveLabel": "Fast",
+      "negativeLabel": "Timey",
+      "description": "Quick to make"
+    },
+    "lowCalorie": {
+      "positiveLabel": "Low-Cal",
+      "negativeLabel": "High-Cal",
+      "description": "Lower kcal/100g"
+    },
+    "ethics": {
+      "positiveLabel": "Ethical",
+      "negativeLabel": "Unethical",
+      "description": "Ethical sourcing"
+    }
+  },
+  "ui": {
+    "searchDishes": "Search dishes...",
+    "pricePer": "Cost per",
+    "showMore": "Show more ({{count}} left)",
+    "showMore_plural": "Show more ({{count}} left)",
+    "priceUnits": {
+      "kcal": "Kcal",
+      "kg": "Kg",
+      "serving": "Serving"
+    }
+  },
+  "zones": {
+    "title": "Economic Zone",
+    "east_euro_agrarian": "Eastern Europe",
+    "west_eu_industrial": "Western Europe",
+    "northern_import": "Northern Import",
+    "mediterranean": "Mediterranean",
+    "north_american": "North America",
+    "latam_agrarian": "Latin America",
+    "asian_rice_labor": "Asia (Rice Belt)",
+    "developed_asia": "Developed Asia",
+    "mena_arid": "MENA Region",
+    "oceanic": "Oceania",
+    "subsaharan_subsistence": "Sub-Saharan Africa"
+  }
+}

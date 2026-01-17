@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, m } from '../lib/motion';
 import { ChevronDown, X, Check, Sparkles } from '../icons/lucide';
 import { useIsMobile } from '../lib/useIsMobile';
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
+import { tPresetName, tPresetDescription } from '../i18n/dataTranslations';
 
 /**
  * Preset option card for the selector
  */
 function PresetOption({ preset, isSelected, onSelect }) {
+  const { t } = useTranslation();
+  const presetName = tPresetName(t, preset);
+  const presetDescription = tPresetDescription(t, preset);
   return (
     <button
       type="button"
@@ -27,10 +32,10 @@ function PresetOption({ preset, isSelected, onSelect }) {
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <div className="text-sm font-semibold leading-snug">{preset.name}</div>
-          {preset.description && (
+          <div className="text-sm font-semibold leading-snug">{presetName}</div>
+          {presetDescription && (
             <div className="mt-1 text-xs text-surface-500 dark:text-surface-400 leading-snug">
-              {preset.description}
+              {presetDescription}
             </div>
           )}
         </div>
@@ -52,6 +57,7 @@ function PresetOption({ preset, isSelected, onSelect }) {
  * Desktop dropdown for presets
  */
 function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSelectPreset }) {
+  const { t } = useTranslation();
   const dropdownRef = useRef(null);
 
   let position = null;
@@ -103,7 +109,7 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
         <div className="flex items-center gap-2">
           <Sparkles size={16} className="text-food-500" />
           <span className="text-sm font-semibold text-surface-700 dark:text-surface-200">
-            Choose Preset
+            {t('presets.choosePreset')}
           </span>
         </div>
       </div>
@@ -128,10 +134,10 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
               `}
             >
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold">{preset.name}</div>
-                {preset.description && (
+                <div className="text-sm font-semibold">{tPresetName(t, preset)}</div>
+                {tPresetDescription(t, preset) && (
                   <div className="text-xs text-surface-500 dark:text-surface-400 mt-0.5 leading-snug">
-                    {preset.description}
+                    {tPresetDescription(t, preset)}
                   </div>
                 )}
               </div>
@@ -151,6 +157,7 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
  * Mobile modal for presets
  */
 function PresetModal({ open, presets, currentPreset, onClose, onSelectPreset }) {
+  const { t } = useTranslation();
   const closeBtnRef = useRef(null);
   const isMobile = useIsMobile();
 
@@ -201,7 +208,7 @@ function PresetModal({ open, presets, currentPreset, onClose, onSelectPreset }) 
           <m.div
             role="dialog"
             aria-modal="true"
-            aria-label="Choose Preset"
+            aria-label={t('presets.choosePreset')}
             className={`
               ${isMobile 
                 ? 'absolute top-0 left-0 right-0 rounded-b-2xl border-b border-surface-300/60 dark:border-surface-700/60'
@@ -223,7 +230,7 @@ function PresetModal({ open, presets, currentPreset, onClose, onSelectPreset }) 
               <div className="min-w-0 flex items-center gap-2">
                 <Sparkles size={18} className="text-food-500" />
                 <div className="text-base font-bold text-surface-900 dark:text-surface-100">
-                  Choose Preset
+                  {t('presets.choosePreset')}
                 </div>
               </div>
               <button
@@ -243,7 +250,7 @@ function PresetModal({ open, presets, currentPreset, onClose, onSelectPreset }) 
               style={isMobile ? { paddingBottom: 'calc(16px + var(--safe-area-inset-bottom))' } : {}}
             >
               <div className="text-xs text-surface-500 dark:text-surface-400 mb-3 leading-snug">
-                Select a preset to apply predefined priority settings and configurations.
+                {t('presets.selectPresetDescription')}
               </div>
               <div role="radiogroup" aria-label="Presets" className="space-y-2">
                 {presets.map((preset) => (
@@ -275,6 +282,7 @@ export default function PresetSelector({
   currentPreset = null, 
   onSelectPreset 
 }) {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef(null);
   const isMobile = useIsMobile();
@@ -287,8 +295,8 @@ export default function PresetSelector({
     setIsOpen(false);
   };
 
-  const displayName = currentPreset?.name || 'Select Preset';
-  const displayDescription = currentPreset?.description || 'Choose a configuration';
+  const displayName = currentPreset ? tPresetName(t, currentPreset) : t('presets.selectPreset');
+  const displayDescription = currentPreset ? tPresetDescription(t, currentPreset) : t('presets.chooseConfiguration');
 
   return (
     <>

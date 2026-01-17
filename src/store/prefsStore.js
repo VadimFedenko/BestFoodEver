@@ -23,6 +23,7 @@ const DEFAULT_PREFS = {
   viewMode: 'grid', // 'list' or 'grid'
   tasteScoreMethod: 'taste_score', // 'taste_score' or 'sentiment_score'
   currentPresetId: 'best-food-ever', // Track the active preset
+  language: 'en',
 };
 
 function readJsonSafe(key) {
@@ -58,6 +59,7 @@ function mergeDefaults(stored) {
     typeof merged.isOptimized === 'boolean' ? merged.isOptimized : DEFAULT_PREFS.isOptimized;
   merged.viewMode = merged.viewMode === 'grid' ? 'grid' : 'list';
   merged.tasteScoreMethod = merged.tasteScoreMethod === 'sentiment_score' ? 'sentiment_score' : DEFAULT_PREFS.tasteScoreMethod;
+  merged.language = merged.language === 'ru' ? 'ru' : merged.language === 'ua' ? 'ua' : 'en';
   return merged;
 }
 

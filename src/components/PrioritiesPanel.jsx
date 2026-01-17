@@ -1,4 +1,5 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from '../lib/motion';
 import { ChevronDown, ChevronUp } from '../icons/lucide';
 import { ECONOMIC_ZONES } from '../lib/RankingEngine';
@@ -7,32 +8,11 @@ import PrioritiesBoard from './PrioritiesBoard';
 import EconomicZoneWidget from './EconomicZoneWidget';
 import { usePrioritiesPanelAutoToggle } from '../hooks/usePrioritiesPanelAutoToggle';
 import { usePrefs, prefsActions } from '../store/prefsStore';
+import { userPresetsActions } from '../store/userPresetsStore';
 import ZoneDropdown from './ZoneDropdown';
 import ZoneIcon from './ZoneIcon';
 import { useIsMobile } from '../lib/useIsMobile';
-
-/**
- * Calculate percentage contribution of each priority
- * Only calculates for priorities with non-zero values to optimize performance
- */
-function calculatePercentages(priorities) {
-  // Filter only active priorities for faster calculation
-  const activeEntries = PRIORITY_CONFIG
-    .map(config => ({ key: config.key, value: Math.abs(priorities[config.key] || 0) }))
-    .filter(entry => entry.value > 0);
-  
-  if (activeEntries.length === 0) return {};
-  
-  const total = activeEntries.reduce((sum, entry) => sum + entry.value, 0);
-  if (total === 0) return {};
-  
-  const percentages = {};
-  activeEntries.forEach(({ key, value }) => {
-    percentages[key] = Math.round((value / total) * 100);
-  });
-  
-  return percentages;
-}
+import SavePresetModal from './SavePresetModal';
 
 /**
  * Compact priority icon for collapsed state
@@ -88,8 +68,12 @@ export default function PrioritiesPanel({
   onDraggingChange,
   scrollableElement = null,
 }) {
+  const { t } = useTranslation();
   const displayed = usePrefs((s) => s.uiPriorities);
   const selectedZone = usePrefs((s) => s.prefs.selectedZone);
+  const isOptimized = usePrefs((s) => s.prefs.isOptimized);
+  const priceUnit = usePrefs((s) => s.prefs.priceUnit);
+  const tasteScoreMethod = usePrefs((s) => s.prefs.tasteScoreMethod);
   const isDark = usePrefs((s) => s.prefs.theme) !== 'light';
   const viewMode = usePrefs((s) => s.prefs.viewMode);
   const isMobile = useIsMobile();
@@ -99,6 +83,7 @@ export default function PrioritiesPanel({
   const [isZoneDropdownOpen, setIsZoneDropdownOpen] = useState(false);
   const [zoneAnchorEl, setZoneAnchorEl] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
   // Handle pointer up for drag end - commit immediately
   useEffect(() => {
@@ -128,6 +113,7 @@ export default function PrioritiesPanel({
     scrollableElement,
     isExpanded,
     setExpanded: setIsExpanded,
+    disableScrollLock: isMobile,
   });
 
   // Dropdown handlers
@@ -149,28 +135,30 @@ export default function PrioritiesPanel({
     () => Object.values(displayed).every((v) => v === 0),
     [displayed],
   );
-  const percentages = useMemo(() => calculatePercentages(displayed), [displayed]);
 
-  // Handlers
-  const handleDragStart = () => {
-    if (!isDragging) {
-      setIsDragging(true);
-      onDraggingChange?.(true);
-    }
-  };
+  // Handlers - memoized to prevent PrioritiesBoard re-renders on isExpanded toggle
+  const handleDragStart = useCallback(() => {
+    setIsDragging((wasDragging) => {
+      if (!wasDragging) {
+        onDraggingChange?.(true);
+        return true;
+      }
+      return wasDragging;
+    });
+  }, [onDraggingChange]);
 
-  const handleSliderChange = (key, value) => {
+  const handleSliderChange = useCallback((key, value) => {
     prefsActions.updateUiPriorities((prev) => ({ ...(prev || {}), [key]: value }));
-  };
+  }, []);
   
-  const handleToggleReverse = (key) => {
+  const handleToggleReverse = useCallback((key) => {
     prefsActions.updateUiPriorities((prev) => {
       const currentValue = prev?.[key] ?? 0;
       const newValue = currentValue === 0 ? -5 : -currentValue;
       return { ...(prev || {}), [key]: newValue };
     });
     prefsActions.flushPriorities();
-  };
+  }, []);
 
   const handleReset = () => {
     const resetPriorities = Object.fromEntries(
@@ -180,6 +168,24 @@ export default function PrioritiesPanel({
     onDraggingChange?.(false);
     prefsActions.setUiPriorities(resetPriorities);
     prefsActions.flushPriorities();
+  };
+
+  const handleSavePreset = (presetName) => {
+    // Capture the in-UI priorities even if the user is mid-drag.
+    const settings = {
+      priorities: displayed,
+      priceUnit,
+      isOptimized,
+      tasteScoreMethod,
+      selectedZone,
+    };
+
+    const newPreset = userPresetsActions.addPreset({ name: presetName, settings });
+    if (newPreset) {
+      // Make it the active preset immediately (keeps current settings, but tracks currentPresetId).
+      prefsActions.applyPreset(newPreset);
+    }
+    setIsSaveModalOpen(false);
   };
 
   const handleToggleExpanded = () => {
@@ -199,9 +205,18 @@ export default function PrioritiesPanel({
             {/* Left header: priorities */}
             <div className="flex items-center justify-between gap-2 pr-10 sm:pr-0">
               <h2 className="font-display font-semibold text-sm min-[480px]:text-lg text-surface-800 dark:text-surface-100 whitespace-nowrap">
-                My Priorities
+                {t('priorities.title')}
               </h2>
               <div className="flex items-center gap-2 flex-shrink-0">
+                <button
+                  onClick={() => setIsSaveModalOpen(true)}
+                  className="px-3 py-1.5 text-xs font-medium text-surface-500 dark:text-surface-400 
+                             hover:text-surface-700 dark:hover:text-surface-200 
+                             hover:bg-surface-200/50 dark:hover:bg-surface-700/50 
+                             rounded-lg transition-colors whitespace-nowrap"
+                >
+                  {t('priorities.save')}
+                </button>
                 <button
                   onClick={handleReset}
                   className="px-3 py-1.5 text-xs font-medium text-surface-500 dark:text-surface-400 
@@ -209,7 +224,7 @@ export default function PrioritiesPanel({
                              hover:bg-surface-200/50 dark:hover:bg-surface-700/50 
                              rounded-lg transition-colors whitespace-nowrap"
                 >
-                  Reset
+                  {t('priorities.reset')}
                 </button>
               </div>
             </div>
@@ -217,7 +232,7 @@ export default function PrioritiesPanel({
             {/* Right header: map */}
             <div className="hidden sm:flex items-center justify-between">
               <h2 className="font-display font-semibold text-lg text-surface-800 dark:text-surface-100">
-                Economic Zone
+                {t('zones.title')}
               </h2>
             </div>
           </div>
@@ -244,7 +259,7 @@ export default function PrioritiesPanel({
             {/* Mobile layout: title, icons, and arrow in one row */}
             <div className="min-[480px]:hidden flex items-center gap-2 min-w-0">
               <h2 className="font-display font-semibold text-sm text-surface-800 dark:text-surface-100 whitespace-nowrap flex-shrink-0">
-                My Priorities
+                {t('priorities.title')}
               </h2>
               <div className="flex-1 min-w-0">
                 <CompactIconsRow
@@ -264,7 +279,7 @@ export default function PrioritiesPanel({
             {/* Desktop layout: title and icons in one row */}
             <div className="hidden min-[480px]:flex items-baseline gap-3">
               <h2 className="font-display font-semibold text-lg text-surface-800 dark:text-surface-100 whitespace-nowrap">
-                My Priorities
+                {t('priorities.title')}
               </h2>
               <CompactIconsRow
                 activePriorities={activePriorities}
@@ -305,7 +320,6 @@ export default function PrioritiesPanel({
               <PrioritiesBoard
                 priorityConfig={PRIORITY_CONFIG}
                 displayed={displayed}
-                percentages={percentages}
                 allPrioritiesZero={allPrioritiesZero}
                 handleSliderChange={handleSliderChange}
                 handleDragStart={handleDragStart}
@@ -330,6 +344,12 @@ export default function PrioritiesPanel({
         onSelectZone={(zoneId) => prefsActions.setPref({ selectedZone: zoneId })}
         onClose={closeDropdown}
         clickCapture
+      />
+
+      <SavePresetModal
+        open={isSaveModalOpen}
+        onCancel={() => setIsSaveModalOpen(false)}
+        onSave={handleSavePreset}
       />
     </div>
   );

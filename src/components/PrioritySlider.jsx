@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '../lib/useIsMobile';
 
 /**
@@ -10,12 +11,12 @@ import { useIsMobile } from '../lib/useIsMobile';
 function PrioritySlider({ 
   config, 
   value, 
-  percentage, 
   onChange, 
   onDragStart, 
   onToggleReverse, 
   isDark = false 
 }) {
+  const { t } = useTranslation();
   const isReversed = value < 0;
   const absValue = Math.abs(value);
   const isActive = absValue !== 0;
@@ -54,7 +55,9 @@ function PrioritySlider({
   
   // Select icon and label based on reversed state
   const Icon = isReversed ? config.negativeIcon : config.positiveIcon;
-  const label = isReversed ? config.negativeLabel : config.positiveLabel;
+  const label = isReversed 
+    ? t(`priorities.${config.key}.negativeLabel`, { defaultValue: config.negativeLabel })
+    : t(`priorities.${config.key}.positiveLabel`, { defaultValue: config.positiveLabel });
   
   // Select gradient color based on theme and reversed state
   const gradientColor = isReversed 
@@ -65,9 +68,7 @@ function PrioritySlider({
 
   // Use local value during drag, prop value otherwise
   const displayValueRaw = isDragging ? localValue : absValue;
-  const displayValue = displayValueRaw !== 0
-    ? (percentage !== undefined ? `${percentage}%` : displayValueRaw)
-    : 'Off';
+  const displayValue = displayValueRaw !== 0 ? displayValueRaw : 'Off';
   
   const fillHeight = displayValueRaw * 10;
   const thumbBottom = fillHeight;
@@ -247,9 +248,15 @@ function PrioritySlider({
       <button
         onClick={onToggleReverse}
         className={`
-          relative flex flex-col items-center gap-0.5 p-0.5 rounded-lg mt-0.5
-          transition-all duration-200 hover:bg-surface-200/50 dark:hover:bg-surface-700/50
-          active:scale-95 cursor-pointer select-none
+          relative flex flex-col items-center gap-0.5 p-1 rounded-lg mt-0.5
+          border border-surface-200/60 dark:border-surface-600/40
+          shadow-sm
+          transition-all duration-200 
+          hover:shadow-lg hover:-translate-y-0.5 hover:border-surface-300/80 dark:hover:border-surface-500/60
+          hover:bg-surface-100/80 dark:hover:bg-surface-700/50
+          active:translate-y-0 active:shadow-sm active:scale-95
+          cursor-pointer select-none
+          max-[480px]:w-[45px] min-[480px]:w-[70px]
         `}
         title={`Click to switch to ${isReversed ? config.positiveLabel : config.negativeLabel}`}
       >
@@ -258,8 +265,14 @@ function PrioritySlider({
             size={18} 
             className={`transition-colors ${displayValueRaw !== 0 ? currentIconColor : 'text-surface-400'}`} 
           />
-          {isReversed && (
-            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-rose-500 dark:bg-rose-400" />
+          {displayValueRaw !== 0 && (
+            <div 
+              className={`absolute -top-0.5 -right-0.5 w-0 h-0 ${
+                isReversed 
+                  ? 'border-t-[6px] border-t-rose-500 dark:border-t-rose-400 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent' 
+                  : 'border-b-[6px] border-b-emerald-500 dark:border-b-emerald-400 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent'
+              }`}
+            />
           )}
         </div>
         <span className={`

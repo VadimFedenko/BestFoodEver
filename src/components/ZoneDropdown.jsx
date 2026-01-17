@@ -1,8 +1,10 @@
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createPortal } from 'react-dom';
 import { ECONOMIC_ZONES } from '../lib/RankingEngine';
 import { useOnClickOutside } from '../hooks/useOnClickOutside';
 import ZoneIcon from './ZoneIcon';
+import { tZoneName } from '../i18n/dataTranslations';
 
 export default function ZoneDropdown({
   open,
@@ -15,6 +17,7 @@ export default function ZoneDropdown({
   clickCapture = false,
   className = 'fixed bg-white dark:bg-surface-800 rounded-lg border border-surface-300 dark:border-surface-700 shadow-lg z-[100] max-h-64 overflow-y-auto',
 }) {
+  const { t } = useTranslation();
   const dropdownRef = useRef(null);
 
   let position = null;
@@ -59,28 +62,31 @@ export default function ZoneDropdown({
         width: `${position.width}px`,
       }}
     >
-      {Object.entries(ECONOMIC_ZONES).map(([zoneId, zone]) => (
-        <button
-          key={zoneId}
-          onClick={() => {
-            onSelectZone?.(zoneId);
-            onClose?.();
-          }}
-          className={`
-            w-full px-3 py-2 text-left text-sm flex items-center gap-2
-            transition-colors
-            ${
-              selectedZone === zoneId
-                ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
-                : 'text-surface-700 dark:text-surface-200 hover:bg-surface-200 dark:hover:bg-surface-700'
-            }
-          `}
-        >
-          <ZoneIcon zoneId={zoneId} size={18} />
-          <span className="flex-1">{zone.name}</span>
-          {selectedZone === zoneId && <span className="text-blue-500">✓</span>}
-        </button>
-      ))}
+      {Object.entries(ECONOMIC_ZONES).map(([zoneId, zone]) => {
+        const zoneName = tZoneName(t, zoneId) || zone.name;
+        return (
+          <button
+            key={zoneId}
+            onClick={() => {
+              onSelectZone?.(zoneId);
+              onClose?.();
+            }}
+            className={`
+              w-full px-3 py-2 text-left text-sm flex items-center gap-2
+              transition-colors
+              ${
+                selectedZone === zoneId
+                  ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
+                  : 'text-surface-700 dark:text-surface-200 hover:bg-surface-200 dark:hover:bg-surface-700'
+              }
+            `}
+          >
+            <ZoneIcon zoneId={zoneId} size={18} />
+            <span className="flex-1">{zoneName}</span>
+            {selectedZone === zoneId && <span className="text-blue-500">✓</span>}
+          </button>
+        );
+      })}
     </div>,
     document.body
   );

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { m } from '../lib/motion';
+import { useTranslation } from 'react-i18next';
 import { 
   Clock, 
   DollarSign, 
@@ -15,6 +16,7 @@ import {
   formatTime,
   getScoreColor,
 } from './dishCardUtils';
+import { tDishName } from '../i18n/dataTranslations';
 
 /**
  * Compact metric display for tile overlay
@@ -94,6 +96,8 @@ export default function DishTile({
   priceUnit = 'serving',
   priorities = {},
 }) {
+  const { t } = useTranslation();
+  const dishName = tDishName(t, dish);
   const scoreColors = getScoreColor(dish.score);
 
   const values = useMemo(() => {
@@ -201,7 +205,7 @@ export default function DishTile({
           {/* Dish image */}
           <img
             src={dish?.originalDish?.img_s || dish?.img_s}
-            alt={dish.name}
+            alt={dishName}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
@@ -260,7 +264,7 @@ export default function DishTile({
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-surface-300/30 dark:via-surface-700/30 to-transparent" />
           
           <h3 className="font-display font-semibold text-sm text-surface-800 dark:text-surface-100 truncate text-center leading-tight relative z-10">
-            {dish.name}
+            {dishName}
           </h3>
         </div>
       </div>
