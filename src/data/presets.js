@@ -202,11 +202,11 @@ export const PRESETS = [
   },
   {
     id: 'bryan-johnson-top',
-    name: 'Bryan Johnson Foood Top',
+    name: 'Bryan Johnson Food Top',
     description: '100% focus on health and nutrients.. and ethics',
     translations: {
       en: {
-        name: 'Bryan Johnson Foood Top',
+        name: 'Bryan Johnson Food Top',
         description: '100% focus on health and nutrients..and ethics',
       },
       ru: {
