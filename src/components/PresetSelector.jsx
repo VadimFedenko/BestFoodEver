@@ -105,7 +105,7 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
       }}
     >
       {/* Header */}
-      <div className="px-4 py-3 border-b border-surface-200 dark:border-surface-700">
+      <div className="px-4 py-2 border-b border-surface-200 dark:border-surface-700">
         <div className="flex items-center gap-2">
           <Sparkles size={16} className="text-food-500" />
           <span className="text-sm font-semibold text-surface-700 dark:text-surface-200">
@@ -115,8 +115,8 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
       </div>
       
       {/* Preset list */}
-      <div className="p-2 max-h-80 overflow-y-auto custom-scrollbar">
-        <div className="space-y-2">
+      <div className="px-2 py-1 max-h-80 overflow-y-auto custom-scrollbar">
+        <div className="space-y-1">
           {presets.map((preset) => (
             <button
               key={preset.id}
@@ -125,7 +125,7 @@ function PresetDropdown({ open, anchorEl, presets, currentPreset, onClose, onSel
                 onClose?.();
               }}
               className={`
-                w-full px-3 py-3 text-left rounded-lg flex items-start gap-3 transition-colors
+                w-full px-3 py-2 text-left rounded-lg flex items-start gap-3 transition-colors
                 ${
                   currentPreset?.id === preset.id
                     ? 'bg-food-500/15 text-surface-900 dark:text-surface-100'

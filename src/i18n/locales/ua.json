@@ -72,8 +72,8 @@
       "description": "Швидке приготування"
     },
     "lowCalorie": {
-      "positiveLabel": "Низькокалорійне",
-      "negativeLabel": "Висококалорійне",
+      "positiveLabel": "Low-Cal",
+      "negativeLabel": "Калорійне",
       "description": "Менше ккал/100г"
     },
     "ethics": {
@@ -106,6 +106,84 @@
     "mena_arid": "Близький Схід і Північна Африка",
     "oceanic": "Океанія",
     "subsaharan_subsistence": "Африка на південь від Сахари"
+  },
+  "slides": {
+    "indexMap": {
+      "costIndex": "Індекс вартості",
+      "spread": "% розкид",
+      "calculating": "Розрахунок вартості для всіх зон...",
+      "cheap": "Дешево",
+      "expensive": "Дорого",
+      "tapToSee": "Натисніть на регіон, щоб побачити розбивку інгредієнтів",
+      "clickToSee": "Натисніть на регіон, щоб побачити розбивку інгредієнтів"
+    },
+    "overview": {
+      "cannotPrepare": "Не може бути приготовано у вашому регіоні",
+      "dataWarnings": "Попередження про дані",
+      "missing": "Відсутнє:",
+      "noCosts": "Немає вартості:",
+      "time": "Час",
+      "cost": "Вартість",
+      "calories": "Калорії",
+      "ingredients": "Інгредієнти"
+    },
+    "time": {
+      "standardCooking": "Звичайне приготування",
+      "requires": "потребує",
+      "ofPreparation": "підготовки",
+      "and": "і",
+      "ofCooking": "приготування",
+      "slowest": "Найповільніше",
+      "speedPercentile": "Процентиль швидкості",
+      "fastest": "Найшвидше",
+      "fasterThan": "Швидше ніж",
+      "ofDishes": "% страв",
+      "timeChanged": "Ви змінили час приготування для цієї страви. Оцінка швидкості тепер",
+      "receivesScore": "На основі цього страва отримує активну оцінку швидкості",
+      "passiveTimeApplies": "пасивний час застосовує штраф у",
+      "pointPenalty": "балів.",
+      "finalSpeedScore": "Фінальна оцінка швидкості:",
+      "timeOptimized": "Оптимізований час",
+      "prep": "Підготовка",
+      "cook": "Готування",
+      "min": "хв",
+      "hour": "година",
+      "hours": "годин"
+    },
+    "health": {
+      "healthBreakdown": "Розбивка здоров'я",
+      "overall": "Загальна",
+      "noData": "Дані про інгредієнти недоступні"
+    },
+    "ethics": {
+      "ethicsBreakdown": "Розбивка етичності",
+      "overall": "Загальна",
+      "noData": "Дані про інгредієнти недоступні",
+      "noEthicsData": "Дані про етичність цього інгредієнта недоступні."
+    },
+    "names": {
+      "overview": "Огляд",
+      "indexMap": "Карта вартості",
+      "time": "Час",
+      "health": "Здоров'я",
+      "ethics": "Етика"
+    },
+    "scoreBreakdown": {
+      "title": "Розбивка оцінок",
+      "edit": "Редагувати",
+      "reset": "Скид",
+      "save": "Зберегти",
+      "cancel": "Скасувати",
+      "priorities": {
+        "taste": "Смак",
+        "health": "Здоров'я",
+        "speed": "Швидкість",
+        "budget": "Бюджет",
+        "lowCal": "Low-Cal",
+        "ethics": "Етика"
+      }
+    },
+    "gramsUnit": "г"
   }
 }
 

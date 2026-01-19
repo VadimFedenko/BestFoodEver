@@ -5,7 +5,7 @@ import { ECONOMIC_ZONES, calculateDishCost } from '../lib/RankingEngine';
 import { getPriceColor } from './dishCardUtils';
 import EconomicZonesSvgMap from './EconomicZonesSvgMap';
 import ZoneIcon from './ZoneIcon';
-import { tZoneName } from '../i18n/dataTranslations';
+import { tZoneName, tIngredientName, tDishName } from '../i18n/dataTranslations';
 
 export default function IndexMapSlide({ dish, ingredientIndex, isMobile, defaultSelectedZone }) {
   const { t } = useTranslation();
@@ -142,12 +142,12 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
         <div className="flex items-center gap-2 sm:gap-3">
           <MapIcon size={14} className="text-food-500 sm:w-5 sm:h-5" />
           <span className="text-sm sm:text-base font-semibold text-surface-700 dark:text-surface-200">
-            {dish?.name} Cost Index
+            {tDishName(t, dish)} {t('slides.indexMap.costIndex')}
           </span>
         </div>
         {priceSpread > 0 && (
           <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400">
-            {priceSpread}% spread
+            {priceSpread}{t('slides.indexMap.spread')}
           </span>
         )}
       </div>
@@ -156,7 +156,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
         <div className="flex items-center justify-center py-12 sm:py-16">
           <div className="flex flex-col items-center gap-3 text-surface-500">
             <Loader2 size={24} className="animate-spin text-food-500 sm:w-8 sm:h-8" />
-            <span className="text-sm sm:text-base">Calculating costs for all zones...</span>
+            <span className="text-sm sm:text-base">{t('slides.indexMap.calculating')}</span>
           </div>
         </div>
       ) : (
@@ -188,9 +188,9 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
           </div>
 
           <div className="flex items-center justify-between text-[9px] text-surface-500 px-0.5">
-            <span className="flex items-center gap-1"><div className="w-2 h-2 rounded" style={{ background: 'rgb(34, 197, 94)' }} />Cheap</span>
+            <span className="flex items-center gap-1"><div className="w-2 h-2 rounded" style={{ background: 'rgb(34, 197, 94)' }} />{t('slides.indexMap.cheap')}</span>
             <div className="flex-1 h-1 mx-2 rounded-full" style={{ background: 'linear-gradient(to right, rgb(34, 197, 94), rgb(250, 204, 21), rgb(249, 115, 22), rgb(239, 68, 68))' }} />
-            <span className="flex items-center gap-1">Expensive<div className="w-2 h-2 rounded" style={{ background: 'rgb(239, 68, 68)' }} /></span>
+            <span className="flex items-center gap-1">{t('slides.indexMap.expensive')}<div className="w-2 h-2 rounded" style={{ background: 'rgb(239, 68, 68)' }} /></span>
           </div>
 
           {activeZone && currentZone && currentBreakdown && (
@@ -198,7 +198,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-1.5">
                   <ZoneIcon zoneId={activeZone} size={16} />
-                  <span className="text-xs font-semibold text-surface-700 dark:text-surface-200">{currentZone.name}</span>
+                    <span className="text-xs font-semibold text-surface-700 dark:text-surface-200">{tZoneName(t, activeZone) || currentZone.name}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className={`text-sm font-bold font-mono ${getPriceColor(currentPrice, minPrice, maxPrice).text}`}>
@@ -210,7 +210,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
               <div className="space-y-0.5">
                 {sortedBreakdown.slice(0, 5).map((item) => (
                   <div key={item.name} className="flex items-center gap-1.5 text-[11px]">
-                    <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{item.name}, {item.netWeight || 0}g</span>
+                    <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{tIngredientName(t, item.name)}, {item.netWeight || 0}{t('slides.gramsUnit')}</span>
                     <span className="font-bold font-mono text-surface-700 dark:text-surface-200 w-10 text-right">${item.cost.toFixed(2)}</span>
                   </div>
                 ))}
@@ -218,7 +218,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
             </div>
           )}
 
-          <p className="text-[9px] text-surface-500 text-center">Tap a region to see ingredient breakdown</p>
+          <p className="text-[9px] text-surface-500 text-center">{t('slides.indexMap.tapToSee')}</p>
         </>
       ) : (
         // Desktop: horizontal layout (map on left, data on right)
@@ -248,12 +248,12 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
             </div>
 
             <div className="flex items-center justify-between text-[9px] sm:text-xs text-surface-500 px-0.5">
-              <span className="flex items-center gap-1"><div className="w-2 h-2 sm:w-3 sm:h-3 rounded" style={{ background: 'rgb(34, 197, 94)' }} />Cheap</span>
+              <span className="flex items-center gap-1"><div className="w-2 h-2 sm:w-3 sm:h-3 rounded" style={{ background: 'rgb(34, 197, 94)' }} />{t('slides.indexMap.cheap')}</span>
               <div className="flex-1 h-1 sm:h-1.5 mx-2 rounded-full" style={{ background: 'linear-gradient(to right, rgb(34, 197, 94), rgb(250, 204, 21), rgb(249, 115, 22), rgb(239, 68, 68))' }} />
-              <span className="flex items-center gap-1">Expensive<div className="w-2 h-2 sm:w-3 sm:h-3 rounded" style={{ background: 'rgb(239, 68, 68)' }} /></span>
+              <span className="flex items-center gap-1">{t('slides.indexMap.expensive')}<div className="w-2 h-2 sm:w-3 sm:h-3 rounded" style={{ background: 'rgb(239, 68, 68)' }} /></span>
             </div>
 
-            <p className="text-[9px] sm:text-xs text-surface-500 text-center">Click a region to see ingredient breakdown</p>
+            <p className="text-[9px] sm:text-xs text-surface-500 text-center">{t('slides.indexMap.clickToSee')}</p>
           </div>
 
           <div className="flex-1 min-w-0 h-[280px] flex flex-col">
@@ -262,7 +262,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
                 <div className="flex items-center justify-between mb-1.5 sm:mb-3 flex-shrink-0">
                   <div className="flex items-center gap-1.5 sm:gap-2">
                     <ZoneIcon zoneId={activeZone} size={16} className="sm:w-5 sm:h-5" />
-                    <span className="text-xs sm:text-sm font-semibold text-surface-700 dark:text-surface-200">{currentZone.name}</span>
+                    <span className="text-xs sm:text-sm font-semibold text-surface-700 dark:text-surface-200">{tZoneName(t, activeZone) || currentZone.name}</span>
                   </div>
                   <div className="flex items-center gap-1.5 sm:gap-2">
                     <span className={`text-sm sm:text-lg font-bold font-mono ${getPriceColor(currentPrice, minPrice, maxPrice).text}`}>
@@ -274,7 +274,7 @@ export default function IndexMapSlide({ dish, ingredientIndex, isMobile, default
                 <div className="space-y-0.5 sm:space-y-1.5 flex-1 overflow-y-auto">
                   {sortedBreakdown.slice(0, 8).map((item) => (
                     <div key={item.name} className="flex items-center gap-1.5 sm:gap-3 text-[11px] sm:text-sm">
-                      <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{item.name}, {item.netWeight || 0}g</span>
+                      <span className="flex-1 truncate text-surface-600 dark:text-surface-300">{tIngredientName(t, item.name)}, {item.netWeight || 0}{t('slides.gramsUnit')}</span>
                       <span className="font-bold font-mono text-surface-700 dark:text-surface-200 w-10 sm:w-14 text-right">${item.cost.toFixed(2)}</span>
                     </div>
                   ))}

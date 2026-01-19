@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { m } from '../lib/motion';
+import { useTranslation } from 'react-i18next';
 import {
   Utensils,
   Heart,
@@ -222,6 +223,7 @@ export default function EditableScoreBreakdown({
   onEditingChange,
   isDark = false,
 }) {
+  const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [draftScores, setDraftScores] = useState({});
   const [initialScores, setInitialScores] = useState({});
@@ -247,12 +249,12 @@ export default function EditableScoreBreakdown({
   }, [dish]);
   
   const metrics = [
-    { key: 'taste', label: 'Taste', icon: Utensils, color: 'bg-food-300', sliderColor: 'food' },
-    { key: 'health', label: 'Health', icon: Heart, color: 'bg-emerald-300', sliderColor: 'emerald' },
-    { key: 'speed', label: 'Speed', icon: Clock, color: 'bg-cyan-300', sliderColor: 'cyan' },
-    { key: 'cheapness', label: 'Budget', icon: DollarSign, color: 'bg-lime-300', sliderColor: 'lime' },
-    { key: 'lowCalorie', label: 'Low-Cal', icon: Flame, color: 'bg-purple-300', sliderColor: 'purple' },
-    { key: 'ethics', label: 'Ethics', icon: Leaf, color: 'bg-amber-300', sliderColor: 'amber' },
+    { key: 'taste', label: t('slides.scoreBreakdown.priorities.taste'), icon: Utensils, color: 'bg-food-300', sliderColor: 'food' },
+    { key: 'health', label: t('slides.scoreBreakdown.priorities.health'), icon: Heart, color: 'bg-emerald-300', sliderColor: 'emerald' },
+    { key: 'speed', label: t('slides.scoreBreakdown.priorities.speed'), icon: Clock, color: 'bg-cyan-300', sliderColor: 'cyan' },
+    { key: 'cheapness', label: t('slides.scoreBreakdown.priorities.budget'), icon: DollarSign, color: 'bg-lime-300', sliderColor: 'lime' },
+    { key: 'lowCalorie', label: t('slides.scoreBreakdown.priorities.lowCal'), icon: Flame, color: 'bg-purple-300', sliderColor: 'purple' },
+    { key: 'ethics', label: t('slides.scoreBreakdown.priorities.ethics'), icon: Leaf, color: 'bg-amber-300', sliderColor: 'amber' },
   ];
   
   // Show all metrics, but mark which are active (priority !== 0)
@@ -430,7 +432,7 @@ export default function EditableScoreBreakdown({
     <div>
       <div className="flex items-center justify-between mb-2 sm:mb-3">
         <h4 className="text-sm sm:text-base font-semibold text-surface-700 dark:text-surface-200">
-          Score Breakdown
+          {t('slides.scoreBreakdown.title')}
         </h4>
         <div className="flex items-center gap-2 sm:gap-3">
           {hasModifications && !isEditing && (
@@ -440,7 +442,7 @@ export default function EditableScoreBreakdown({
                          text-amber-600 dark:text-amber-400 bg-amber-500/10 hover:bg-amber-500/20"
             >
               <RotateCcw size={10} className="sm:w-3 sm:h-3" />
-              Reset
+              {t('slides.scoreBreakdown.reset')}
             </button>
           )}
           {isEditing ? (
@@ -451,7 +453,7 @@ export default function EditableScoreBreakdown({
                            text-surface-600 dark:text-surface-400 bg-surface-200 dark:bg-surface-700 hover:bg-surface-300 dark:hover:bg-surface-600"
               >
                 <X size={12} className="sm:w-4 sm:h-4" />
-                Cancel
+                {t('slides.scoreBreakdown.cancel')}
               </button>
               <button
                 onClick={handleSave}
@@ -459,7 +461,7 @@ export default function EditableScoreBreakdown({
                            text-white bg-food-500 hover:bg-food-600"
               >
                 <Check size={12} className="sm:w-4 sm:h-4" />
-                Save
+                {t('slides.scoreBreakdown.save')}
               </button>
             </>
           ) : (
@@ -470,7 +472,7 @@ export default function EditableScoreBreakdown({
               disabled={activeMetrics.length === 0}
             >
               <Edit3 size={12} className="sm:w-4 sm:h-4" />
-              Edit
+              {t('slides.scoreBreakdown.edit')}
             </button>
           )}
         </div>

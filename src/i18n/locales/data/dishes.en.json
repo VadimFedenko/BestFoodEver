@@ -1,7 +1,1277 @@
 {
   "scrambled-eggs": {
     "name": "Scrambled Eggs",
-    "desc": "Light, fluffy scrambled eggs seasoned with a touch of salt and pepper. A quick breakfast staple that pairs wonderfully with toast or fresh herbs."
+    "desc": "Light, fluffy scrambled eggs seasoned with a touch of salt and pepper. A quick breakfast staple that pairs wonderfully with toast or fresh herbs.",
+    "comment": "Scrambled eggs keep well in the refrigerator. Spend half the time by making two servings at once, eat one, and save the other for later."
+  },
+  "omelette": {
+    "name": "Omelette",
+    "desc": "A fluffy, lightly folded egg dish filled with sautéed vegetables and melted cheese. Originating from French cuisine, it’s a staple for quick breakfasts and light lunches worldwide.",
+    "comment": "Omelette keeps well in the refrigerator for 2-3 days. Batch-prep fillings like sautéed onions and peppers ahead, storing them separately to reheat quickly when making omelettes. Use pre-chopped frozen onions and bell peppers to slash chopping time without much cost increase. Employ a thin non-stick pan on medium-high heat for faster setting without flipping, and keep cheese at room temp for even melting."
+  },
+  "fried-eggs": {
+    "name": "Fried Eggs",
+    "desc": "A classic breakfast staple, fried eggs offer a simple yet satisfying way to start the day. They can be cooked in various styles—sunny-side up, over easy, or over hard—to suit any preference.",
+    "comment": "Fried eggs are best fresh but can be refrigerated for a day. Halve time by frying multiple eggs for several servings at once in a large pan, eating one portion now and saving others. Use a well-heated non-stick pan or spray to prevent sticking and speed cooking. Crack all eggs into a bowl first for quick pan addition."
+  },
+  "arugula-salad-with-parmesan-and-che": {
+    "name": "Arugula Salad with Parmesan and Cherry Tomatoes",
+    "desc": "A sophisticated salad featuring peppery arugula leaves, sweet cherry tomatoes, crunchy nuts, and shaved Parmesan cheese. Dressed with olive oil and lemon juice, it's a perfect balance of flavors and textures that works as a starter or light meal.",
+    "comment": "You can prepare two or more portions of this salad at once: store the dry ingredients separately from the cherry tomatoes. Or if you are feeling lazy, mix all the ingredients with cherry and and accept that they will be less juicy the next day. Then dress the salad right before serving. This will significantly cut down your prep time. You can also use pre-washed arugula and pre-toasted walnuts."
+  },
+  "borscht": {
+    "name": "Borscht",
+    "desc": "A hearty Ukrainian beetroot soup, simmered with cabbage, carrots, and potatoes, finished with a splash of sour cream and dill. Its deep crimson hue and earthy sweetness make it a comforting staple across Eastern Europe.",
+    "comment": "You can cook a big pot of borscht for several meals: ideally, cool it quickly, portion it into airtight containers, and keep toppings like sour cream and fresh herbs separate, adding them only when serving. It's only getting tastier the next day! This will significantly cut down your prep time. You can even keep it for a few months in freezer, before you lose the taste. It's convenient to use boiled beets so as not to get the entire room purple. You can also use pre‑shredded frozen beet and carrot mix to cut chopping time. Keep a batch of homemade or store‑bought stock ready, so you only need to stir the vegetables."
+  },
+  "ramen": {
+    "name": "Ramen",
+    "desc": "A steaming bowl of Japanese noodle soup with savory soy-seasoned broth and fresh toppings. Comforting breakfast or quick dinner balancing umami flavors.",
+    "comment": "Batch-cook a large pot of broth using chicken bones or store-bought dashi/stock in a pressure cooker (20 min), then freeze in portions. Prep toppings like boiled eggs and chopped scallions ahead, storing separately in fridge up to 3 days. Boil noodles fresh and assemble: total active time drops as batching cuts per-serving prep by 70%. Use pre-boiled eggs from store or microwave method for eggs (1 min)."
+  },
+  "khao-soi": {
+    "name": "Khao soi",
+    "desc": "Northern Thai curry noodle soup with rich coconut broth, fragrant herbs, tender chicken, and crispy fried shallots. Balances savory, sweet, citrusy notes.",
+    "comment": "Make extra curry paste (blend garlic, shallots, spices, lemongrass ahead) and freeze in ice cube trays for 1-month use. Pressure cook large batch of chicken broth with aromatics (lemongrass, lime leaves, chicken) to cut simmer to 20 min, portion and freeze. Reheat frozen broth, add coconut milk and fresh noodles; fry shallots in small batch or use oven for less oil. Batch cooking reduces per-serving active time by 70%; homemade paste cheaper than store-bought long-term."
+  },
+  "pho": {
+    "name": "Pho",
+    "desc": "A fragrant Vietnamese noodle soup featuring clear beef broth, rice noodles, fresh herbs, and thinly sliced beef. Its aromatic blend of star anise, cinnamon, and ginger creates a comforting bowl that is both savory and slightly sweet.",
+    "comment": "Use store-bought quality beef stock or stock cubes to skip long simmering; char aromatics under broiler for 5 minutes instead of stovetop. Prepare a large batch of broth, cool quickly, portion into airtight containers, and freeze for up to 3 months—reheat only what you need. Boil multiple noodle portions at once and keep toppings like basil, onion, and lime separate until serving. Blanch bean sprouts quickly if desired."
+  },
+  "xiao-long-bao": {
+    "name": "Xiao Long Bao",
+    "desc": "Delicate Chinese soup dumplings from Jiangnan, filled with pork, gelatin broth that melts into soup, and wrapped in thin translucent dough. Steamed hot, the filling bursts with savory broth upon biting.",
+    "comment": "Make double or triple batch of filling and aspic ahead, freeze aspic in portions and filling separately; thaw overnight for quick assembly next day. Prepare dough in bulk and store wrapped; assemble 20+ dumplings at once to halve pleating time per batch. Steam multiple trays simultaneously in a large steamer setup. Freeze uncooked assembled dumplings on tray then transfer to bags for up to 2 months—steam directly from frozen, adding 2 minutes."
+  },
+  "hondashi-miso-soup": {
+    "name": "Hondashi Miso Soup",
+    "desc": "A fragrant Japanese comfort food, Miso Soup blends savory dashi broth with sweet miso paste and soft tofu. It’s a staple for breakfast or as an accompaniment to any meal, offering warmth in just a few minutes.",
+    "comment": "Use pre-cut tofu and scallions stored in water to slash chopping time. Assemble soup in under 2 minutes with prepped stock."
+  },
+  "traditional-miso-soup": {
+    "name": "Traditional Miso Soup",
+    "desc": "A fragrant Japanese comfort food, Miso Soup blends savory dashi broth with sweet miso paste and soft tofu. It’s a staple for breakfast or as an accompaniment to any meal, offering warmth in just a few minutes.",
+    "comment": "Prepare dashi stock in advance and store it in the refrigerator for up to 3 days, or freeze in ice cube trays for single portions. Keep miso paste ready-mixed in small jars for quick dissolving. For batch cooking, make a large pot of dashi once a week, portion into daily bags, and freeze—thaw overnight in fridge. Use pre-cut tofu and scallions stored in water to slash chopping time. Assemble soup in under 2 minutes with prepped stock."
+  },
+  "chicken-soup": {
+    "name": "Chicken Soup",
+    "desc": "A comforting bowl of homemade chicken soup with tender broth, fresh vegetables, and noodles, perfect for chilly evenings. It’s a classic comfort food enjoyed worldwide.",
+    "comment": "Cook a large batch of soup for several meals: cool quickly, portion into airtight containers, refrigerate up to 4 days or freeze up to 3 months, adding parsley fresh when serving. Tastes better next day. Use pre-shredded carrots and frozen mirepoix mix (carrot, celery, onion) to slash chopping time without cost hike. Keep stock and pre-cooked shredded chicken (from batch) ready. Use Instant Pot: 10 min high pressure for everything after sauté."
+  },
+  "udon": {
+    "name": "Udon",
+    "desc": "A comforting Japanese noodle soup featuring thick wheat noodles simmered in a delicate dashi broth, garnished with scallions and optional tempura flakes. It’s a staple of casual home cooking and can be quickly assembled for a satisfying meal.",
+    "comment": "Prepare dashi stock in advance and store in refrigerator up to 3 days or freeze in portions. For batch, make large dashi pot once weekly. Use dashi powder: just dissolve in hot water. Boil noodles separately in fresh water 8-10 min, rinse cold to stop cooking. Keep pre-boiled rinsed noodles and chopped scallions frozen. Soup assembles in under 5 min if dashi/noodles ready: heat dashi, add seasonings/noodles, top with flakes/scallions."
+  },
+  "tom-yum": {
+    "name": "Tom Yum",
+    "desc": "A fiery Thai soup that blends aromatic herbs with fresh shrimp for a bright, tangy flavor profile. Its spicy kick and citrusy undertones make it a staple in Southeast Asian cuisine.",
+    "comment": "Prepare a big batch of the aromatic paste (pound or blend lemongrass, galangal, lime leaves, chili flakes together) and freeze in ice cube trays for up to 3 months; drop one cube per serving into simmering stock. Use pre-sliced mushrooms and store-bought fish stock to skip chopping and boiling from scratch. Cook a large pot of soup, cool quickly, portion into airtight containers, and freeze for up to 1 month; reheat with fresh shrimp or protein. This cuts per-serving prep by 70%."
+  },
+  "tom-kha-gai": {
+    "name": "Tom Kha Gai",
+    "desc": "A fragrant Thai coconut milk soup featuring tender chicken and aromatic herbs. The creamy broth is brightened by lemongrass, galangal, and lime leaves for a refreshing finish.",
+    "comment": "Make a large batch of aromatic paste (blend lemongrass, galangal, prik kee noo, lime leaves) and freeze in portions for quick use; simmer with coconut milk and stock. Use bite-sized pre-cut chicken and pre-sliced cao gu to minimize chopping. Prepare big pot, cool rapidly, portion and freeze base (without chicken) for 1-2 months; add fresh or pre-poached chicken upon reheating. Batch cooking slashes active time per serving by 70%. Pre-poach chicken in bulk for the week."
+  },
+  "laksa": {
+    "name": "Laksa",
+    "desc": "A spicy, aromatic noodle soup from Malaysia that blends coconut milk with a fragrant broth of lemongrass and galangal. It is typically served hot in a bowl, garnished with fresh herbs and lime for a refreshing finish.",
+    "comment": "Prepare the spice paste in advance and store it in the refrigerator or freezer for up to a month. Cook a large batch of broth using a pressure cooker to reduce cooking time, then portion and freeze. When ready to serve, reheat the broth, add fresh noodles, and garnish. Pre-cook shrimp separately and store in the refrigerator, adding them just before serving. Batch cooking cuts active prep time per serving by about 70%."
+  },
+  "harira": {
+    "name": "Harira",
+    "desc": "A velvety Moroccan soup where tender lamb, chickpeas, and lentils are bound together by a tomato base and a flour thickener (tedouira). Infused with ginger, cinnamon, and fresh herbs, it is a nutritionally complete meal.",
+    "comment": "To save time, blend onions, celery, and herbs in a food processor instead of hand-chopping. Use a pressure cooker to tenderize the lamb and chickpeas in 45 minutes rather than 1.5 hours. Make a large batch of the base (meat/legumes/broth) and freeze it; add the vermicelli and flour thickener (tedouira) only upon reheating to maintain the perfect texture."
+  },
+  "shchi": {
+    "name": "Shchi",
+    "desc": "A fundamental Russian soup featuring soft cabbage and tender beef in a clear, savory broth. The acidity from tomatoes (or sauerkraut) balances the richness of the meat and the sweetness of the root vegetables.",
+    "comment": "Shchi is famous for tasting better the next day ('Sutochnye Shchi'), so always cook a double batch to let flavors cure overnight in the fridge. For a massive time saver, use high-quality sauerkraut instead of fresh cabbage—it eliminates shredding time and provides the authentic sour profile instantly. If using a pressure cooker, add potatoes only for the last 5 minutes of pressure to prevent them from disintegrating."
+  },
+  "okroshka": {
+    "name": "Okroshka",
+    "desc": "A refreshing Russian cold soup made with kefir, diced raw vegetables, and boiled eggs, often enjoyed in summer. Its tangy flavor is amplified by a splash of vinegar or lemon juice.",
+    "comment": "Pre-boil eggs and potatoes in advance and store them in the refrigerator for up to 3 days. Pre-chop all vegetables and store them separately in airtight containers. When ready to serve, simply mix everything with kefir. You can prepare the vegetable mix for several days ahead. Batch preparation cuts active prep time by about 60%."
+  },
+  "lagman": {
+    "name": "Lagman",
+    "desc": "A hearty Central Asian noodle soup featuring hand‑made wide noodles topped with a savory beef and vegetable stir‑fry. Originating from Kyrgyzstan and Uzbekistan, it’s celebrated for its comforting broth and chewy texture.",
+    "comment": "Make the dough a few hours ahead, chill it in the fridge, and roll out when ready to cook. This cuts resting time. Also, pre‑cut all vegetables and marinate beef overnight for deeper flavor."
+  },
+  "kharcho": {
+    "name": "Kharcho",
+    "desc": "A hearty Georgian beef soup with rice in a spicy tomato broth enriched with walnuts. It features aromatic spices like fenugreek, coriander, and chili for a distinct warm flavor.",
+    "comment": "Cook a large pot of kharcho for 4-6 servings: after boiling beef, portion cooled soup into airtight containers and freeze for up to 3 months, reheating only what you need. Use pre-made beef stock or frozen cooked beef to skip initial simmer. Keep a batch of roasted onion-tomato paste mix frozen, adding directly to stock. Prepare spice paste (fenugreek, garlic, coriander) ahead and store in fridge for a week. These steps retain flavor while slashing active time."
+  },
+  "altibariai": {
+    "name": "Šaltibarščiai",
+    "desc": "A classic Lithuanian cold beetroot soup that balances earthy sweetness with creamy tanginess. It’s traditionally served chilled in the summer and often garnished with dill.",
+    "comment": "Batch-boil beets and potatoes ahead for up to 5 days in fridge or freeze peeled beets for months. Pre-chop scallions, cucumber, and dill, storing separately in airtight containers for 3 days. Mix kefir base with salt and store chilled up to 2 days; stir in veggies just before serving to keep crisp. For daily use, maintain a large tub of soup base and add fresh garnishes per bowl. This cuts active prep by 75%."
+  },
+  "focaccia": {
+    "name": "Focaccia",
+    "desc": "A classic Italian flatbread from Liguria, known for its airy crumb and fragrant rosemary topping. It’s often enjoyed as a snack or accompaniment to soups and salads.",
+    "comment": "Prepare the dough in advance and let it rise in the refrigerator overnight or for several hours. This cuts active prep time significantly. Use a food processor to mix the dough quickly. For batch preparation, make multiple focaccias at once and freeze the extras. The dough can be stored in the refrigerator for up to 3 days before baking."
+  },
+  "minestrone": {
+    "name": "Minestrone",
+    "desc": "A hearty Italian vegetable soup that blends tomatoes, beans, pasta and fresh herbs into a comforting bowl. It’s a staple of Tuscan kitchens, often served as a first course during the winter months.",
+    "comment": "Use pre‑chopped vegetable mix and canned beans to shave off prep time. If making a larger batch, simmer at low heat for up to 2 hours; the soup deepens in flavor and can be stored refrigerated for 3–4 days."
+  },
+  "french-onion-soup": {
+    "name": "French Onion Soup",
+    "desc": "A classic French comfort dish featuring sweet caramelized onions in a rich beef broth topped with melted Gruyère on toasted baguette slices. The slow-simmered flavor profile makes it an ideal starter for any hearty meal.",
+    "comment": "Caramelize onions in a big batch for multiple servings—store extras in the freezer for quick reheats, halving future cook time. Use pre-minced garlic and oven-bake all onions at 300°F for hands-off caramelization. Keep stock on hand or freeze portions; broil multiple cheese toasts at once under broiler."
+  },
+  "gazpacho": {
+    "name": "Gazpacho",
+    "desc": "A chilled Spanish tomato soup that blends ripe tomatoes with cucumber, bell pepper, onion and garlic for a refreshing, tangy bite. It’s perfect as a light starter or summer snack, often served with a drizzle of olive oil and a splash of sherry vinegar.",
+    "comment": "Use a blender or food processor to quickly process all vegetables. Gazpacho can be made in large batches and stored in the refrigerator for several days—it actually improves in flavor. Pre-chop vegetables and store them separately, then blend when ready to serve. Batch preparation cuts active prep time by about 70%."
+  },
+  "tomato-soup": {
+    "name": "Tomato Soup",
+    "desc": "A comforting, velvety tomato soup simmered with onions, garlic, carrots, and chicken stock. Its bright red hue and silky texture make it a staple for both lunch and dinner.",
+    "comment": "Cook a larger batch of soup for up to four servings, then refrigerate or freeze individual portions. The soup tastes even better the next day and can be stored for several days. Use an immersion blender directly in the pot for faster pureeing. Batch cooking reduces the overall cooking effort per serving by about 60%. Pre-chop mirepoix (onion, carrot, garlic) and freeze in portions."
+  },
+  "caldo-verde": {
+    "name": "Caldo Verde",
+    "desc": "A traditional Portuguese soup made with potatoes, kale, and chorizo, served hot in a rustic bowl. It’s renowned for its comforting simplicity and the subtle smoky flavor of cured sausage.",
+    "comment": "Cook a large pot for 4 servings: cool quickly, portion into airtight containers, refrigerate up to 4 days or freeze up to 3 months, adding chorizo fresh when serving. Soup improves next day. Use pre-boiled potatoes from batch and frozen chopped kale to slash chopping. Keep sliced onions/garlic frozen ready. Batch cuts active time per serving by 50%. Pressure cooker halves boil time."
+  },
+  "fufu": {
+    "name": "Fufu",
+    "desc": "A staple of West African cuisine, fufu is a soft dough made from boiled cassava pounded into a smooth consistency. It pairs beautifully with spicy soups and stews, offering a comforting, starchy base that absorbs flavors.",
+    "comment": "Peel and cut cassava into chunks ahead, store in water fridge up to 2 days. Boil multiple portions, pound/shape while hot using stand mixer or potato masher with water for smooth fast texture. Store pounded fufu airtight up to 24h or freeze portions. Pressure cooker cuts boil to 15min. Batch pounding for 4 saves 50% active time."
+  },
+  "egusi-soup": {
+    "name": "Egusi Soup",
+    "desc": "A hearty Nigerian melon-seed soup simmered with leafy greens, palm oil and assorted meats, often served with pounded yam or fufu. Its thick, nutty texture and savory depth make it a staple at family gatherings.",
+    "comment": "Pre-grind egusi, chop/freeze onions in portions. Use pressure cooker for beef (15min) and keep stock frozen. Frozen spinach thaws instantly. Cook double batch, cool quick, portion/freeze up to 2 months; reheats fast, flavors deepen. Separate spinach add when serving. Batch cuts per-serving active time by 50%."
+  },
+  "greek-salad": {
+    "name": "Greek salad",
+    "desc": "A vibrant mix of ripe tomatoes, crisp cucumbers, tangy feta, and briny olives dressed in olive oil and oregano. This classic Greek staple is a refreshing, no-cook dish perfect for hot summer days.",
+    "comment": "Pre-chop all vegetables and store them separately in airtight containers in the refrigerator for up to 3 days. Cube feta and portion olives ahead. You can prepare the vegetable mix for several days ahead, but add dressing only when serving. Use a vegetable chopper or food processor pulse for uniform dice in seconds."
+  },
+  "gravlax": {
+    "name": "Gravlax",
+    "desc": "A Scandinavian delicacy of thinly sliced cured salmon, seasoned with salt, sugar, dill, and peppercorns. It offers a silky texture and a subtle balance of savory and herbal flavors that pair beautifully with rye bread or capers.",
+    "comment": "Prepare a large batch of gravlax (e.g., 1kg salmon) at once—scale up the cure mix evenly, wrap tightly, and refrigerate; it keeps for a week or freezes well in portions. This cuts active prep time per serving by 70% since mixing/spreading scales minimally. Use pre-chopped frozen dill if available cheaply to save chopping; flip the package once midway passively."
+  },
+  "soba": {
+    "name": "Soba",
+    "desc": "A classic Japanese buckwheat noodle dish served chilled with a savory dipping sauce. The delicate, nutty flavor of soba pairs perfectly with fresh greens and crispy tempura flakes.",
+    "comment": "Pre-make dashi and sauce in batches, freeze dashi cubes; slice garnishes ahead. Boil multiple portions at once in a large pot to cut time per serving. Soak dried soba 15min before boiling for better texture and shorter cook [web:14]."
+  },
+  "hot-dog": {
+    "name": "Hot Dog",
+    "desc": "A classic street-food favorite from the United States, a hot dog pairs a seasoned pork sausage with a soft bun and a handful of condiments. The dish is quick to assemble and can be enjoyed as a casual snack or a meal on the go.",
+    "comment": "Cook multiple sausages at once in a skillet or on a griddle to halve cooking time per serving; they reheat well from fridge or freezer in 30 seconds microwave. Pre-chop onions and store in fridge up to 3 days, or use a food processor for batch slicing. Keep condiments in squeeze bottles at the table for instant assembly."
+  },
+  "burger": {
+    "name": "Burger",
+    "desc": "A classic American burger featuring a juicy beef patty, fresh lettuce, tomato, and cheese nestled between toasted buns. The savory blend of grilled meat and crisp vegetables makes it an iconic street-food favorite.",
+    "comment": "Pre-form multiple patties from ground beef, stack with parchment, and freeze; they cook straight from frozen in 1 extra minute. Batch-chop tomatoes, onions if added, and lettuce, storing in airtight containers in fridge up to 2 days. Toast buns in bulk under broiler while patties sizzle, and keep condiments sauced-mixed in a squirt bottle."
+  },
+  "pizza-pepperoni": {
+    "name": "Pizza Pepperoni",
+    "desc": "A classic Italian-style pizza topped with spicy pepperoni slices and melted mozzarella on a crisp baked crust. The combination of smoky cured meat and gooey cheese makes it a perennial favorite for sharing.",
+    "comment": "Keep a batch of pizza dough in the fridge, doing a long cold rise for 1–3 days so you only need to shape and top before baking. Let the dough warm slightly while you preheat the oven and stone or steel, so shaping is easier without adding extra time. Prepare tomato sauce in advance and store it in the fridge or freezer in small portions ready to scoop. Grate cheese and slice pepperoni for several pizzas at once, storing them in airtight containers for a few days, so assembling a pizza takes under 10 minutes. Baking two pizzas at once on separate racks or using a large sheet pan maximizes oven use without increasing active time."
+  },
+  "pizza-margherita": {
+    "name": "Pizza Margherita",
+    "desc": "A classic Neapolitan-style pizza featuring a thin, airy baked crust topped with bright tomato sauce, creamy Mozzarella di Bufala Campana and fragrant basil leaves. It is known for its simple, balanced flavors that showcase quality ingredients.",
+    "comment": "Mix a larger batch of Neapolitan-style dough and let it cold-proof in the refrigerator for 1–3 days, portioned into balls so each one is ready to stretch and bake. Take dough out 45–60 minutes before baking so it relaxes and stretches quickly without extra work. Keep simple tomato sauce pre-cooked or blended and chilled in a squeeze bottle for fast topping. Store mozzarella di bufala and basil ready to use, patting the cheese dry and tearing it by hand right before baking to avoid a watery pizza. Bake on a preheated stone or steel at maximum oven temperature so the pizza cooks in just a few minutes."
+  },
+  "grilled-cheese": {
+    "name": "Grilled Cheese",
+    "desc": "A comforting sandwich of butter-fried white bread encasing gooey melted cheddar cheese, a classic American comfort food. The crispy golden exterior and stretchy interior make it ideal for quick lunches or late-night snacks.",
+    "comment": "Shred a block of cheddar cheese ahead and store in the fridge for up to a week, or use store-bought pre-shredded bags for instant grab-and-go. Keep bread slices frozen in portions and butter softened at room temperature so you can spread it evenly in seconds without a knife. Heat a cast-iron skillet or nonstick pan over medium and cook two sandwiches at once, flipping only once; for batches, preheat the oven to 400°F and bake multiple on a sheet pan for even faster hands-off crisping while you prep sides."
+  },
+  "club-sandwich": {
+    "name": "Club Sandwich",
+    "desc": "A tall American triple-decker sandwich of toasted white bread layered with sliced turkey breast, crispy bacon, fresh lettuce, tomato slices, and mayonnaise. Toothpicks hold the layers secure for easy eating.",
+    "comment": "Fry a large batch of bacon on a sheet pan in the oven at 400°F and store cooked strips in the fridge for up to 5 days or freeze them flat for quick thawing. Buy pre-sliced deli turkey breast and store it vacuum-sealed or wrapped tightly; slice tomatoes and lettuce ahead, keeping them crisp in separate fridge bins with paper towels. Toast all three bread slices at once in a toaster oven or pop-up toaster, then layer assembly-line style for multiple sandwiches—reheat bacon briefly in a microwave if needed to save pan time."
+  },
+  "blt": {
+    "name": "BLT",
+    "desc": "A classic American sandwich with crispy fried bacon, juicy tomato slices, crisp lettuce, and toasted white bread spread with mayonnaise. A simple, satisfying option for quick lunches or hearty breakfasts.",
+    "comment": "Cook a full tray of bacon in the oven and refrigerate it for up to 3 days or freeze it, then re-crisp slices in a pan or toaster oven as needed. Keep washed lettuce leaves and sliced tomatoes in airtight containers with a paper towel to absorb moisture so they are grab-and-assemble. Store sandwich bread in the freezer and toast slices directly from frozen to save on waste and shopping trips. When everything is prepped, you only need to toast bread, reheat bacon, and assemble several sandwiches at once, which keeps active time low even for multiple portions."
+  },
+  "california-sushi-roll": {
+    "name": "California Sushi Roll",
+    "desc": "A popular sushi roll made with vinegared uruchimai rice, nori, crab surimi, cucumber, and creamy avocado. Its mild flavor and soft-crisp texture make it a staple in casual sushi spots and takeout boxes.",
+    "comment": "Cook a larger batch of sushi rice, season it while warm, and cool it quickly in a thin layer; it keeps well at cool room temperature for several hours covered with a damp towel, so you can roll multiple batches with one cooking session. Use surimi sticks instead of raw fish so you only need to cut them into strips, which is faster and safer for home storage. Pre-cut cucumber and avocado into batons and store them in tight containers (add a light brush of rice vinegar or lemon to avocado to reduce browning). A bamboo mat lined with plastic wrap speeds rolling and cleanup, and assembling 3–4 rolls in a row dramatically reduces per-roll active time."
+  },
+  "fajitas": {
+    "name": "Fajitas",
+    "desc": "Sizzling strips of beef fried with bell peppers, onions, and spices, served with warm corn tortillas and a squeeze of lime.",
+    "comment": "Marinate sliced beef overnight for flavor (passive). Prep double veggies with a mandoline or food processor. Batch-cook filling for 4 servings in one large skillet to halve active cook time, then freeze portions. Warm multiple tortillas in microwave wrapped in damp towel instead of oven."
+  },
+  "burrito": {
+    "name": "Burrito",
+    "desc": "Flour tortilla wrapped around boiled rice, beans, fried ground beef with onions and peppers, melted cheese, and fresh salsa with sour cream.",
+    "comment": "Batch-cook rice, beans, and beef filling ahead for multiple burritos; store separately in fridge up to 3 days or freeze. Use microwave rice cooker or instant cooker for rice/beans, reheat components 1-2 min each, assemble fast. Pre-chop onions/peppers and keep frozen bags ready."
+  },
+  "quesadilla": {
+    "name": "Quesadilla",
+    "desc": "A classic Mexican snack, the quesadilla is a crisp tortilla filled with molten cheese and often served as a quick meal or appetizer. The name comes from the Spanish word for cheese, reflecting its simple yet delicious core ingredients.",
+    "comment": "Use pre-shredded cheese and keep tortillas stacked to avoid individual wrapping. Make multiple quesadillas at once in a large skillet or on a griddle, flipping them together to halve the active cooking time per serving. Batch-prep by assembling several ahead and cooking in sequence."
+  },
+  "pommes-frites": {
+    "name": "Pommes frites",
+    "desc": "French fries are crisp, golden strips of potato fried to perfection—a staple in French and Belgian street food culture. They’re beloved worldwide for their simple yet addictive texture and savory crunch.",
+    "comment": "Cut extra potatoes into uniform fries and steam-blanch them in microwave for 4-5 min to speed peeling and parboil, then pat dry. Fry larger batches in a deep fryer or wok, reusing oil for multiple meals stored frozen after first fry. Mix animal fat into oil for better crispiness without extra steps."
+  },
+  "kebab": {
+    "name": "Kebab (Doner)",
+    "desc": "A classic Turkish street food consisting of thinly sliced seasoned beef cooked on a vertical grill and served in warm flatbread with fresh vegetables and creamy sauce. It’s renowned for its juicy texture and the smoky flavor that comes from slow-cooking the meat.",
+    "comment": "Use pre-sliced thin beef sheets or minute steaks, season quickly and cut post-cook. Pan-sear or broil multiple portions at once on a sheet pan under oven broiler for fast cooking without rotisserie; store extra cooked meat refrigerated up to 2 days. Prep veggie toppings in bulk jars ahead."
+  },
+  "shawarma": {
+    "name": "Shawarma",
+    "desc": "A Middle Eastern street-food staple, shawarma features thinly sliced roasted chicken wrapped in warm pita bread with fresh onions and a tangy yogurt-garlic sauce.",
+    "comment": "Marinate chicken ahead in yogurt, garlic, lemon, oil, salt, pepper for hours or overnight to infuse flavor with zero extra active time. Prepare multiple shawarmas at once: slice all chicken after roasting, chop onions in bulk, mix sauce big batch, assemble as needed—halves prep per serving. Use store-bought rotisserie chicken to skip roasting entirely, or pre-toasted pita kept warm in foil. Quick yogurt sauce blends in seconds with minced garlic from jar."
+  },
+  "gyros": {
+    "name": "Gyros",
+    "desc": "A popular Greek street food featuring thinly sliced roasted pork seasoned with oregano and garlic, served in warm pita bread with fresh tomato, onion, lettuce, and cucumber.",
+    "comment": "Use thin pork slices or ground pork pressed into loaf for home oven roasting instead of vertical spit; season simply with oregano, garlic, salt, pepper. Make extra loaf or slices for multiple servings: roast once, store sliced meat in fridge up to 4 days or freeze, reheat quickly in pan—cuts active cook time per gyros. Buy pre-sliced 'gyros meat' from butcher or store if available cheaply, or rotisserie pork/chicken as substitute. Prep tzatziki sauce in advance and chop veggies in bulk for instant assembly."
+  },
+  "pad-thai": {
+    "name": "Pad Thai",
+    "desc": "A vibrant stir-fry of rice noodles, shrimp and tofu tossed in a tangy tamarind sauce, finished with crunchy peanuts and fresh bean sprouts. Originating from Thailand, it’s a beloved street-food staple that balances sweet, sour, salty and umami flavors.",
+    "comment": "Soak noodles in advance or use hot water soak for 5-10 min to cut prep; prepare sauce mix and chop all ahead mise-en-place style. Make double batch in two woks or large pans to halve active time per serving; use pre-chopped garlic/shallots if freezing your own batches. Keep garnishes separate and add fresh for best taste."
+  },
+  "pad-krapow": {
+    "name": "Pad Krapow",
+    "desc": "A vibrant Thai street-food staple featuring minced pork stir-fried with holy basil, garlic and chilies, finished with a splash of fish sauce, soy and a touch of sugar. It’s quick to whip up and delivers an aromatic, spicy kick that pairs perfectly with steamed rice.",
+    "comment": "Chop garlic and chilies in bulk and freeze in portions to slash prep; batch-cook multiple servings in one wide pan, stirring efficiently. Use pre-minced pork from trusted butchers or grind your own ahead; wilt basil at end to preserve aroma without overcooking."
+  },
+  "banh-mi": {
+    "name": "Banh Mi",
+    "desc": "A Vietnamese sandwich that marries a crisp French baguette with savory grilled pork, pickled vegetables and fresh herbs. The crunchy texture and bright flavors make it a street-food favorite worldwide.",
+    "comment": "Roast or grill pork belly in bulk ahead and slice thin when needed; quick-pickle shredded carrot/daikon in 30-min vinegar brine using microwave for speed. Use store-bought pate and pre-sliced baguettes; assemble multiples at once to minimize per-sandwich handling. Freeze extra pickled veg in portions."
+  },
+  "southern-fried-chicken": {
+    "name": "Southern Fried Chicken",
+    "desc": "Crispy, golden-brown chicken pieces coated in a seasoned flour batter, served hot and juicy. Originating from the American South, this dish is a staple at gatherings and comfort-food menus.",
+    "comment": "Brining in salted buttermilk adds juiciness but takes 8 hours passively; skip it for quicker meals using straight buttermilk soak for 15 minutes. Cut chicken into uniform bite-sized pieces and keep chilled until frying to speed prep. Fry multiple batches in the same hot oil reusing it across meals, or double-fry (first low temp 8 min, rest, then high temp 3 min) for extra crisp without longer total active time. Batch brine larger amounts for the week, freezing portions."
+  },
+  "roast-chicken": {
+    "name": "Roast Chicken",
+    "desc": "A classic Sunday roast featuring a whole chicken seasoned with herbs and citrus, served alongside roasted root vegetables. The dish is celebrated for its crispy skin and juicy meat, making it a comforting centerpiece for family gatherings.",
+    "comment": "Use pre-cut frozen vegetables like carrot, onion, potato mix to slash chopping time without extra cost. Roast two chickens side-by-side in a large tray; oven time barely increases but doubles output. Start with room-temp chicken and blast high heat first (10 min at 450F then lower) to cut total cook time while keeping skin crisp."
+  },
+  "fish-and-chips": {
+    "name": "Fish and Chips",
+    "desc": "A classic British seaside staple, crispy battered fish served with golden potato fries. The dish combines crunchy texture with a savory, slightly tangy batter that pairs perfectly with tartar sauce.",
+    "comment": "Prep fries first: cut into even thin strips, soak in cold water 30 min passively to remove starch for crispier results, then pat dry. Mix batter ahead and rest 30 min in fridge for better texture without active time. Use two pans for simultaneous frying of fish and chips to halve cook time; reuse hot oil for multiple servings."
+  },
+  "steak-ribeye-wagyu": {
+    "name": "Steak Ribeye Wagyu",
+    "desc": "A classic ribeye steak cooked to a juicy medium-rare, seasoned simply with salt and pepper. This hearty dish is a staple of American steakhouse cuisine, often served with a pat of herb butter.",
+    "comment": "Let the steak temper at room temperature for 30-60 minutes before cooking to reduce total time and ensure even cooking. Use a cast iron pan preheated on high while prepping; sear multiple steaks at once since pan time doesn't scale with quantity. Keep pre-made garlic-thyme butter logs in freezer for instant basting."
+  },
+  "lasagna": {
+    "name": "Lasagna",
+    "desc": "A classic Italian layered pasta dish featuring rich meat sauce, creamy béchamel, and melted cheeses baked to perfection. The combination of textures and flavors makes it a comforting family favorite.",
+    "comment": "Using no-boil lasagna sheets cuts prep time by eliminating the boiling step. Prepare the meat sauce and béchamel in bulk and freeze individual portions; assemble and bake only takes a few minutes, saving both prep and cook time for future meals. Chop onion and garlic in food processor to halve prep."
+  },
+  "chicken-parmesan": {
+    "name": "Chicken Parmesan",
+    "desc": "A classic Italian-American favorite: breaded chicken breast smothered in marinara and melted mozzarella, then baked to golden perfection. It’s a comforting dish that pairs wonderfully with pasta or a crisp green salad.",
+    "comment": "Pound chicken thin for even faster baking and use cooking spray instead of oil spray lightly. Bread and freeze batches ahead; bake from frozen adding 5 min. Set up breading station in advance and bake multiple portions at once as oven time stays similar."
+  },
+  "spaghetti-carbonara": {
+    "name": "Spaghetti Carbonara",
+    "desc": "A classic Roman pasta dish that marries silky spaghetti with a creamy sauce made from eggs, cheese, and crisp pancetta. The subtle smoky flavor of the cured pork gives it an unmistakable depth.",
+    "comment": "Cook a double batch of carbonara: fry extra pancetta, boil more pasta, and portion the sauce components separately for quick reheating in microwave with a splash of water—saves half the active time next meal. Use pre-grated cheese and guanciale/pancetta chunks over slices to speed chopping. Boil pasta while frying pancetta simultaneously on two burners."
+  },
+  "spaghetti-bolognese": {
+    "name": "Spaghetti Bolognese",
+    "desc": "A hearty Italian classic featuring al dente spaghetti smothered in a rich, slow-cooked meat sauce. The dish showcases the comforting blend of tomatoes, ground beef, and aromatic herbs that make it a staple for family dinners.",
+    "comment": "Make a large pot of Bolognese sauce and freeze in portions; reheat only what you need, cutting future prep by two-thirds since chopping and initial frying is done. Use a food processor to pulse onion, carrot, celery, and garlic together in seconds. Keep soffritto (onion-carrot-celery) frozen in batches for instant start. Double the recipe upfront to amortize active cooking time."
+  },
+  "risotto": {
+    "name": "Risotto",
+    "desc": "A creamy Italian classic made with Arborio rice slowly stirred in hot broth and finished with Parmesan and butter. It’s a comforting bowl that showcases the delicate balance of textures and flavors.",
+    "comment": "Prepare multiple risotto portions by scaling up the recipe in a wide pan, stirring less frequently after initial toasting; portion and chill for reheating in microwave with stock splash, halving active time per serving. Pre-mince onion-garlic and measure rice/stock in advance. Use hot stock in a pitcher for seamless additions without constant checking."
+  },
+  "paella": {
+    "name": "Paella",
+    "desc": "A vibrant Spanish rice dish simmered with saffron, chicken, seafood, and vegetables. It’s a festive one-pot meal that showcases the Mediterranean culinary tradition.",
+    "comment": "Cook a large batch for 4 servings at once to halve prep time: chop veggies in bulk once, use pre-boiled beets or frozen mirepoix if available cheaply, steep saffron ahead in warm stock. For single servings, prep soffrito and proteins in advance, refrigerate, then add rice just before serving to cut active prep. Use oven for even rice cooking at 190C after initial boil to speed up."
+  },
+  "har-gow": {
+    "name": "Har Gow (Shrimp Dumplings)",
+    "desc": "Delicate translucent wrappers filled with juicy shrimp and subtle seasonings, the classic Cantonese Har Gow dim sum prized for its chewy skin and fresh briny taste.",
+    "comment": "Make double batch of filling and dough, freeze formed dumplings flat on tray then bag: steam from frozen adds just 1 min, skips all chopping next time. Use food processor for quick mince on shrimp/ginger/garlic. Tortilla press between oiled parchment speeds wrapper rolling evenly without cracks. Batch-steam multiple tiers in steamer."
+  },
+  "gyoza": {
+    "name": "Gyoza",
+    "desc": "Japanese pan‑fried dumplings filled with seasoned pork and cabbage, first steamed in a covered pan then finished until crisp on the bottom. Often served hot with a soy‑vinegar dip as a popular street food and izakaya snack in Japan.",
+    "comment": "Make a larger batch of filling and wrappers at once, then freeze uncooked gyoza flat on a tray before transferring them to a container; they can go straight from freezer to pan without thawing, only adding 1–2 minutes to cooking. Mix the filling in a stand mixer or with chopsticks until sticky to speed up the kneading step, and use a small measuring scoop so portioning goes quickly and evenly. A non‑stick pan with a fitted lid lets you steam‑fry many dumplings at once without babysitting, so active time per portion drops sharply when cooking several servings together."
+  },
+  "wontons": {
+    "name": "Wontons",
+    "desc": "Delicate Chinese wontons filled with seasoned pork and aromatics, typically boiled and served in a light broth or quickly stir‑fried after boiling with soy‑based sauce. Their silky wrappers and savory filling make them a classic in home cooking and dim sum.",
+    "comment": "Shape a large batch of wontons at once and freeze them on a tray; they can be boiled directly from frozen with just 1–2 extra minutes in the water. Use store‑bought square wonton wrappers instead of rolling dough to cut prep drastically, and set up a small assembly line (filling, folding, sealing) so multiple portions are folded in one focused session and cooked to order later."
+  },
+  "fresh-spring-rolls": {
+    "name": "Fresh Spring Rolls",
+    "desc": "Fresh Vietnamese spring rolls with crisp rice paper wrappers filled with boiled shrimp, vermicelli noodles, fresh herbs, and crunchy vegetables. Typically paired with peanut or hoisin dipping sauce.",
+    "comment": "Prepare multiple rolls at once: boil a larger batch of shrimp and vermicelli simultaneously (active 5 min, passive boil 5-7 min), chill in ice water for quick cool-down, and use pre-julienned frozen carrot/cucumber mixes from the store—often cheaper than fresh in off-season. Keep filling ingredients portioned in bowls assembly-line style. Toast peanuts in bulk ahead and store. This cuts individual roll prep by half without raising costs."
+  },
+  "hot-pot": {
+    "name": "Hot Pot",
+    "desc": "A communal East Asian dish where a simmering pot of broth serves as the centerpiece for an assortment of thinly sliced meats, fresh vegetables, and chewy noodles. It's celebrated for its comforting warmth and the interactive experience of cooking ingredients right at the table.",
+    "comment": "Prepare a large batch of broth ahead and freeze in portions; reheat one while prepping ingredients for next use, cutting active time drastically. Buy pre-sliced meats and frozen pre-chopped vegetable mixes like cabbage, carrot, spinach to halve chopping. Slice everything at once for 4-6 servings, using a mandoline for meats and veggies; cook one portion now, refrigerate others raw for later table-cooking. Boil noodles separately in bulk."
+  },
+  "peking-duck": {
+    "name": "Peking Duck",
+    "desc": "A celebrated Chinese specialty featuring crisp skin and tender meat, traditionally served with thin pancakes, scallions, cucumber strips, and sweet bean sauce. The dish showcases the art of roasting, resulting in an unmistakable aroma and rich flavor profile.",
+    "comment": "Use a fan or hairdryer to speed skin drying to 8-10 hours instead of 24; rub with baking soda for extra crispness without long air-drying. For multiple ducks, rotate in oven to batch roast, saving 20-25 min per bird via hot air circulation. Buy ready-made Peking duck pancakes or steam frozen ones in bulk to skip batter mixing. Keep duck hanging hooks ready and preheat oven fully while prepping glaze."
+  },
+  "kung-pao-chicken": {
+    "name": "Kung Pao Chicken",
+    "desc": "A spicy Sichuan stir-fry with tender fried chicken, crunchy peanuts, vegetables, and a sweet-savory sauce featuring numbing Sichuan peppercorns and dried chilies.",
+    "comment": "Batch-prep ingredients for multiple portions by using a mandoline or food processor for uniform chopping of peppers, onions, garlic, and chilies, then store in bowls. Toast extra Sichuan peppercorns and grind into powder ahead for quick use. Double the recipe in one wok to halve per-portion cook time; cool quickly, portion into airtight containers, and freeze for up to a month—reheat straight from freezer in hot wok with splash of water."
+  },
+  "mapo-tofu": {
+    "name": "Mapo Tofu",
+    "desc": "Classic Sichuan dish with silky tofu in spicy fermented bean sauce, ground pork, and numbing Sichuan peppercorns.",
+    "comment": "Pre-mince garlic, ginger, and pork together and store in fridge for up to a day; keep pre-toasted ground Sichuan peppercorns handy. Cook double batch of sauce base (pork, doubanjiang, aromatics) ahead, freeze portions, then just simmer with tofu when needed—thaws and reheats in wok in half the time. Use store-bought chicken stock if faster than homemade."
+  },
+  "char-siu": {
+    "name": "Char Siu",
+    "desc": "Classic Cantonese roasted pork with sweet-savory glaze and caramelized edges, served sliced with rice.",
+    "comment": "Marinate a large pork shoulder batch (2-3kg) overnight, then roast or grill all at once—per-portion active oven time drops as it hands-off. Use oven fan/convection for even faster cooking and crispier results. Vacuum-seal and freeze marinated portions for quick future preps; thaw overnight in fridge. Apply extra glaze under broiler for 2-3 min caramelization."
+  },
+  "tempura": {
+    "name": "Tempura",
+    "desc": "A Japanese delicacy featuring lightly battered and deep-fried shrimp, sweet potato, and assorted vegetables. Its airy crunch and subtle seasoning make it a beloved appetizer in sushi restaurants worldwide.",
+    "comment": "Prepare batter just before frying by chilling dry ingredients and soda water ahead; use ice-cold sparkling water for crispiness. Slice vegetables uniformly in advance and pat dry to speed up. Fry multiple batches at once in a wide pot for home use, reusing oil for 2-3 sessions if filtered and stored properly. Make double portion: fry all, cool on rack, freeze extras in single layer then bag; reheat in 180C oven 3-4 min for crisp revival."
+  },
+  "sashimi": {
+    "name": "Sashimi",
+    "desc": "A traditional Japanese delicacy featuring thinly sliced raw fish served with soy sauce, wasabi, and pickled ginger. Its delicate texture and subtle umami flavor make it a favorite among seafood lovers worldwide.",
+    "comment": "Buy sashimi-grade tuna pre-sliced or partially frozen (sushi block)—thaw briefly in fridge and slice in 2-3 min vs 8 min fresh. Prepare multiple portions ahead: slice whole tuna loin into 150g packs, wrap airtight, refrigerate up to 2 days or freeze; grate extra ginger/wasabi in bulk and store. Use a mandoline slicer for uniform thin cuts to halve knife time safely."
+  },
+  "unagi-don": {
+    "name": "Unagi Don",
+    "desc": "Japanese unagi donburi: grilled freshwater eel over steamed rice, glazed with sweet-savory kabayaki sauce of soy, mirin, sugar, and sake. Smoky, silky eel pairs perfectly with fluffy rice.",
+    "comment": "Use pre-boned frozen unagi fillets (thaw in fridge ahead) to skip filleting/boning. Prepare double sauce batch and store refrigerated for instant use next time. Cook rice in cooker or microwave pouch while broiling eel; make multiple portions at once to halve active time per serving. Reuse foil tray for easy cleanup."
+  },
+  "yakitori": {
+    "name": "Yakitori",
+    "desc": "Japanese skewered chicken thigh and scallions, grilled over high heat and glazed with savory-sweet tare sauce. Smoky, charred edges deliver irresistible umami.",
+    "comment": "Cut chicken and scallions into uniform pieces ahead; soak bamboo skewers in water batch for multiple uses to prevent burning. Prepare tare sauce in advance and store. Thread multiple skewers at once for batch grilling under broiler or on grill pan; flip and glaze in one go. Buy pre-cut chicken thigh if available cheaply."
+  },
+  "tonkatsu": {
+    "name": "Tonkatsu",
+    "desc": "Japanese deep-fried breaded pork loin cutlet, served with shredded raw cabbage and tangy tonkatsu sauce. Crispy exterior yields to juicy pork inside.",
+    "comment": "Pound pork thin for even faster cooking; set up breading station with bowls in assembly line. Shred cabbage with mandoline or pre-shredded bag while oil heats. Fry two cutlets sequentially using same oil (skimming crumbs); double-fry briefly for extra crisp without extra oil. Freeze extra breaded cutlets for instant future meals."
+  },
+  "okonomiyaki": {
+    "name": "Okonomiyaki",
+    "desc": "A savory Japanese pancake blending cabbage, flour batter, and pork belly into a hearty fried disc, topped with okonomiyaki sauce, mayonnaise, nori, and sesame seeds.",
+    "comment": "Prepare a double or triple batch of batter and chop extra cabbage ahead, storing in fridge; this halves chopping time next day. Use pre-shredded cabbage coleslaw mix to skip chopping. Make multiple pancakes at once on a large griddle to reduce per-pancake cooking flips and attention."
+  },
+  "bibimbap": {
+    "name": "Bibimbap",
+    "desc": "Korean mixed rice bowl with steamed rice, sauteed beef and vegetables, tangy kimchi, fried egg, and gochujang chili paste.",
+    "comment": "Use pre-washed, pre-cut veggies and microwave rice to cut prep time. Fry beef in bulk for several servings; store the fried egg separately if making multiple portions."
+  },
+  "bulgogi": {
+    "name": "Bulgogi",
+    "desc": "Thinly sliced Korean beef marinated in sweet-savory soy sauce blend, quickly grilled, and served with fresh vegetables.",
+    "comment": "Marinate beef overnight or freeze briefly to slice thinner faster; use pre-minced garlic and ginger paste. Batch-grill double portion on a hot cast-iron skillet or grill pan, then portion and fridge for 2-3 days. Thinly slice veggies ahead and store in water to crisp."
+  },
+  "kimchi": {
+    "name": "Kimchi",
+    "desc": "A staple Korean fermented dish made from napa cabbage, garlic, and spicy chili flakes. Its tangy, umami flavor is a cornerstone of many Korean meals.",
+    "comment": "Prepare a large batch (4-6 servings) of kimchi at once: the salting and mixing time per portion drops significantly as chopping and tossing scales better for multiples; portion into jars immediately after mixing to save daily prep. Use pre-minced garlic and ginger from jars (cheaper in bulk, lasts months refrigerated) to halve chopping time. Keep salted cabbage in a colander over a bowl in fridge for 1-2 days if short on counter space, yielding even better flavor extraction."
+  },
+  "tteokbokki": {
+    "name": "Tteokbokki",
+    "desc": "A beloved Korean street-food classic, tteokbokki consists of chewy rice cakes simmered in a fiery gochujang sauce with fish cakes and scallions. Its vibrant red color and spicy-sweet flavor make it a comforting snack or quick meal.",
+    "comment": "Cook a big batch for 3-4 servings to halve chopping and sauce-mixing time per portion; cool quickly, portion into airtight containers, and refrigerate for up to 3 days—flavors intensify nicely. Use pre-sliced garlic/ginger paste or frozen minced packs to skip fresh mincing. Buy ready-to-use tteok from stores (often cheaper in bulk Asian markets) to avoid any soaking if dry. Slice surimi while sauce simmers for overlap."
+  },
+  "samgyeopsal": {
+    "name": "Samgyeopsal",
+    "desc": "A classic Korean barbecue dish featuring grilled pork belly slices served with fresh vegetables and ssamjang. Its rich, savory flavor is complemented by the crispy edges that develop during grilling.",
+    "comment": "Grill multiple batches at once for 2-4 servings to halve cooking time per portion, using a large grill pan or cast iron skillet; cut into bites with kitchen scissors directly on the grill to speed up serving. Preheat the grill well and avoid overcrowding to ensure quick, even crisping. Pre-chop vegetables and portion ssamjang ahead; freeze extra pork belly slices flat for instant thawing next time."
+  },
+  "japchae": {
+    "name": "Japchae",
+    "desc": "A classic Korean stir-fry made with sweet potato glass noodles, thinly sliced beef, and a colorful mix of vegetables tossed in sesame oil and soy sauce. It’s a staple at celebrations and a popular comfort food that balances savory, sweet, and umami flavors.",
+    "comment": "Prep vegetables for 4 servings at once and store in fridge up to 2 days to slash chopping time next cooks; blanch spinach and cook noodles in two pots simultaneously. Stir-fry double batch in shifts using large wok, then portion immediately—noodles absorb flavors better overnight in fridge. Use pre-sliced beef and frozen mirepoix mix if available cheaply to minimize knife work."
+  },
+  "butter-chicken": {
+    "name": "Butter Chicken",
+    "desc": "A creamy, tomato-based curry featuring tender pieces of marinated chicken, originating from Indian cuisine. The dish balances rich butter and spices with a silky sauce that pairs beautifully with rice or naan.",
+    "comment": "Marinate chicken overnight or several hours ahead in fridge to deepen flavor without extra active time. Prepare sauce base ahead and freeze in portions, then thaw and simmer with pre-marinated chicken. Use store-bought ginger-garlic paste and tomato puree to slash chopping time; batch-marinade for multiple meals to halve per-portion prep."
+  },
+  "tandoori-chicken": {
+    "name": "Tandoori Chicken",
+    "desc": "A classic North-Indian dish featuring tender chicken pieces marinated in a smoky spice blend and cooked to a charred finish. The vibrant red hue comes from a mix of paprika, cayenne pepper, and tandoori masala, delivering a fragrant and mildly spicy flavor.",
+    "comment": "Marinate chicken overnight in fridge for best tenderness with zero extra active time. Use pre-cut chicken thighs and bottled lemon juice to minimize prep; batch-grill multiple portions on a tray in hot oven or air fryer to cut cook time per serving. Freeze marinated raw chicken in portions for quick future cooks."
+  },
+  "biryani": {
+    "name": "Biryani",
+    "desc": "A fragrant, layered rice and meat dish originating from the Indian subcontinent, renowned for its complex blend of spices and aromatic herbs. Traditionally cooked over a slow flame to meld flavors into a single, savory masterpiece.",
+    "comment": "Batch-cook double portions: fry onions and cook chicken gravy ahead, layer with soaked rice, and dum in oven or sealed pot for even resting. Soak rice and marinate chicken/gravy a day prior in fridge. Use frozen pre-sliced onions (often cheaper bulk) and microwave partially cook rice to cut active boiling time."
+  },
+  "naan": {
+    "name": "Naan",
+    "desc": "A soft, pillowy flatbread originating from the Indian subcontinent, traditionally baked in a tandoor oven. It pairs wonderfully with curries and is often brushed with garlic butter for extra flavor.",
+    "comment": "Prepare a large batch of dough and refrigerate for up to 2 days; portion into balls and proof only the needed amount while the rest stays cold, cutting kneading and rising time per naan. Use no-yeast baking powder version with hot water and yogurt for instant 20-min total process. Preheat cast-iron skillet or tawa hot to speed up cooking per piece."
+  },
+  "samosa": {
+    "name": "Samosa",
+    "desc": "A crisp, triangular pastry filled with spiced potatoes and peas, originating from South Asia. Its crunchy exterior contrasts with a savory interior that makes it a popular street-food snack.",
+    "comment": "Boil and mash potatoes in advance or use leftover mashed potatoes to skip 15 min boiling and cooling; prepare large filling batch and freeze in portions, thawing quickly for assembly. Make double dough batch, chill or freeze wrapped portions to cut resting and kneading time next uses. Use premade spring roll wrappers if available for 10-min assembly, sealing with water."
+  },
+  "pani-puri": {
+    "name": "Pani Puri",
+    "desc": "A beloved Indian street-food delight, Pani Puri consists of crisp puri shells filled with a spicy, tangy water (pani) and a mixture of mashed potatoes, chickpeas, and chutneys. It’s a quick, bite-size snack that balances sweet, sour, and savory flavors in every bite.",
+    "comment": "Use storebought puri shells and pre-boiled potatoes/chickpeas from bulk cooking to halve prep. Prepare tamarind pani in large batches ahead as noted in its recipe and store chilled. Finely chop onions and coriander in bulk or use pre-chopped frozen mixes if cheaper locally. Fry multiple servings at once reusing oil safely to cut cook time."
+  },
+  "masala-dosa": {
+    "name": "Masala Dosa",
+    "desc": "A South-Indian crispy crepe filled with a spicy potato and onion mixture. The dish is celebrated for its delicate texture and aromatic flavor, often served with coconut chutney.",
+    "comment": "Prepare batter in large batches and ferment overnight in fridge for up to 5 days using portioned containers. Boil and mash potatoes ahead storing in fridge up to 3 days. Chop onions in bulk or use frozen pre-chopped to save 5min. Use non-stick tawa preheated to reduce oil and flipping time; make 2-3 dosas at once if tawa allows."
+  },
+  "palak-paneer": {
+    "name": "Palak Paneer",
+    "desc": "A creamy North-Indian spinach curry studded with soft paneer cubes. It’s a staple in Indian households and is often enjoyed with roti or rice.",
+    "comment": "Use frozen chopped spinach thawed quickly under hot water skipping blanch time. Buy pre-cubed paneer or cut from block in bulk ahead. Prepare onion-tomato masala base in large pot and freeze portions to cut saute time by half. Blend spinach smooth with immersion blender while cooking for speed."
+  },
+  "som-tam": {
+    "name": "Som Tam",
+    "desc": "A zesty Thai green papaya salad pounded with a mortar and pestle, blending sweet, sour, salty, and spicy flavors. Iconic street food staple served with sticky rice.",
+    "comment": "Prepare a large batch of shredded green papaya and blanched yardlong beans ahead, storing in fridge up to 3 days to halve shredding and chopping time for multiple servings. Pound sauce ingredients (garlic, chilies, sugar, fish sauce, lime) in mortar first while prepping veggies, then toss all together. Use pre-roasted peanuts and a julienne peeler for carrots/tomatoes to speed up."
+  },
+  "massaman-curry": {
+    "name": "Massaman Curry",
+    "desc": "A fragrant Thai-Indian fusion dish featuring tender beef simmered in a creamy coconut milk base enriched with tamarind and aromatic spices. The rich, slightly sweet flavor is balanced by the mild heat of Massaman curry paste and the earthy texture of potatoes.",
+    "comment": "Cook a large batch for 4-6 servings to halve active times: chop once, simmer big pot, portion and freeze (up to 3 months, flavors deepen). Use pressure cooker (20-25 min high pressure for tender beef). Pre-peeled frozen potatoes/onions save 5 min chopping. Store-bought roasted peanuts (20g, roasted state) optional for crunch without extra toast time."
+  },
+  "green-curry": {
+    "name": "Green Curry",
+    "desc": "A fragrant Thai staple featuring a bright green coconut-based sauce brimming with aromatic herbs and spices. The dish balances heat, sweetness, and creaminess, making it a versatile choice for both lunch and dinner.",
+    "comment": "Double the batch: fry paste once for multiple pans, saving 5 min per extra portion. Use frozen pre-sliced veggies (bell pepper, zucchini, bamboo) to skip chopping. Pressure cooker on high for 5 min cuts simmer to 15 min total active cook. Keep aromatics (lemongrass, lime leaves) in infuser bag for easy removal."
+  },
+  "chicken-satay": {
+    "name": "Chicken Satay",
+    "desc": "A classic Indonesian street-food favorite, consisting of marinated chicken skewers grilled to perfection and served with a creamy peanut sauce. The smoky aroma and rich flavor make it an instant crowd-pleaser at any gathering.",
+    "comment": "Batch marinate 1kg chicken (divide into bags, freeze extras): cuts future prep to 5 min thaw/skewer. Use pre-shelled roasted peanuts blended quick for sauce. Grill multiple batches at once on large tray or double grill; broil in oven (8 min flip once) skips outdoor setup. Soak bamboo skewers in bulk ahead."
+  },
+  "fried-rice": {
+    "name": "Fried Rice",
+    "desc": "A quick and versatile dish that turns leftover rice into a flavorful meal. Originating from Chinese street food, it’s now a staple in many households worldwide.",
+    "comment": "Use day-old leftover rice straight from the fridge to skip cooling time. Prep all veggies and sauces in advance while rice warms if needed. For batch cooking, double or triple the recipe in a wok—fixed costs like heating the pan stay the same, chopping scales but takes less proportional time; portion and fridge for 3-4 days. Pre-chopped frozen mixed veggies (peas, carrots) cut chopping to zero."
+  },
+  "nasi-goreng": {
+    "name": "Nasi Goreng",
+    "desc": "A classic Indonesian fried rice, bright with garlic and chili, often served with a sunny-side-up egg on top. It’s the go-to comfort food for lunch or dinner across the archipelago.",
+    "comment": "Use cold leftover rice to avoid clumping. Mince garlic/onion together ahead or use frozen pre-minced for speed. Batch cook multiple servings in one wok to halve per-portion active time; store extras in fridge up to 3 days. Mix sambal into oil first for even spice distribution without extra stirring."
+  },
+  "rendang": {
+    "name": "Rendang",
+    "desc": "A rich, slow-cooked Indonesian beef stew known for its deep umami and fragrant blend of spices. The dish originates from Minangkabau cuisine in West Sumatra and is traditionally simmered until the sauce thickens to a caramelized glaze.",
+    "comment": "Using an Instant Pot or pressure cooker cuts the cooking time to about 30-35 minutes (including pressure build/release) while still developing depth of flavor. For batch preparation, double ingredients for 2-3 meals and store in airtight containers; reheat gently on the stove or microwave. Blend spice paste (onion, garlic, ginger, galangal, lemongrass, etc.) in food processor to halve chopping time; freeze extra paste in ice cube trays for future batches."
+  },
+  "goi-cuon": {
+    "name": "Goi Cuon",
+    "desc": "Fresh Vietnamese spring rolls filled with shrimp, rice vermicelli, and crisp vegetables wrapped in translucent rice paper. The dish is renowned for its light, aromatic flavor profile and the satisfying crunch of fresh herbs.",
+    "comment": "Boil shrimps and vermicelli noodles in bulk ahead of time and store them in the fridge for up to 3 days. Pre-julienne vegetables and keep them in airtight containers with a damp paper towel. When ready to serve, you'll only need to soften the rice paper and assemble the rolls, cutting prep time in half. You can also freeze pre-cooked shrimps for weeks."
+  },
+  "chili-crab": {
+    "name": "Chili Crab",
+    "desc": "A Singaporean seafood classic, Chili Crab features sweet and spicy tomato-based sauce enveloping tender crab meat. The dish is often enjoyed with a side of steamed buns or rice to soak up the savory broth.",
+    "comment": "Use pre-cleaned frozen crab segments to eliminate shell-cleaning time. Prepare the chili-tomato sauce base in a large batch and freeze it in portions—it keeps well for months and only needs reheating when you add the crab. You can also use a pressure cooker to cut the simmering time in half while tenderizing the crab meat."
+  },
+  "hainanese-chicken-rice": {
+    "name": "Hainanese Chicken Rice",
+    "desc": "A fragrant Hainanese classic featuring poached chicken served with fragrant rice cooked in chicken stock and a side of ginger-soy sauce. The dish showcases subtle seasoning that highlights the natural flavors of the poultry.",
+    "comment": "Use a rice cooker with a steamer basket to poach the chicken and cook rice simultaneously in chicken stock, saving significant time and cleanup. Pre-made chicken stock (homemade frozen or quality store-bought) eliminates the need to make it fresh. Cook extra chicken and rice—they keep well refrigerated for 3 days and the flavors improve overnight. Slice chicken when cold for cleaner cuts."
+  },
+  "falafel": {
+    "name": "Falafel",
+    "desc": "A Middle Eastern street-food staple, falafel consists of deep-fried patties made from ground chickpeas and herbs. The crispy exterior gives way to a fragrant, herbaceous interior that pairs wonderfully with tahini sauce or fresh salad.",
+    "comment": "Soak dried chickpeas overnight (or quick-soak by boiling 1 min then 1 hour off-heat) for best texture; use a food processor for fast chopping of onion, garlic, herbs, and spices into a coarse paste. Form 6-8 small balls and freeze 15 min to firm up before frying—this prevents crumbling and cuts active frying time. Fry in batches but make double quantity, freeze extras on a tray then bag them; reheat from frozen in air fryer or oven to halve per-batch time on repeat meals."
+  },
+  "tabouleh": {
+    "name": "Tabouleh",
+    "desc": "A vibrant Middle Eastern parsley and bulgur salad that balances tangy lemon with fresh herbs. It’s a staple in Lebanese cuisine, often served as a refreshing starter or side dish.",
+    "comment": "Use fine bulgur and pour boiling water or lemon juice over it to soak quickly while chopping—fine grind hydrates in 15-20 min without cooking. Buy pre-washed parsley/mint bunches and pulse in processor with onion for speed; make a big tub for the week, portion into jars—it keeps 4-5 days in fridge as flavors meld better. Freeze chopped parsley in ice cube trays with water for future batches."
+  },
+  "fattoush": {
+    "name": "Fattoush",
+    "desc": "A fresh Lebanese salad featuring crispy toasted pita, crisp vegetables, herbs, and a tangy sumac-lemon dressing. It’s a vibrant mix of textures perfect for light lunches or side dishes.",
+    "comment": "Toast multiple pitas at once in the oven on a sheet for several salads, storing cooled chips airtight for weeks. Use pre-washed salad greens and a food processor pulse for chopping veggies in seconds. Keep sumac-lemon-olive oil dressing premixed in fridge up to 5 days, shaking before use."
+  },
+  "shakshouka": {
+    "name": "Shakshouka",
+    "desc": "A North African and Middle Eastern dish with eggs poached in a fragrant simmered tomato-and-pepper sauce. Often enjoyed for breakfast or brunch, served with warm bread.",
+    "comment": "Prep a big batch of the sauce base (onions, peppers, tomatoes, spices) and freeze in portions; reheat one, crack eggs in, cover to poach—cuts daily cook time in half. Use frozen diced onions/peppers to skip chopping, or a food processor for quick dice. Make multiple egg nests in one pan for 2-4 servings at once."
+  },
+  "couscous": {
+    "name": "Couscous",
+    "desc": "A light North African staple of steamed semolina grains with broth and olive oil. Its fluffy texture makes it ideal for quick salads.",
+    "comment": "Cook a large batch (multiply by 4), portion into airtight containers; reheat single servings in microwave with a splash of water in 1 minute. Use instant/quick-cook couscous variety if available. Keep stock boiling on hand or use microwave from start: boil stock 2 min, stir in couscous, cover 5 min."
+  },
+  "tagine": {
+    "name": "Tagine",
+    "desc": "A fragrant Moroccan stew simmered in a conical earthenware pot, blending tender meat with aromatic spices and sweet dried fruits. Its slow cooking process melds flavors into a comforting, savory-sweet harmony that is both hearty and exotic.",
+    "comment": "Tagine tastes even better the next day, so make a large batch in advance—brown extra meat and sauté aromatics in bulk, then portion and refrigerate for up to 5 days or freeze for months. Pre-toast and grind your spice mix in batches to save daily prep time. You can use canned tomatoes and pre-washed baby carrots. If you have a pressure cooker or Instant Pot, reduce passive cooking time to 30–40 minutes while achieving the same tender results."
+  },
+  "baklava": {
+    "name": "Baklava",
+    "desc": "A rich, sweet pastry from the Middle East made of layers of flaky phyllo dough filled with a crunchy nut mixture and drizzled in honey syrup. Its golden crust and fragrant pistachio flavor make it a beloved dessert across many cultures.",
+    "comment": "Always use store-bought phyllo dough—making it from scratch is impractical for home cooks. Prepare syrup while baklava bakes to streamline workflow. Toast nuts in bulk and freeze in portions for future batches. Most importantly, bake a full tray (20–30 pieces) at once and store tightly wrapped at room temperature for up to 2 weeks, or freeze for months. This reduces per-piece active time dramatically. Brush melted butter between every 2–3 layers instead of each layer to save time without sacrificing texture."
+  },
+  "pide": {
+    "name": "Pide",
+    "desc": "A traditional Turkish flatbread shaped like a boat or crescent, baked to a golden crisp and often topped with cheese, ground meat, or egg. It is a staple at family gatherings and street stalls alike, known for its flaky layers and hearty flavors.",
+    "comment": "Make dough in large batches: after the first rise, divide into portions, wrap tightly, and freeze for up to 3 months. Thaw overnight in the fridge, then shape and bake. Pre-cook ground beef in bulk, season well, and refrigerate or freeze in portions—this alone cuts daily prep by 10 minutes. Use pre-shredded cheese to save more time. For ultimate efficiency, assemble multiple pides and bake them simultaneously on two oven racks, rotating halfway through for even browning."
+  },
+  "lahmacun": {
+    "name": "Lahmacun",
+    "desc": "A thin, crispy Turkish flatbread topped with a spiced minced meat mixture. The savory blend of beef and lamb, accented by sumac and fresh herbs, makes it a beloved street-food favorite.",
+    "comment": "Prepare a larger batch of dough and topping for multiple lahmacuns: divide into portions, freeze extras flat on trays then bag, thaw overnight in fridge for quick future use, cutting active prep by over 30%. Use a food processor to chop onions, tomatoes, and parsley in seconds. Preheat oven with pizza stone or inverted heavy tray at max heat (250C+) for crispier results in less time. Spread topping very thin to ensure even quick baking."
+  },
+  "kofte": {
+    "name": "Kofte",
+    "desc": "A classic Turkish meatball made from spiced ground lamb and beef, often served with yogurt sauce or fresh salad. The fragrant blend of cumin, paprika, and parsley gives it a distinctive warm flavor that pairs wonderfully with pita bread.",
+    "comment": "Mix a large batch of kofta dough by hand or food processor, shape into patties or logs, layer with parchment in airtight containers, and freeze; grill or pan-fry straight from frozen (add 2 min), halving prep for multiple meals. Grate onions instead of chopping to speed mixing. Rest shaped koftas only 15 min covered at room temp, or skip for urgency. Use air fryer at 190C for 10-12 min total with flip, no active watch needed."
+  },
+  "borek": {
+    "name": "Borek",
+    "desc": "A flaky baked pastry from the Balkans and neighboring regions, typically made from thin dough layers filled with cheese or minced meat and baked to a golden crisp. It’s often enjoyed as a savory snack for breakfast or as a shareable appetizer at gatherings.",
+    "comment": "Use ready‑made yufka or phyllo sheets so you only have to mix the filling and assemble, skipping dough making completely. Prepare a larger tray of borek, cut it after baking, and refrigerate or freeze portions; reheat directly from the fridge or freezer so the effort of layering and filling is spread over several meals. You can mix the cheese filling in advance and keep it covered in the fridge for up to two days, so on busy days you only roll and bake."
+  },
+  "lula-kebab": {
+    "name": "Lula Kebab",
+    "desc": "A classic Caucasian and Turkish‑style skewer made from seasoned ground meat, shaped around skewers and grilled to a juicy finish. Its aromatic mix of cumin, onion, garlic, and fresh herbs gives it a rich, smoky character when served wrapped in warm lavash.",
+    "comment": "Prepare a larger batch of seasoned meat mixture, shape kebabs, and refrigerate or freeze them on a tray; once firm, store in containers so you can grill straight from chilled or frozen with almost no prep. Use a grill pan or oven broiler to cook multiple skewers at once instead of turning individual kebabs in a small pan. Grate onion in bulk and freeze it in ice‑cube portions for future kebab batches to avoid repeated chopping."
+  },
+  "moussaka": {
+    "name": "Moussaka",
+    "desc": "A hearty Greek‑style casserole with layers of roasted eggplant, spiced lamb and tomato sauce, and a creamy baked béchamel topping. The rich layers are baked until the top is golden and set, making it ideal as a make‑ahead family meal.",
+    "comment": "Roast sliced eggplant on a single large tray under the broiler instead of pan‑frying batches to save both time and oil. Make the meat sauce and béchamel while the eggplant roasts so assembly happens immediately after. Assemble a whole pan of moussaka a day ahead, chill it well, then bake once for several meals; leftovers reheat very well and the flavors meld even more."
+  },
+  "souvlaki": {
+    "name": "Souvlaki",
+    "desc": "A classic Greek street food favorite, grilled skewers of seasoned pork served with lemony herbs and fresh vegetables. It's a quick, flavorful bite that captures the spirit of seaside tavernas.",
+    "comment": "Marinate the meat overnight or at least 2 hours beforehand to deepen flavor and reduce active prep time. Make a double or triple batch since souvlaki keeps well in the refrigerator for 3-4 days and reheats beautifully in a hot pan or oven. You can prep skewers in advance, freeze them marinated, and grill directly from frozen, adding just 3-4 minutes to cooking time. Use pre-cut bell peppers or frozen vegetable mixes to eliminate chopping."
+  },
+  "spanakopita": {
+    "name": "Spanakopita",
+    "desc": "A classic Greek spinach pie featuring flaky phyllo dough filled with a savory mixture of sautéed spinach, onions, feta cheese, and herbs. It is often served warm as an appetizer or light main course during family gatherings.",
+    "comment": "Make a large pan for multiple servings since spanakopita keeps excellently in the refrigerator for up to 5 days and freezes beautifully for up to 3 months. Use pre-washed frozen spinach (already chopped and moisture-removed) to eliminate prep work. Buy store-bought phyllo dough instead of making from scratch, saving hours of labor. You can assemble the entire dish a day ahead, refrigerate unbaked, and pop it in the oven when ready. Reheat individual portions in a toaster oven to restore crispness."
+  },
+  "schnitzel": {
+    "name": "Schnitzel",
+    "desc": "A classic Austrian dish consisting of a thin, breaded veal cutlet that is pan‑fried to golden perfection. Often served with lemon wedges and a simple side like potato salad or greens, it exemplifies the comforting simplicity of Central European home cooking.",
+    "comment": "Prep several veal cutlets at once: pound, season, and bread a batch, then freeze them flat on a tray before transferring to a container; they can go straight from freezer to pan with just a couple of extra minutes of cooking on low–medium heat at the start. Set up a breading station with wide containers and use one hand for wet and the other for dry ingredients to cut mess and speed up coating. Use a large pan so you can fry 2–3 schnitzels in a single batch without crowding; this keeps them crisp and reduces total active time. If you often cook schnitzel, pre‑blend a simple seasoning mix for the flour and breadcrumbs so you skip measuring every time."
+  },
+  "currywurst": {
+    "name": "Currywurst",
+    "desc": "A quintessential German street‑food dish featuring sliced bratwurst smothered in a lightly sweet, tangy tomato‑curry sauce. Usually served with fries or a bread roll, it is a popular late‑night snack across Berlin’s bustling food stalls.",
+    "comment": "Cook a large batch of curry sauce once: it keeps well in the fridge for up to several days and freezes even longer, so you only need to sear the sausages when hungry. Par‑cook several bratwursts in lightly simmering water, then chill them; later you only need a quick pan‑fry or grill to reheat and brown. Store sauce and sausages separately in airtight containers so you can portion them flexibly for single or multiple servings. If you eat this often, pre‑mix your own curry–paprika–sugar blend to shorten seasoning steps."
+  },
+  "bratwurst": {
+    "name": "Bratwurst",
+    "desc": "A classic German sausage, typically made from pork or a mix of pork and veal and seasoned with spices like nutmeg, ginger, and caraway. It is usually grilled or pan‑fried and served with mustard, bread, and sometimes sauerkraut.",
+    "comment": ""
+  },
+  "pretzel": {
+    "name": "Pretzel",
+    "desc": "A soft, chewy German snack with a glossy dark crust and a hint of saltiness. The classic pretzel is often enjoyed warm, topped with coarse sea salt or cheese dip.",
+    "comment": "Make a double or triple batch of dough to freeze portions after initial rise, defrost overnight in fridge and shape directly to save repeated mixing time. Use instant yeast to skip proofing, and prepare the baking soda bath while dough rests. Bake multiple pretzels at once on one sheet to optimize oven time."
+  },
+  "sauerkraut": {
+    "name": "Sauerkraut",
+    "desc": "A tangy, fermented cabbage dish originating from Central Europe, often served as a side or topping for sausages and sandwiches. Its crisp texture and probiotic benefits make it a staple in many hearty meals.",
+    "comment": "Shred multiple heads of cabbage at once using a food processor to batch-prep several jars, halving per-jar time. Use weights or fermentation crocks to ensure even pressing without daily checks. Start multiple jars in rotation every week for continuous supply without full prep repeats."
+  },
+  "sauerbraten": {
+    "name": "Sauerbraten",
+    "desc": "A classic German pot roast marinated in a tangy vinegar–wine mixture, then slow‑cooked until tender. The dish is renowned for its deep flavor and is often served with red cabbage or potato dumplings.",
+    "comment": "Marinate several roasts at once in large batches, freezing extras post-marinade to skip future prep. Use a pressure cooker or Instant Pot for cooking to reduce active time to 45 min from 3 hours. Pre-chop and freeze veggie mixes for the marinade to cut daily chopping."
+  },
+  "ksesptzle": {
+    "name": "Käsespätzle",
+    "desc": "A classic German comfort dish of fresh egg noodles smothered in melted cheese and crispy onions, often served as a hearty main or side.",
+    "comment": "Use store-bought or pre-made spätzle (refrigerated or dried) to eliminate dough mixing and resting. Slice onions thinly in advance or use a mandoline for quick frying in 2 min. Grate cheese ahead and layer cold for faster melting under broiler instead of stovetop stirring."
+  },
+  "rouladen": {
+    "name": "Rouladen",
+    "desc": "A classic German dish of thinly sliced beef rolled around pickles, onions and bacon, then braised until tender. It’s a hearty comfort food that showcases the depth of slow‑cooked flavors in traditional Bavarian cuisine.",
+    "comment": "Prepare a big batch of 4-6 rolls at once: assembly time per roll drops significantly after the first. Use pre-cut thin beef slices (top round) from the butcher to skip trimming. Brown all rolls in one pan quickly over high heat. For reheating, make extra gravy and store rolls immersed in it in the fridge; they reheat in 5 minutes on stovetop. Freeze cooked rolls in sauce for up to 3 months, thaw overnight and reheat gently."
+  },
+  "goulash": {
+    "name": "Goulash",
+    "desc": "A hearty Hungarian beef stew simmered with paprika, onions, and vegetables. It’s traditionally served hot with a side of crusty bread or over egg noodles.",
+    "comment": "Cook a large pot for 4-6 servings: chopping once and simmering scales time down per portion. Caramelize onions slowly in advance and freeze portions for instant base. Use a pressure cooker or Instant Pot for full cook in 40 minutes total. Keep pre-made spice mix (paprika, salt, pepper) ready. Freeze in portions; it tastes better next day and holds flavor well up to 3 months frozen."
+  },
+  "pelmeni": {
+    "name": "Pelmeni",
+    "desc": "Traditional Russian dumplings filled with seasoned ground pork and beef, served hot in broth or with sour cream. Their delicate wrappers and savory filling make them a comforting staple of Eastern European cuisine.",
+    "comment": "Prepare a large batch of dough and filling for multiple meals, shape all pelmeni at once, freeze extras on a floured tray then transfer to bags; this halves assembly time per serving. Use a pasta machine or food processor for dough and meat grinding to speed up. Boil in batches while shaping the next to overlap active time. Buy frozen pelmeni for instant cooking if time is critical."
+  },
+  "olivier-salad": {
+    "name": "Olivier Salad",
+    "desc": "A classic Russian salad featuring a creamy blend of diced vegetables, eggs, and pickles tossed with mayonnaise. It’s both hearty and refreshing, often served at festive gatherings.",
+    "comment": "Batch-boil potatoes, carrots, eggs, and peas together in one pot to minimize cooking time; cool quickly in ice water for safe fast chopping. Dice everything uniformly using a vegetable chopper or grid cutting board. Make a large batch, portion and refrigerate up to 3 days, adding mayo just before serving to keep fresh. Use frozen peas directly thawed to skip boiling."
+  },
+  "blini-with-caviar": {
+    "name": "Blini with Caviar",
+    "desc": "Delicate Russian pancakes served as a luxurious starter, topped with briny caviar and a dollop of sour cream. The contrast between the soft, slightly yeasted blinis and the salty caviar creates an elegant bite that is both classic and refined.",
+    "comment": "Prepare a double or triple batch of batter ahead and store in the fridge for up to 2 days; this cuts mixing time significantly for multiple servings. Use a dedicated blini pan or electric griddle to cook 4-6 blini at once instead of one-by-one, reducing total cooking time. Pre-portion toppings like sour cream and caviar in a piping bag for quick assembly."
+  },
+  "beef-stroganoff": {
+    "name": "Beef Stroganoff",
+    "desc": "A comforting Russian classic featuring tender beef strips simmered in a creamy mushroom sauce. Often served over noodles or rice, it balances savory depth with velvety richness.",
+    "comment": "Slice a large batch of beef and vegetables ahead, storing in fridge for 1-2 days to halve prep for multiple meals. Use pre-made roux (flour-butter mix cooked and frozen in ice cube trays) to instantly thicken sauce without stirring flour fresh. Opt for tenderloin or pre-sliced beef stir-fry cuts to shorten cooking to medium-rare sear before saucing."
+  },
+  "varenyky": {
+    "name": "Varenyky",
+    "desc": "Ukrainian potato and cheese dumplings served hot with buttered onions or sour cream. They are a comforting staple often enjoyed on holidays and family gatherings.",
+    "comment": "Boil potatoes in microwave for 5-7 min to speed mashing; use food processor for dough and filling. Fry onions in bulk while dough rests. Make double batch, freeze uncooked varenyky on tray then bag them; boil from frozen to halve future prep. Keep pre-boiled potatoes or mashed potato mix frozen."
+  },
+  "pierogi": {
+    "name": "Pierogi",
+    "desc": "Classic Polish dumplings with varied fillings: savory options like pork-potato, sauerkraut-mushroom, or sweet berry. Served hot with sautéed onions and sour cream.",
+    "comment": "Microwave potatoes for quick boil/mash; use store-bought or no-rest dough recipe to skip resting. Prep all fillings in bulk food processor, fry meats/veggies together. Assemble double batch, freeze uncooked on tray then store; boil directly from frozen. Rinse sauerkraut to cut prep, use frozen chopped onions/mushrooms if available cheaply."
+  },
+  "bigos": {
+    "name": "Bigos",
+    "desc": "A hearty Polish hunter's stew that blends sauerkraut, fresh cabbage, and various meats into a deeply savory pot roast. Its slow-cooked layers of flavors make it a comforting classic for winter meals.",
+    "comment": "Cook a large batch as it tastes better after 2-3 days and freezes perfectly. Use a pressure cooker to reduce simmering from 3 hours to 45 minutes. Utilizing a food processor for shredding cabbage and carrots can save significant prep time without increasing costs."
+  },
+  "stuffed-cabbage-rolls": {
+    "name": "Stuffed Cabbage Rolls",
+    "desc": "A comforting Eastern European dish where seasoned ground meat and rice are wrapped in tender cabbage leaves and simmered in a tomato-based sauce.",
+    "comment": "Freeze the whole cabbage head for 24 hours then thaw it; the leaves will become soft and pliable without boiling, saving time and avoiding burns. Use a slow cooker or a heavy pot to let them simmer passively while you do other tasks."
+  },
+  "potato-pancakes": {
+    "name": "Potato Pancakes",
+    "desc": "Classic Eastern European pancakes made from grated potatoes, pan-fried until golden and crispy. Best served hot with a dollop of sour cream.",
+    "comment": "Use a food processor with a fine grating disk to prepare the batter in seconds instead of minutes. Frying with two large pans simultaneously cuts the cooking time in half and ensures everyone eats at the same time."
+  },
+  "salo": {
+    "name": "Salo",
+    "desc": "A traditional Ukrainian cured pork fat delicacy known for its rich flavor and melt-in-your-mouth texture. Often served thinly sliced on rye bread with a sprinkle of fresh dill or chopped onions.",
+    "comment": "Prepare a large batch of 1-2kg salo at once: the rubbing and layering time stays similar, but halve per-portion prep by doing multiple pieces. Use pre-peeled frozen garlic to save slicing time. For hot brine method, boil spices in bulk ahead and reuse; cool quickly in ice bath for fridge storage. Store in fridge up to months or freeze portions."
+  },
+  "shashlik": {
+    "name": "Shashlik",
+    "desc": "A classic Central Asian kebab consisting of marinated meat cubes skewered and grilled over open flame. The smoky char and juicy interior make it a beloved street-food staple across the former Soviet republics.",
+    "comment": "Batch-marinate 1-2kg beef at once: chopping and mixing time per portion halves with volume. Use pre-minced garlic and frozen onion slices to cut prep. Skewer multiple ahead and grill in bigger batches on larger grill or broil in oven; rotate less frequently for time save. Reheat leftovers on hot grill."
+  },
+  "plov": {
+    "name": "Plov",
+    "desc": "A fragrant Uzbek rice pilaf cooked with tender lamb and caramelized onions, simmered in a savory broth of spices. It is traditionally served at gatherings, symbolizing abundance and hospitality.",
+    "comment": "Batch-cook several portions at once in larger pot; the simmering time drops slightly because a larger volume retains heat better. Use pre-chopped frozen onion-carrot mix and keep homemade stock frozen in portions to slash chopping and heating. Store cooked plov in airtight containers in the fridge for up to 48 hours or freeze individual servings."
+  },
+  "manti": {
+    "name": "Manti",
+    "desc": "Turkish dumplings filled with a spiced mixture of beef and lamb, served with tangy yogurt sauce and sprinkled with sumac and chili flakes. Traditionally boiled after optional par-baking, sometimes lightly fried for crispy edges.",
+    "comment": "Make a large batch of manti dough and filling, shape and par-bake them all at once, then freeze in portions; this spreads fixed prep time over multiple meals, halving per-portion active time on repeats. Boil straight from frozen without thawing, adding just 1-2 minutes. Use a pasta machine or rolling pin with guide for thinner, uniform dough sheets to speed rolling. Prepare yogurt and sauces ahead in bulk."
+  },
+  "dolma": {
+    "name": "Dolma",
+    "desc": "Mediterranean stuffed grape leaves with seasoned rice, herbs, and ground beef. Savory bites served with yogurt or tomato sauce.",
+    "comment": "Prepare large batches of filling and roll/roll dolma ahead, layering in pots or freezer bags to steam multiple meals at once, cutting per-portion prep in half. Use jarred or pre-blanched grape leaves to skip blanching. Par-cook rice ahead or use microwave quick-rice. For cooking, use a pressure cooker to reduce simmer time significantly. Keep herbs chopped and frozen in portions."
+  },
+  "khinkali": {
+    "name": "Khinkali",
+    "desc": "Traditional Georgian dumplings filled with a savory mix of beef, pork and aromatic herbs. They are boiled to perfection, creating a steaming pocket that bursts with flavor when you bite into them.",
+    "comment": "Prepare a large batch of dough and filling for multiple meals: roll and fill 20+ khinkali at once, boil half immediately and freeze the rest uncooked on a floured tray, then bag for later. This cuts per-portion prep by half. Use a stand mixer for dough kneading and food processor for onion to save 15-20 min. Rest dough only 30 min instead of 1 hour. Boil in batches using a large pot whirlpool method to prevent sticking."
+  },
+  "khachapuri": {
+    "name": "Khachapuri",
+    "desc": "A Georgian cheese-filled bread that is both savory and comforting. The round, golden crust encases a gooey blend of cheese, egg and butter, making it a popular street food in Tbilisi.",
+    "comment": "Make double dough batch and freeze half portioned balls for next time, thawing overnight in fridge to skip rising. Grate cheese ahead and store in fridge up to 2 days. Use rapid-rise yeast and warm spot for 45 min rise instead of 90. For multiple, rotate oven trays to shave 3 min bake. Knead in stand mixer to save 5 min."
+  },
+  "satsivi": {
+    "name": "Satsivi",
+    "desc": "A classic Georgian winter dish, satsivi is a velvety walnut sauce served cold over boiled turkey. Its rich, earthy flavor and creamy texture make it a comforting centerpiece for festive meals.",
+    "comment": "Prepare a large batch of walnut sauce base (grind walnuts, sauté onions, blend with spices and broth), portion and freeze; just boil turkey and mix when needed to slash active time. Use pre-boiled turkey from store rotisserie (shred and measure) or a pressure cooker to cut turkey cooking to 20 min. Keep spices like utskho suneli pre-mixed for instant flavor."
+  },
+  "cepelinai": {
+    "name": "Cepelinai",
+    "desc": "A traditional Lithuanian dish of large potato dumplings stuffed with seasoned pork, often served with sour cream and bacon fat. The name means 'flying saucers' due to their distinctive shape.",
+    "comment": "Grate potatoes in a food processor to halve dough prep; make double batch of filling and raw cepelinai, freeze on tray then bag for quick future boils. Use riced boiled potatoes mixed with starch for easier non-sticky dough handling. Form all dumplings at once assembly-line style."
+  },
+  "kibinai": {
+    "name": "Kibinai",
+    "desc": "Traditional Lithuanian pastry filled with spiced meat and onions, often enjoyed as a quick snack or street food. The flaky dough encases a savory mixture that balances aromatic spices with hearty protein.",
+    "comment": "Prepare dough and filling ahead, assemble and freeze raw kibinai on a tray before baking to cut daily active time; bake straight from freezer adding a few minutes. Use food processor for quick onion chop and dough mix. Make mega-batch, portion freeze for grab-and-bake convenience."
+  },
+  "smorrebrod-with-egg-and-anchovies": {
+    "name": "Smorrebrod with Egg and Anchovies",
+    "desc": "Traditional Danish open-faced sandwich on crisp rye bread, topped with butter, sliced boiled egg, anchovies, and chives. A simple yet flavorful staple at gatherings.",
+    "comment": "Boil multiple eggs at once and keep peeled in the fridge for up to a week. Buy pre-sliced rye bread or use a toaster to skip cutting. Prepare toppings ahead and assemble several smorrebrod in one go to halve assembly time."
+  },
+  "italian-meatballs": {
+    "name": "Italian Meatballs",
+    "desc": "Classic Italian meatballs made tender with breadcrumbs and cheese, fried and simmered in rich tomato sauce. Perfect as an appetizer or main with herbs.",
+    "comment": "Double the batch, freeze raw formed meatballs in single layers on a tray then bag them; thaw overnight in fridge before frying to slash future prep. Use a food processor pulse for quick meat and parsley mixing. Keep premade sauce simmering while frying to overlap times."
+  },
+  "cinnamon-buns": {
+    "name": "Cinnamon Buns",
+    "desc": "Sweet yeasted dough rolled with cinnamon-sugar filling, baked to golden perfection. Classic comfort food for breakfast or treats.",
+    "comment": "Refrigerate shaped buns overnight for slow proof, bake fresh in morning to cut active prep. Use rapid-rise yeast and warm oven proofing (heat oven briefly then turn off with light on) to halve rise times. Make double dough batch, freeze half pre-rolled for quick future bakes."
+  },
+  "swiss-cheese-fondue": {
+    "name": "Swiss Cheese Fondue",
+    "desc": "Swiss melted Gruyère cheese fondue with white wine and kirsch, perfect for dipping crusty bread cubes. Warm, shareable classic.",
+    "comment": "Pre-shred cheese and chop garlic ahead, store in fridge. Cube bread while cheese melts to overlap steps. For multiples, use bigger pot and keep warm on low heat longer without extra active time."
+  },
+  "raclette": {
+    "name": "Raclette",
+    "desc": "A Swiss classic where melted Raclette cheese is scraped over boiled potatoes, accompanied by pickled cucumbers and sliced onion. The dish offers a comforting blend of savory cheese with crisp, tangy sides that highlight the alpine culinary tradition.",
+    "comment": "Boil a large batch of potatoes ahead and reheat as needed; slice onions and portion pickles in advance for multiple servings. Use pre-boiled baby potatoes or microwave them in 5 minutes to halve boiling time. For cheese, prepare multiple portions under the broiler simultaneously or use a raclette grill if available to melt faster without constant monitoring."
+  },
+  "rosti": {
+    "name": "Rosti",
+    "desc": "A classic Swiss potato pancake that is crispy on the outside and tender inside. It’s often served as a side dish or topped with cheese, smoked salmon, or a fried egg for a hearty breakfast.",
+    "comment": "Grate potatoes for multiple portions at once using a food processor to save time; squeeze out moisture in a clean kitchen towel batch-style. Use a non-stick pan or pre-shredded frozen hash browns (thaw quickly under water) for even faster crisping without sticking. Cook double batch and reheat slices in toaster oven for later meals."
+  },
+  "croissant": {
+    "name": "Croissant",
+    "desc": "A flaky, buttery pastry originating from France, known for its layers of laminated dough that puff into airy crescents. Perfect as a breakfast treat or elegant snack with coffee.",
+    "comment": "Laminate and chill dough overnight or freeze pre-laminated blocks for quick thawing; divide dough into multiple portions for batch freezing after proofing to cut active time per croissant. Use rough puff pastry method skipping multiple folds or store-bought puff pastry sheets rolled into crescents for home use, slashing bake time. Proof multiple at once in a warm oven with light turned on."
+  },
+  "baguette": {
+    "name": "Baguette",
+    "desc": "A classic French loaf with a crisp, golden crust and a soft, airy interior. The slender shape makes it perfect for sandwiches or as an accompaniment to any meal.",
+    "comment": "Prepare multiple baguettes at once from bulk dough: mix large batch the night before for overnight rise, divide and shape quickly in morning. Use pre-ferment (poolish) started day ahead to enhance flavor while fitting schedule. Keep dough in fridge for cold retard to extend rise controllably and batch multiple days. Freeze shaped loaves post-proofing, bake from frozen adding few extra minutes."
+  },
+  "arancini": {
+    "name": "Arancini",
+    "desc": "Crispy Italian rice balls filled with melted mozzarella, traditionally served as street food in Sicily. They offer a satisfying crunch that hides the creamy, savory center.",
+    "comment": "Cook large batch of risotto ahead and chill overnight; portion into balls quickly while cold for easier handling. Use pre-shredded/grated cheeses to skip cutting. Make multiple batches of balls, freeze on tray then bag; fry straight from freezer adding 1-2 min, keeps shape well. Batch breading station setup speeds assembly for many."
+  },
+  "caprese-salad": {
+    "name": "Caprese Salad",
+    "desc": "A bright, fresh Italian salad that showcases the harmony of ripe tomatoes, creamy mozzarella, and fragrant basil. Drizzled with a simple olive oil dressing, it’s a quintessential summer dish that balances sweetness and saltiness.",
+    "comment": "Slice tomatoes and mozzarella while the knife is sharp, or use pre-sliced cheese and cherry tomatoes halved in bulk to minimize cutting time. Prepare multiple salads at once by slicing everything ahead and assembling as needed; store components separately in the fridge for up to a day. Keep basil leaves whole if bought in larger bunches to avoid extra chopping."
+  },
+  "bruschetta": {
+    "name": "Bruschetta",
+    "desc": "A classic Italian antipasto featuring toasted bread rubbed with garlic and topped with a fresh tomato-basil mixture. Its bright flavors make it a popular starter for Mediterranean feasts.",
+    "comment": "Use a microplane for grating garlic directly onto the hot toasts to save rubbing time, and mix toppings in advance for multiple batches. Slice and toast a whole baguette at once under the broiler, then store cooled slices airtight for quick assembly later. Buy pre-diced tomatoes or dice a large batch ahead and drain excess liquid overnight."
+  },
+  "polenta": {
+    "name": "Polenta",
+    "desc": "A classic Italian comfort dish made from cornmeal cooked in salted water until creamy, often used as a base for sauces or served as slices after chilling and pan-searing. It’s versatile and hearty, pairing well with vegetables, ragù, or braised meats.",
+    "comment": "To save time on busy days, cook a larger batch once, spread it in a thin layer to cool quickly, then refrigerate. Reheat a portion with a splash of water (or milk) and whisk for 3–5 minutes to get it creamy again, instead of cooking from scratch."
+  },
+  "ossobuco": {
+    "name": "Ossobuco",
+    "desc": "A classic Milanese-style veal shank dish, slowly simmered with aromatics, wine, and stock until tender. The marrow enriches the sauce, making it a natural match for risotto or polenta.",
+    "comment": "For faster weeknight ossobuco, use a pressure cooker to shorten the long simmer (the main time sink) while keeping the same ingredient list. Another practical speed-up is to keep a frozen diced onion-carrot-celery mix on hand: it’s usually inexpensive and cuts chopping time to almost zero."
+  },
+  "gnocchi": {
+    "name": "Gnocchi",
+    "desc": "Classic potato dumplings, boiled until they float, then tossed with butter (or served with tomato sauce). Soft, filling, and easy to pair with many sauces.",
+    "comment": "To speed this up, microwave the potatoes instead of boiling (less waiting and no big pot), then rice them while hot so they dry out quickly. For an even bigger win, form a double batch and freeze the uncooked gnocchi on a tray; they can be boiled straight from frozen for quick meals later."
+  },
+  "ricotta-spinach-ravioli": {
+    "name": "Ricotta Spinach Ravioli",
+    "desc": "Traditional Italian stuffed pasta featuring delicate pockets of ricotta-spinach filling, boiled and served in a light simmered tomato sauce. A classic comfort dish that showcases the elegance of homemade dough and seasonal vegetables.",
+    "comment": "Making ravioli dough and filling for one serving is time-intensive; double or triple the batch, freeze uncooked ravioli on a floured tray, then transfer to bags for up to 3 months. Boil straight from frozen, adding 1 minute. Use a food processor to chop spinach and mix filling in seconds. Pre-blanch spinach in bulk and freeze portions to skip wilting each time. Roll dough with a pasta machine if available to halve rolling time."
+  },
+  "fettuccine-alfredo": {
+    "name": "Fettuccine Alfredo",
+    "desc": "Creamy Italian pasta dish featuring silky fettuccine tossed in a rich sauce of butter, heavy cream, and Parmesan cheese. Its indulgent texture makes it a classic comfort food for any meal.",
+    "comment": "Cook pasta while cream, butter, and grated cheese gently warm together—no need to boil sauce vigorously, just stir until emulsified over low heat. Grate cheese ahead and store in fridge; mince garlic in bulk and freeze in ice cube trays with oil for instant addition. Double portions to boil pasta once for two meals, sauce reheats perfectly with a splash of pasta water. Use no-boil lasagna sheets cut into strips if available for zero pasta cook time."
+  },
+  "jamn-ibrico": {
+    "name": "Jamón Ibérico",
+    "desc": "Premium dry-cured Iberian ham from Spain’s pig farms, prized for its marbled fat and deep umami flavor. Sliced thinly to showcase the delicate balance of salt, fat, and meat.",
+    "comment": "Use an electric slicer or sharpest knife warmed in hot water and dried for ultra-thin slices without effort. Buy pre-sliced vacuum packs for single servings to skip all cutting. Store whole ham wrapped tightly in parchment and cloth in fridge; it lasts months. Slice multiple servings at once, wrap extras individually to eat cold anytime."
+  },
+  "prosciutto-di-parma": {
+    "name": "Prosciutto di Parma",
+    "desc": "A celebrated Italian dry-cured ham from the Parma region, known for its delicate balance of salt and sweet notes. Thinly sliced, it pairs wonderfully with melon, figs, or a simple drizzle of olive oil.",
+    "comment": "Buy pre-sliced Prosciutto di Parma to halve slicing time. Prepare multiple servings at once by arranging slices on a platter ahead, storing covered in fridge, and drizzling oil just before serving. This cuts daily prep significantly."
+  },
+  "escargots-de-bourgogne": {
+    "name": "Escargots de Bourgogne",
+    "desc": "A classic French delicacy featuring snails cooked in a fragrant garlic-herb butter. Often served as an elegant appetizer, the dish showcases Burgundy's culinary heritage with its simple yet luxurious preparation.",
+    "comment": "Use pre-cooked or canned snails (drained) to skip cleaning and initial boiling, saving 20+ minutes. Make a large batch of garlic-parsley butter ahead and freeze in portions; melt quickly for multiple servings. Bake several trays at once to reduce per-portion cooking time."
+  },
+  "boeuf-bourguignon": {
+    "name": "Boeuf Bourguignon",
+    "desc": "A classic French beef stew simmered in red wine with mushrooms, onions and bacon. The slow braising brings a deep, savory richness that is synonymous with Burgundy cuisine.",
+    "comment": "Batch-cook a large pot for several meals: brown meat and veggies in advance, then slow-simmer. Cool quickly, portion into airtight containers, and freeze for months—flavor improves on reheating. Use pre-chopped frozen mirepoix (onion/carrot) and pearl onions to slash chopping; keep stock batches ready."
+  },
+  "cassoulet": {
+    "name": "Cassoulet",
+    "desc": "A hearty French stew originating from the Languedoc region, simmering white beans with pork, duck confit, and rabbit for hours of deep flavor. The dish is celebrated for its rich, comforting texture and is often prepared for large gatherings.",
+    "comment": "Cook a large pot for 4-6 servings: soak and pressure cook beans in bulk (10 min under pressure), chop veggies in food processor, layer meats and beans in pot, bake once. Cool quickly, portion into airtight containers, freeze up to 3 months—reheat portions as needed, adding fresh breadcrumbs only when serving. Use store-bought duck confit and pre-cooked sausage to skip confit prep. This cuts active prep by multitasking and oven time in half by using hotter initial bake at 220°C/450°F for 1 hour then lower."
+  },
+  "coq-au-vin": {
+    "name": "Coq au Vin",
+    "desc": "A classic French braised chicken dish where tender pieces of poultry simmer in red wine with aromatic vegetables and herbs. It showcases the rustic elegance of Provençal cooking, often enjoyed during family gatherings.",
+    "comment": "Batch for 3-4 servings: sear all chicken/bacon/veggies at once in wide pot, deglaze with wine/stock, braise covered. Use pre-cut mirepoix veggies or food processor for chopping, ready chicken stock cubes, skip flour roux by thickening with cornstarch slurry post-cook. Pressure cook for 20-25 min total after sear (high pressure), or slow cooker 4h low after sear. Freeze portions flat in bags, thaw overnight, reheat gently on stove."
+  },
+  "ratatouille": {
+    "name": "Ratatouille",
+    "desc": "A classic Provençal vegetable stew featuring zucchini, eggplant, bell pepper, tomato, and onion, simmered with herbs to create a vibrant, hearty dish. It’s often served as a side or a light vegetarian main, showcasing the rustic flavors of Southern France.",
+    "comment": "Prep multiple batches: use food processor to dice all veggies uniformly in seconds, sauté onions/garlic base, mix all in one pot or sheet pan. Bake sheet pan version at 400°F/200°C covered 20 min then uncovered 10 min for roasting flavors without stirring. Use frozen diced veg mix (eggplant/zucchini/pepper) thawed quick, simmer all in pot 15-20 min stovetop. Portion and freeze flat, microwave-reheat in 3 min or fridge 4 days—flavors improve next day."
+  },
+  "quiche-lorraine": {
+    "name": "Quiche Lorraine",
+    "desc": "A classic French custard tart featuring a buttery pastry shell filled with eggs, cream, bacon and Gruyère cheese. It’s a staple of French bistro cuisine, often served warm as brunch or light dinner.",
+    "comment": "Make double batch of pastry dough and freeze extras for next time, or use store-bought pie dough to slash prep in half. Blind bake the crust while frying bacon simultaneously to overlap tasks. Cook a large batch, cool quickly, portion into airtight containers, and refrigerate up to 3 days or freeze for 2 months; reheat slices in oven to restore crispness."
+  },
+  "mashed-potatoes": {
+    "name": "Mashed Potatoes",
+    "desc": "Creamy, buttery mashed potatoes are a staple side dish in many households worldwide. They pair wonderfully with roasted meats or can be enjoyed on their own as a comforting comfort food.",
+    "comment": "Batch-cook 3-4 portions at once in a large pot or pressure cooker (boil time ~8 min), cool quickly under cold water, portion and store in fridge up to 4 days or freeze flat in bags for 2 months; reheat with milk splash in microwave. Microwave whole potatoes 5 min first to cut boiling time, or use pre-peeled frozen potatoes if budget allows."
+  },
+  "bouillabaisse": {
+    "name": "Bouillabaisse",
+    "desc": "A classic Provençal fish stew originating from Marseille, featuring a fragrant saffron-infused broth and an assortment of fresh seafood. The dish is traditionally served with crusty bread and a rouille sauce for dipping.",
+    "comment": "Keep pre-made fish stock and frozen seafood mix on hand; sauté aromatics while stock heats. Use pressure cooker or instant pot for simmering to halve time. Cook big pot for 4-6 servings, cool rapidly in ice bath, portion broth separate from seafood in airtight containers, refrigerate 3 days or freeze 2 months; add fresh herbs when reheating."
+  },
+  "croque-monsieur": {
+    "name": "Croque Monsieur",
+    "desc": "A classic French grilled ham and cheese sandwich with toasted bread, cured ham, melted Gruyère, and creamy béchamel sauce. Savory layers meet rich, gooey comfort.",
+    "comment": "Prepare a double batch of béchamel sauce and store in fridge for up to 2 days, reheating gently to save making it from scratch each time. Use pre-sliced ham and grated cheese to cut assembly time. Make 2-4 sandwiches at once in a large skillet or under broiler, halving active cooking per sandwich. Keep béchamel warm in a thermos for instant use."
+  },
+  "steak-frites": {
+    "name": "Steak frites",
+    "desc": "A classic French entrée of juicy ribeye steak with golden crispy fries. Savory protein balances starchy crunch.",
+    "comment": "Use pre-cut frozen fries to cut cutting and drying time. Marinate the steak overnight in a salt-pepper mix to reduce searing time. Batch-cook multiple steaks on a grill sheet to share prep steps."
+  },
+  "moules-frites": {
+    "name": "Moules-frites",
+    "desc": "Classic Belgian mussels steamed in white wine broth with aromatics, served with golden French fries. Briny seafood pairs with crisp potatoes.",
+    "comment": "Buy pre-scrubbed, debearded mussels to skip 5min cleaning. Use frozen fries for frites, baking while sautéing aromatics/steaming mussels to overlap 5min. Prep chopped onion/garlic/pepper in bulk freezer bags for instant start. Cook double mussels batch, portion and freeze half (add parsley fresh), halving next prep/cook."
+  },
+  "spanish-tortilla": {
+    "name": "Spanish Tortilla",
+    "desc": "A hearty, classic Spanish tortilla featuring eggs, thinly sliced potatoes, and onions simmered together into a golden thick omelette. It’s often served warm or at room temperature, making it perfect for brunch or tapas.",
+    "comment": "Prepare a double batch: slice extra potatoes and onions ahead, store in water in fridge; fry all potatoes/onions together (scales easily), use half the oil for cooking, save the rest. Flip easier in larger pan. Use pre-sliced frozen potatoes if available to cut prep by half."
+  },
+  "patatas-bravas": {
+    "name": "Patatas Bravas",
+    "desc": "A classic Spanish tapa featuring crispy fried potatoes served with a spicy tomato sauce. The dish balances heat and tang, making it a popular starter at tapas bars.",
+    "comment": "Batch fry potatoes for multiple servings, draining on racks; pre-make and fridge sauce (improves flavor); use frozen pre-cut fries or potato cubes for home use, parboil briefly to speed crisping. Infuse oil with garlic ahead."
+  },
+  "fabada": {
+    "name": "Fabada",
+    "desc": "Asturian bean stew slow-cooked with chorizo, morcilla and bacon for a smoky, hearty flavor. The beans become creamy while the meats infuse the broth with rich umami.",
+    "comment": "Soak beans overnight or use quick-soak (boil 2 min, rest 1 hr); cook large pot for 4+ servings in pressure cooker or Instant Pot (high pressure 25-30 min after building flavors). Freeze portions flat in bags for quick reheat; keep meats separate if desired."
+  },
+  "crepes": {
+    "name": "Crepes",
+    "desc": "Thin French pancakes that can be served sweet or savory, often filled with fruit preserves, cheese, or ham and béchamel. A staple of breakfast, brunch, or light dinner, they are prized for their delicate texture and versatility.",
+    "comment": "Let the batter rest 30 minutes while prepping other things or use a blender to mix instantly without lumps. Make batter for 8-10 crepes at once; cooking time per crepe stays but fixed prep like melting butter is done once. Use non-stick pan or well-seasoned crepe pan to skip oiling every time."
+  },
+  "gelato": {
+    "name": "Gelato",
+    "desc": "Italian frozen dessert known for its dense, silky texture and rich flavor profile. Made from milk, cream, sugar, egg yolks, and natural flavorings, gelato is churned at a slower speed than ice cream to reduce air incorporation.",
+    "comment": "Heat milk with sugar first to dissolve, temper yolks off heat to avoid scrambling; chill base in ice bath to speed up instead of overnight. Whip cream while base cools. For no-churn, freeze in shallow metal tray, stir vigorously with fork every 30 min for 3 times to break crystals instead of churning. Make double batch, portion and freeze ahead."
+  },
+  "tiramisu": {
+    "name": "Tiramisu",
+    "desc": "A classic Italian dessert that layers espresso-soaked ladyfingers with a silky mascarpone cream, dusted with cocoa powder. Its airy texture and rich coffee flavor make it a perennial favorite for celebratory occasions.",
+    "comment": "Brew espresso ahead and chill; separate eggs cold then warm bowl for whites to whip faster. Use electric mixer for mascarpone cream to halve whipping time. Quickly dip ladyfingers (don't soak) in wide shallow dish; assemble layers in one go. Make double portion in larger dish to spread fixed steps like whipping over more servings."
+  },
+  "cheesecake": {
+    "name": "Cheesecake",
+    "desc": "A creamy New York–style cheesecake that balances rich dairy with a buttery graham cracker crust. The dense filling pairs perfectly with fresh fruit or a drizzle of caramel for an indulgent dessert.",
+    "comment": "Bake multiple cheesecakes at once in the oven to halve prep time per cake—prep two crusts and fillings in sequence while the first bakes, using the same water bath setup. Use pre-crushed graham cracker crumbs from bulk packaging to skip crushing. Prepare filling in a food processor for faster blending. Store whole cheesecakes wrapped tightly in the freezer for up to 2 months, thawing overnight in fridge for quick desserts."
+  },
+  "american-pancakes": {
+    "name": "American Pancakes",
+    "desc": "Fluffy, golden-brown American pancakes are a staple breakfast treat that pair wonderfully with maple syrup or fresh fruit. They’re beloved for their airy texture and comforting sweetness.",
+    "comment": "Double the batter for multiple breakfasts, cooking all pancakes at once on a large griddle or two pans to halve cooking time per batch—cool and stack with parchment, freezing flat then bagging for up to a month; reheat in toaster or microwave 30 seconds. Melt butter in the milk microwave for 20 seconds to speed mixing. Use a measuring cup as a batter scoop for uniform quick portions."
+  },
+  "french-toast": {
+    "name": "French Toast",
+    "desc": "Classic French toast is a sweetened bread soaked in an egg-milk mixture and pan-fried to golden perfection. It’s a beloved breakfast treat that originated in Europe and now graces tables worldwide.",
+    "comment": "Prepare triple the custard and soak multiple batches of bread slices ahead, stacking in a covered dish in fridge overnight for instant morning cooking, halving active prep—soak releases flavors better too. Fry two pans simultaneously or use a large electric griddle for batch cooking to cut cook time in half. Freeze cooked extras in single layers with parchment, toaster-reheat straight from freezer."
+  },
+  "oatmeal": {
+    "name": "Oatmeal",
+    "desc": "A comforting bowl of warm oats topped with fresh banana and honey, perfect for a quick breakfast that satisfies both taste and energy needs.",
+    "comment": "Cook a larger batch (e.g., double portions) on the stovetop or in the microwave to halve per-portion active cooking time: boil water, add oats and microwave 2 min or stir 5 min total, then portion and fridge extras for up to 5 days—reheat in 30 sec. Pre-slice bananas and portion honey/oats into jars nightly for grab-and-go overnight oats (no cooking). Use quick/instant oats if available for 1 min microwave total."
+  },
+  "traditional-caesar-salad": {
+    "name": "Traditional Caesar Salad",
+    "desc": "The definitive traditional Caesar salad. Crisp Romaine lettuce and croutons tossed in a creamy dressing featuring Parmesan, anchovies, and garlic. Originating from Tijuana, Mexico, it is celebrated for its rich umami depth and contrasting textures.",
+    "comment": "To achieve a  flavor profile at home without the fuss, crush your garlic into a paste with a little salt before mixing it into the dressing; this prevents bitter chunks. You can prepare a double batch of this 'authentic' dressing and keep it in the fridge for up to 3 days. Always toss the lettuce with the dressing first, and add croutons only at the very last second to ensure they never lose their crunch."
+  },
+  "cafe-style-salad-caesar": {
+    "name": "Cafe-Style Salad Caesar",
+    "desc": "A popular contemporary version of the Caesar salad that swaps anchovies for a lighter, creamy yogurt-mayonnaise dressing and adds fresh cherry tomatoes. This 'Cafe-style' variant is a balanced meal that prioritizes accessibility and lean protein.",
+    "comment": "To bypass daily cooking, prepare a large batch of 'toasted' croutons and grilled chicken on Sunday. Keep the lettuce whole until serving to prevent wilting; using a specialized salad container that keeps dressing and croutons separate from the greens will allow you to pack this for lunch and enjoy a fresh-tasting salad with under 5 minutes of final prep."
+  },
+  "cobb-salad": {
+    "name": "Cobb Salad",
+    "desc": "A classic American layered salad featuring grilled chicken breast, crisp bacon, fresh avocado, and tangy blue cheese over a bed of Romaine lettuce. It is served with a zesty red wine vinaigrette that binds the diverse, bold flavors together.",
+    "comment": "To save time, hard-boil a batch of eggs and cook extra chicken and bacon during your weekly meal prep; they store perfectly in the fridge for several days. This reduces the active cooking time to zero and limits preparation to quick chopping and assembly. Use a small jar to shake your vinaigrette components together—this emulsifies the dressing instantly and saves on cleanup."
+  },
+  "poutine": {
+    "name": "Poutine",
+    "desc": "A quintessential Canadian comfort food, poutine combines crispy French fries with squeaky cheese curds and rich brown gravy. The dish is celebrated for its indulgent texture contrast and has become a staple at diners across North America.",
+    "comment": "To save time, use frozen fries in an air fryer for a crispy finish without the mess of deep frying. Prepare a large batch of gravy and freeze it in ice cube trays for instant portioning; the curds should always be added fresh at room temperature to ensure they melt slightly but keep their 'squeak'."
+  },
+  "montreal-smoked-meat-sandwich": {
+    "name": "Montreal Smoked Meat Sandwich",
+    "desc": "A classic Canadian deli staple, Montreal smoked meat is a seasoned brisket slow-smoked to perfection and served on rye bread with mustard. This sandwich is prized for its rich, savory flavor and tender, melt-in-your-mouth texture.",
+    "comment": "The best way to enjoy this at home is to smoke and steam a large brisket (3-5kg) at once. Slice it thinly while still warm, portion into 200g vacuum bags, and freeze. When hungry, simply steam the frozen slices for 10 minutes to restore the perfect texture, far better than microwaving."
+  },
+  "reuben-sandwich": {
+    "name": "Reuben sandwich",
+    "desc": "A hearty deli classic featuring warm corned beef, melted Gruyre, and tangy sauerkraut on toasted rye bread with Russian dressing. The sandwich is grilled until golden and the cheese is fully integrated with the meat.",
+    "comment": "To speed up, sear the corned beef and sauerkraut directly on the skillet before assembly; this melts the cheese twice as fast. Using a heavy bacon press or another skillet on top of the sandwich ensures even toasting and heat distribution in half the time."
+  },
+  "bagel-with-lox": {
+    "name": "Bagel with lox",
+    "desc": "A classic New York breakfast featuring a toasted bagel with a thick layer of cream cheese, topped with premium smoked salmon, capers, and thinly sliced red onions.",
+    "comment": "Use 'whipped' cream cheese spread—it applies instantly without tearing the bagel. Keep pre-sliced onions in a jar of cold water in the fridge to maintain crunch and remove harshness, saving you from chopping every morning."
+  },
+  "lobster-roll": {
+    "name": "Lobster Roll",
+    "desc": "A premium New England staple featuring tender, chilled lobster meat tossed in a delicate herb mayonnaise, served in a split-top bun toasted with golden butter for a perfect texture contrast.",
+    "comment": "To save significant time, use flash-frozen pre-cooked lobster meat; it preserves the 'sea-fresh' taste while eliminating the 20-minute task of boiling and picking shells. Prepare the lemon-chive dressing in a larger batch and keep it chilled for up to 3 days. Toasting multiple buns simultaneously in a large skillet with butter allows you to serve a family in the same time it takes to make one roll."
+  },
+  "mac-and-cheese": {
+    "name": "Mac and Cheese",
+    "desc": "A comforting American classic featuring tender elbow macaroni coated in a rich, creamy cheddar sauce. This quick-cooking staple serves as a satisfying main or side dish.",
+    "comment": "To save time, boil the pasta directly in a milk-water mixture; the released starch naturally thickens the sauce, eliminating the need for a separate roux (butter and flour) [web:7]. Shredding a large block of cheese in bulk using a food processor and freezing it in portions ensures it's always ready and melts perfectly [web:9]. This one-pot approach significantly reduces cleanup and active monitoring compared to the traditional method."
+  },
+  "buffalo-wings": {
+    "name": "Buffalo Wings",
+    "desc": "Classic American appetizer featuring crispy chicken wings tossed in a fiery blend of hot sauce and butter, served with cool blue-cheese dressing and crisp celery sticks. The dish originated from Buffalo, New York, where it became a staple at sports bars.",
+    "comment": "Make a large batch for multiple meals: bake or fry 4x portions at once on sheet pans, cool quickly, and freeze cooked plain wings; reheat and sauce only what you eat fresh. Use pre-cut party wings or sectioned flats/drums to skip chopping. Air fryer cuts cooking to 12-15 min with no preheat oil drain. Keep dressing and celery separate until serving to avoid sogginess."
+  },
+  "bbq-ribs": {
+    "name": "BBQ Ribs",
+    "desc": "Succulent pork ribs slathered in a smoky barbecue glaze, slow-cooked until the meat falls off the bone. A staple of American grill culture, they’re often served with tangy coleslaw and sweet cornbread.",
+    "comment": "Use a pressure cooker (Instant Pot): 25–30 minutes on High Pressure with a 10-minute natural release yields tender ribs that would take 3+ hours in the oven. Finish them with a 5-minute broil to caramelize the sauce. Remove the membrane on the back of the ribs using a paper towel for a better grip—this takes seconds but ensures tenderness. Using a high-quality bottled BBQ sauce is the ultimate prep time hack."
+  },
+  "gumbo": {
+    "name": "Gumbo",
+    "desc": "A hearty Louisiana stew that blends savory roux, okra, and a mix of meats or seafood into a fragrant, soul-fulfilling dish. The classic gumbo is often served over rice and garnished with parsley, offering a comforting taste of New Orleans.",
+    "comment": "Make a large batch of oven-baked roux ahead (flour and oil in Dutch oven at 350°F for 1-2 hours stirring occasionally) and store in fridge for weeks, spooning out just what you need. Use a frozen mirepoix (onion, celery, bell pepper) mix or pre-chopped veggies from the store if budget allows, or batch-chop and freeze your own. Brown sausage and okra while roux reheats with garlic, then simmer; cooking multiple servings at once cuts per-portion active time in half as steps scale efficiently. Prepare stock in big pots ahead and freeze."
+  },
+  "jambalaya": {
+    "name": "Jambalaya",
+    "desc": "A classic Louisiana Creole dish combining rice, meats, seafood, and the 'holy trinity' of onion, bell pepper, and celery into a hearty one-pot meal. Smoky sausage, tender chicken, fresh shrimp, and bold spices create layers of flavor perfect for gatherings.",
+    "comment": "Prep a big batch for 4 servings at once: chop the holy trinity (onion, bell pepper, celery) and meats in advance, store in fridge up to 1 day, then dump everything into the pot to halve chopping time. Use pre-cooked rice or microwaveable pouches to skip rinsing and boiling, cutting cook time. Keep stock ready-frozen in ice cube trays for quick thawing; use a pressure cooker or Instant Pot for the whole dish to reduce simmering to 10 minutes."
+  },
+  "clam-chowder": {
+    "name": "Clam Chowder",
+    "desc": "A creamy New England classic featuring tender clams, potatoes, onions, and celery in a thick, rich roux-based broth.",
+    "comment": "Batch-cook a large pot for 4-6 servings to halve per-portion active time; cool quickly, portion into airtight containers, and refrigerate up to 3 days or freeze for 2 months. Use canned clams (drained, juice reserved or substituted with bottled clam juice) to skip cleaning/steaming fresh clams. Buy pre-diced frozen onions, celery, and carrot mirepoix mix if available cheaply, or pre-peel potatoes. Keep clam juice and roux base pre-made in fridge for instant assembly."
+  },
+  "chili-con-carne": {
+    "name": "Chili con Carne",
+    "desc": "A hearty, spicy stew originating from the American Southwest, blending beef, beans, and tomatoes into a comforting bowl of flavor. The dish is often enjoyed with toppings like cheese, sour cream, or fresh cilantro for added depth.",
+    "comment": "Cook a large pot of chili for 4-6 servings: cool quickly, portion into airtight containers, and freeze for up to 3 months—reheats excellently with better flavor on day two. Use a food processor for chopping onion, garlic, and bell pepper to slash prep time. Opt for canned beans (rinsed) to skip soaking. For cooking, brown everything quickly in a skillet while the pot heats, then simmer covered to retain moisture and speed thickening. Pressure cook the whole batch in 15-20 minutes for single portions too."
+  },
+  "nachos": {
+    "name": "Nachos",
+    "desc": "A classic Mexican street-food favorite, nachos combine crispy tortilla chips with melted cheese and a variety of toppings. They're perfect for parties or a quick snack, especially when topped with salsa, guacamole, and jalapeños.",
+    "comment": "Prep toppings mise en place style ahead and refrigerate cooked beef/beans separately: chop tomatoes/jalapeños/coriander, measure lime juice/sour cream. Use pre-shredded cheese. Keep beef and beans pre-cooked/frozen in portions to reheat quickly in one pan while oven preheats. Microwave single servings in 1-2 min instead of oven baking, or broil briefly for melt. Batch prep toppings for multiple meals cuts per-batch prep by 70%."
+  },
+  "tacos-al-pastor": {
+    "name": "Tacos al Pastor",
+    "desc": "A vibrant Mexican street food classic, featuring marinated pork topped with fresh onions, cilantro, and sweet pineapple on warm corn tortillas. The dish blends smoky flavors with a hint of citrus for an unforgettable bite.",
+    "comment": "Marinate pork ahead (overnight or freeze portions pre-marinated to skip). Use pre-sliced pork shoulder or tenderloin for thin slicing. Cook a large batch of meat on a hot cast-iron skillet or trompo substitute (vertical skewer from foil-wrapped stack), then store in fridge for 3-4 days or freeze. Warm multiple tortillas at once in microwave (damp paper towel, 30s) or foil in oven while meat rests. Prep toppings in bulk and store chopped onion/cilantro/pineapple separately in fridge. This cuts active time significantly for multiple servings."
+  },
+  "mole-poblano": {
+    "name": "Mole Poblano",
+    "desc": "A rich Mexican sauce featuring chocolate, chilies, spices, and nuts blended into a silky base that is traditionally served over turkey or chicken. Its complex flavor profile balances sweet, smoky, and slightly bitter notes for an unforgettable dining experience.",
+    "comment": "Prepare a large batch of mole paste and freeze in portions; it keeps for months and thaws quickly, cutting prep in half for future uses. Use pre-toasted nuts and sesame seeds from bulk buys to skip toasting time. Soak chiles while chopping and roasting other items in parallel on multiple burners. Strain through a fine sieve once for silkiness without multiple passes."
+  },
+  "chicken-enchilada": {
+    "name": "Chicken Enchilada",
+    "desc": "A classic Mexican comfort dish of corn tortillas rolled around savory sauteed chicken, smothered in rich heated tomato sauce and melted cheese. The bold flavors make it ideal for family dinners.",
+    "comment": "Prepare a large batch of sauteed chicken filling and enchilada sauce ahead, storing refrigerated up to 3 days; assembly takes just minutes before baking. Use store-bought rotisserie chicken shredded to skip cooking the chicken entirely. Soften multiple tortillas in a damp towel microwaved for 30 seconds instead of individually heating. Make 4-6 portions at once to halve per-portion assembly time, freezing extras fully assembled (add cheese after thawing)."
+  },
+  "chiles-en-nogada": {
+    "name": "Chiles en Nogada",
+    "desc": "A classic Mexican summer dish featuring poblano peppers stuffed with a savory picadillo and topped with a creamy walnut sauce, garnished with pomegranate seeds and parsley. It showcases the vibrant green-red-white colors of Mexico’s national flag.",
+    "comment": "Prepare the picadillo filling and nogada sauce in advance or batch for multiple servings and freeze portions; this spreads prep over days and cuts active time per meal in half. Use pre-roasted canned or thawed frozen peeled poblanos to skip 20 minutes of roasting and peeling. Soak walnuts overnight in milk to simplify blending and enhance creaminess without extra steps."
+  },
+  "tamales": {
+    "name": "Tamales",
+    "desc": "A traditional Mesoamerican staple made of masa dough filled with savory meats or vegetables and wrapped in corn husks. Often enjoyed during festivals, tamales offer a comforting blend of warm, slightly sweet corn flavor and hearty filling.",
+    "comment": "Soak corn husks in advance and keep them refrigerated, fully submerged, for up to 2 days, so you can start assembling immediately. Use leftover cooked shredded chicken and ready-made salsa as filling to avoid cooking a separate stew. Whip the masa dough with fat using a hand mixer to speed up aeration and achieve a lighter texture. Steam a full steamer basket of tamales at once; once cooled, refrigerate them in their husks for up to 3 days or freeze for several weeks, then reheat by steaming, which saves prep time on busy days."
+  },
+  "chilaquiles": {
+    "name": "Chilaquiles",
+    "desc": "A Mexican breakfast staple featuring fried corn tortilla pieces simmered briefly in a tangy tomatillo–tomato and mixed chile sauce, then topped with fresh queso fresco and coriander. The dish balances savory, mildly spicy flavors with a pleasantly tender‑crisp texture.",
+    "comment": "The fastest way to make chilaquiles at home is to batch‑prepare the components: bake or fry a large tray of tortilla chips in advance and store them in an airtight container, then keep a jar of tomatillo–chile sauce in the fridge or freezer so you only need to reheat it and toss with the chips. For busy mornings, you can simmer the sauce the night before, refrigerate it, and in the morning just warm the sauce, add the tortillas for a minute or two, and finish with crumbled queso fresco and fresh coriander. If you use the oven to crisp tortillas instead of frying, you can do several trays at once while you prepare the sauce on the stovetop, which cuts active cooking time."
+  },
+  "elote": {
+    "name": "Elote",
+    "desc": "A classic Mexican street food: grilled corn on the cob slathered with a creamy mayo-lime sauce, crumbled cheese, and a kick of chili powder.",
+    "comment": "To drastically cut time, microwave the corn (in the husk or wrapped in damp paper towels) for 3–4 minutes before grilling; this par-cooks the kernels so you only need 2 minutes on the heat for a smoky char. Buying pre-shucked corn further reduces prep. You can also premix the mayo, lime, and chili into a single 'crema' to brush on instantly."
+  },
+  "pupusa": {
+    "name": "Pupusa",
+    "desc": "A traditional Salvadoran stuffed corn tortilla made from masa dough filled with cheese and refried black beans, often served with curtido and salsa. The soft griddled tortilla and savory filling make it a comforting street-food favorite. [file:1]",
+    "comment": "To speed up pupusas at home, prepare a larger batch of refried beans and grated cheese in advance and keep them in the fridge or freezer in small portions, so you only need to mix dough and shape. Pre-portion the masa into balls and press them quickly by hand or with a simple plastic-lined plate or tortilla press to cut shaping time without any special tools. Cooking several pupusas at once on a large skillet or griddle instead of in batches will also shorten active time."
+  },
+  "arepa": {
+    "name": "Arepa",
+    "desc": "A staple of Venezuelan and Colombian cuisine, the arepa is a corn‑based flatbread made from precooked corn flour, water, salt, and a bit of oil, then pan‑fried until crisp on the outside and tender within. It’s typically split and filled with cheese, avocado, beans, or shredded meat, making it both versatile and satisfying.",
+    "comment": "To speed up arepa prep, mix a larger batch of dough and shape all patties at once, then refrigerate them for up to a day or freeze with parchment between layers so you only need to pan‑fry from chilled or thawed. Keep the dough on the firmer side so patties hold their shape and you can pan‑fry several at the same time in a wide skillet with a lid, which shortens the cooking time while still giving a nice crust. Using a preheated non‑stick pan means you can use less oil without sticking, and you can reuse the same pan and oil for several batches, which saves both time and dishes."
+  },
+  "beef-empanada": {
+    "name": "Beef Empanada",
+    "desc": "A savory baked pastry filled with spiced ground beef and sautéed onions, garlic, and tomato paste. The dough is unleavened and baked to a golden crisp, giving a satisfying contrast between flaky shell and juicy filling.",
+    "comment": "Use a simple unleavened dough: mix flour, salt, oil, and warm water, knead briefly, then rest 15–20 minutes while you cook the filling, so prep overlaps with passive dough time. Roll the dough into a log and cut into portions instead of shaping each circle from a ball, then stack circles between lightly oiled sheets so they do not dry out. Cook a large batch of beef-onion-garlic-tomato filling and freeze it flat in thin zip bags; it defrosts in minutes and turns empanadas into an assembly job. For bigger time savings, assemble and freeze fully formed, unbaked empanadas in a single layer, then store in a bag or box—bake straight from frozen, just adding a few extra minutes to baking time."
+  },
+  "ceviche": {
+    "name": "Ceviche",
+    "desc": "A refreshing Peruvian classic where firm white fish is gently cured in lime juice and mixed with ají limo, onion, and fresh coriander, then served with sweet potato and choclo for balance.",
+    "comment": "For faster ceviche on busy days, keep small fillets of firm white fish like sea bass or corvina trimmed, deboned, and frozen flat in single-portion bags so they thaw quickly in cold water. Pre-boil and freeze sweet potato slices and choclo kernels in portioned containers so you only need to warm or defrost them before serving. Squeeze lime juice for 2–3 days at once and store it in a glass bottle in the fridge to avoid juicing every time and to reduce cleanup. If slicing onions and chilies is what slows you down, prep a small airtight container of thinly sliced red onion and ají limo in salted water; use it over 1–2 days so you only portion and assemble when hungry. With these tricks, active prep shrinks to mostly cutting the fish and tossing everything in the cold marinade."
+  },
+  "lomo-saltado": {
+    "name": "Lomo saltado",
+    "desc": "A signature Peruvian stir-fry that harmoniously blends soy-marinated beef, red onions, and tomatoes. Traditionally served with both crispy French fries and steamed white rice, it represents the heart of Chifa fusion cuisine.",
+    "comment": "To save time, use frozen French fries (baked or air-fried) and pre-cooked or leftover rice. Pre-slicing the beef and vegetables allows for the high-heat stir-frying to take just minutes. For the best flavor, use a wok or a heavy skillet on maximum heat to sear the meat quickly without losing the crunch of the onions. Pre-mixing the soy sauce and vinegar into a single sauce base further speeds up the process during the intense cooking phase."
+  },
+  "cuy-chactado": {
+    "name": "Cuy Chactado",
+    "desc": "A quintessential Peruvian highland dish featuring a whole guinea pig pressed under a heavy stone (chactado) and deep-fried. The meat is tenderized in a citrus-garlic marinade before being coated in cornmeal for a thick, golden crunch.",
+    "comment": "To optimize, pre-boil the guinea pig in salted water for 15 minutes; this ensures the meat is fully cooked and reduces the final deep-frying to just 5 minutes for the skin. You can marinate multiple portions and freeze them, as they fry excellently straight from the freezer. If you don't have a traditional volcanic stone, use a second heavy cast-iron skillet to press the meat flat during frying for that signature even crispiness."
+  },
+  "bandeja-paisa": {
+    "name": "Bandeja Paisa",
+    "desc": "A legendary Colombian feast featuring red beans, rice, and a variety of proteins. This plate includes crispy chicharrón, chorizo, ground meat, fried plantains, avocado, and an arepa, all topped with a fried egg.",
+    "comment": "To optimize this complex dish, use a pressure cooker for the beans to cut cooking time from hours to 40 minutes. Utilize a rice cooker for hands-off starch prep. Prepare the chicharrón (pork belly) in an air fryer to achieve perfect crunch without constant supervision or mess. Batch-cook the ground beef and beans ahead of time—they reheat beautifully. Use frozen, pre-formed arepas to save prep time while focusing on the fresh proteins."
+  },
+  "feijoada": {
+    "name": "Feijoada",
+    "desc": "A hearty Brazilian stew of black beans simmered with pork, offal, and sausage, often served with rice, collard greens, and farofa. The dish is known for its rich umami flavor and comforting depth, making it a staple at family gatherings.",
+    "comment": "Traditional feijoada is time-intensive, but using a pressure cooker can tenderize the pork and offal in just 30-40 minutes, cutting total stove time by 70%. You can skip the 24-hour soaking period entirely by using canned black beans. For the best flavor-to-effort ratio, cook a large batch: this stew freezes perfectly for up to 3 months and the taste actually improves the next day as the collagen thickens the broth."
+  },
+  "churrasco": {
+    "name": "Churrasco",
+    "desc": "A classic Brazilian grilled steak, typically using Picanha or Ribeye, seasoned with coarse salt. Served with a vibrant chimichurri sauce, it features a deeply charred, smoky crust and a juicy, tender interior.",
+    "comment": "Make a large batch of chimichurri sauce in advance; it keeps for weeks in the fridge and the flavors only deepen over time, reducing active prep to just salting the meat. Use a heavily preheated cast-iron skillet if a grill isn't available to achieve a professional sear in half the time. Prepare multiple portions at once and rest them together to streamline the cooking process for subsequent meals."
+  },
+  "moqueca": {
+    "name": "Moqueca",
+    "desc": "A traditional Brazilian fish stew from Bahia, rich with coconut milk and palm oil. The blend of fresh seafood, aromatic herbs, and vibrant peppers creates a fragrant, comforting bowl of flavor.",
+    "comment": "To optimize, use frozen pre-cleaned shrimp and pre-cut frozen bell pepper/onion mixes to eliminate chopping entirely. Prepare a large batch; Moqueca freezes beautifully and the flavor deepens after a day, allowing you to simply reheat for future meals."
+  },
+  "po-de-queijo": {
+    "name": "Pão de queijo",
+    "desc": "Traditional Brazilian cheese bread from Minas Gerais, featuring a unique chewy, airy texture made from fermented cassava starch and salty cheese.",
+    "comment": "For a much faster preparation, use the blender method: combine all ingredients in a blender (liquids first) and pour the batter into greased mini-muffin tins, skipping the manual shaping entirely. Alternatively, prepare a large batch of dough balls and freeze them; they can be baked directly from the freezer with just 5 extra minutes of cook time, providing a fresh snack with zero daily prep."
+  },
+  "pastel-de-nata": {
+    "name": "Pastel de nata",
+    "desc": "A traditional Portuguese custard tart with a crisp, multi-layered puff pastry crust and a creamy egg-yolk custard, characterized by its distinctive caramelized 'burnt' spots on top.",
+    "comment": "To minimize effort, use high-quality store-bought puff pastry and prepare the custard base in advance. The most professional optimization is to shape the tarts in the tin and freeze them raw; they can be baked directly from the freezer at a very high temperature (250°C-300°C). This high-heat method ensures the signature charred top and crispy base in nearly half the standard baking time. Making a large batch and freezing them allows for fresh tarts on demand with zero daily prep."
+  },
+  "bacalhau-brs": {
+    "name": "Bacalhau à Brás",
+    "desc": "A classic Portuguese dish featuring shredded salted cod sautéed with onions and thinly sliced crispy potatoes, finished with scrambled eggs and fresh parsley. It offers a perfect balance of briny fish, creamy eggs, and crunchy potato textures.",
+    "comment": "To make this in under 15 minutes, use store-bought 'batata palha' (matchstick potato crisps) and pre-soaked, shredded frozen cod (Bacalhau Desfiado). This eliminates the 24-hour soaking process and the labor-intensive task of manual shredding and potato slicing. Sauté the onions and fish first, then fold in the potatoes and eggs at the very end to prevent the chips from getting soggy."
+  },
+  "francesinha": {
+    "name": "Francesinha",
+    "desc": "A legendary Portuguese sandwich from Porto, layering steak, ham, and sausages between thick bread slices, draped in melted cheese and drenched in a spicy beer-based tomato sauce.",
+    "comment": "The secret to a fast Francesinha is batch-cooking the sauce: it freezes perfectly for months. In professional kitchens, the sauce is blended and simmered in large quantities; at home, you can do the same and simply reheat a portion while grilling the meats. Use a sandwich press to toast the inner layers simultaneously to save time, and always place the cheese slices so they overlap the edges, ensuring a perfect melt under the broiler."
+  },
+  "sardinhas-assadas": {
+    "name": "Sardinhas assadas",
+    "desc": "Traditional Portuguese grilled sardines served with a splash of olive oil and a squeeze of lemon. The dish is celebrated for its smoky flavor and crispy skin.",
+    "comment": "To significantly reduce prep time, ask your fishmonger to scale and gut the sardines for you. Use a double-sided fish grill basket to flip the entire batch at once, which prevents the delicate skin from sticking and ensures even charring. Preparing a larger batch of the garlic and parsley garnish in advance can also save time if you plan to serve this dish multiple times during the week."
+  },
+  "cornish-pasty": {
+    "name": "Cornish Pasty",
+    "desc": "An authentic Cornish pasty made with a robust shortcrust pastry, crimped along the side. The traditional filling consists of raw beef, potato, swede, and onion, which slow-bake together to create a succulent interior.",
+    "comment": "You can prepare a large batch and freeze them raw; they bake perfectly straight from the freezer with only 15 extra minutes of oven time. Using pre-chopped frozen swede/onion mixes or store-bought shortcrust pastry can cut your active prep time to a few minutes while keeping the traditional flavor."
+  },
+  "shepherds-pie": {
+    "name": "Shepherd's Pie",
+    "desc": "A comforting British classic featuring savory seasoned ground lamb topped with a crust of creamy mashed potatoes. Traditionally, this specific name is reserved for the lamb version, while the beef alternative is known as Cottage Pie.",
+    "comment": "Cook a large batch of the lamb filling and mashed potatoes to assemble multiple individual pies in oven-safe containers; they freeze perfectly for up to 2 months. Use frozen peas and carrots to eliminate chopping time without sacrificing nutrition. To speed up the potato prep, use a kettle to boil water instantly and keep the lid on the pot to retain heat."
+  },
+  "yorkshire-pudding": {
+    "name": "Yorkshire Pudding",
+    "desc": "A classic British side dish, the airy Yorkshire pudding is baked from a simple batter of flour, eggs, and milk. It pairs perfectly with roast beef and gravy, offering a comforting crunch on the outside and a fluffy interior.",
+    "comment": "To optimize, whisk the batter in a blender for 30 seconds instead of by hand. You can make a large batch and store it in the fridge for up to 48 hours; chilled batter often rises better. Best of all, Yorkshire puddings freeze perfectly—bake a dozen, freeze them, and reheat in a hot oven for just 5 minutes when needed, maintaining that fresh crunch with almost zero daily effort."
+  },
+  "sunday-roast": {
+    "name": "Sunday Roast",
+    "desc": "A hearty classic Sunday roast featuring roasted beef shoulder, crispy root vegetables, and traditional Yorkshire puddings, all brought together with a rich gravy.",
+    "comment": "To maximize efficiency, always roast a large joint of beef and a full tray of vegetables for 4+ servings at once; the oven duration remains the same but the 'active' time per portion drops significantly. Leftover beef is perfect for cold sandwiches, and extra roasted vegetables can be quickly fried into 'bubble and squeak' for Monday's lunch. Preparing the Yorkshire pudding batter a few hours ahead and letting it rest in the fridge ensures a better rise while clearing prep space before the final bake."
+  },
+  "haggis": {
+    "name": "Haggis",
+    "desc": "Traditional Scottish savory pudding containing sheep's pluck (heart, liver, lungs) minced with suet, oatmeal, and onions, traditionally encased in a sheep's stomach and simmered.",
+    "comment": "To significantly speed up preparation, use a pressure cooker to tenderize the meat in 45 minutes instead of several hours. Traditional stomach stuffing is labor-intensive; you can use a greased bowl covered with foil (stoved haggis) for the same flavor with much less effort. Making a large batch and freezing it in portions is highly recommended, as haggis retains its quality well when frozen."
+  },
+  "scones": {
+    "name": "Scones",
+    "desc": "Classic English plain scones are golden, slightly crumbly biscuits that melt in your mouth. They’re a staple at afternoon tea and can be enjoyed with clotted cream or jam.",
+    "comment": "To optimize, pulse cold butter and flour in a food processor to reach the breadcrumb stage in seconds. You can shape a large batch and freeze them raw on a tray; they bake perfectly straight from the freezer with just a few extra minutes, giving you fresh scones daily with zero morning prep. Instead of using a round cutter, pat the dough into a rectangle and cut into squares with a sharp knife to eliminate re-rolling scraps and keep the texture light."
+  },
+  "jollof-rice": {
+    "name": "Jollof Rice",
+    "desc": "A vibrant West African staple, Jollof rice blends tomatoes, onions, and aromatic spices into a fragrant one-pot meal. It’s often served at celebrations, showcasing the region’s love for bold flavors.",
+    "comment": "Prepare a large batch of the tomato-pepper base ('Jollof base') and freeze it in portions to cut prep time to nearly zero on busy days. Parboiled long-grain rice is ideal for a consistent, non-mushy texture. Cooking multiple servings at once significantly reduces effort, as the flavor intensifies over time, making leftovers even better."
+  },
+  "bunny-chow": {
+    "name": "Bunny Chow",
+    "desc": "A South African street-food classic, bunny chow is a hollowed loaf of bread filled with a hearty curry. It offers a satisfying blend of spices and textures that make it a popular lunch or dinner option.",
+    "comment": "To save time, use a pressure cooker for the beef curry to cut cooking from an hour to 20 minutes, or prepare a large batch of curry in advance as the flavor improves overnight. You can also use frozen pea and carrot mixes to eliminate chopping time, allowing you to simply hollow the bread and fill it when ready to eat."
+  },
+  "bobotie": {
+    "name": "Bobotie",
+    "desc": "An iconic South African baked dish consisting of spiced minced meat topped with a savory egg-based custard. It features a complex flavor profile where sweet jam and raisins perfectly balance the aromatic curry spices.",
+    "comment": "Bobotie is a perfect candidate for batch cooking: prepare a large meat base, portion it into containers, and freeze. When ready, simply add the fresh milk-egg topping and bake. You can use frozen pre-shredded onion to save on chopping time without the premium price of fresh pre-cut vegetables. Keep in mind: passive time is excluded from calculation."
+  },
+  "injera": {
+    "name": "Injera",
+    "desc": "Ethiopian fermented flatbread with a spongy, slightly sour texture and distinctive hole in the center. It serves as both plate and utensil for stews and curries across Ethiopia.",
+    "comment": "It's important to note, that passive time is excluded from time calculation. Injera requires 1-3 days of passive fermentation before cooking."
+  },
+  "doro-wat": {
+    "name": "Doro Wat",
+    "desc": "A legendary Ethiopian chicken stew characterized by a deep, complex sauce made from slow-cooked onions and fiery berbere spices. Traditionally served with hard-boiled eggs and sourdough injera, it is the centerpiece of Ethiopian festive dining.",
+    "comment": "To cut prep time, pulse the onions in a food processor instead of hand-chopping. Using a pressure cooker (like an Instant Pot) reduces the long onion-softening phase from 45 minutes to just 12, and the chicken simmer to 15. For the most authentic taste, use Ghee (substitute for Niter Kibbeh) and prepare a double batch as the stew freezes perfectly and tastes even better the next day."
+  },
+  "chicken-muamba": {
+    "name": "Chicken Muamba",
+    "desc": "A hearty Congolese stew featuring tender chicken simmered in red palm oil with okra, tomatoes, and aromatic spices. It is a comforting dish that balances savory depth with the subtle sweetness of peppers and the richness of palm nut flavor.",
+    "comment": "To slash time, use a food processor to pulse onion, garlic, and peppers into a paste instead of hand-chopping. Cook a larger batch of the chicken and palm oil base; it freezes perfectly for months. Add fresh okra only during the final reheating to keep its texture firm and avoid sliminess. A pressure cooker can tenderize the chicken in just 15 minutes."
+  },
+  "poke": {
+    "name": "Poke",
+    "desc": "A vibrant Hawaiian bowl featuring diced raw tuna tossed in a savory soy-sesame dressing, served over seasoned steamed rice with fresh avocado and cucumber.",
+    "comment": "To slash prep time, cook a large batch of rice in a rice cooker and store it; poke rice is often served at room temperature, making it perfect for meal prep. Use a mandoline for paper-thin cucumber slices and buy pre-diced sashimi-grade tuna to avoid delicate knife work. You can even mix the dressing in a large jar and keep it in the fridge for a week of quick, fresh assembly."
+  },
+  "jamaican-jerk-chicken": {
+    "name": "Jamaican jerk chicken",
+    "desc": "A fiery Caribbean staple where chicken is coated in a smoky, spicy jerk rub and grilled to perfection. The dish balances heat with aromatic herbs for a bold, unforgettable flavor.",
+    "comment": "Prepare a large batch of the jerk marinade and freeze it in ice cube trays for easy portioning. For ultimate efficiency, marinate several portions of chicken at once and freeze them; the meat marinates as it thaws in the fridge, resulting in near-zero active prep. Batch-grilling multiple servings simultaneously halves the active cooking time per portion."
+  },
+  "cuban-sandwich": {
+    "name": "Cuban Sandwich",
+    "desc": "A legendary Floridian pressed sandwich featuring crusty bread layered with citrus-marinated roasted pork, savory ham, melted Swiss cheese, tangy pickles, and yellow mustard.",
+    "comment": "To optimize, use two heavy cast-iron skillets (one as a press) to cook both sides simultaneously and flatten the sandwich perfectly without a panini press. Prepare a large batch of Mojo pork in a slow cooker over the weekend; the active sandwich assembly then takes under five minutes. You can also assemble multiple sandwiches and freeze them (without pickles), then press directly from the fridge for a quick meal."
+  },
+  "salade-nioise": {
+    "name": "Salade Niçoise",
+    "desc": "A classic French salad from Nice featuring tuna, anchovies, hard-boiled eggs, potatoes, green beans, tomatoes, and olives, dressed with a vinaigrette of olive oil and white wine vinegar. This Mediterranean favorite balances protein, vegetables, and briny flavors in perfect harmony.",
+    "comment": "To optimize, boil a large batch of eggs and potatoes at the start of the week; they stay fresh for days and reduce assembly to mere minutes. Use frozen green beans that blanch in half the time, or cook them in the same pot as the potatoes. Prepare a larger jar of the vinaigrette to keep in the fridge for instant seasoning of this or other salads."
+  },
+  "waldorf-salad": {
+    "name": "Waldorf Salad",
+    "desc": "An elegant American salad created at New York's Waldorf-Astoria Hotel, combining crisp apples, celery, grapes, and walnuts in a creamy mayonnaise dressing. The sweet and crunchy combination makes it a timeless classic.",
+    "comment": "Prepare multiple servings at once to cut the average preparation time; the salad maintains its texture well for up to 24 hours when refrigerated. Use an apple corer and slicer to speed up the dicing process, and toss the pieces immediately in the dressing to prevent oxidation without needing extra lemon juice. Buying walnuts in larger, unshelled quantities is more cost-effective, and they can be shelled in bulk ahead of time for quick assembly."
+  },
+  "coleslaw": {
+    "name": "Coleslaw",
+    "desc": "A classic American side salad made from finely shredded cabbage and carrots, tossed in a creamy, tangy dressing. Its crisp texture and balanced flavor make it an essential accompaniment to heavy, grilled, or fried dishes.",
+    "comment": "Coleslaw is an ideal candidate for batch prepping because it stays fresh for 3-5 days and the flavors actually improve as the vegetables marinate. Use a food processor with a shredding disc or a wide mandoline to prep the vegetables in seconds instead of hand-cutting. Preparing four servings at once takes nearly the same time as one, providing a ready-to-eat side for the whole week."
+  },
+  "shopska-salad": {
+    "name": "Shopska Salad",
+    "desc": "A traditional Bulgarian salad featuring fresh tomatoes, cucumbers, red onions, and bell peppers, topped with a snowy layer of finely grated white cheese. Dressed simply with olive oil and vinegar, it's a vibrant and refreshing Balkan classic.",
+    "comment": "Use a mandoline to slice onions and cucumbers in seconds for a uniform texture. For the authentic 'snowy' look, grate the Feta directly over the bowl using a fine grater instead of crumbling it; freezing the cheese for 20 minutes first makes this effortless. You can pre-slice peppers and onions in bulk; they stay crisp for up to 3 days in an airtight container, effectively halving the prep time for subsequent servings."
+  },
+  "gado-gado": {
+    "name": "Gado-gado",
+    "desc": "An Indonesian vegetable salad featuring blanched and raw vegetables, tofu, tempe, and hard-boiled eggs, all smothered in a rich, spicy peanut sauce. This vibrant dish showcases the balance of textures and flavors in Indonesian cuisine.",
+    "comment": "To slash cooking time, use the microwave to 'steam-blanch' cabbage and green beans in just 3 minutes by placing them in a bowl with a splash of water and covering them. You can boil eggs and potatoes in the same pot to save energy and cleanup time, or use a batch-cooking strategy by preparing a large quantity of peanut sauce and fried tofu/tempeh in advance to store in the freezer. For the freshest taste, slice the raw cucumber just before serving, and assemble the dish while the vegetables are still slightly warm to help the sauce adhere better."
+  },
+  "chicken-larb": {
+    "name": "Chicken Larb",
+    "desc": "A traditional Laotian and Thai meat salad made with minced chicken, seasoned with lime juice, fish sauce, chilies, and toasted rice powder. Served with fresh herbs and lettuce leaves, it offers a perfect balance of sour, salty, and spicy flavors with a unique nutty crunch.",
+    "comment": "To save time, prepare a large batch of 'Khao Khua' (toasted rice powder) and store it in an airtight jar; it stays aromatic for months and provides the essential nutty texture. Pre-mix your lime juice, fish sauce, and chili dressing in a small bottle for instant use. Using pre-washed herb mixes and buying pre-minced chicken significantly reduces active prep time. For meal prepping, cook a double portion of meat and store it separately from the herbs to maintain freshness."
+  },
+  "wakame-salad": {
+    "name": "Wakame Salad",
+    "desc": "A light and refreshing Japanese seaweed salad made with rehydrated wakame, dressed in a tangy mixture of rice vinegar, sesame oil, and a touch of sugar. Topped with sesame seeds, it's a healthy and umami-rich side dish.",
+    "comment": "Hydrate a larger batch of dried wakame at once, squeeze it very dry, and store it undressed in an airtight container in the fridge for up to 3 days. Keep a small jar of pre-mixed dressing (rice vinegar, sesame oil, sugar) ready; when you want a portion, just toss a handful of wakame with a spoonful of dressing and finish with sesame seeds, which cuts active prep to just a minute or two."
+  },
+  "shuba-salad": {
+    "name": "Shuba Salad",
+    "desc": "A layered salad from Soviet Union featuring salted herring tucked under 'fur' (the salad is basically called a fur coat) layers of grated boiled potatoes, carrots, eggs, and beets, bound with mayonnaise. It is a staple of Post-Soviet festive tables, prized for its striking purple exterior and savory-sweet flavor profile.",
+    "comment": "To save over an hour, microwave whole root vegetables in a sealed bag with a splash of water for 10-15 minutes instead of boiling. For maximum efficiency, use store-bought vacuum-packed pre-boiled beets and a food processor's grating attachment for all layers. Marinate the onions in apple cider vinegar and a pinch of sugar for 5 minutes to remove bitterness and add a bright acidity that cuts through the heavy mayonnaise."
+  },
+  "vinegret": {
+    "name": "Vinegret",
+    "desc": "A traditional root vegetable salad made with boiled beets, potatoes, and carrots, combined with sauerkraut and pickled cucumbers. Dressed with oil, it is a healthy, fiber-rich winter staple known for its vibrant color and tangy flavor.",
+    "comment": "Cut active time by using vacuum-packed pre-boiled vegetables and a mechanical grid dicer. Mix diced beets with oil separately before adding other ingredients to prevent them from staining everything purple. Preparing a large batch is ideal as the salad tastes better on the second day and stays fresh in the fridge for up to 5 days."
+  },
+  "potato-salad": {
+    "name": "Potato Salad",
+    "desc": "A classic creamy side dish made with tender boiled potatoes, hard-boiled eggs, and crunchy celery in a savory mayonnaise and mustard dressing. Perfectly balanced with a hint of vinegar and onions, it is a staple for barbecues and family meals.",
+    "comment": "To cut prep time significantly, use a wire cooling rack to press boiled potatoes and eggs through for instant uniform dicing. You can 'boil' potatoes in the microwave in a covered bowl with a splash of water for just 8 minutes instead of 25. Mix the vinegar into the potatoes while they are still warm to maximize flavor absorption before adding the dressing. Prepare a large batch to save time; the flavor improves after a day in the fridge and stays fresh for up to 72 hours."
+  },
+  "tagliata-con-rucola": {
+    "name": "Tagliata con Rucola",
+    "desc": "An Italian classic featuring high-quality grilled beef sliced and served over a peppery arugula bed, topped with sharp Parmesan flakes and a simple balsamic dressing.",
+    "comment": "Prepare a larger batch of shaved Parmesan and pre-washed arugula to use throughout the week, minimizing daily prep to simple assembly. Grilling two steaks simultaneously in a large pan allows you to enjoy one hot and save the other for a cold salad the next day, effectively cutting the active cooking time per portion in half."
+  },
+  "ensalada-mixta": {
+    "name": "Ensalada Mixta",
+    "desc": "A refreshing Spanish mixed salad with fresh lettuce, tomatoes, cucumbers, and onions, topped with canned tuna, hard-boiled eggs, and olives. Dressed in a classic olive oil and white wine vinegar vinaigrette.",
+    "comment": "Batch-cook a dozen hard-boiled eggs at once; they stay fresh in the fridge for 7 days, eliminating daily cooking time. Store sliced onions in cold water to remove harsh sulfur compounds while keeping them crisp for instant assembly. Use a small jar to emulsify the dressing in seconds, ensuring a more even coat with less oil."
+  },
+  "belgian-waffles": {
+    "name": "Belgian Waffles",
+    "desc": "Authentic yeast-leavened waffles, light and airy with a crisp exterior and deep pockets. This traditional recipe yields a complex flavor profile that pairs perfectly with powdered sugar or fresh berries.",
+    "comment": "Prepare the batter in a blender and refrigerate overnight to skip morning prep and enhance the depth of flavor through slow fermentation. For ultimate efficiency, cook a large batch, freeze the extras, and reheat them in a toaster to regain their signature crunch in seconds—perfect for busy weekdays."
+  },
+  "macarons": {
+    "name": "Macarons",
+    "desc": "Delicate French almond meringue cookies with a smooth, crisp shell and a soft, chewy interior. Filled with ganache, buttercream, or jam, these colorful confections are a symbol of French patisserie artistry and require precision to master.",
+    "comment": "Macarons are ideal for batch cooking: freeze finished shells for up to 3 months or filled ones for a month; the texture improves significantly after 24 hours of maturation. Use a food processor to pulse almond flour and powdered sugar together to skip manual sifting and ensure a smooth shell. Doubling the batch size cuts your active prep time per serving in half with minimal extra effort in piping."
+  },
+  "chicken-kiev": {
+    "name": "Chicken Kiev",
+    "desc": "A classic Ukrainian dish featuring a pounded chicken breast rolled around herb-infused butter, breaded, and deep-fried. The highlight is the molten herb butter that flows out upon the first cut.",
+    "comment": "Make a large batch of rolled and breaded chicken 'logs' and freeze them. This eliminates the labor-intensive prep and ensures the butter stays cold enough to not leak during frying. Use a double-breading technique for a sturdy crust and fry directly from frozen for the best results."
+  },
+  "brownie": {
+    "name": "Brownie",
+    "desc": "A dense, fudgy chocolate dessert bar with a crackly top and rich, intense chocolate flavor. Made with melted chocolate and butter, brownies are beloved for their chewy texture and deep cocoa taste. A classic American treat that's both simple and indulgent.",
+    "comment": "Bake a large batch at once and freeze the squares: brownies freeze perfectly and gain a fudgier texture when thawed. Use a single microwave-safe glass bowl for both melting the chocolate/butter and mixing the remaining ingredients to minimize cleanup. Line your baking pan with parchment paper 'slings' to lift the entire block out for instant cooling and slicing. You can also prepare a dry mix (flour, sugar) in advance to cut daily prep to just adding wet ingredients."
+  },
+  "katsudon": {
+    "name": "Katsudon",
+    "desc": "A hearty Japanese rice bowl topped with a crispy breaded pork cutlet (tonkatsu) and eggs simmered in a sweet and savory dashi broth. The umami-rich sauce soaks into the rice and coating, creating a deeply satisfying comfort food.",
+    "comment": "To drastically cut time, batch-prepare the pork cutlets: bread them in bulk and freeze them raw. When ready to eat, you can fry them directly from frozen (just add 1-2 minutes to frying time). Alternatively, fry a batch and freeze; reheat in a toaster oven for the fastest meal. For the sauce, use 'Mentsuyu' (concentrated noodle soup base) diluted with water—this replaces dashi, soy sauce, mirin, and sugar instantly. You can also use frozen sliced onions to skip chopping."
+  },
+  "churros": {
+    "name": "Churros",
+    "desc": "Spanish fried dough pastries made from choux pastry, piped into long strips and deep-fried until golden and crispy. Coated in cinnamon sugar, they're traditionally served with hot chocolate for dipping. A beloved street food that's both simple and indulgent.",
+    "comment": "Pipe raw dough strips onto a parchment-lined baking sheet and freeze until solid, then transfer to a ziplock bag. You can fry them directly from frozen (add 1-2 minutes to cook time), which reduces prep time to zero for future snacks. Use kitchen shears to snip the dough directly into the hot oil to avoid handling sticky raw pastry and ensure clean edges."
+  },
+  "bryan-johnsons-nutty-pudding": {
+    "name": "Bryan Johnson's Nutty Pudding",
+    "desc": "A nutrient-dense smoothie bowl packed with ground nuts, seeds, berries, and cocoa. Designed for optimal nutrition with healthy fats, omega-3s, antioxidants, and fiber.",
+    "comment": "Grind nuts and seeds in bulk once a week and store in airtight containers in the fridge to cut daily prep time in half. Use frozen berries instead of fresh—they're often cheaper and blend into a creamier texture. Make 2-3 servings at once; the chia seeds will thicken it overnight, improving the pudding consistency."
+  },
+  "bryan-johnsons-super-veggie": {
+    "name": "Bryan Johnson's Super Veggie",
+    "desc": "A longevity powerhouse featuring black lentils, cruciferous vegetables, and mushrooms. Delivers massive amounts of fiber, plant protein, and sulforaphane.",
+    "comment": "The biggest time-saver is cooking lentils in bulk for 3-4 days (they keep well). You can also buy frozen pre-cut broccoli/cauliflower mixes to skip washing and chopping—nutritionally they are just as good. If eating daily, blend the sauce ingredients (lime, vinegar, spices, oil) in a small jar for the whole week to just pour over."
   }
 }
-

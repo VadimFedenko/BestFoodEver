@@ -31,6 +31,14 @@ function getDishDescFallback(dish) {
   );
 }
 
+function getDishCommentFallback(dish) {
+  return (
+    dish?.optimizedComment ||
+    dish?.originalDish?.comment ||
+    ''
+  );
+}
+
 export function tDishName(t, dish) {
   const id = getDishId(dish);
   const fallback = getDishNameFallback(dish);
@@ -45,6 +53,14 @@ export function tDishDesc(t, dish) {
   if (!id) return fallback;
   // Use 'dishes' namespace
   return t(`dishes:${id}.desc`, { defaultValue: fallback });
+}
+
+export function tDishComment(t, dish) {
+  const id = getDishId(dish);
+  const fallback = getDishCommentFallback(dish);
+  if (!id) return fallback;
+  // Use 'dishes' namespace
+  return t(`dishes:${id}.comment`, { defaultValue: fallback });
 }
 
 export function ingredientKeyFromName(name) {

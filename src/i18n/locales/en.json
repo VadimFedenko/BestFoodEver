@@ -106,5 +106,83 @@
     "mena_arid": "MENA Region",
     "oceanic": "Oceania",
     "subsaharan_subsistence": "Sub-Saharan Africa"
+  },
+  "slides": {
+    "indexMap": {
+      "costIndex": "Cost Index",
+      "spread": "% spread",
+      "calculating": "Calculating costs for all zones...",
+      "cheap": "Cheap",
+      "expensive": "Expensive",
+      "tapToSee": "Tap a region to see ingredient breakdown",
+      "clickToSee": "Click a region to see ingredient breakdown"
+    },
+    "overview": {
+      "cannotPrepare": "Cannot be prepared in your region",
+      "dataWarnings": "Data warnings",
+      "missing": "Missing:",
+      "noCosts": "No costs:",
+      "time": "Time",
+      "cost": "Cost",
+      "calories": "Calories",
+      "ingredients": "Ingredients"
+    },
+    "time": {
+      "standardCooking": "Standard Cooking",
+      "requires": "requires",
+      "ofPreparation": "of preparation",
+      "and": "and",
+      "ofCooking": "of cooking",
+      "slowest": "Slowest",
+      "speedPercentile": "Speed Percentile",
+      "fastest": "Fastest",
+      "fasterThan": "Faster than",
+      "ofDishes": "% of dishes",
+      "timeChanged": "You changed the cooking time for this dish. Speed score is now",
+      "receivesScore": "Based on this, the dish receives an active speed score of",
+      "passiveTimeApplies": "passive time applies a",
+      "pointPenalty": "point penalty.",
+      "finalSpeedScore": "Final speed score:",
+      "timeOptimized": "Time-Optimized",
+      "prep": "Prep",
+      "cook": "Cook",
+      "min": "min",
+      "hour": "hour",
+      "hours": "hours"
+    },
+    "health": {
+      "healthBreakdown": "Health Breakdown",
+      "overall": "Overall",
+      "noData": "No ingredient data available"
+    },
+    "ethics": {
+      "ethicsBreakdown": "Ethics Breakdown",
+      "overall": "Overall",
+      "noData": "No ingredient data available",
+      "noEthicsData": "No ethics data available for this ingredient."
+    },
+    "names": {
+      "overview": "Overview",
+      "indexMap": "Index Map",
+      "time": "Time",
+      "health": "Health",
+      "ethics": "Ethics"
+    },
+    "scoreBreakdown": {
+      "title": "Score Breakdown",
+      "edit": "Edit",
+      "reset": "Reset",
+      "save": "Save",
+      "cancel": "Cancel",
+      "priorities": {
+        "taste": "Taste",
+        "health": "Health",
+        "speed": "Speed",
+        "budget": "Budget",
+        "lowCal": "Low-Cal",
+        "ethics": "Ethics"
+      }
+    },
+    "gramsUnit": "g"
   }
 }

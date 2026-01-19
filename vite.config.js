@@ -48,7 +48,6 @@ export default defineConfig({
             urlPattern: ({ url }) =>
               url.pathname.endsWith('/dishes.json') ||
               url.pathname.endsWith('/ingredients.json') ||
-              url.pathname.endsWith('/presets.json') ||
               url.pathname.endsWith('/states.json'),
             handler: 'StaleWhileRevalidate',
             options: {

@@ -2,10 +2,12 @@ import { m } from '../lib/motion';
 import { Heart } from '../icons/lucide';
 import { getHealthColor, getCookingLabel, getCookingEffect } from './dishCardUtils';
 import { getCookingCoef, normalizeIngredientName } from '../lib/RankingEngine';
+import { useTranslation } from 'react-i18next';
 
 export default function HealthSlide({ dish, ingredients, ingredientIndex }) {
+  const { t } = useTranslation();
   if (!ingredients?.length || !ingredientIndex) {
-    return <div className="flex items-center justify-center h-40 text-surface-500 text-sm sm:text-base">No ingredient data available</div>;
+    return <div className="flex items-center justify-center h-40 text-surface-500 text-sm sm:text-base">{t('slides.health.noData')}</div>;
   }
 
   const dishName = dish?.displayName ?? dish?.name ?? '';
@@ -39,10 +41,10 @@ export default function HealthSlide({ dish, ingredients, ingredientIndex }) {
       <div className="flex items-center justify-between p-2.5 sm:p-4 bg-surface-100/80 dark:bg-surface-800/80 rounded-lg">
         <div className="flex items-center gap-2 sm:gap-3">
           <Heart size={16} className={`${healthColors.text} sm:w-5 sm:h-5`} />
-          <span className="text-sm sm:text-base font-semibold text-surface-700 dark:text-surface-200">{dishName} Health Breakdown</span>
+          <span className="text-sm sm:text-base font-semibold text-surface-700 dark:text-surface-200">{dishName} {t('slides.health.healthBreakdown')}</span>
         </div>
         <div className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-bold text-white ${healthColors.badge}`}>
-          Overall {(dish?.health ?? 5).toFixed(1)}/10
+          {t('slides.health.overall')} {(dish?.health ?? 5).toFixed(1)}/10
         </div>
       </div>
 
@@ -64,7 +66,7 @@ export default function HealthSlide({ dish, ingredients, ingredientIndex }) {
               <div className="flex items-center justify-between mb-1 sm:mb-2">
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <Heart size={10} className={`${colors.text} sm:w-3.5 sm:h-3.5`} />
-                  <span className="font-semibold text-surface-800 dark:text-surface-100 text-xs sm:text-sm">{ing.grams}g {ing.displayName ?? ing.name}</span>
+                  <span className="font-semibold text-surface-800 dark:text-surface-100 text-xs sm:text-sm">{ing.grams}{t('slides.gramsUnit')} {ing.displayName ?? ing.name}</span>
                 </div>
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <span className={`px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-xs font-medium ${hasImpact ? 'bg-surface-200/60 dark:bg-surface-700/60' : ''} ${ing.cookingEffect.color}`}>

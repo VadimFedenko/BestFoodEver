@@ -290,23 +290,27 @@ export const prefsActions = {
       Object.entries(settings.priorities).forEach(([key, value]) => {
         if (value !== null && value !== undefined) {
           newPriorities[key] = value;
+        } else {
+          // If not specified (null/undefined), set to 0
+          newPriorities[key] = 0;
         }
       });
       
       patch.priorities = newPriorities;
     }
     
-    // Apply other settings if defined
-    if (settings.selectedZone !== null && settings.selectedZone !== undefined) {
+    // Apply other settings only if they are explicitly present in the preset
+    // If a setting is not in the preset at all, we don't change the current value
+    if ('selectedZone' in settings && settings.selectedZone !== null && settings.selectedZone !== undefined) {
       patch.selectedZone = settings.selectedZone;
     }
-    if (settings.isOptimized !== null && settings.isOptimized !== undefined) {
+    if ('isOptimized' in settings && settings.isOptimized !== null && settings.isOptimized !== undefined) {
       patch.isOptimized = settings.isOptimized;
     }
-    if (settings.priceUnit !== null && settings.priceUnit !== undefined) {
+    if ('priceUnit' in settings && settings.priceUnit !== null && settings.priceUnit !== undefined) {
       patch.priceUnit = settings.priceUnit;
     }
-    if (settings.tasteScoreMethod !== null && settings.tasteScoreMethod !== undefined) {
+    if ('tasteScoreMethod' in settings && settings.tasteScoreMethod !== null && settings.tasteScoreMethod !== undefined) {
       patch.tasteScoreMethod = settings.tasteScoreMethod;
     }
     

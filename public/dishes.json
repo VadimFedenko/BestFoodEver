@@ -205,6 +205,11 @@
         "state": "boiled"
       },
       {
+        "name": "Chicken",
+        "g": 40,
+        "state": "boiled"
+      },
+      {
         "name": "Tomato Paste",
         "g": 10,
         "state": "raw"
@@ -3860,7 +3865,7 @@
         "state": "fried"
       },
       {
-        "name": "Pancake Flour",
+        "name": "Flour",
         "g": 55,
         "state": "steamed"
       },

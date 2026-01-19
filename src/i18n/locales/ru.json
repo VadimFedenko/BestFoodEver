@@ -72,8 +72,8 @@
       "description": "Быстрое приготовление"
     },
     "lowCalorie": {
-      "positiveLabel": "Низкокалорийное",
-      "negativeLabel": "Высококалорийное",
+      "positiveLabel": "Low-Cal",
+      "negativeLabel": "Калорийное",
       "description": "Меньше ккал/100г"
     },
     "ethics": {
@@ -106,5 +106,83 @@
     "mena_arid": "Ближний Восток и Северная Африка",
     "oceanic": "Океания",
     "subsaharan_subsistence": "Африка к югу от Сахары"
+  },
+  "slides": {
+    "indexMap": {
+      "costIndex": "Индекс стоимости",
+      "spread": "% разброс",
+      "calculating": "Расчет стоимости для всех зон...",
+      "cheap": "Дешево",
+      "expensive": "Дорого",
+      "tapToSee": "Нажмите на регион, чтобы увидеть разбивку ингредиентов",
+      "clickToSee": "Нажмите на регион, чтобы увидеть разбивку ингредиентов"
+    },
+    "overview": {
+      "cannotPrepare": "Не может быть приготовлено в вашем регионе",
+      "dataWarnings": "Предупреждения о данных",
+      "missing": "Отсутствует:",
+      "noCosts": "Нет стоимости:",
+      "time": "Время",
+      "cost": "Стоимость",
+      "calories": "Калории",
+      "ingredients": "Ингредиенты"
+    },
+    "time": {
+      "standardCooking": "Обычное приготовление",
+      "requires": "требует",
+      "ofPreparation": "подготовки",
+      "and": "и",
+      "ofCooking": "приготовления",
+      "slowest": "Медленнее всего",
+      "speedPercentile": "Процентиль скорости",
+      "fastest": "Быстрее всего",
+      "fasterThan": "Быстрее чем",
+      "ofDishes": "% блюд",
+      "timeChanged": "Вы изменили время приготовления для этого блюда. Оценка скорости теперь",
+      "receivesScore": "На основе этого блюдо получает активную оценку скорости",
+      "passiveTimeApplies": "пассивное время применяет штраф в",
+      "pointPenalty": "баллов.",
+      "finalSpeedScore": "Финальная оценка скорости:",
+      "timeOptimized": "Оптимизированное время",
+      "prep": "Подготовка",
+      "cook": "Готовка",
+      "min": "мин",
+      "hour": "час",
+      "hours": "часов"
+    },
+    "health": {
+      "healthBreakdown": "Разбивка здоровья",
+      "overall": "Общая",
+      "noData": "Данные об ингредиентах недоступны"
+    },
+    "ethics": {
+      "ethicsBreakdown": "Разбивка этичности",
+      "overall": "Общая",
+      "noData": "Данные об ингредиентах недоступны",
+      "noEthicsData": "Данные об этичности этого ингредиента недоступны."
+    },
+    "names": {
+      "overview": "Обзор",
+      "indexMap": "Карта стоимости",
+      "time": "Время",
+      "health": "Здоровье",
+      "ethics": "Этика"
+    },
+    "scoreBreakdown": {
+      "title": "Разбивка оценок",
+      "edit": "Редактировать",
+      "reset": "Сброс",
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "priorities": {
+        "taste": "Вкус",
+        "health": "Здоровье",
+        "speed": "Скорость",
+        "budget": "Бюджет",
+        "lowCal": "Low-Cal",
+        "ethics": "Этика"
+      }
+    },
+    "gramsUnit": "г"
   }
 }

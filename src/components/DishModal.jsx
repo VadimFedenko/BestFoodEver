@@ -419,11 +419,11 @@ export default function DishModal({
   
   // Slides - removed "Scores" slide
   const slides = [
-    { id: 'overview', label: 'Overview', icon: FileText },
-    { id: 'index-map', label: 'Index Map', icon: MapIcon },
-    { id: 'time', label: 'Time', icon: Clock },
-    { id: 'health', label: 'Health', icon: Heart },
-    { id: 'ethics', label: 'Ethics', icon: Leaf },
+    { id: 'overview', label: t('slides.names.overview'), icon: FileText },
+    { id: 'index-map', label: t('slides.names.indexMap'), icon: MapIcon },
+    { id: 'time', label: t('slides.names.time'), icon: Clock },
+    { id: 'health', label: t('slides.names.health'), icon: Heart },
+    { id: 'ethics', label: t('slides.names.ethics'), icon: Leaf },
   ];
   
   useEffect(() => {

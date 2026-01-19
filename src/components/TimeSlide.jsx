@@ -1,8 +1,11 @@
 import { m } from '../lib/motion';
 import { Timer, Zap, ArrowDown } from '../icons/lucide';
 import { getPassiveTimePenalty } from '../lib/RankingEngine';
+import { useTranslation } from 'react-i18next';
+import { tDishComment } from '../i18n/dataTranslations';
 
 export default function TimeSlide({ dish, isOptimized }) {
+  const { t } = useTranslation();
   const dishName = dish?.displayName || dish?.name || 'This dish';
   const prepTimeNormal = dish?.prepTimeNormal ?? 0;
   const cookTimeNormal = dish?.cookTimeNormal ?? 0;
@@ -18,11 +21,11 @@ export default function TimeSlide({ dish, isOptimized }) {
   const cookChanged = cookTimeNormal !== cookTimeOptimized;
   const timeReduction = totalTimeNormal - (prepTimeOptimized + cookTimeOptimized);
   const percentReduction = totalTimeNormal > 0 ? Math.round((timeReduction / totalTimeNormal) * 100) : 0;
-  const optimizedComment = dish?.optimizedComment || '';
+  const optimizedComment = tDishComment(t, dish);
 
   const hasUserTimeOverride = !!dish?.hasOverrides?.time;
 
-  const formatPassiveTime = (h) => h < 1 ? `${Math.round(h * 60)} min` : h === 1 ? '1 hour' : `${h} hours`;
+  const formatPassiveTime = (h) => h < 1 ? `${Math.round(h * 60)} ${t('slides.time.min')}` : h === 1 ? `1 ${t('slides.time.hour')}` : `${h} ${t('slides.time.hours')}`;
 
   return (
     <div className="space-y-3 sm:space-y-4">
@@ -30,7 +33,7 @@ export default function TimeSlide({ dish, isOptimized }) {
         <div className="flex items-center justify-between mb-2 sm:mb-3">
           <div className="flex items-center gap-2">
             <Timer size={14} className="text-cyan-500 sm:w-5 sm:h-5" />
-            <span className="text-xs sm:text-sm font-semibold text-surface-700 dark:text-surface-200 uppercase tracking-wide">Standard Cooking</span>
+            <span className="text-xs sm:text-sm font-semibold text-surface-700 dark:text-surface-200 uppercase tracking-wide">{t('slides.time.standardCooking')}</span>
           </div>
           <div className="px-2 sm:px-3 py-0.5 sm:py-1 rounded text-xs sm:text-sm font-bold bg-cyan-500/15 text-cyan-600 dark:text-cyan-400">
             {finalSpeedScore.toFixed(1)}/10
@@ -38,18 +41,18 @@ export default function TimeSlide({ dish, isOptimized }) {
         </div>
 
         <p className="text-xs sm:text-base text-surface-600 dark:text-surface-300 leading-relaxed mb-2 sm:mb-3">
-          <span className="font-semibold text-surface-800 dark:text-surface-100">{dishName}</span> requires{' '}
-          <span className="font-mono font-semibold text-cyan-600 dark:text-cyan-400">{prepTimeNormal} min</span> of preparation
+          <span className="font-semibold text-surface-800 dark:text-surface-100">{dishName}</span> {t('slides.time.requires')}{' '}
+          <span className="font-mono font-semibold text-cyan-600 dark:text-cyan-400">{prepTimeNormal} {t('slides.time.min')}</span> {t('slides.time.ofPreparation')}
           {cookTimeNormal > 0 ? (
-            <> and <span className="font-mono font-semibold text-cyan-600 dark:text-cyan-400">{cookTimeNormal} min</span> of cooking</>
+            <> {t('slides.time.and')} <span className="font-mono font-semibold text-cyan-600 dark:text-cyan-400">{cookTimeNormal} {t('slides.time.min')}</span> {t('slides.time.ofCooking')}</>
           ) : null}.
         </p>
 
         <div className="bg-surface-200/50 dark:bg-surface-700/50 rounded-lg p-2 sm:p-3 mb-2 sm:mb-3">
           <div className="flex items-center justify-between text-[9px] sm:text-xs text-surface-500 mb-1 sm:mb-2">
-            <span>Slowest</span>
-            <span>Speed Percentile</span>
-            <span>Fastest</span>
+            <span>{t('slides.time.slowest')}</span>
+            <span>{t('slides.time.speedPercentile')}</span>
+            <span>{t('slides.time.fastest')}</span>
           </div>
           <div className="relative h-1.5 sm:h-2.5 bg-surface-300 dark:bg-surface-600 rounded-full overflow-hidden">
             <m.div
@@ -60,18 +63,18 @@ export default function TimeSlide({ dish, isOptimized }) {
             />
           </div>
           <p className="text-[10px] sm:text-sm text-center text-cyan-600 dark:text-cyan-400 mt-1 sm:mt-2">
-            Faster than {speedPercentile}% of dishes
+            {t('slides.time.fasterThan')} {speedPercentile}{t('slides.time.ofDishes')}
           </p>
         </div>
 
         {/* Speed score explanation */}
         {hasUserTimeOverride ? (
           <p className="text-xs sm:text-base text-amber-600 dark:text-amber-400 font-medium">
-            You changed the cooking time for this dish. Speed score is now <span className="font-mono">{finalSpeedScore.toFixed(1)}/10</span>
+            {t('slides.time.timeChanged')} <span className="font-mono">{finalSpeedScore.toFixed(1)}/10</span>
           </p>
         ) : (
           <p className="text-xs sm:text-base text-surface-600 dark:text-surface-300">
-            Based on this, the dish receives an active speed score of{' '}
+            {t('slides.time.receivesScore')}{' '}
             <span className="font-mono font-semibold text-cyan-600 dark:text-cyan-400">≈{speedScoreBeforePenalty.toFixed(1)}/10</span>.
           </p>
         )}
@@ -79,9 +82,9 @@ export default function TimeSlide({ dish, isOptimized }) {
         {passiveTimeHours > 0 && (
           <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-surface-200 dark:border-surface-700">
             <p className="text-xs sm:text-base text-surface-600 dark:text-surface-300">
-              <span className="text-amber-600 dark:text-amber-400 font-semibold">+{formatPassiveTime(passiveTimeHours)}</span> passive time applies a{' '}
-              <span className="text-rose-500 font-semibold">{passivePenalty} point</span> penalty.
-              Final speed score: <span className="font-mono font-bold text-cyan-600">{finalSpeedScore.toFixed(1)}/10</span>
+              <span className="text-amber-600 dark:text-amber-400 font-semibold">+{formatPassiveTime(passiveTimeHours)}</span> {t('slides.time.passiveTimeApplies')}{' '}
+              <span className="text-rose-500 font-semibold">{passivePenalty} {t('slides.time.pointPenalty')}</span>
+              {t('slides.time.finalSpeedScore')} <span className="font-mono font-bold text-cyan-600">{finalSpeedScore.toFixed(1)}/10</span>
             </p>
           </div>
         )}
@@ -92,23 +95,23 @@ export default function TimeSlide({ dish, isOptimized }) {
           <div className="flex items-center justify-between mb-2 sm:mb-3">
             <div className="flex items-center gap-2">
               <Zap size={14} className="text-emerald-500 sm:w-5 sm:h-5" />
-              <span className="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-300 uppercase">Time-Optimized</span>
+              <span className="text-xs sm:text-sm font-semibold text-emerald-700 dark:text-emerald-300 uppercase">{t('slides.time.timeOptimized')}</span>
             </div>
             <span className="text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400">-{percentReduction}%</span>
           </div>
 
           <div className="grid grid-cols-2 gap-3 sm:gap-6 mb-2 sm:mb-3">
             <div>
-              <div className="text-[10px] sm:text-xs text-surface-500">Prep</div>
+              <div className="text-[10px] sm:text-xs text-surface-500">{t('slides.time.prep')}</div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="font-semibold text-surface-700 dark:text-surface-200 sm:text-lg">{prepTimeOptimized} min</span>
+                <span className="font-semibold text-surface-700 dark:text-surface-200 sm:text-lg">{prepTimeOptimized} {t('slides.time.min')}</span>
                 {prepChanged && <span className="flex items-center text-emerald-500 text-[10px] sm:text-sm"><ArrowDown size={10} className="sm:w-3 sm:h-3" />{prepTimeNormal - prepTimeOptimized}</span>}
               </div>
             </div>
             <div>
-              <div className="text-[10px] sm:text-xs text-surface-500">Cook</div>
+              <div className="text-[10px] sm:text-xs text-surface-500">{t('slides.time.cook')}</div>
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="font-semibold text-surface-700 dark:text-surface-200 sm:text-lg">{cookTimeOptimized} min</span>
+                <span className="font-semibold text-surface-700 dark:text-surface-200 sm:text-lg">{cookTimeOptimized} {t('slides.time.min')}</span>
                 {cookChanged && <span className="flex items-center text-emerald-500 text-[10px] sm:text-sm"><ArrowDown size={10} className="sm:w-3 sm:h-3" />{cookTimeNormal - cookTimeOptimized}</span>}
               </div>
             </div>
