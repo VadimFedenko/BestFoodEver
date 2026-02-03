@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { tDishName, tDishDesc } from '../i18n/dataTranslations';
 import { useDishDeepLinking } from './useDishDeepLinking';
 import { usePrefs } from '../store/prefsStore';
 import { useIsMobile } from '../lib/useIsMobile';
@@ -22,6 +24,8 @@ export function useDishCollectionView({
   const [selectedDish, setSelectedDish] = useState(null);
   const [hasOpenedModal, setHasOpenedModal] = useState(false);
 
+  const { t } = useTranslation();
+
   const priceUnit = usePrefs((s) => s.prefs.priceUnit);
   const isOptimized = usePrefs((s) => s.prefs.isOptimized);
   const priorities = usePrefs((s) => s.computationPriorities);
@@ -29,17 +33,17 @@ export function useDishCollectionView({
   const isMobile = useIsMobile();
   const isModalOpen = selectedDish !== null;
 
-  // Filter dishes by search query
+  // Filter dishes by search query (using translated name/description for current language)
   const filteredDishes = useMemo(() => {
     if (!searchQuery.trim()) return dishes;
 
     const query = searchQuery.toLowerCase();
-    return dishes.filter(
-      (dish) =>
-        dish.name.toLowerCase().includes(query) ||
-        dish.description?.toLowerCase().includes(query),
-    );
-  }, [dishes, searchQuery]);
+    return dishes.filter((dish) => {
+      const name = tDishName(t, dish).toLowerCase();
+      const desc = tDishDesc(t, dish).toLowerCase();
+      return name.includes(query) || desc.includes(query);
+    });
+  }, [dishes, searchQuery, t]);
 
   // Pagination
   const [visibleCount, setVisibleCount] = useState(() => pageSize);

@@ -13,15 +13,45 @@ import ingredientsEn from './locales/data/ingredients.en.json';
 import ingredientsRu from './locales/data/ingredients.ru.json';
 import ingredientsUa from './locales/data/ingredients.ua.json';
 
+function detectBrowserLanguage() {
+  if (typeof navigator === 'undefined') return null;
+
+  const candidates =
+    (navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || navigator.userLanguage]
+    ) || [];
+
+  const supported = ['en', 'ru', 'ua'];
+
+  for (const l of candidates) {
+    if (!l) continue;
+    const base = String(l).toLowerCase().split('-')[0]; // 'ru-RU' -> 'ru'
+    if (supported.includes(base)) return base;
+  }
+
+  return null;
+}
+
 function readInitialLanguage() {
   try {
     const raw = localStorage.getItem('bfe_prefs_v2');
     const prefs = raw ? JSON.parse(raw) : null;
     const lng = prefs?.language;
-    return lng === 'ru' ? 'ru' : lng === 'ua' ? 'ua' : lng === 'en' ? 'en' : null;
+    if (lng === 'ru' || lng === 'ua' || lng === 'en') {
+      // Явный выбор пользователя из настроек – используем его.
+      return lng;
+    }
   } catch {
-    return null;
+    // ignore and fall back to browser language / default
   }
+
+  // Настройки ещё не сохранены – пробуем подобрать язык по браузеру.
+  const detected = detectBrowserLanguage();
+  if (detected) return detected;
+
+  // Фоллбек – английский.
+  return null;
 }
 
 i18n.use(initReactI18next).init({

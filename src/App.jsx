@@ -3,6 +3,16 @@ import { LazyMotion, domAnimation, m } from './lib/motion';
 import Header from './components/Header';
 import { usePrefs } from './store/prefsStore';
 import i18n from './i18n/i18n';
+import { hasSeenGuideSync } from './lib/checkOnboarding';
+
+// Check onboarding status synchronously before React renders
+// This check happens BEFORE any React code runs, allowing us to prioritize loading
+const needsGuide = !hasSeenGuideSync();
+
+// Conditionally lazy-load Guide:
+// - If needed: load with high priority (eager, will be rendered immediately)
+// - If not needed: create lazy component but don't render it (won't load until needed)
+const Guide = lazy(() => import('./components/Guide'));
 
 const PrioritiesPanel = lazy(() => import('./components/PrioritiesPanel'));
 const DishList = lazy(() => import('./components/DishList'));
@@ -214,6 +224,13 @@ export default function App() {
 
   return (
     <LazyMotion features={domAnimation}>
+      {/* Guide - shows only on first app launch */}
+      {needsGuide && (
+        <Suspense fallback={null}>
+          <Guide />
+        </Suspense>
+      )}
+      
       <div className="min-h-screen bg-surface-100 dark:bg-surface-900 pattern-grid transition-colors duration-300">
         {/* Centered container - max width for desktop, full width on mobile */}
         <div className="mx-auto w-full max-w-[960px] flex flex-col h-screen 

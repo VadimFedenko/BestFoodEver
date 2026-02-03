@@ -107,6 +107,16 @@
     "oceanic": "Oceania",
     "subsaharan_subsistence": "Sub-Saharan Africa"
   },
+  "guide": {
+    "skip": "Skip",
+    "getStarted": "Get Started",
+    "pageTitles": {
+      "1": "Welcome",
+      "2": "How-To",
+      "3": "About Data",
+      "4": "Finish"
+    }
+  },
   "slides": {
     "indexMap": {
       "costIndex": "Cost Index",
